@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Indicado Por</th>
+      <th scope="col">Qualidade</th>
+      <th scope="col">Telefone</th>
+      <th scope="col">Ligação Comum</th>
+      <th scope="col">Abrir [ WA ]</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for contact in contacts %}
+    <tr>
+      <td><a href="">{{contact.nome}}</a></td>
+      <td>Edu 10</td>
+      <td>1 / 5</td>
+      <td>{{contact.tels.0.numero}}</td>
+      <td><a href="tel:{{contact.tels.0.numero}}">Chamar</a></td>
+      <td><a target="_blank" href="https://api.whatsapp.com/send?phone={{contact.tels.0.waid}}&text={{whats_mensagem_padrao}}">Abrir [ WA ]</a></td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>

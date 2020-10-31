@@ -1,0 +1,48 @@
+{% load widget_tweaks %}
+
+<form method="post" action="{% url 'leads:upload-contacts' %}" enctype="multipart/form-data" class="bg-light border border-primary p-4 rounded">
+    
+    <div class="form-group">
+        <h1 class="h4 mb-3">Upload de Contatos</h1>
+    </div>
+
+    {% csrf_token %}
+
+    <div class="form-group">
+
+        <label for="{{ upload_contacts_form.indicated_by.id_for_label }}">
+            {{ upload_contacts_form.indicated_by.label }}
+        </label>
+
+        {% if not upload_contacts_form.indicated_by.errors %}
+            {{ upload_contacts_form.indicated_by|add_class:'form-control form-control-lg' }}
+        {% else %}
+            {{ upload_contacts_form.indicated_by|add_class:'form-control form-control-lg is-invalid' }}
+        {% endif %}
+
+        <div class="invalid-feedback">{{ upload_contacts_form.indicated_by.errors }}</div>
+
+    </div>
+    
+
+    <div class="form-group">
+
+        <label for="{{ upload_contacts_form.vcf_files.id_for_label }}">
+            {{ upload_contacts_form.vcf_files.label }}
+        </label>
+
+        {% if not upload_contacts_form.vcf_files.errors %}
+            {{ upload_contacts_form.vcf_files|attr:"multiple"|add_class:'form-control-file' }}
+        {% else %}
+            {{ upload_contacts_form.vcf_files|attr:"multiple"|add_class:'form-control-file is-invalid' }}
+        {% endif %}
+
+        <div class="invalid-feedback">{{ upload_contacts_form.vcf_files.errors }}</div>
+
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-block btn-lg btn-success">Carregar Contatos</button>
+    </div>
+
+</form>
