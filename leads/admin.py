@@ -15,7 +15,7 @@ class LeadAdmin(admin.ModelAdmin):
 
     change_form_template = "leads/admin/change_form.html"
 
-    search_fields = ('name', 'tel', 'waip',)
+    search_fields = ('name', 'tel', 'waid',)
 
     list_filter = (
         ('created_at', DateRangeFilter),
