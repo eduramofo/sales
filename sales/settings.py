@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     # thirds
     'widget_tweaks',
+    'rangefilter',
 
 ]
 

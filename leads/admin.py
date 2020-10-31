@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
 from leads.models import Lead
+from rangefilter.filter import DateRangeFilter
 
 
 class LeadForm(forms.ModelForm):
@@ -12,17 +13,18 @@ class LeadForm(forms.ModelForm):
 
 class LeadAdmin(admin.ModelAdmin):
 
-    # change_form_template = "cliente/signup/admin/change_form.html"
+    change_form_template = "leads/admin/change_form.html"
 
     search_fields = ('name', 'tel', 'waip',)
 
     list_filter = (
+        ('created_at', DateRangeFilter),
         'status',
         'quality',
         'indicated_by',
     )
 
-    list_display = ('created_at', 'updated_at', 'name', 'indicated_by', 'quality',)
+    list_display = ('created_at', 'updated_at', 'name', 'status', 'indicated_by', 'quality', 'next_contact',)
 
     form = LeadForm
 

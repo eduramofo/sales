@@ -14,8 +14,13 @@ LEAD_QUALITY_CHOICES = (
 LEAD_STATUS_CHOICES = (
     ("novo", "Novo"),
     ("processando", "Processando"),
-    ("ganho", "Ganho"),
-    ("perdido", "Perdido"),
+    ("sem_interesse", "Contato realizado [ SEM INTERESSE ]"),
+    ("contato_invalido", "Contato inválido"),
+    ("ignorando", "Está rejeitando os contatos"),
+    ("agendamento", "Agendamento"),
+    ("acompanhamento", "Acompanhamento"),
+    ("ganho", "Apresentação realizada [ GANHO ]"),
+    ("perdido", "Apresentação realizada [ PERDIDO ]"),
 )
 
 
@@ -62,8 +67,26 @@ class Lead(BaseModel):
         default=1,
     )
 
+    next_contact = models.DateTimeField(
+        verbose_name='Próximo contato',
+        null=True,
+        blank=True,
+    )
+
     note = models.TextField(
         verbose_name='Anotações',
         null=True,
         blank=True,
     )
+
+    class Meta:
+        verbose_name = "Lead"
+        verbose_name_plural = "Leads"
+
+    def __str__(self):
+        if self.name and self.indicated_by:
+            return str(self.name) + " | " + str(self.indicated_by)
+        elif self.name:
+            return str(self.name)
+        else:
+            return str(self.id)
