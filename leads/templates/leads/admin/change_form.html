@@ -1,29 +1,9 @@
 {% extends 'admin/change_form.html' %}
-{% load leads_extras %}
 
 {% block submit_buttons_bottom %}
+
     {{ block.super }}
 
-
-
-    <div class="submit-row">
-
-
-        <p class="deletelink-box"><a href="{% link_to_call_lead original %}" class="deletelink">Ligar</a></p>
-
-        <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_whats_open original %}" class="deletelink">Abrir Whats</a></p>
-
-        <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_whats_oi original %}" class="deletelink">Chamar Whats (Oi)</a></p>
-
-        <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_to_call_lead original %}" class="deletelink">Enviar Link WOL</a></p>
-        
-        <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_modelo_referido_conheci original %}" class="deletelink">Referido Conheci</a></p>
-
-        <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_modelo_referido_entrei original %}" class="deletelink">Referido Entrei</a></p>
-
-    </div>
-
+    {% include "leads/admin/custom_change_form_submit_row.html" %}
 
 {% endblock %}
-
-
