@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+from dj_database_url import parse as dburl
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,17 +22,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(84fp59p6)#q#(4rmxk3rs%l7l5=)6&@e5-i$$-0s#sfhy7i3b'
+SECRET_KEY = config('SECRET_KEY', default="NOT_GOOD_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+INTERNAL_IPS = ('127.0.0.1',)
 
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+
+ADMINS = [
+    ('Eduardo Rabelo', 'eduramofo@gmail.com'),
+]
 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    # local apps
+    'core.apps.CoreConfig',
+    'leads.apps.LeadsConfig',
 
     # django apps
     'django.contrib.admin',
@@ -43,28 +54,34 @@ INSTALLED_APPS = [
     # thirds
     'widget_tweaks',
 
-    # local apps
-    'core.apps.CoreConfig',
-    'leads.apps.LeadsConfig',
-    
 ]
 
 MIDDLEWARE = [
+
+    # django
     'django.middleware.security.SecurityMiddleware',
+
+    # thirds/whitenoise
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
+    # django
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'sales.urls'
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ TEMPLATES_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,11 +100,9 @@ WSGI_APPLICATION = 'sales.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+default_dburl = 'postgres://postgres:postgres@localhost:5432/sales'
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
 
 
@@ -113,9 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt_BR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -123,8 +138,66 @@ USE_L10N = True
 
 USE_TZ = True
 
+# new
+# AUTHENTICATION_BACKENDS = ['core.authentication_backends.EmailBackend'] 
 
+# Whitenoise
+STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='whitenoise.storage.CompressedManifestStaticFilesStorage')
+
+
+#########################################################
+# MEDIA - START
+#########################################################
+# MEDIA
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE', default='django.core.files.storage.FileSystemStorage')
+
+PRIVATE_FILE_STORAGE = config('PRIVATE_FILE_STORAGE', default='django.core.files.storage.FileSystemStorage')
+
+#########################################################
+# MEDIA - END
+#########################################################
+
+
+#########################################################
+# STATIC - START
+#########################################################
+# STATIC
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='django.contrib.staticfiles.storage.StaticFilesStorage')
+
+STATIC_URL = config('STATIC_URL', default='/static/')
+
+#########################################################
+# STATIC - END
+#########################################################
+
+
+#########################################################
+# Email configuration - START
+#########################################################
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+
+EMAIL_HOST = config('EMAIL_HOST', default='127.0.0.1')
+
+EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
+
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+#########################################################
+# Email configuration - END
+#########################################################
