@@ -4,5 +4,5 @@ from . import views
 
 app_name = 'leads'
 urlpatterns = [
-    path('upload-contacts/', views.index, name='upload-contacts'),
+    path('upload-contacts/', views.upload_contacts, name='upload-contacts'),
 ]

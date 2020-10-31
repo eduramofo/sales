@@ -2,10 +2,12 @@ from urllib.parse import urlencode
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from leads.forms import UploadContactsForm
 from leads.process_contacts import gerar_leads
+from django.contrib.auth.decorators import login_required
 
 
-def index(request):
-    
+@login_required()
+def upload_contacts(request):
+
     upload_contacts_form = UploadContactsForm()
 
     if request.method == 'POST':

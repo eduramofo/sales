@@ -1,6 +1,6 @@
 .idea/
 .vscode
-.venv/
+.sales/
 db.sqlite3
 /staticfiles
 /media

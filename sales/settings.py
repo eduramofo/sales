@@ -76,12 +76,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'sales.urls'
 
-TEMPLATES_DIR = BASE_DIR / 'templates'
+CUSTOM_TEMPLATES =  BASE_DIR / 'templates'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ TEMPLATES_DIR ],
+        'DIRS': [CUSTOM_TEMPLATES],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -148,7 +148,6 @@ STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='whitenoise.storage.
 #########################################################
 # MEDIA - START
 #########################################################
-# MEDIA
 
 MEDIA_URL = '/media/'
 
@@ -171,7 +170,6 @@ PRIVATE_FILE_STORAGE = config('PRIVATE_FILE_STORAGE', default='django.core.files
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
 
 STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='django.contrib.staticfiles.storage.StaticFilesStorage')
 
