@@ -8,3 +8,4 @@ whitenoise
 django-storages
 django-widget-tweaks
 django-filter
+vobject

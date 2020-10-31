@@ -1,6 +1,5 @@
 from urllib.parse import urlencode
 from django.shortcuts import render, HttpResponseRedirect, reverse
-from core.process_contacts import process_contacts_file
 from leads.forms import UploadContactsForm
 from leads.process_contacts import gerar_leads
 

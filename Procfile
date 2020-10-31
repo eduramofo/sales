@@ -1,1 +1,1 @@
-web: gunicorn scapoleaffiliate.wsgi --log-file -
+web: gunicorn sales.wsgi --log-file -
