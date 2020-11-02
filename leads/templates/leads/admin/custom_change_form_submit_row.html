@@ -3,19 +3,35 @@
 {% if original %}
 
 <div class="submit-row">
+    <p class="deletelink-box"><a href="{% url 'leads:list' %}" class="deletelink">Voltar para Lista de Leads</a></p>
+</div>
 
+<div class="submit-row">
     <p class="deletelink-box"><a href="{% link_to_call_lead original %}" class="deletelink">Ligar</a></p>
+</div>
 
-    <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_whats_open original %}" class="deletelink">Abrir Whats</a></p>
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_whats_open original %}" class="deletelink">Abrir Whats</a></p>
+</div>
 
-    <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_whats_oi original %}" class="deletelink">Chamar Whats (Oi)</a></p>
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_whats_tentei_te_ligar original %}" class="deletelink">Tentei te Ligar</a></p>
+</div>
 
-    <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_wise_up_link original %}" class="deletelink">Enviar Link WOL</a></p>
-    
-    <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_modelo_referido_conheci original %}" class="deletelink">Referido Conheci</a></p>
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_whats_oi original %}" class="deletelink">Chamar Whats (Oi)</a></p>
+</div>
 
-    <p style="margin-left:20px;" class="deletelink-box"><a href="{% link_modelo_referido_entrei original %}" class="deletelink">Referido Entrei</a></p>
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_wise_up_link original %}" class="deletelink">Enviar Link WOL</a></p>
+</div>
 
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_modelo_referido_conheci original %}" class="deletelink">Referido Conheci</a></p>
+</div>
+
+<div class="submit-row">
+    <p class="deletelink-box"><a href="{% link_modelo_referido_entrei original %}" class="deletelink">Referido Entrei</a></p>
 </div>
 
 {% endif %}

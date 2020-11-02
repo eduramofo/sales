@@ -19,10 +19,13 @@ class LeadAdmin(admin.ModelAdmin):
 
     list_filter = (
         ('created_at', DateRangeFilter),
+        ('next_contact', DateRangeFilter),
         'status',
         'quality',
         'indicated_by',
     )
+
+    list_per_page = 8
 
     list_display = ('created_at', 'updated_at', 'name', 'status', 'indicated_by', 'quality', 'next_contact',)
 

@@ -1,33 +1,35 @@
 <div class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
 
-    <a class="navbar-brand" href="{% url 'core:home' %}">Wiser Sales</a>
+    <a class="navbar-brand" href="{% url 'core:home' %}">Wiser Sale</a>
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+            data-target="#navbarNav" aria-controls="navbarNav" 
+            aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ml-auto ">
 
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Contatos <span class="sr-only">(current)</span></a>
+        <li class="nav-item {% if nav_name == 'core_home' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'core:home' %}">Home <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Apresentações</a>
+        <li class="nav-item {% if nav_name == 'leads_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:list' %}">Leads <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item {% if nav_name == 'leads_agendamento_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:list' %}?status=agendamento">Agendamentos <span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">Ganhos</a>
+        <li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:upload' %}">Upload de Leads</a>
         </li>
-
+        
         <li class="nav-item">
-          <a class="nav-link" href="#">Perdidos</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'leads:upload-contacts' %}">Upload de Contatos</a>
+          <a class="nav-link" href="/admin-leads/leads/lead">Admin Leads</a>
         </li>
 
       </ul>

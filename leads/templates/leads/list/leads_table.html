@@ -1,0 +1,26 @@
+<table class="table table-bordered table-striped table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Status</th>
+      <th scope="col">Indicado Por</th>
+      <th scope="col">Qualidade</th>
+      <th scope="col">Próximo Contato</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for lead in leads %}
+    <tr>
+      <td>{{lead.created_at|date:"d/m/y"}}</td>
+      <td><a href="/admin/leads/lead/{{lead.id}}/change/">{{lead.name}}</a></td>
+      <td>{{lead.get_status_display}}</td>
+      <td>{{lead.indicated_by|slice:"0:-16"}}</td>
+      <td>{{lead.quality}} / 5</td>
+      <td>{{lead.next_contact|date:"d/m/y"}} {{ lead.next_contact|time:"H:i" }}</td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>

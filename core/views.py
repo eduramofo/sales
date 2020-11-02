@@ -1,16 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView as AuthLoginView
-
 
 @login_required()
 def index(request):
 
-    
-
     context = {
-        'contacts': [],
-        'whats_mensagem_padrao': '',
+        'nav_name': 'core_home'
     }
 
-    return render(request, 'core/index.html', context)
+    return render(request, 'core/home/index.html', context)
