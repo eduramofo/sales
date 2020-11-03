@@ -19,9 +19,25 @@
         <li class="nav-item {% if nav_name == 'leads_list' %}active{% endif%}">
           <a class="nav-link" href="{% url 'leads:list' %}">Leads <span class="sr-only">(current)</span></a>
         </li>
+
+        <li class="nav-item {% if nav_name == 'leads_novos_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:novos-list' %}">Novos <span class="sr-only">(current)</span></a>
+        </li>
         
-        <li class="nav-item {% if nav_name == 'leads_agendamento_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:list' %}?status=agendamento">Agendamentos <span class="sr-only">(current)</span></a>
+        <li class="nav-item {% if nav_name == 'leads_agendamentos_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:agendamentos-list' %}">Agendamentos <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item {% if nav_name == 'leads_em_aberto_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:leads-em-aberto-list' %}">Em Aberto <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item {% if nav_name == 'leads_indicators_list' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:indicators-list' %}">Indicadores <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item {% if nav_name == 'leads_estatisticas' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:list' %}">Estatísticas <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
@@ -29,7 +45,7 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="/admin-leads/leads/lead">Admin Leads</a>
+          <a class="nav-link" href="/admin-leads/leads/lead">Configurações</a>
         </li>
 
       </ul>

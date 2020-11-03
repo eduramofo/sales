@@ -1,30 +1,134 @@
 from urllib.parse import urlencode
-from django.shortcuts import render, HttpResponseRedirect, reverse
-from leads.forms import UploadContactsForm
-from leads.process_contacts import gerar_leads
+
+from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from leads.models import Lead
 from django.db.models import Q
+
+from leads.process_contacts import gerar_leads
+from leads.models import Lead
+from leads.forms import UploadContactsForm
+from leads.indicators import indicators_data
+from leads.filters import LeadFilter
 
 
 @login_required()
 def leads_list(request):
     
-    leads = []
+    nav_name = 'leads_list'
 
-    leads_status = request.GET.get('status', None)
+    page_title = 'Lista de Leads'
     
-    if leads_status:
-        leads = Lead.objects.filter(status=leads_status).order_by('next_contact').order_by('next_contact')
-    else:
-        leads = Lead.objects.filter(Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')).order_by('-quality')
-    
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all())
+
     context = {
-        'nav_name': 'leads_list',
-        'leads': leads,
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads.qs,
+        'leads_filters_form': leads.form,
     }
 
-    return render(request, 'leads/list//index.html', context)
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def lead_update(request, lead_id):
+    
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead_form = None
+
+    page_title = 'Atualização do Lead'
+    
+    nav_name = 'leads_list'
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'lead': lead,
+        'lead_form': lead_form,
+    }
+
+    return render(request, 'leads/update/index.html', context)
+
+
+
+@login_required()
+def leads_novos_list(request):
+    
+    nav_name = 'leads_novos_list'
+
+    page_title = 'Lista de Novos Leads'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='novo').order_by('-quality'))
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads.qs,
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def leads_em_aberto_list(request):
+    
+    nav_name = 'leads_em_aberto_list'
+
+    page_title = 'Lista de Leads em Aberto'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(
+        Q(status='tentando_contato') | Q(status='processando')
+    ).order_by('-quality'))
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads.qs,
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def leads_agendamentos_list(request):
+    
+    nav_name = 'leads_agendamentos_list'
+
+    page_title = 'Lista de Leads em Agendamentos'
+
+    leads = Lead.objects.filter().order_by('next_contact')
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(
+        status='agendamento'
+    ).order_by('next_contact'))
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads.qs,
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def leads_indicators_list(request):
+
+    indicators = indicators_data()
+    nav_name = 'leads_indicators_list'
+    page_title = 'Lista Indicadores'
+    
+    context = {
+        'nav_name': nav_name,
+        'page_title': page_title,
+        'indicators': indicators,
+    }
+
+    return render(request, 'leads/indicators_list/index.html', context)
 
 
 @login_required()

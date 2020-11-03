@@ -1,8 +1,6 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
 {% include "core/nav.html" %}
-<div class="container">
-  {% include "core/home/content.html" %}
-</div>
+{% include "core/page_title.html" %}
+{% include "core/home/content.html" %}
 {% endblock %}

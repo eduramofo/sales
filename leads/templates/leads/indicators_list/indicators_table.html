@@ -1,0 +1,20 @@
+<table class="table table-bordered table-striped table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Qte</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {% for indicator in indicators %}
+    <tr>
+      <td>01/01/20 20:50</td>
+      <td><a href="{% url 'leads:list' %}?indicated_by_contains={{indicator.indicated_by}}">{{indicator.indicated_by}}?</a></td>
+      <td>10</td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>

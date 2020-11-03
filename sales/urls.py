@@ -51,6 +51,6 @@ urlpatterns = [
 
     path('', include("core.urls")),
 
-    path('', include("leads.urls")),
+    path('leads/', include("leads.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
