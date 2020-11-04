@@ -3,10 +3,12 @@ from urllib.parse import urlencode
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
-from leads.forms import UploadContactsForm
+from leads.forms import LeadForm, UploadContactsForm
 from leads.indicators import indicators_data
 from leads.filters import LeadFilter
 
@@ -31,15 +33,44 @@ def leads_list(request):
 
 
 @login_required()
-def lead_update(request, lead_id):
-    
-    lead = get_object_or_404(Lead, id=lead_id)
+def lead_add(request):
 
-    lead_form = None
-
-    page_title = 'Atualização do Lead'
+    initial = {}
     
+    lead_form = LeadForm(initial=initial)
+
+    page_title = 'Criação de um novo do Lead'
+
     nav_name = 'leads_list'
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'lead_form': lead_form,
+    }
+
+    if request.method == 'POST':
+        lead_form = LeadForm(request.POST)
+        if lead_form.is_valid():
+            lead = lead_form.save()
+            url = reverse_lazy('leads:go-to', args=(str(lead.id),))
+            messages.add_message(request, messages.SUCCESS, 'Lead adicionado com sucesso!')
+            return HttpResponseRedirect(url)
+        else:
+            messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
+            context['lead_form'] = lead_form
+
+    return render(request, 'leads/add/index.html', context)
+
+
+@login_required()
+def lead_update(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    lead_form = LeadForm(request.POST or None, instance=lead)
+    page_title = 'Atualização do Lead'
+    nav_name = 'leads_list'
+    method = request.method
 
     context = {
         'page_title': page_title,
@@ -48,7 +79,30 @@ def lead_update(request, lead_id):
         'lead_form': lead_form,
     }
 
+    if method == 'POST' and lead_form.is_valid():
+        lead = lead_form.save()
+        url = reverse_lazy('leads:go-to', args=(str(lead.id),))
+        messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+        return HttpResponseRedirect(url)
+
+    if method == 'POST' and not lead_form.is_valid():
+        messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
+        context['lead_form'] = lead_form
+
     return render(request, 'leads/update/index.html', context)
+
+
+@login_required()
+def lead_go_to(request, lead_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    page_title = 'Para onde você gostaria de encaminhado?'
+    nav_name = 'leads_list'
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'lead': lead,
+    }
+    return render(request, 'leads/go_to/index.html', context)
 
 
 

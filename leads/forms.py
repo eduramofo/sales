@@ -4,6 +4,13 @@ from django import forms
 from leads.models import Lead
 
 
+class LeadForm(forms.ModelForm):
+
+    class Meta:
+        model = Lead
+        fields = '__all__'
+
+
 class UploadContactsForm(forms.Form):
 
     indicated_by = forms.CharField(

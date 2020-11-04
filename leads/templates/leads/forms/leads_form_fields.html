@@ -1,0 +1,8 @@
+{% csrf_token %}
+{% include 'core/fields_widgets/input_default.html' with field=form.status %}
+{% include 'core/fields_widgets/input_default.html' with field=form.name %}
+{% include 'core/fields_widgets/input_default.html' with field=form.indicated_by %}
+{% include 'core/fields_widgets/input_default.html' with field=form.waid %}
+{% include 'core/fields_widgets/input_default.html' with field=form.quality %}
+{% include 'core/fields_widgets/input_datetime_local.html' with field=form.next_contact %}
+{% include 'core/fields_widgets/input_default.html' with field=form.note %}

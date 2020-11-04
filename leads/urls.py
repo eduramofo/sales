@@ -12,10 +12,16 @@ urlpatterns = [
     path('em-aberto/', views.leads_em_aberto_list, name='leads-em-aberto-list'),
     path('indicators/', views.leads_indicators_list, name='indicators-list'),
 
+    # add
+    path('add/', views.lead_add, name='add'),
+    
     # update
     path('<uuid:lead_id>/update/', views.lead_update, name='update'),
+
+    # go
+    path('<uuid:lead_id>/go-to/', views.lead_go_to, name='go-to'),
     
-    # create/add
+    # upload / add
     path('upload/', views.leads_upload, name='upload'),
 
 ]

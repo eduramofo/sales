@@ -1,0 +1,7 @@
+<div class="col-12">
+    <form id="leads" method="post"
+        action="{% url 'leads:add' %}"
+        class="bg-light border border-dark p-3 mt-3 mb-5">
+        {% include 'leads/forms/leads_form_fields.html' with form=lead_form %}
+    </form>
+</div>
