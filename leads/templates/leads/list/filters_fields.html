@@ -1,0 +1,18 @@
+{% include "core/fields_widgets/text.html" with field=form.name %}
+{% include "core/fields_widgets/text.html" with field=form.indicated_by_contains %}
+{% include "core/fields_widgets/text.html" with field=form.tel %}
+
+{% comment %} status {% endcomment %}
+{% include "core/fields_widgets/text.html" with field=form.status %}
+
+{% comment %} quality {% endcomment %}
+{% include "core/fields_widgets/text.html" with field=form.quality_gte %}
+{% include "core/fields_widgets/text.html" with field=form.quality_lte %}
+
+{% comment %} next_contact {% endcomment %}
+{% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
+{% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
+
+<div class="form-group">
+    <button type="submit" class="btn btn-block btn-success">Executar Filtro</button>
+</div>

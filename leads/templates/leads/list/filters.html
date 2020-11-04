@@ -1,38 +1,14 @@
-{% load widget_tweaks %}
-
 <div class="row">
+
     <div class="col-12">
+        <button id="filter-toggle-btn" class="btn btn-sm btn-secondary mb-3">Mostrar/Esconder Filtro</button>
+    </div>
+
+    <div id="filter-form-wrapper" class="col-12 d-none">
         <form method="get" action="." class="bg-light border border-dark mb-3 p-3">
             {% csrf_token %}
-
-            {% with field=form.name %}
-                <div class="form-group">
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {% if not field.errors %}
-                            {{field|add_class:'form-control'}}
-                        {% else %}
-                            {{field|add_class:'form-control is-invalid'}}
-                        {% endif %}
-                        <div class="invalid-feedback">{{ field.errors }}</div>
-                </div>
-            {% endwith %}
-
-            {% with field=form.indicated_by_contains %}
-                <div class="form-group">
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {% if not field.errors %}
-                            {{field|add_class:'form-control'}}
-                        {% else %}
-                            {{field|add_class:'form-control is-invalid'}}
-                        {% endif %}
-                        <div class="invalid-feedback">{{ field.errors }}</div>
-                </div>
-            {% endwith %}
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Executar Filtro</button>
-            </div>
-
+            {% include "leads/list/filters_fields.html" %}
         </form>
     </div>
+
 </div>

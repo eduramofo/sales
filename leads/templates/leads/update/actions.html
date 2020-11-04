@@ -1,0 +1,22 @@
+<div class="col-12 mt-3">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#actions-modal">Ações</button>
+</div>
+
+<div id="actions-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 text-center">Ações Padrões para o Lead</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% include "leads/update/actions_modal.html" %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg btn-block btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

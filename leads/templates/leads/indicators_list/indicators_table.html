@@ -11,7 +11,7 @@
   {% for indicator in indicators %}
     <tr>
       <td>01/01/20 20:50</td>
-      <td><a href="{% url 'leads:list' %}?indicated_by_contains={{indicator.indicated_by}}">{{indicator.indicated_by}}?</a></td>
+      <td><a href="{% url 'leads:list' %}?indicated_by_contains={{indicator.indicated_by}}">{{indicator.indicated_by}}</a></td>
       <td>10</td>
     </tr>
   {% endfor %}
