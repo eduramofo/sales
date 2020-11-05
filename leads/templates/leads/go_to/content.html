@@ -5,23 +5,43 @@
             <ul class="list-group">
 
                 <li class="list-group-item">
-                    <a href="{% url 'leads:list' %}" class="mt-5">Programação de HOJE</a>
+                    <a href="{% url 'leads:today' %}" class="mt-5">Programação para HOJE</a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="{% url 'leads:list' %}" class="mt-5">Lista de leads novos</a>
+                    <a href="{% url 'leads:novos-list' %}" class="mt-5">Todos os leads</a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:novos-list' %}" class="mt-5">Novos leads</a>
                 </li>
                 
                 <li class="list-group-item">
-                    <a href="{% url 'leads:list' %}" class="mt-5">Voltar para edição desse lead</a>
+                    <a href="{% url 'leads:update' lead.id %}" class="mt-5">Editar este lead</a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="{% url 'leads:list' %}" class="mt-5">Adicionar um lead novo</a>
+                    <a href="{% url 'leads:add' %}" class="mt-5">Adicionar novo lead</a>
                 </li>
 
                 <li class="list-group-item">
-                    <a href="{% url 'leads:list' %}" class="mt-5">Agendamentos</a>
+                    <a href="{% url 'leads:agendamentos-list' %}" class="mt-5">Agendamentos</a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:agendamentos-list' %}" class="mt-5">Indicadores</a>
+                </li> 
+                
+                <li class="list-group-item">
+                    <a href="{% url 'leads:agendamentos-list' %}" class="mt-5">Upload de leads</a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'core:statistics' %}" class="mt-5">Estatísticas</a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'core:settings' %}" class="mt-5">Configurações</a>
                 </li>
 
             </ul>

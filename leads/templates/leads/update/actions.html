@@ -1,17 +1,15 @@
 <div class="col-12 mt-3">
-
   <div class="p-2 bg-light border border-dark">
     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#actions-modal">Ações padrões para o Lead</button>
     <button id="leads-form-submit-btn" type="button" class="btn btn-sm btn-success ml-3">Salvar Alterações</button>
   </div>
-
 </div>
 
 <div id="actions-modal" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title w-100 text-center">Ações Padrões para o Lead</h5>
+        <h4 class="modal-title w-100 text-center">Ações Padrões para o Lead</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -20,7 +18,7 @@
         {% include "leads/update/actions_modal.html" %}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-lg btn-block btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-block btn-warning" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>

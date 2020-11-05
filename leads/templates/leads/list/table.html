@@ -10,17 +10,23 @@
             <th scope="col">Indicado Por</th>
             <th scope="col">Qualidade</th>
             <th scope="col">Próximo Contato</th>
+            <th scope="col">Anotações</th>
           </tr>
         </thead>
         <tbody>
         {% for lead in leads %}
           <tr>
-            <td><a href="{% url 'leads:update' lead.id %}">{{lead.created_at|date:"d/m/y"}}</a></td>
-            <td><a href="/admin/leads/lead/{{lead.id}}/change/">{{lead.name}}</a></td>
+            <td>{{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}</td>
+            <td><a href="{% url 'leads:update' lead.id %}">{{lead.name}}</a></td>
             <td>{{lead.get_status_display}}</td>
-            <td>{{lead.indicated_by|slice:"0:-16"}}</td>
+            {% if lead.indicated_by|slice:"0:-16" %}
+              <td>{{lead.indicated_by|slice:"0:-16"}}</td>
+            {% else %}
+              <td>{{lead.indicated_by}}</td>
+            {% endif %}
             <td>{{lead.quality}} / 5</td>
             <td>{{lead.next_contact|date:"d/m/y"}} {{ lead.next_contact|time:"H:i" }}</td>
+            <td>{{lead.note|default_if_none:""|truncatechars:45}}</td>
           </tr>
         {% endfor %}
         </tbody>

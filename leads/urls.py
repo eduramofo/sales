@@ -11,6 +11,9 @@ urlpatterns = [
     path('agendamentos/', views.leads_agendamentos_list, name='agendamentos-list'),
     path('em-aberto/', views.leads_em_aberto_list, name='leads-em-aberto-list'),
     path('indicators/', views.leads_indicators_list, name='indicators-list'),
+    
+    # today
+    path('today/', views.leads_list, name='today'),
 
     # add
     path('add/', views.lead_add, name='add'),

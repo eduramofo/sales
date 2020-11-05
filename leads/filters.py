@@ -24,3 +24,4 @@ class LeadFilter(django_filters.FilterSet):
     class Meta:
         model = Lead
         fields = ['name', 'status', 'indicated_by', 'tel', 'waid', 'quality', 'next_contact']
+        order_by_field = 'quality'

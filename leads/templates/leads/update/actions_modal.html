@@ -1,27 +1,34 @@
+{% load leads_extras %}
+
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-primary text-left">Telefone: Ligar/Discar</button>
+    <a role="button" href="{% url 'leads:list' %}" class="btn btn-block btn-dark text-left">Voltar para Lista de Leads</a>    
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Abrir</button>
+    <a role="button" href="{% link_to_call_lead lead %}" class="btn btn-block btn-success text-left">Telefone: Ligar/Discar</a>
+</div>
+
+
+<div class="col-12 my-3">
+    <a role="button" href="{% link_whats_open lead %}" class="btn btn-block btn-secondary text-left">Whats: Abrir</a>
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Tentei te Ligar</button>
+    <a role="button" href="{% link_whats_tentei_te_ligar lead %}" class="btn btn-block btn-secondary text-left">Whats: Tentei te Ligar</a>
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Oi</button>
+    <a role="button" href="{% link_whats_oi lead %}" class="btn btn-block btn-secondary text-left">Whats: Oi</a>
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Link de Wise Up Online</button>
+    <a role="button" href="{% link_wise_up_link lead %}" class="btn btn-block btn-secondary text-left">Whats: Enviar link da Wise Up Online</a>
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Referido (CONHECI)</button>
+    <a role="button" href="{% link_modelo_referido_conheci lead %}" class="btn btn-block btn-secondary text-left">Whats: Referido Conheci</a>
 </div>
 
 <div class="col-12 my-3">
-    <button type="button" class="btn btn-lg btn-block btn-success text-left">Whats: Referido (ENTREI)</button>
+    <a role="button" href="{% link_modelo_referido_entrei lead %}" class="btn btn-block btn-secondary text-left">Whats: Referido Entrei</a>
 </div>

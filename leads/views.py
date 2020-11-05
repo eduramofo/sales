@@ -155,9 +155,11 @@ def leads_agendamentos_list(request):
 
     leads = Lead.objects.filter().order_by('next_contact')
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(
-        status='agendamento'
-    ).order_by('next_contact'))
+    leads = LeadFilter(
+        request.GET, queryset=Lead.objects.filter(
+            status='agendamento'
+        ).order_by('next_contact')
+    )
 
     context = {
         'page_title': page_title,
