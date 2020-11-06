@@ -18,6 +18,11 @@ class UploadContactsForm(forms.Form):
         max_length=1024,
     )
 
+    indicated_by_datetime = forms.DateTimeField(
+        label='Data e Hora da Indicação',
+        required=False,
+    )
+
     vcf_files = forms.FileField(
        label='Arquivos de contatos para upload',
        required=False,

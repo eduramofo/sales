@@ -4,16 +4,17 @@ import vobject
 import json
 
 
-def gerar_leads(indicated_by, request_files):
+def gerar_leads(indicated_by, indicated_by_datetime, request_files):
     request_files_list = request_files.getlist('vcf_files')
     contacts = handle_uploaded_files(request_files_list)
-    create_leads_by_contacts(contacts, indicated_by)
+    create_leads_by_contacts(contacts, indicated_by, indicated_by_datetime)
 
 
-def create_leads_by_contacts(contacts, indicated_by):
+def create_leads_by_contacts(contacts, indicated_by, indicated_by_datetime):
     for contact in contacts:
         new_lead = Lead.objects.create(
             indicated_by=indicated_by,
+            indicated_by_datetime=indicated_by_datetime,
             name=contact['nome'],
             tel=contact['tels'][0]['numero'],
             waid=contact['tels'][0]['waid'],

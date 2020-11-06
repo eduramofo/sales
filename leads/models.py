@@ -56,6 +56,12 @@ class Lead(BaseModel):
         blank=True,
     )
 
+    indicated_by_datetime = models.DateTimeField(
+        verbose_name='Data e hora da indicação',
+        null=True,
+        blank=True,
+    )
+
     tel = models.CharField(
         max_length=1024,
         verbose_name='Telefone',

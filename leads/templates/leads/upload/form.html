@@ -8,22 +8,11 @@
 
     {% csrf_token %}
 
-    <div class="form-group">
 
-        <label for="{{ upload_contacts_form.indicated_by.id_for_label }}">
-            {{ upload_contacts_form.indicated_by.label }}
-        </label>
+    {% include "core/fields_widgets/input_datetime_local.html" with field=upload_contacts_form.indicated_by_datetime %}
 
-        {% if not upload_contacts_form.indicated_by.errors %}
-            {{ upload_contacts_form.indicated_by|add_class:'form-control form-control-lg' }}
-        {% else %}
-            {{ upload_contacts_form.indicated_by|add_class:'form-control form-control-lg is-invalid' }}
-        {% endif %}
+    {% include "core/fields_widgets/input_default.html" with field=upload_contacts_form.indicated_by %}
 
-        <div class="invalid-feedback">{{ upload_contacts_form.indicated_by.errors }}</div>
-
-    </div>
-    
 
     <div class="form-group">
 
@@ -42,7 +31,7 @@
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn btn-block btn-lg btn-success">Carregar Contatos</button>
+        <button type="submit" class="btn btn-block btn-success">Carregar Contatos</button>
     </div>
 
 </form>

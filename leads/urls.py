@@ -13,7 +13,10 @@ urlpatterns = [
     path('indicators/', views.leads_indicators_list, name='indicators-list'),
     
     # today
-    path('today/', views.leads_list, name='today'),
+    path('today/', views.leads_today, name='today'),
+
+    # next
+    path('next/', views.lead_next, name='next'),
 
     # add
     path('add/', views.lead_add, name='add'),

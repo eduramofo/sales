@@ -6,9 +6,25 @@
 {% endblock %}
 {% block js %}
 <script>
+$(document).ready(function() {
+
     $('button#leads-form-submit-btn').click(function(e) {
         e.preventDefault();
         $('form#leads').submit();
     });
+
+    checkPosition();
+    function checkPosition() {
+        if (!window.matchMedia('(max-width: 767px)').matches) {
+            $('#defaults-leads-actions').parent().removeClass('d-flex');
+            $('#links-shortcuts').parent().removeClass('d-flex');
+            $('#leads-form-submit-btn').removeClass('btn-block');
+            $('#leads-next-btn').removeClass('btn-block');
+        }
+    }
+
+});
+
+
 </script>
 {% endblock %}

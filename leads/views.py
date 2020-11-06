@@ -1,4 +1,5 @@
 from urllib.parse import urlencode
+from random import choice as random_choice
 
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -53,7 +54,7 @@ def lead_add(request):
         lead_form = LeadForm(request.POST)
         if lead_form.is_valid():
             lead = lead_form.save()
-            url = reverse_lazy('leads:go-to', args=(str(lead.id),))
+            url = reverse_lazy('leads:update', args=(str(lead.id),))
             messages.add_message(request, messages.SUCCESS, 'Lead adicionado com sucesso!')
             return HttpResponseRedirect(url)
         else:
@@ -81,7 +82,7 @@ def lead_update(request, lead_id):
 
     if method == 'POST' and lead_form.is_valid():
         lead = lead_form.save()
-        url = reverse_lazy('leads:go-to', args=(str(lead.id),))
+        url = reverse_lazy('leads:update', args=(str(lead.id),))
         messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
         return HttpResponseRedirect(url)
 
@@ -90,6 +91,34 @@ def lead_update(request, lead_id):
         context['lead_form'] = lead_form
 
     return render(request, 'leads/update/index.html', context)
+
+
+@login_required()
+def lead_next(request):
+    exlude = Q(status='sem_interesse') | Q(status='contato_invalido') | Q(status='ignorando') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='perdido') | Q(status='ganho')
+    pks = Lead.objects.exclude(exlude).values_list('pk', flat=True)
+    random_pk = random_choice(pks)
+    next_lead_url = reverse('leads:update', args=[random_pk,])
+    return HttpResponseRedirect(next_lead_url)
+
+
+@login_required()
+def leads_today(request):
+    
+    nav_name = 'leads_list'
+
+    page_title = 'Lista de Leads HOJE'
+    
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all())
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads.qs,
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
 
 
 @login_required()
@@ -103,7 +132,6 @@ def lead_go_to(request, lead_id):
         'lead': lead,
     }
     return render(request, 'leads/go_to/index.html', context)
-
 
 
 @login_required()
@@ -202,17 +230,22 @@ def leads_upload(request):
 
             indicated_by = upload_contacts_form_data['indicated_by']
 
-            gerar_leads(indicated_by, request.FILES)
+            indicated_by_datetime = upload_contacts_form_data['indicated_by_datetime']
+
+            gerar_leads(indicated_by, indicated_by_datetime, request.FILES)
 
             filter_querydict = {
-                'indicated_by__exact': indicated_by,
+                'indicated_by_contains': indicated_by,
             }
             
-            lead_admin_changelist_url = reverse('admin:leads_lead_changelist')
+            filter_urlencode = urlencode(filter_querydict)
 
-            success_url = '%s?%s' % (lead_admin_changelist_url, urlencode(filter_querydict))
+            leads_list = reverse('leads:list')
+            
+            success_url = '%s?%s' % (leads_list, filter_urlencode)
 
             return HttpResponseRedirect(success_url)
+
 
     context = {
         'nav_name': 'leads_upload',
