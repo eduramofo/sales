@@ -108,6 +108,7 @@ def lead_update(request, lead_id):
 
 @login_required()
 def lead_update_run_now(request, lead_id, lead_run_now):
+
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form_run_now = LeadFormRunNow(request.POST or None, instance=lead)
     method = request.method
@@ -116,6 +117,7 @@ def lead_update_run_now(request, lead_id, lead_run_now):
 
     if lead_run_now == 'true':
         run_now_status = True
+
     elif lead_run_now == 'false':
         run_now_status = False
 
@@ -128,13 +130,13 @@ def lead_update_run_now(request, lead_id, lead_run_now):
     if method == 'POST':
         if lead_form_run_now.is_valid() and not run_now_status == None:
             lead = lead_form_run_now.save()
+            lead_id = lead.id
             run_now = lead.run_now
             response['success'] = True
             response['run_now'] = run_now
-            response['td_html'] =  leads_extras.run_now_table_data_html(lead.id, run_now.lower()),
+            response['td_html'] =  leads_extras.run_now_table_data_html(lead_id, run_now),
             messages.add_message(request, messages.SUCCESS, 'Lead incluído na lista de execução de agora com SUCESSO!')
         else:
-            response['success'] = False
             messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão do Lead na lista de execução de agora!')
 
     return JsonResponse(response)
@@ -142,7 +144,10 @@ def lead_update_run_now(request, lead_id, lead_run_now):
 
 @login_required()
 def lead_next(request):
-    pks = tools.get_open_leads().values_list('pk', flat=True)
+    random_queryset_list =  tools.get_open_run_now_leads()
+    if not random_queryset_list:
+        random_queryset_list = tools.get_open_leads()
+    pks = random_queryset_list.values_list('pk', flat=True)
     random_pk = random_choice(pks)
     next_lead_url = reverse('leads:update', args=[random_pk,])
     return HttpResponseRedirect(next_lead_url)

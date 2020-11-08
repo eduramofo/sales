@@ -1,10 +1,12 @@
+import urllib.parse
+import json
+
 from django import template
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from leads.models import Lead
-import urllib.parse
 
 register = template.Library()
 
@@ -123,18 +125,23 @@ def link_modelo_referido_entrei(lead_object):
 def run_now_table_data_html(lead_id, lead_run_now):
 
     url = ''
-    
-    td_html = "<td class='run-now-td' data-run-now-url='{}'><strong class='{}'>{}</strong></td>"
+    data = {}
+    td_html = "<td class='run-now-td' data-run-now-data='{}' data-run-now-url='{}'><strong class='{}'>{}</strong></td>"
     
     if lead_run_now == True:
         url = reverse_lazy('leads:update-run-now', args=(str(lead_id), 'true',))
-        td_html = td_html.format(url, 'text-success', 'Sim')
+        data = {'run_now': False,}
+        data = json.dumps(data)
+        td_html = td_html.format(data, url, 'text-success', 'Sim')
     
     elif lead_run_now == False:
         url = reverse_lazy('leads:update-run-now', args=(str(lead_id), 'false',))
-        td_html = td_html.format(url, 'text-danger','Não')
-
+        data = {'run_now': True,}
+        data = json.dumps(data)
+        td_html = td_html.format(data, url, 'text-danger','Não')
+    
     else:
-        td_html = td_html.format(url, 'N/A')
+        data = json.dumps(data)
+        td_html = td_html.format(data, url, 'text-danger','Não')
 
     return mark_safe(td_html)

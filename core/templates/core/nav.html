@@ -1,7 +1,7 @@
 <div class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
 
-    <a class="navbar-brand" href="{% url 'core:home' %}">Wiser Sale</a>
+    <a class="navbar-brand" href="{% url 'core:home' %}">Sales Up</a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarNav" aria-controls="navbarNav" 
@@ -14,6 +14,10 @@
 
         <li class="nav-item {% if nav_name == 'core_home' %}active{% endif%}">
           <a class="nav-link" href="{% url 'core:home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item {% if nav_name == 'leads_next' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'leads:next' %}">Próximo! <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_now' %}active{% endif%}">

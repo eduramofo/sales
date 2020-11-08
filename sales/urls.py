@@ -22,7 +22,7 @@ from django.contrib.auth.views import LoginView
 from leads.admin_custom import lead_admin_site
 
 
-DEFAULT_TITLE = 'Wiser Sale'
+DEFAULT_TITLE = 'Sales Up'
 
 admin.site.site_title  = ugettext_lazy(DEFAULT_TITLE)
 

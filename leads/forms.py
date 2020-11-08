@@ -6,6 +6,24 @@ from leads.models import Lead, Activity, ACTIVITY_TYPE_CHOICES
 
 class LeadForm(forms.ModelForm):
     
+    next_contact = forms.DateTimeField(
+        label='Próximo Contato',
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%dT%H:%M',
+            attrs={'type': 'datetime-local',}
+        ),
+        required=True,
+    )
+
+    indicated_by_datetime = forms.DateTimeField(
+        label='Data e hora da indicação',
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%dT%H:%M',
+            attrs={'type': 'datetime-local',}
+        ),
+        required=True,
+    )
+
     run_now = forms.BooleanField(
         label='Colocar na Lista de Execução de Agora?',
         required=False,
