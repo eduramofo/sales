@@ -1,0 +1,5 @@
+<form id="activity" method="post"
+    action="{% url 'leads:add' %}"
+    class="bg-light border border-dark p-3 mt-3 mb-5">
+    {% include 'leads/update/activity/forms/activity_form_fields.html' with form=activity_form %}
+</form>

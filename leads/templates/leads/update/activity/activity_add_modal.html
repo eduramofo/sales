@@ -1,0 +1,20 @@
+<div class="modal fade" id="activity-add-modal" tabindex="-1" aria-labelledby="activityAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="activityAddModalLabel">Adicionar Nova Atividade</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% include "leads/update/activity/activity_add_modal_fad.html" %}
+        {% include "leads/update/activity/forms/activity_form_add.html" %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-success">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>

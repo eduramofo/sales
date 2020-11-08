@@ -15,6 +15,7 @@ LEAD_STATUS_CHOICES = (
     ("tentando_contato", "TENTANDO CONTATO"),
     ("processando", "PROCESSANDO"),
     ("sem_interesse", "SEM INTERESSE"),
+    ("sem_condicoes_financeiras", "SEM CONDIÇÕES FINANCEIRAS"),
     ("contato_invalido", "CONTATO INVÁLIDO"),
     ("ignorando", "REJEITANDO AS LIGAÇÕES"),
     ("agendamento", "AGENDAMENTO"),
@@ -127,6 +128,12 @@ class Activity(BaseModel):
 
     due_date = models.DateTimeField(
         verbose_name='Data de Vencimento',
+        null=True,
+        blank=True,
+    )
+
+    note = models.TextField(
+        verbose_name='Anotações',
         null=True,
         blank=True,
     )

@@ -9,7 +9,7 @@ from django.contrib import messages
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
-from leads.forms import LeadForm, UploadContactsForm
+from leads.forms import LeadForm, UploadContactsForm, ActivityForm
 from leads.indicators import indicators_data
 from leads.filters import LeadFilter
 
@@ -72,17 +72,22 @@ def lead_update(request, lead_id):
     page_title = 'Atualização do Lead'
     nav_name = 'leads_list'
     method = request.method
+    activity_form = ActivityForm()
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
         'lead': lead,
         'lead_form': lead_form,
+        'activity_form': activity_form,
     }
 
     if method == 'POST' and lead_form.is_valid():
         lead = lead_form.save()
+        go_next = request.GET.get('next', None)
         url = reverse_lazy('leads:update', args=(str(lead.id),))
+        if go_next:
+            url = reverse_lazy('leads:next')
         messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
         return HttpResponseRedirect(url)
 
