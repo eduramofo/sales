@@ -1,5 +1,8 @@
 from django import template
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
+
 from leads.models import Lead
 import urllib.parse
 
@@ -114,3 +117,24 @@ def link_modelo_referido_entrei(lead_object):
     link_to_call = whatsapp_api_link + '&text=' + text
 
     return link_to_call
+
+
+@register.simple_tag
+def run_now_table_data_html(lead_id, lead_run_now):
+
+    url = ''
+    
+    td_html = "<td class='run-now-td' data-run-now-url='{}'><strong class='{}'>{}</strong></td>"
+    
+    if lead_run_now == True:
+        url = reverse_lazy('leads:update-run-now', args=(str(lead_id), 'true',))
+        td_html = td_html.format(url, 'text-success', 'Sim')
+    
+    elif lead_run_now == False:
+        url = reverse_lazy('leads:update-run-now', args=(str(lead_id), 'false',))
+        td_html = td_html.format(url, 'text-danger','Não')
+
+    else:
+        td_html = td_html.format(url, 'N/A')
+
+    return mark_safe(td_html)

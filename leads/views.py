@@ -2,16 +2,21 @@ from urllib.parse import urlencode
 from random import choice as random_choice
 
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
 
+from core.tools import paginator
+
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
-from leads.forms import LeadForm, UploadContactsForm, ActivityForm
+from leads.forms import LeadForm, LeadFormRunNow, UploadContactsForm, ActivityForm
 from leads.indicators import indicators_data
 from leads.filters import LeadFilter
+from leads import tools
+from leads.templatetags import leads_extras
 
 
 @login_required()
@@ -23,10 +28,13 @@ def leads_list(request):
     
     leads = LeadFilter(request.GET, queryset=Lead.objects.all())
 
+    pages = paginator.make_paginator(request, leads.qs, 10)
+
     context = {
         'page_title': page_title,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
         'nav_name': nav_name,
-        'leads': leads.qs,
         'leads_filters_form': leads.form,
     }
 
@@ -99,44 +107,69 @@ def lead_update(request, lead_id):
 
 
 @login_required()
+def lead_update_run_now(request, lead_id, lead_run_now):
+    lead = get_object_or_404(Lead, id=lead_id)
+    lead_form_run_now = LeadFormRunNow(request.POST or None, instance=lead)
+    method = request.method
+    lead_run_now = lead_run_now.lower()
+    run_now_status = None
+
+    if lead_run_now == 'true':
+        run_now_status = True
+    elif lead_run_now == 'false':
+        run_now_status = False
+
+    response = {
+        'success': False,
+        'run_now': run_now_status,
+        'td_html': '',
+    }
+
+    if method == 'POST':
+        if lead_form_run_now.is_valid() and not run_now_status == None:
+            lead = lead_form_run_now.save()
+            run_now = lead.run_now
+            response['success'] = True
+            response['run_now'] = run_now
+            response['td_html'] =  leads_extras.run_now_table_data_html(lead.id, run_now.lower()),
+            messages.add_message(request, messages.SUCCESS, 'Lead incluído na lista de execução de agora com SUCESSO!')
+        else:
+            response['success'] = False
+            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão do Lead na lista de execução de agora!')
+
+    return JsonResponse(response)
+
+
+@login_required()
 def lead_next(request):
-    exlude = Q(status='sem_interesse') | Q(status='contato_invalido') | Q(status='ignorando') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='perdido') | Q(status='ganho')
-    pks = Lead.objects.exclude(exlude).values_list('pk', flat=True)
+    pks = tools.get_open_leads().values_list('pk', flat=True)
     random_pk = random_choice(pks)
     next_lead_url = reverse('leads:update', args=[random_pk,])
     return HttpResponseRedirect(next_lead_url)
 
 
 @login_required()
-def leads_today(request):
+def leads_now(request):
     
-    nav_name = 'leads_list'
+    nav_name = 'leads_now'
 
-    page_title = 'Lista de Leads HOJE'
-    
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all())
+    page_title = 'Lista de Leads [ AGORA ]'
+
+    leads_queryset = tools.get_open_run_now_leads()
+
+    leads = LeadFilter(request.GET, queryset=leads_queryset)
+
+    pages = paginator.make_paginator(request, leads.qs, 10)
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'leads': leads.qs,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }
 
     return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def lead_go_to(request, lead_id):
-    lead = get_object_or_404(Lead, id=lead_id)
-    page_title = 'Para onde você gostaria de encaminhado?'
-    nav_name = 'leads_list'
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'lead': lead,
-    }
-    return render(request, 'leads/go_to/index.html', context)
 
 
 @login_required()
@@ -148,10 +181,13 @@ def leads_novos_list(request):
 
     leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='novo').order_by('-quality'))
 
+    pages = paginator.make_paginator(request, leads.qs, 10)
+
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'leads': leads.qs,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }
 
@@ -168,11 +204,14 @@ def leads_em_aberto_list(request):
     leads = LeadFilter(request.GET, queryset=Lead.objects.filter(
         Q(status='tentando_contato') | Q(status='processando')
     ).order_by('-quality'))
+    
+    pages = paginator.make_paginator(request, leads.qs, 10)
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'leads': leads.qs,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }
 
@@ -194,10 +233,13 @@ def leads_agendamentos_list(request):
         ).order_by('next_contact')
     )
 
+    pages = paginator.make_paginator(request, leads.qs, 10)
+
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'leads': leads.qs,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }
 

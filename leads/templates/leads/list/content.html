@@ -2,4 +2,5 @@
     {% include "leads/list/actions.html" %}
     {% include "leads/list/filters.html" with form=leads_filters_form %}
     {% include "leads/list/table.html" %}
+    {% include "core/tools/pagination.html" with page=leads %}
 </div>

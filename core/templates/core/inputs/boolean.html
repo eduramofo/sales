@@ -1,0 +1,13 @@
+{% load widget_tweaks %}
+
+<div class="form-group">
+    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+        {% if not field.errors %}
+            {{field|add_class:'custom-control-input'}}
+        {% else %}
+            {{field|add_class:'custom-control-input is-invalid'}}
+            <div class="invalid-feedback">{{ field.errors }}</div>
+        {% endif %}
+        <label class="custom-control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+    </div>
+</div>

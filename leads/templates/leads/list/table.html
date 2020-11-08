@@ -1,3 +1,5 @@
+{% load leads_extras %}
+
 <div class="row">
     <div class="col-12">
 
@@ -11,6 +13,7 @@
             <th scope="col">Qualidade</th>
             <th scope="col">Próximo Contato</th>
             <th scope="col">Anotações</th>
+            <th scope="col">Agora?</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +37,7 @@
             <td>{{lead.quality}} / 5</td>
             <td>{{lead.next_contact|date:"d/m/y"}} {{ lead.next_contact|time:"H:i" }}</td>
             <td>{{lead.note|default_if_none:""|truncatechars:45}}</td>
+            {% run_now_table_data_html lead.id lead.run_now %}
           </tr>
         {% endfor %}
         </tbody>

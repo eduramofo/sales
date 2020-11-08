@@ -95,6 +95,11 @@ class Lead(BaseModel):
         blank=True,
     )
 
+    run_now = models.BooleanField(
+        verbose_name='Executar Agora?',
+        default=False,
+    )
+
     class Meta:
         verbose_name = "Lead"
         verbose_name_plural = "Leads"

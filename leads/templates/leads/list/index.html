@@ -1,14 +1,10 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block content %}
 {% include "core/nav.html" %}
 {% include "core/page_title.html" %}
 {% include "leads/list/content.html" %}
 {% endblock %}
 {% block js %}
-<script>
-$('#filter-toggle-btn').click(function(e) {
-    e.preventDefault();
-    $('#filter-form-wrapper').toggleClass('d-none');
-});
-</script>
+<script src="{% static 'leads/list.js' %}"></script>
 {% endblock %}

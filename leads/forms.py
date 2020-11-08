@@ -6,6 +6,11 @@ from leads.models import Lead, Activity, ACTIVITY_TYPE_CHOICES
 
 class LeadForm(forms.ModelForm):
     
+    run_now = forms.BooleanField(
+        label='Colocar na Lista de Execução de Agora?',
+        required=False,
+    )
+
     note = forms.CharField(
         label='Anotações',
         widget=forms.Textarea(attrs={'rows': 4, 'cols':60}),
@@ -15,6 +20,18 @@ class LeadForm(forms.ModelForm):
     class Meta:
         model = Lead
         fields = '__all__'
+
+
+class LeadFormRunNow(forms.ModelForm):
+    
+    run_now = forms.BooleanField(
+        label='Colocar na Lista de Execução de Agora?',
+        required=False,
+    )
+    
+    class Meta:
+        model = Lead
+        fields = ['run_now',]
 
 
 class UploadContactsForm(forms.Form):

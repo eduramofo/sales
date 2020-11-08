@@ -11,9 +11,8 @@ urlpatterns = [
     path('agendamentos/', views.leads_agendamentos_list, name='agendamentos-list'),
     path('em-aberto/', views.leads_em_aberto_list, name='leads-em-aberto-list'),
     path('indicators/', views.leads_indicators_list, name='indicators-list'),
-    
-    # today
-    path('today/', views.leads_today, name='today'),
+    # list - now
+    path('now/', views.leads_now, name='now'),
 
     # next
     path('next/', views.lead_next, name='next'),
@@ -23,9 +22,7 @@ urlpatterns = [
     
     # update
     path('<uuid:lead_id>/update/', views.lead_update, name='update'),
-
-    # go
-    path('<uuid:lead_id>/go-to/', views.lead_go_to, name='go-to'),
+    path('<uuid:lead_id>/update/run-now/<str:lead_run_now>/', views.lead_update_run_now, name='update-run-now'),
     
     # upload / add
     path('upload/', views.leads_upload, name='upload'),
