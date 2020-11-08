@@ -296,7 +296,13 @@ def leads_upload(request):
             
             success_url = '%s?%s' % (leads_list, filter_urlencode)
 
+            messages.add_message(request, messages.SUCCESS, 'Leads criados SUCESSO!')
+    
             return HttpResponseRedirect(success_url)
+        
+        else:
+
+            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão dos Lead, faça uma verificação manual!')
 
 
     context = {

@@ -12,7 +12,7 @@ class LeadForm(forms.ModelForm):
             format='%Y-%m-%dT%H:%M',
             attrs={'type': 'datetime-local',}
         ),
-        required=True,
+        required=False,
     )
 
     indicated_by_datetime = forms.DateTimeField(
@@ -21,7 +21,7 @@ class LeadForm(forms.ModelForm):
             format='%Y-%m-%dT%H:%M',
             attrs={'type': 'datetime-local',}
         ),
-        required=True,
+        required=False,
     )
 
     run_now = forms.BooleanField(

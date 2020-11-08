@@ -183,6 +183,21 @@ STATIC_URL = config('STATIC_URL', default='/static/')
 
 
 #########################################################
+# Security configuration - START
+#########################################################
+SECURE_PROXY_SSL_HEADER = config('SECURE_PROXY_SSL_HEADER', default=(''), cast=Csv())
+
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=False, cast=bool)
+
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
+#########################################################
+# Security configuration - END
+#########################################################
+
+
+#########################################################
 # Email configuration - START
 #########################################################
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
