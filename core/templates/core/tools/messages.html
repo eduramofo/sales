@@ -1,60 +1,35 @@
-<div id="global-toast-container" aria-live="polite" aria-atomic="true" style="position:fixed;top:30px;right:30px;z-index:9999;">
-  
-  <!-- Position it -->
-  <div style="position:relative;">
+{% if messages %}
 
-    <!-- Then put toasts within -->
-    <div class="toast 1" role="alert" aria-live="assertive" aria-atomic="true" style="background-color:#fff;">
-      <div class="toast-header">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">just now</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        See? Just like this.
+  <div id="django-messages-toast-templates-wrapper">
+    <div id="global-toast-container" aria-live="polite" aria-atomic="true" style="position:fixed;top:30px;right:30px;z-index:9999;">
+      <div id="toasts-wrapper" style="position:relative;">
+
+          <div class="toast base d-none" role="alert" aria-live="assertive" aria-atomic="true" style="width:350px;background-color:#fff;">
+            <div class="toast-header">
+              <svg  class="bd-placeholder-img rounded mr-2"
+                    width="20" height="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable="false" role="img">
+                    <rect width="100%" height="100%" fill="#28a745"></rect>
+              </svg>
+              <strong class="mr-auto headline-text">Bootstrap</strong>
+              <small class="text-muted">Agora</small>
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">See? Just like this.</div>
+          </div>
+
       </div>
     </div>
-
-    <div class="toast 2" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Heads up, toasts will stack automatically
-      </div>
-    </div>
-
-    <div class="toast 3" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Heads up, toasts will stack automatically
-      </div>
-    </div>
-
-    <div class="toast 4" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header">
-        <strong class="mr-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="toast-body">
-        Heads up, toasts will stack automatically
-      </div>
-    </div>
-
   </div>
-</div>
+
+  <ul id="django-messages" class="d-none">
+    {% for message in messages %}
+      <li class="message-item" data-tags="{{ message.tags }}" data-message="{{ message }}" data-processed="false"></li>
+    {% endfor %}
+  </ul>
+
+{% endif %}

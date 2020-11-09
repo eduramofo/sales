@@ -137,7 +137,7 @@ def lead_update_run_now(request, lead_id, lead_run_now):
             response['td_html'] =  leads_extras.run_now_table_data_html(lead_id, run_now),
             messages.add_message(request, messages.SUCCESS, 'Lead incluído na lista de execução de agora com SUCESSO!')
         else:
-            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão do Lead na lista de execução de agora!')
+            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão/excluído do Lead na lista de execução de agora!')
 
     return JsonResponse(response)
 
