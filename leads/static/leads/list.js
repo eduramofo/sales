@@ -11,9 +11,14 @@ $(document).ready(function() {
     // now - START
     leadTable.find('tbody tr td.run-now-td').css('cursor', 'pointer').click(changeLeadRunNowStatus);
     function changeLeadRunNowStatus (e) {
-        
         var currentTd = $(this);
         
+        // check se tá processando, se tiver encerra o procedimento;
+        if (currentTd.attr('class').includes("run-now-td-processing")) {
+            return;
+        }
+
+        currentTd.addClass('run-now-td-processing');
         var ajaxOptions = {
             type: "POST",
             url: currentTd.data('run-now-url'),
@@ -32,7 +37,10 @@ $(document).ready(function() {
                 currentTd.data('run-now-data', newTdData);
                 currentTd.data('run-now-url', newTdUrl);
                 currentTd.html(newTdHtml);
-
+                $('body').djangoMessages();
+                setTimeout(function() {
+                    currentTd.removeClass('run-now-td-processing');
+                }, 3500);
             } else {
                 console.log('Ocorreu algum erro desconhecido, atualize a página e tente novamente.');
             }

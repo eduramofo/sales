@@ -80,7 +80,7 @@ def lead_update(request, lead_id):
     page_title = 'Atualização do Lead'
     nav_name = 'leads_list'
     method = request.method
-    activity_form = ActivityForm()
+    activity_form = ActivityForm(prefix='activity')
 
     context = {
         'page_title': page_title,
@@ -135,7 +135,10 @@ def lead_update_run_now(request, lead_id, lead_run_now):
             response['success'] = True
             response['run_now'] = run_now
             response['td_html'] =  leads_extras.run_now_table_data_html(lead_id, run_now),
-            messages.add_message(request, messages.SUCCESS, 'Lead incluído na lista de execução de agora com SUCESSO!')
+            if run_now:         
+                messages.add_message(request, messages.SUCCESS, 'Lead INCLUÍDO na lista de execução de AGORA com sucesso!')
+            else:
+                messages.add_message(request, messages.SUCCESS, 'Lead EXCLUÍDO na lista de execução de AGORA com sucesso!')
         else:
             messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão/excluído do Lead na lista de execução de agora!')
 

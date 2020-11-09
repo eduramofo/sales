@@ -81,3 +81,41 @@ $(document).ready(function() {
     }
 
 });
+
+(function (factory, jQuery, Zepto) {
+
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory(require('jquery'));
+    } else {
+        factory(jQuery || Zepto);
+    }
+
+} (function ($) {
+
+$.fn.djangoMessages = function() {
+
+    function success(data) {
+        var messages = data.messages;
+        if (messages) {
+            insertDjangoMessagesInHtml(messages);
+        }
+    }
+
+    function insertDjangoMessagesInHtml(messages) {
+        $('body').prepend(messages);
+    }
+
+    var ajaxOptions = {
+        type: "GET",
+        url: '/messages/',
+        success: success,
+        dataType: 'json',
+    }
+
+    $.ajax(ajaxOptions);
+
+}
+
+}, window.jQuery, window.Zepto));
