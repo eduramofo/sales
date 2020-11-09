@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # local apps
     'core.apps.CoreConfig',
     'leads.apps.LeadsConfig',
+    'activities.apps.ActivitiesConfig',
 
     # django apps
     'django.contrib.admin',

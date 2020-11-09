@@ -12,7 +12,7 @@ from core.tools import paginator
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
-from leads.forms import LeadForm, LeadFormRunNow, UploadContactsForm, ActivityForm
+from leads.forms import LeadForm, LeadFormRunNow, UploadContactsForm
 from leads.indicators import indicators_data
 from leads.filters import LeadFilter
 from leads import tools
@@ -80,14 +80,12 @@ def lead_update(request, lead_id):
     page_title = 'Atualização do Lead'
     nav_name = 'leads_list'
     method = request.method
-    activity_form = ActivityForm(prefix='activity')
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
         'lead': lead,
         'lead_form': lead_form,
-        'activity_form': activity_form,
     }
 
     if method == 'POST' and lead_form.is_valid():
