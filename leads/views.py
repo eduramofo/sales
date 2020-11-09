@@ -26,7 +26,7 @@ def leads_list(request):
 
     page_title = 'Lista de Leads'
     
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all())
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
 
     pages = paginator.make_paginator(request, leads.qs, 10)
 
