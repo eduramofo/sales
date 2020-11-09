@@ -52,5 +52,7 @@ urlpatterns = [
     path('', include("core.urls")),
 
     path('leads/', include("leads.urls")),
+    
+    path('activities/', include("activities.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

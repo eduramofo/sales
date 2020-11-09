@@ -2,7 +2,7 @@ from django.urls import path
 from leads import views
 
 
-app_name = 'leads'
+app_name = 'activities'
 urlpatterns = [
 
     # leads lists

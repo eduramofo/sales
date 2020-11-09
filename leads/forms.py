@@ -25,7 +25,7 @@ class LeadForm(forms.ModelForm):
     )
 
     run_now = forms.BooleanField(
-        label='Colocar na Lista de Execução de Agora?',
+        label='Está na lista de Execução de Agora?',
         required=False,
     )
 

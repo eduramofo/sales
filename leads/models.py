@@ -33,7 +33,6 @@ ACTIVITY_TYPE_CHOICES = (
     ("Tarefa", "Tarefa"),
 )
 
-
 class Lead(BaseModel):
 
     status = models.CharField(
