@@ -51,7 +51,7 @@ class Activity(BaseModel):
 
     lead = models.ForeignKey(
         'leads.Lead',
-        verbose_name='Lead',
+        verbose_name='Associada ao Lead',
         on_delete=models.CASCADE,
         blank=True,
         null=True,
