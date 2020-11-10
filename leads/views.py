@@ -10,6 +10,8 @@ from django.contrib import messages
 
 from core.tools import paginator
 
+from activities.models import Activity
+
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
 from leads.forms import LeadForm, LeadFormRunNow, UploadContactsForm
@@ -77,6 +79,7 @@ def lead_update(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form = LeadForm(request.POST or None, instance=lead)
+    activities = Activity.objects.filter(lead=lead)
     page_title = 'Atualização do Lead'
     nav_name = 'leads_list'
     method = request.method
@@ -85,6 +88,7 @@ def lead_update(request, lead_id):
         'page_title': page_title,
         'nav_name': nav_name,
         'lead': lead,
+        'activities': activities,
         'lead_form': lead_form,
     }
 
