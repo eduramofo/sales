@@ -1,5 +1,6 @@
 <div class="bg-dark">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark container">
+
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark container">
 
     <a class="navbar-brand" href="{% url 'core:home' %}">Sales Up</a>
     
@@ -29,35 +30,40 @@
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_novos_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:novos-list' %}">Novos <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'leads:novos-list' %}">News <span class="sr-only">(current)</span></a>
         </li>
         
         <li class="nav-item {% if nav_name == 'leads_agendamentos_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:agendamentos-list' %}">Agendamentos <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'leads:agendamentos-list' %}">Schedules <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_em_aberto_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:leads-em-aberto-list' %}">Em Aberto <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'leads:leads-em-aberto-list' %}">Opened <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item {% if nav_name == 'activities' %}active{% endif%}">
+          <a class="nav-link" href="{% url 'activities:list' %}">Activities</a>
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_indicators_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:indicators-list' %}">Indicadores <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'leads:indicators-list' %}">Indicators <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item {% if nav_name == 'statistics' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'core:statistics' %}">Estatísticas <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'core:statistics' %}">Statistics <span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
           <a class="nav-link" href="{% url 'leads:upload' %}">Upload de Leads</a>
         </li>
-        
+
         <li class="nav-item {% if nav_name == 'settings' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'core:settings' %}">Configurações</a>
+          <a class="nav-link" href="{% url 'core:settings' %}">Settings</a>
         </li>
 
       </ul>
     </div>
     
   </nav>
+
 </div>

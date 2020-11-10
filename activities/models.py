@@ -36,10 +36,25 @@ class Activity(BaseModel):
         blank=True,
     )
 
+    done = models.BooleanField(
+        verbose_name='Feita?',
+        default=False,
+        null=False,
+        blank=False,
+    )
+
     note = models.TextField(
         verbose_name='Anotações',
         null=True,
         blank=True,
+    )
+
+    lead = models.ForeignKey(
+        'leads.Lead',
+        verbose_name='Lead',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     class Meta:

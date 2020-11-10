@@ -1,0 +1,26 @@
+{% load leads_extras %}
+
+<table id="lead-table-list" class="table table-bordered table-striped table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">Criação</th>
+      <th scope="col">Assunto</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Vencimento</th>
+      <th scope="col">Feita?</th>
+      <th scope="col">Anotações</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for activity in activities %}
+    <tr>
+      <td>{{activity.created_at|date:"d/m/y"}} {{ activity.created_at|time:"H:i" }}</td>
+      <td><a href="{% url 'activities:update' activity.id %}">{{activity.subject|truncatechars:35}}</a></td>
+      <td>{{activity.get_type_display}}</td>
+      <td>{{activity.due_date|date:"d/m/y"}} {{ activity.due_date|time:"H:i" }}</td>
+      <td>{% if activity.done %}Sim{% else %}Não{% endif %}</td>
+      <td>{{activity.note|truncatechars:40}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

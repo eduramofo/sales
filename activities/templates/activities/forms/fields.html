@@ -1,0 +1,7 @@
+{% csrf_token %}
+{% include 'core/inputs/default.html' with field=activity_form.type %}
+{% include 'core/inputs/default.html' with field=activity_form.subject %}
+{% include 'core/inputs/default.html' with field=activity_form.due_date %}
+{% include 'core/inputs/boolean.html' with field=activity_form.done %}
+{% include 'core/inputs/default.html' with field=activity_form.lead %}
+{% include 'core/inputs/default.html' with field=activity_form.note %}

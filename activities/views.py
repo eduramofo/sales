@@ -16,7 +16,7 @@ def activity_add(request):
     initial = {}
     activity_form = ActivityForm(initial=initial)
     page_title = 'Criação de uma nova atividade'
-    nav_name = 'activities_list'
+    nav_name = 'activities'
 
     context = {
         'page_title': page_title,
@@ -44,7 +44,7 @@ def activity_update(request, activity_id):
     activity = get_object_or_404(Activity, id=activity_id)
     activity_form = ActivityForm(request.POST or None, instance=activity, prefix='activity')
     page_title = 'Atualização de Atividade'
-    nav_name = 'activities_list'
+    nav_name = 'activities'
     method = request.method
 
     context = {
@@ -69,7 +69,7 @@ def activity_update(request, activity_id):
 @login_required()
 def activities_list(request):
     
-    nav_name = 'activities_list'
+    nav_name = 'activities'
     page_title = 'Lista de Atividades'
     activities = ActivityFilter(request.GET, queryset=Activity.objects.all().order_by('-created_at'))
     pages = paginator.make_paginator(request, activities.qs, 10)
