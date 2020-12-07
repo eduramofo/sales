@@ -1,23 +1,44 @@
-{% include "core/fields_widgets/text.html" with field=form.name %}
-{% include "core/fields_widgets/text.html" with field=form.indicated_by_contains %}
-{% include "core/fields_widgets/text.html" with field=form.tel %}
-
 {% comment %} status {% endcomment %}
-{% include "core/fields_widgets/text.html" with field=form.status %}
-
-{% comment %} quality {% endcomment %}
-{% include "core/fields_widgets/text.html" with field=form.quality_gte %}
-{% include "core/fields_widgets/text.html" with field=form.quality_lte %}
-
-{% comment %} next_contact {% endcomment %}
-{% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
-{% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
-
-
-<div class="form-group">
-    <button type="submit" class="btn btn-block btn-success">Executar Filtro</button>
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.status %}
 </div>
 
-<div class="form-group">
-    <a role="button" href="{{ request.path }}" class="btn btn-block btn-warning">Limpar Filtro</a>
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.name %}
+</div>
+
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.indicated_by_contains %}
+</div>
+
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.tel %}
+</div>
+
+{% comment %} quality {% endcomment %}
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.quality_gte %}
+</div>
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/text.html" with field=form.quality_lte %}
+</div>
+
+{% comment %} next_contact {% endcomment %}
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_gte %}
+</div>
+<div class="col-6 col-md-3">
+    {% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
+</div>
+
+<div class="col-6 col-md-4 mb-0 pb-0">
+    <div class="form-group mb-0">
+        <button type="submit" class="btn btn-block btn-success">Executar Filtro</button>
+    </div>
+</div>
+
+<div class="col-6 col-md-4 mb-0 pb-0">
+    <div class="form-group mb-0">
+        <a role="button" href="{{ request.path }}" class="btn btn-block btn-warning">Limpar Filtro</a>
+    </div>
 </div>

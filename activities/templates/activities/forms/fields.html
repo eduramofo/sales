@@ -1,7 +1,31 @@
-{% csrf_token %}
-{% include 'core/inputs/default.html' with field=activity_form.type %}
-{% include 'core/inputs/default.html' with field=activity_form.subject %}
-{% include 'core/inputs/default.html' with field=activity_form.due_date %}
-{% include 'core/inputs/boolean.html' with field=activity_form.done %}
-{% include 'core/inputs/default.html' with field=activity_form.lead %}
-{% include 'core/inputs/default.html' with field=activity_form.note %}
+<div class="row">
+
+    {% csrf_token %}
+    
+    {{activity_form.lead.as_hidden}}
+    
+    <div class="col-12">
+        {% include 'core/inputs/boolean.html' with field=activity_form.done %}
+    </div>
+
+    <div class="col-6 col-md-4">
+        {% include 'core/inputs/default.html' with field=activity_form.type %}
+    </div>
+
+    <div class="col-6 col-md-4">
+        {% include 'core/inputs/default.html' with field=activity_form.subject %}
+    </div>
+
+    <div class="col-6 col-md-4">
+        {% include 'core/inputs/default.html' with field=activity_form.due_date %}
+    </div>
+
+    <div class="col-6 col-md-12">
+        {% include 'core/inputs/default.html' with field=activity_form.note %}
+    </div>
+    
+    <div class="col-12">
+        <button class="btn btn-success btn-block">Salvar</button>
+    </div>
+
+</div>

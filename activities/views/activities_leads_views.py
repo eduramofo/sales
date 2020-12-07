@@ -14,7 +14,7 @@ from activities.filters import ActivityFilter
 def activity_add(request, lead_id):
 
     initial = {
-        'lead_id': lead_id,
+        'lead': lead_id,
     }
 
     activity_form = ActivityForm(initial=initial, prefix="activity-lead")

@@ -14,12 +14,12 @@ class LeadFilter(django_filters.FilterSet):
     status = django_filters.ChoiceFilter(choices=LEAD_STATUS_CHOICES)
 
     # quality
-    quality_gte = django_filters.NumberFilter(field_name='quality', lookup_expr='gte')
-    quality_lte = django_filters.NumberFilter(field_name='quality', lookup_expr='lte')
+    quality_gte = django_filters.NumberFilter(field_name='quality', label='Qualidade >= que', lookup_expr='gte')
+    quality_lte = django_filters.NumberFilter(field_name='quality', label='Qualidade <= que', lookup_expr='lte')
 
     # next contact
-    next_contact_gte = django_filters.DateTimeFilter(field_name='next_contact', lookup_expr='gte')
-    next_contact_lte = django_filters.DateTimeFilter(field_name='next_contact', lookup_expr='lte')
+    next_contact_gte = django_filters.DateTimeFilter(field_name='next_contact', label='Próx. Cont.: Qualidade >= que', lookup_expr='gte')
+    next_contact_lte = django_filters.DateTimeFilter(field_name='next_contact', label='Próx. Cont.: Qualidade <= que', lookup_expr='lte')
 
     class Meta:
         model = Lead

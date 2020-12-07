@@ -11,17 +11,17 @@ LEAD_QUALITY_CHOICES = (
 )
 
 LEAD_STATUS_CHOICES = (
-    ("novo", "NOVO"),
-    ("tentando_contato", "TENTANDO CONTATO"),
-    ("processando", "PROCESSANDO"),
-    ("sem_interesse", "SEM INTERESSE"),
-    ("sem_condicoes_financeiras", "SEM CONDIÇÕES FINANCEIRAS"),
-    ("contato_invalido", "CONTATO INVÁLIDO"),
-    ("ignorando", "REJEITANDO AS LIGAÇÕES"),
-    ("agendamento", "AGENDAMENTO"),
-    ("acompanhamento", "ACOMPANHAMENTO"),
-    ("ganho", "GANHO"),
-    ("perdido", "PERDIDO"),
+    ("novo", "Novo"),
+    ("tentando_contato", "Tentando Contato"),
+    # ("processando", "PROCESSANDO"),
+    ("sem_interesse", "Sem Interesse"),
+    ("sem_condicoes_financeiras", "Sem Dinheiro"),
+    ("contato_invalido", "Contato Inválido"),
+    # ("ignorando", "Rejeitando as Ligações"),
+    ("agendamento", "Agendamento"),
+    # ("acompanhamento", "ACOMPANHAMENTO"),
+    ("ganho", "Ganho"),
+    # ("perdido", "PERDIDO"),
 )
 
 

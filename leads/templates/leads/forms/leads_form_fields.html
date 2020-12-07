@@ -1,5 +1,6 @@
 {% csrf_token %}
 {% include 'core/inputs/default.html' with field=form.status %}
+{% include 'core/inputs/boolean.html' with field=form.run_now %}
 {% include 'core/inputs/default.html' with field=form.name %}
 {% include 'core/inputs/default.html' with field=form.indicated_by %}
 {% include 'core/inputs/default.html' with field=form.indicated_by_datetime %}
@@ -7,5 +8,4 @@
 {% include 'core/inputs/default.html' with field=form.waid %}
 {% include 'core/inputs/default.html' with field=form.quality %}
 {% include 'core/inputs/default.html' with field=form.next_contact %}
-{% include 'core/inputs/boolean.html' with field=form.run_now %}
 {% include 'core/inputs/default.html' with field=form.note %}

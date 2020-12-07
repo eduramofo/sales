@@ -6,6 +6,11 @@ from activities.models import Activity, ACTIVITY_TYPE_CHOICES
 
 class ActivityForm(forms.ModelForm):
 
+    lead = forms.CharField(
+        label='Lead ID',
+        required=True,
+    )
+
     type = forms.ChoiceField(
         label='Tipo',
         choices=ACTIVITY_TYPE_CHOICES,
@@ -28,7 +33,7 @@ class ActivityForm(forms.ModelForm):
 
     note = forms.CharField(
         label='Anotações',
-        widget=forms.Textarea(attrs={'rows': 4, 'cols':60}),
+        widget=forms.Textarea(attrs={'rows': 2, 'cols':60}),
         required=False,
     )
 
