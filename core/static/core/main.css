@@ -2,3 +2,35 @@ nav#main-navbar li a {
     font-weight: 400;
     font-size: 12;
 }
+
+#main-navbar-bottom,
+#main-navbar-bottom .navbar-nav {
+    background-color: #000;
+}
+
+
+#main-navbar-bottom,
+#main-navbar-bottom .navbar-nav,
+#main-navbar-bottom .navbar-nav .items-wrapper,
+#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
+    height: 50px!important;
+}
+
+#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
+    border-top: 2px solid rgb(106, 129, 255);
+    border-bottom: 2px solid rgb(106, 129, 255);
+    border-left: 2px solid rgb(106, 129, 255);
+}
+
+#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item:last-child {
+    border-right: 2px solid rgb(106, 129, 255);
+}
+
+#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
+    width: 12.5%;
+}
+
+#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item .h6 {
+    font-size: 13px!important;
+    color: #fff!important;
+}

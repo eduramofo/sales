@@ -65,18 +65,44 @@
 </div>
 
 <div class="d-lg-none">
-  <nav id="main-navbar-bottom" class="navbar fixed-bottom navbar-dark bg-dark container-fluid">
+  <nav id="main-navbar-bottom" class="navbar fixed-bottom navbar-dark bg-dark container-fluid p-0 m-0">
   
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav w-100">
       <li class="nav-item">
-        <div class="d-flex justify-content-center align-items-center">
-          <div><a class="h6 mr-3 text-white" href="{% url 'leads:next' %}">NX</a></div>
-          <div><a class="h6 mr-3 text-white" href="{% url 'leads:now' %}">NXW</a></div>
-          <div><a class="h6 mr-3 text-white" href="{% url 'leads:list' %}">LEADS</a></div>
-          <div><a class="h6 mr-3 text-white" href="{% url 'leads:agendamentos-list' %}">AGS</a></div>
-          <div><a class="h6 mr-3 text-white" href="{% url 'leads:leads-em-aberto-list' %}?quality_gte=2">PRI</a></div>
-          <div><a class="h6 mr-3 text-white referentes" href="{% url 'leads:indicators-list' %}">REFS</a></div>
-          <div><a class="h6 mr-3 text-white" href="{% url 'activities:list' %}">ACT</a></div>
+        <div class="items-wrapper d-flex justify-content-between align-items-center">
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'leads:next' %}">Next!</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'leads:now' %}">Agora</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'leads:list' %}">Leads</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'leads:agendamentos-list' %}">Agenda</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'leads:leads-em-aberto-list' %}?quality_gte=2">Priori.</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white  p-0 m-0 referentes" href="{% url 'leads:indicators-list' %}">Refs.</a>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'activities:list' %}">Ativ.</a>
+          </div>
+          
+          <div class="d-flex justify-content-center align-items-center nav-item-item">
+            <a class="h6 text-white p-0 m-0" href="{% url 'activities:list' %}">Extra</a>
+          </div>
+
         </div>
       </li>
     </ul>
