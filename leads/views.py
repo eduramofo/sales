@@ -30,7 +30,7 @@ def leads_list(request):
     
     leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
 
-    pages = paginator.make_paginator(request, leads.qs, 10)
+    pages = paginator.make_paginator(request, leads.qs, 30)
 
     context = {
         'page_title': page_title,
@@ -212,10 +212,10 @@ def leads_em_aberto_list(request):
     page_title = 'Lista de Leads em Aberto'
 
     leads = LeadFilter(request.GET, queryset=Lead.objects.filter(
-        Q(status='tentando_contato') | Q(status='processando')
+        Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')
     ).order_by('-quality'))
-    
-    pages = paginator.make_paginator(request, leads.qs, 10)
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
 
     context = {
         'page_title': page_title,
