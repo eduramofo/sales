@@ -1,3 +1,8 @@
+:root {
+    --main-navbar-bottom-main-color: #000;
+    --main-navbar-bottom-secondary-color: rgb(253, 124, 247);
+}
+
 nav#main-navbar li a {
     font-weight: 400;
     font-size: 12;
@@ -5,7 +10,7 @@ nav#main-navbar li a {
 
 #main-navbar-bottom,
 #main-navbar-bottom .navbar-nav {
-    background-color: #000;
+    background-color: var(--main-navbar-bottom-main-color);
 }
 
 
@@ -17,13 +22,13 @@ nav#main-navbar li a {
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    border-top: 2px solid rgb(106, 129, 255);
-    border-bottom: 2px solid rgb(106, 129, 255);
-    border-left: 2px solid rgb(106, 129, 255);
+    border-top: 2px solid var(--main-navbar-bottom-secondary-color);
+    border-bottom: 2px solid var(--main-navbar-bottom-secondary-color);
+    border-left: 2px solid var(--main-navbar-bottom-secondary-color);
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item:last-child {
-    border-right: 2px solid rgb(106, 129, 255);
+    border-right: 2px solid var(--main-navbar-bottom-secondary-color);
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
@@ -32,5 +37,5 @@ nav#main-navbar li a {
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item .h6 {
     font-size: 13px!important;
-    color: #fff!important;
+    color: var(--main-navbar-bottom-secondary-color)!important;
 }
