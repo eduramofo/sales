@@ -2,8 +2,7 @@
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-link active" id="nav-lead-tab" data-toggle="tab" href="#nav-lead" role="tab" aria-controls="nav-lead" aria-selected="true">Lead</a>
     <a class="nav-link" id="nav-actions-tab" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false">Ações</a>
-    <a class="nav-link" id="nav-activity-tab" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-activity" aria-selected="false">Atividades</a>
-    {% comment %} <a class="nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">Histórico</a> {% endcomment %}
+    <a class="nav-link" id="nav-shortcuts-tab" data-toggle="tab" href="#nav-shortcuts" role="tab" aria-controls="nav-shortcuts" aria-selected="false">Atalhos</a>
   </div>
 </nav>
 
@@ -13,15 +12,15 @@
         {% include "leads/forms/leads_update_form.html" with form=lead_form %}
     </div>
 
-    <div class="tab-pane" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
+    <div class="tab-pane mb-5" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
         {% include "leads/update/actions_tab.html" %}
     </div>
 
-    <div class="tab-pane" id="nav-activity" role="tabpanel" aria-labelledby="nav-activity-tab">
-        {% include "activities/leads/list.html" %}
+    <div class="tab-pane" id="nav-shortcuts" role="tabpanel" aria-labelledby="nav-shortcuts-tab">
+        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e não atendeu (tentanto contato)</a>
+        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e Agendamento</a>
+        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e não tem interesse</a>
+        <a role="button" href="#" class="btn btn-lg btn-block btn-success mt-3 text-left">GANHO</a>
     </div>
-
-    {% comment %} <div class="tab-pane" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-    </div> {% endcomment %}
 
 </div>
