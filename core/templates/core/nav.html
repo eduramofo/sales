@@ -2,7 +2,7 @@
 
   <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark container">
 
-    <a class="navbar-brand" href="{% url 'core:home' %}">Sales Up</a>
+    <a class="navbar-brand" href="{% url 'core:home' %}">Sales</a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarNav" aria-controls="navbarNav" 
@@ -12,10 +12,6 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto ">
-
-        <li class="nav-item {% if nav_name == 'core_home' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'core:home' %}">Home <span class="sr-only">(current)</span></a>
-        </li>
         
         <li class="nav-item {% if nav_name == 'leads_next' %}active{% endif%}">
           <a class="nav-link" href="{% url 'leads:next' %}">Next! <span class="sr-only">(current)</span></a>
@@ -66,4 +62,24 @@
     
   </nav>
 
+</div>
+
+<div class="d-lg-none">
+  <nav id="main-navbar-bottom" class="navbar fixed-bottom navbar-dark bg-dark container-fluid">
+  
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <div class="d-flex justify-content-center align-items-center">
+          <div><a class="h6 mr-3 text-white" href="{% url 'leads:next' %}">NX</a></div>
+          <div><a class="h6 mr-3 text-white" href="{% url 'leads:now' %}">NXW</a></div>
+          <div><a class="h6 mr-3 text-white" href="{% url 'leads:list' %}">LEADS</a></div>
+          <div><a class="h6 mr-3 text-white" href="{% url 'leads:agendamentos-list' %}">AGS</a></div>
+          <div><a class="h6 mr-3 text-white" href="{% url 'leads:leads-em-aberto-list' %}?quality_gte=2">PRI</a></div>
+          <div><a class="h6 mr-3 text-white referentes" href="{% url 'leads:indicators-list' %}">REFS</a></div>
+          <div><a class="h6 mr-3 text-white" href="{% url 'activities:list' %}">ACT</a></div>
+        </div>
+      </li>
+    </ul>
+
+  </nav>
 </div>

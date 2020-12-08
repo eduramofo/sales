@@ -80,7 +80,7 @@ def lead_update(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form = LeadForm(request.POST or None, instance=lead)
     activities = Activity.objects.filter(lead=lead)
-    page_title = 'Atualização do Lead'
+    page_title = 'Lead: ' + str(lead.name)
     nav_name = 'leads_list'
     method = request.method
 

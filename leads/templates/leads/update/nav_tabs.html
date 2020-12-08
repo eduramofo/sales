@@ -1,8 +1,9 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-link active" id="nav-lead-tab" data-toggle="tab" href="#nav-lead" role="tab" aria-controls="nav-lead" aria-selected="true">Lead</a>
+    <a class="nav-link" id="nav-actions-tab" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false">Ações</a>
     <a class="nav-link" id="nav-activity-tab" data-toggle="tab" href="#nav-activity" role="tab" aria-controls="nav-activity" aria-selected="false">Atividades</a>
-    <a class="nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">Histórico</a>
+    {% comment %} <a class="nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">Histórico</a> {% endcomment %}
   </div>
 </nav>
 
@@ -12,11 +13,15 @@
         {% include "leads/forms/leads_update_form.html" with form=lead_form %}
     </div>
 
+    <div class="tab-pane" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
+        {% include "leads/update/actions_tab.html" %}
+    </div>
+
     <div class="tab-pane" id="nav-activity" role="tabpanel" aria-labelledby="nav-activity-tab">
         {% include "activities/leads/list.html" %}
     </div>
 
-    <div class="tab-pane" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-    </div>
+    {% comment %} <div class="tab-pane" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
+    </div> {% endcomment %}
 
 </div>
