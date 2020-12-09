@@ -25,7 +25,12 @@ class LeadForm(forms.ModelForm):
     )
 
     run_now = forms.BooleanField(
-        label='Está na lista de Execução de Agora?',
+        label='Lista de Agora?',
+        required=False,
+    )
+
+    priority = forms.BooleanField(
+        label='Prioridade?',
         required=False,
     )
 
@@ -37,7 +42,7 @@ class LeadForm(forms.ModelForm):
 
     class Meta:
         model = Lead
-        fields = '__all__'
+        fields = ['status', 'run_now', 'priority', 'name', 'next_contact', 'indicated_by', 'indicated_by_datetime', 'tel', 'waid', 'quality', 'note']
 
 
 class LeadFormRunNow(forms.ModelForm):

@@ -1,11 +1,34 @@
+{% load leads_extras %}
+
 {% csrf_token %}
-{% include 'core/inputs/default.html' with field=form.status %}
-{% include 'core/inputs/boolean.html' with field=form.run_now %}
+
+<a role="button" id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" class="btn btn-lg btn-block btn-primary text-center">Discar Telefone</a>
+
+<a role="button" id="leads-call-whatsapp-btn" href="{% link_whats_open lead %}" class="btn btn-lg btn-block btn-primary text-center mt-2 mb-3">Abrir WhatsApp</a>
+
 {% include 'core/inputs/default.html' with field=form.name %}
+
+{% include 'core/inputs/default.html' with field=form.status %}
+
+<div class="row">
+    <div class="col-6">
+        {% include 'core/inputs/boolean.html' with field=form.run_now %}
+    </div>
+    <div class="col-6">
+        {% include 'core/inputs/boolean.html' with field=form.priority %}
+    </div>
+</div>
+
 {% include 'core/inputs/default.html' with field=form.indicated_by %}
+
 {% include 'core/inputs/default.html' with field=form.indicated_by_datetime %}
+
 {% include 'core/inputs/default.html' with field=form.tel %}
+
 {% include 'core/inputs/default.html' with field=form.waid %}
+
 {% include 'core/inputs/default.html' with field=form.quality %}
+
 {% include 'core/inputs/default.html' with field=form.next_contact %}
+
 {% include 'core/inputs/default.html' with field=form.note %}

@@ -1,6 +1,12 @@
 :root {
-    --main-navbar-bottom-main-color: #000;
-    --main-navbar-bottom-secondary-color: rgb(253, 124, 247);
+    --main-navbar-bottom-main-color: var(--dark);
+    --main-navbar-bottom-secondary-color: rgba(255,255,255,.5);
+    --main-navbar-bottom-border-size: 3px;
+}
+
+nav#main-navbar button.navbar-toggler {
+    border: 0;
+    outline: 0;    
 }
 
 nav#main-navbar li a {
@@ -18,17 +24,17 @@ nav#main-navbar li a {
 #main-navbar-bottom .navbar-nav,
 #main-navbar-bottom .navbar-nav .items-wrapper,
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    height: 50px!important;
+    height: 60px!important;
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    border-top: 2px solid var(--main-navbar-bottom-secondary-color);
-    border-bottom: 2px solid var(--main-navbar-bottom-secondary-color);
-    border-left: 2px solid var(--main-navbar-bottom-secondary-color);
+    border-top: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
+    border-bottom: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
+    border-left: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item:last-child {
-    border-right: 2px solid var(--main-navbar-bottom-secondary-color);
+    border-right: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
 }
 
 #main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
