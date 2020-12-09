@@ -83,11 +83,15 @@ def lead_update(request, lead_id):
     page_title = str(lead.name)
     nav_name = 'leads_list'
     method = request.method
+    
+    referrers_info =  str(lead.indicated_by).split('(')[0]
+
+    if lead.indicated_by_datetime: referrers_info = referrers_info + ' em ' + lead.indicated_by_datetime.strftime("%x") + ' às ' +  lead.indicated_by_datetime.strftime("%X")
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'referrers_info': str(lead.indicated_by).split('(')[0] + ' em ' + lead.indicated_by_datetime.strftime("%x") + ' às ' +  lead.indicated_by_datetime.strftime("%X"),
+        'referrers_info': referrers_info,
         'lead': lead,
         'activities': activities,
         'lead_form': lead_form,
