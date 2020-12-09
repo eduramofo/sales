@@ -34,16 +34,23 @@ class LeadForm(forms.ModelForm):
         required=False,
     )
 
+    location = forms.CharField(
+        label='Localização: País/Cidade',
+        required=False,
+    )
+
     note = forms.CharField(
         label='Anotações',
-        widget=forms.Textarea(attrs={'rows': 4, 'cols':60}),
+        widget=forms.Textarea(attrs={'rows': 2, 'cols': 60}),
         required=False,
     )
 
     class Meta:
         model = Lead
-        fields = ['status', 'run_now', 'priority', 'name', 'next_contact', 'indicated_by', 'indicated_by_datetime', 'tel', 'waid', 'quality', 'note']
-
+        fields = ['status', 'run_now', 'priority', 'name', 'next_contact',
+        'indicated_by', 'indicated_by_datetime', 
+        'tel', 'waid', 'quality', 'note', 'location', 'gmt',
+        ]
 
 class LeadFormRunNow(forms.ModelForm):
     

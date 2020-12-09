@@ -1,19 +1,7 @@
 <div class="container">
     <div class="row">
-
-        {% if not lead.run_now %}
-        <div class="col-12 mt-3">
-            <div class="border border-dark bg-danger p-2 rounded">
-                <p class="h6 p-0 m-0 text-white">Não Está na Lista [ NOW ]</p>
-            </div>
-        </div>
-        {% endif %}
-
-        {% comment %} {% include "leads/update/actions.html" %} {% endcomment %}
-
         <div class="col-12 mt-3">
             {% include "leads/update/nav_tabs.html" %}
         </div>
-        
     </div>
 </div>

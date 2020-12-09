@@ -13,17 +13,12 @@ LEAD_QUALITY_CHOICES = (
 LEAD_STATUS_CHOICES = (
     ("novo", "Novo"),
     ("tentando_contato", "Tentando Contato"),
-    # ("processando", "PROCESSANDO"),
     ("sem_interesse", "Sem Interesse"),
     ("sem_condicoes_financeiras", "Sem Dinheiro"),
     ("contato_invalido", "Contato Inválido"),
-    # ("ignorando", "Rejeitando as Ligações"),
     ("agendamento", "Agendamento"),
-    # ("acompanhamento", "ACOMPANHAMENTO"),
     ("ganho", "Ganho"),
-    # ("perdido", "PERDIDO"),
 )
-
 
 class Lead(BaseModel):
 
@@ -79,7 +74,7 @@ class Lead(BaseModel):
     )
 
     location = models.CharField(
-        max_length=1024,
+        max_length=300,
         verbose_name='Localização: País/Cidade',
         null=True,
         blank=True,

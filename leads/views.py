@@ -80,13 +80,14 @@ def lead_update(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form = LeadForm(request.POST or None, instance=lead)
     activities = Activity.objects.filter(lead=lead)
-    page_title = 'Lead: ' + str(lead.name)
+    page_title = str(lead.name)
     nav_name = 'leads_list'
     method = request.method
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
+        'referrers_info': str(lead.indicated_by).split('(')[0] + ' em ' + lead.indicated_by_datetime.strftime("%x") + ' às ' +  lead.indicated_by_datetime.strftime("%X"),
         'lead': lead,
         'activities': activities,
         'lead_form': lead_form,

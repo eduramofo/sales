@@ -98,7 +98,7 @@ def link_whats_tentei_te_ligar(lead_object):
 
     indicated_by_first_name = str(lead_object.indicated_by).partition(' ')[0]
 
-    raw_text = 'Olá ' + lead_name + ', tudo bem? Aqui e o Eduardo e estou te contatando através de' + indicated_by_first_name + '. Você pode falar?'
+    raw_text = 'Olá ' + lead_name + ', tudo bem? Aqui e o Eduardo. Estou te contatando através do(a) ' + indicated_by_first_name + '. Você pode falar agora?'
 
     text = urllib.parse.quote(raw_text)
     
@@ -114,7 +114,7 @@ def link_modelo_referido_conheci(lead_object):
 
     whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
 
-    raw_text = "Conheci em um projeto de para aprender Inglês da *Wise Up* e te indiquei. Acho que você também vai gostar! 🚀🇺🇸. O representante *Eduardo* da *Wise Up* vai te ligar para te apresentar, Ok? O número dele é esse: *(31) 99569-1349*."
+    raw_text = "Conheci um projeto para aprender Inglês da *Wise Up* e te indiquei. Acho que você também vai gostar! 🚀🇺🇸. O representante *Eduardo* da *Wise Up* vai te ligar para te apresentar, Ok? O número dele é esse: *(31) 99569-1349*."
 
     text = urllib.parse.quote(raw_text)
 
@@ -130,7 +130,7 @@ def link_modelo_referido_entrei(lead_object):
 
     whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
 
-    raw_text = "Me matriculei em um projeto de para aprender Inglês da *Wise Up* e te indiquei. Acho que você também vai gostar! 🚀🇺🇸. O representante *Eduardo* da *Wise Up* vai te ligar para te apresentar, Ok? O número dele é esse: *(31) 99569-1349*."
+    raw_text = "Entrei em um projeto para aprender Inglês da *Wise Up* e te indiquei. Acho que você também vai gostar! 🚀🇺🇸. O representante *Eduardo* da *Wise Up* vai te ligar para te apresentar, Ok? O número dele é esse: *(31) 99569-1349*."
 
     text = urllib.parse.quote(raw_text)
 
