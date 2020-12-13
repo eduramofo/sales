@@ -1,10 +1,27 @@
+{% load core_extras %}
 {% load leads_extras %}
 
-<p class="p-0 m-0 mt-2">{{referrers_info}}</p>
+<p class="p-0 m-0 mt-2">
+    {{referrers_info}}
+</p>
 
-<a role="button" id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" class="btn btn-lg btn-block btn-primary text-center mt-2">Discar Telefone</a>
+<div class="row">
+    <div class="col-6">
+        <a role="button" 
+            id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
+            class="btn btn-lg btn-block btn-primary text-center mt-2">
+            {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' 'Ligar' %}
+        </a>
+    </div>
+    
+    <div class="col-6">
+        <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% link_whats_open lead %}" 
+            class="btn btn-lg btn-block btn-primary text-center mt-2 mb-3">Abrir WhatsApp</a>
+    </div>
+</div>
 
-<a role="button" id="leads-call-whatsapp-btn" href="{% link_whats_open lead %}" class="btn btn-lg btn-block btn-primary text-center mt-2 mb-3">Abrir WhatsApp</a>
 
 <form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-3 mb-5 rounded">
     
