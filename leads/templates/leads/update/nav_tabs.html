@@ -1,26 +1,35 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-link active" id="nav-lead-tab" data-toggle="tab" href="#nav-lead" role="tab" aria-controls="nav-lead" aria-selected="true"><strong>Lead</strong></a>
-    <a class="nav-link" id="nav-actions-tab" data-toggle="tab" href="#nav-actions" role="tab" aria-controls="nav-actions" aria-selected="false"><strong>Ações</strong></a>
-    <a class="nav-link" id="nav-shortcuts-tab" data-toggle="tab" href="#nav-shortcuts" role="tab" aria-controls="nav-shortcuts" aria-selected="false"><strong>Atalhos</strong></a>
+
+    <a  class="nav-link active"
+        id="nav-lead-tab"
+        data-toggle="tab"
+        href="#nav-lead"
+        role="tab"
+        aria-controls="nav-lead"
+        aria-selected="true"><strong>Lead</strong></a>
+    
+    <a  class="nav-link"
+        id="nav-actions-tab"
+        data-toggle="tab"
+        href="#nav-actions"
+        role="tab"
+        aria-controls="nav-actions"
+        aria-selected="false"><strong>Ações</strong></a>
+    
+    <a  class="nav-link"
+        id="nav-activities-tab"
+        data-toggle="tab"
+        href="#nav-activities" 
+        role="tab"
+        aria-controls="nav-activities"
+        aria-selected="false"><strong>Atividades</strong></a>
+  
   </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
-
-    <div class="tab-pane show active" id="nav-lead" role="tabpanel" aria-labelledby="nav-lead-tab">
-        {% include "leads/forms/leads_update_form.html" with form=lead_form %}
-    </div>
-
-    <div class="tab-pane mb-5" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
-        {% include "leads/update/actions_tab.html" %}
-    </div>
-
-    <div class="tab-pane" id="nav-shortcuts" role="tabpanel" aria-labelledby="nav-shortcuts-tab">
-        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e não atendeu (tentanto)</a>
-        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e Agendamento</a>
-        <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Liguei e não tem interesse</a>
-        <a role="button" href="#" class="btn btn-lg btn-block btn-success mt-3 text-left">Marcar como Matriculado</a>
-    </div>
-
+    {% include "leads/update/nav_tabs_tab_pane_leads.html" %}
+    {% include "leads/update/nav_tabs_tab_pane_actions.html" %}
+    {% include "leads/update/nav_tabs_tab_pane_activities.html" %}
 </div>

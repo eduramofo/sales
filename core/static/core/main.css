@@ -1,3 +1,8 @@
+svg {
+    /* border: 1px solid red; */
+}
+
+
 :root {
     --main-navbar-bottom-main-color: var(--dark);
     --main-navbar-bottom-secondary-color: rgba(255,255,255,.5);

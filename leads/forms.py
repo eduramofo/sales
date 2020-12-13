@@ -49,7 +49,7 @@ class LeadForm(forms.ModelForm):
         model = Lead
         fields = ['status', 'run_now', 'priority', 'name', 'next_contact',
         'indicated_by', 'indicated_by_datetime', 
-        'tel', 'waid', 'quality', 'note', 'location', 'gmt',
+        'tel', 'waid', 'note', 'location', 'gmt',
         ]
 
 class LeadFormRunNow(forms.ModelForm):

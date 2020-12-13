@@ -86,10 +86,13 @@ def lead_update(request, lead_id):
     
     referrers_info =  str(lead.indicated_by).split('(')[0]
 
-    if lead.indicated_by_datetime: referrers_info = referrers_info + ' em ' + lead.indicated_by_datetime.strftime("%x") + ' às ' +  lead.indicated_by_datetime.strftime("%X")
+    if lead.indicated_by_datetime:
+        referrer_dt = lead.indicated_by_datetime.strftime("%x")
+        referrer_tm = lead.indicated_by_datetime.strftime("%H:%M")
+        referrers_info = '{} {} {}'.format(referrers_info, referrer_dt, referrer_tm)
 
     context = {
-        'page_title': page_title,
+        'page_title': '{} ({})'.format(page_title, referrers_info),
         'nav_name': nav_name,
         'referrers_info': referrers_info,
         'lead': lead,
@@ -97,18 +100,19 @@ def lead_update(request, lead_id):
         'lead_form': lead_form,
     }
 
-    if method == 'POST' and lead_form.is_valid():
-        lead = lead_form.save()
-        go_next = request.GET.get('next', None)
-        url = reverse_lazy('leads:update', args=(str(lead.id),))
-        if go_next:
-            url = reverse_lazy('leads:next')
-        messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-        return HttpResponseRedirect(url)
-
-    if method == 'POST' and not lead_form.is_valid():
-        messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
-        context['lead_form'] = lead_form
+    if method == 'POST':
+        if lead_form.is_valid():
+            lead = lead_form.save()
+            go_next = request.GET.get('next', None)
+            url = reverse_lazy('leads:update', args=(str(lead.id),))
+            if go_next:
+                url = reverse_lazy('leads:next')
+            messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+            return HttpResponseRedirect(url)
+        else:
+            messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
+            context['lead_form'] = lead_form
+            print(lead_form)
 
     return render(request, 'leads/update/index.html', context)
 

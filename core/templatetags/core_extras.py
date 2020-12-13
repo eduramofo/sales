@@ -6,13 +6,15 @@ register = template.Library()
 
 
 @register.simple_tag
-def btn_svg_icons(svg_group, icon_name, btn_text):
+def btn_svg_icons(svg_group, icon_name, icon_size, justify_content, btn_text):
 
     icon_template_address = 'core/svg_icons/{}/{}.svg'.format(svg_group, icon_name)
 
     context = {
         'icon_template_address': icon_template_address,
         'btn_text': btn_text,
+        'icon_size': icon_size,
+        'justify_content': justify_content,
     }
 
     tlp_address = 'core/btn_svg_icons/entry.html'

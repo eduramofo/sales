@@ -1,16 +1,16 @@
 {% csrf_token %}
 
-{% include 'core/inputs/default.html' with field=form.name %}
-
-{% include 'core/inputs/default.html' with field=form.status %}
-
-{% include 'core/inputs/default.html' with field=form.tel %}
-
-{% include 'core/inputs/default.html' with field=form.waid %}
-
-{% include 'core/inputs/default.html' with field=form.note %}
-
-{% include 'core/inputs/default.html' with field=form.next_contact %}
+<div class="row">
+    <div class="col-12 col-md-5">
+        {% include 'core/inputs/default.html' with field=form.name %}
+    </div>
+    <div class="col-8 col-md-5">
+        {% include 'core/inputs/default.html' with field=form.location %}
+    </div>
+    <div class="col-4 col-md-2">
+        {% include 'core/inputs/default.html' with field=form.gmt %}
+    </div>
+</div>
 
 <div class="row">
     <div class="col-6">
@@ -22,13 +22,20 @@
 </div>
 
 <div class="row">
-    <div class="col-4">
-        {% include 'core/inputs/default.html' with field=form.gmt %}
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.status %}
     </div>
-    <div class="col-8">
-        {% include 'core/inputs/default.html' with field=form.location %}
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.tel %}
+    </div>
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.waid %}
     </div>
 </div>
+
+{% include 'core/inputs/default.html' with field=form.note %}
+
+{{form.indicated_by.next_contact.as_hidden}}
 
 {{form.indicated_by.quality.as_hidden}}
 

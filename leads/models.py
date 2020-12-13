@@ -20,6 +20,35 @@ LEAD_STATUS_CHOICES = (
     ("ganho", "Ganho"),
 )
 
+GMT_CHOICES = (
+    (None, 'Selecionar'),
+    (-1, 'GMT-1'),
+    (-2, 'GMT-2'),
+    (-3, 'GMT-3'),
+    (-4, 'GMT-4'),
+    (-5, 'GMT-5'),
+    (-6, 'GMT-6'),
+    (-7, 'GMT-7'),
+    (-8, 'GMT-8'),
+    (-9, 'GMT-9'),
+    (-10, 'GMT-10'),
+    (-11, 'GMT-11'),
+    (-12, 'GMT-12'),
+    (0, 'GMT'),
+    (1, 'GMT+1'),
+    (2, 'GMT+2'),
+    (3, 'GMT+3'),
+    (4, 'GMT+4'),
+    (5, 'GMT+5'),
+    (6, 'GMT+6'),
+    (7, 'GMT+7'),
+    (8, 'GMT+8'),
+    (9, 'GMT+9'),
+    (10, 'GMT+10'),
+    (11, 'GMT+11'),
+    (12, 'GMT+12'),
+)
+
 class Lead(BaseModel):
 
     status = models.CharField(
@@ -63,8 +92,10 @@ class Lead(BaseModel):
         blank=True,
     )
 
+    # https://greenwichmeantime.com/cities/
     gmt = models.IntegerField(
         verbose_name='GMT',
+        choices=GMT_CHOICES,
         default=-3,
     )
 

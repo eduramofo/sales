@@ -1,0 +1,26 @@
+100		Ligações;
+================================
+
+25		NAO ATENDEU;
+4		AGENDAMETOS;
+8		SEM INTERESSE;
+10		SEM DINHEIRO;
+40		APRESENTAÇÕES;
+13		VENDAS;
+================================
+
+APRESENTACAO:
+Lead
+Reffer
+Data
+Status: win, lost, follow-up
+Áudio
+
+Text Fied
+Apresentações
+Conexão
+Decisão Imediata
+Speech
+Fechamento
+Referidos
+Validação
