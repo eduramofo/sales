@@ -1,6 +1,7 @@
 from urllib.parse import urlencode
 from random import choice as random_choice
 
+from django.utils import timezone
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -14,7 +15,7 @@ from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
-from leads.forms import LeadForm, LeadFormRunNow, UploadContactsForm
+from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm
 from leads.indicators import indicators_data
 from leads.filters import LeadFilter
 from leads import tools
@@ -192,9 +193,9 @@ def leads_now(request):
 
 
 @login_required()
-def leads_novos_list(request):
+def leads_news(request):
     
-    nav_name = 'leads_novos_list'
+    nav_name = 'leads_news'
 
     page_title = 'Lista de Novos Leads'
 
@@ -214,9 +215,9 @@ def leads_novos_list(request):
 
 
 @login_required()
-def leads_em_aberto_list(request):
+def leads_opened(request):
     
-    nav_name = 'leads_em_aberto_list'
+    nav_name = 'leads_opened'
 
     page_title = 'Lista de Leads em Aberto'
 
@@ -238,9 +239,33 @@ def leads_em_aberto_list(request):
 
 
 @login_required()
-def leads_agendamentos_list(request):
+def leads_priorities(request):
     
-    nav_name = 'leads_agendamentos_list'
+    nav_name = 'leads_priorities'
+
+    page_title = 'Leads prioritários em aberto'
+
+    query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(priority=True).filter(query))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def leads_schedules(request):
+    
+    nav_name = 'leads_schedules'
 
     page_title = 'Lista de Leads em Agendamentos'
 
@@ -266,11 +291,11 @@ def leads_agendamentos_list(request):
 
 
 @login_required()
-def leads_indicators_list(request):
+def referrers_old(request):
 
     indicators = indicators_data()
-    nav_name = 'leads_indicators_list'
-    page_title = 'Lista Indicadores'
+    nav_name = 'leads_referrers'
+    page_title = 'Referenciadores'
     
     context = {
         'nav_name': nav_name,
@@ -284,44 +309,33 @@ def leads_indicators_list(request):
 @login_required()
 def leads_upload(request):
 
-    upload_contacts_form = UploadContactsForm()
+    indicated_by_datetime = timezone.now().strftime('%Y-%m-%dT%H:%M')
+
+    gmt = -3
+
+    form = ReferrerForm()
+
+    initial = {
+        'referring_datetime': indicated_by_datetime,
+        'gmt': gmt,
+    }
+
+    form = ReferrerForm(initial=initial)
 
     if request.method == 'POST':
-
-        upload_contacts_form = UploadContactsForm(request.POST)   
-
-        if upload_contacts_form.is_valid():
-
-            upload_contacts_form_data = upload_contacts_form.cleaned_data
-
-            indicated_by = upload_contacts_form_data['indicated_by']
-
-            indicated_by_datetime = upload_contacts_form_data['indicated_by_datetime']
-
-            gerar_leads(indicated_by, indicated_by_datetime, request.FILES)
-
-            filter_querydict = {
-                'indicated_by_contains': indicated_by,
-            }
-            
-            filter_urlencode = urlencode(filter_querydict)
-
-            leads_list = reverse('leads:list')
-            
-            success_url = '%s?%s' % (leads_list, filter_urlencode)
-
-            messages.add_message(request, messages.SUCCESS, 'Leads criados SUCESSO!')
-    
-            return HttpResponseRedirect(success_url)
-        
+        form = ReferrerForm(request.POST)
+        if form.is_valid():
+            gerar_leads(form, request)
+            message_text = 'Leads criados com sucesso =)'
+            messages.add_message(request,messages.SUCCESS, message_text)
+            return HttpResponseRedirect(reverse('leads:list'))
         else:
-
-            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão dos Lead, faça uma verificação manual!')
-
+            message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
+            messages.add_message(request,messages.ERROR, message_text)
 
     context = {
         'nav_name': 'leads_upload',
-        'upload_contacts_form': upload_contacts_form
+        'form': form,
     }
 
     return render(request, 'leads/upload/index.html', context)

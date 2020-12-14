@@ -9,9 +9,8 @@
             <th scope="col">Indicado em</th>
             <th scope="col">Nome</th>
             <th scope="col">Status</th>
-            <th scope="col">Indicado</th>
+            <th scope="col">Referenciador</th>
             <th scope="col">Prioridade?</th>
-            <th scope="col">Próximo Contato</th>
             <th scope="col">Anotações</th>
             <th scope="col">Agora?</th>
           </tr>
@@ -35,7 +34,6 @@
               <td>{{lead.indicated_by}}</td>
             {% endif %}
             <td class="{% if lead.priority %}bg-success text-white{% endif %}">{% if lead.priority %}Sim{% else %}Não{% endif %}</td>
-            <td>{{lead.next_contact|date:"d/m/y"}} {{ lead.next_contact|time:"H:i" }}</td>
             <td>{{lead.note|default_if_none:""|truncatechars:45}}</td>
             {% run_now_table_data_html lead.id lead.run_now %}
           </tr>

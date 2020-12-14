@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
-from leads.models import Lead
+from leads.models import Lead, Referrer
 
 register = template.Library()
 
@@ -163,3 +163,18 @@ def run_now_table_data_html(lead_id, lead_run_now):
         td_html = td_html.format(data, url, 'text-danger','Não')
 
     return mark_safe(td_html)
+
+
+@register.simple_tag
+def get_leads_referrers(lead):
+    referrers = Referrer.objects.filter(lead=lead)
+    tlp_string = ''
+    if referrers:
+        lis = ''
+        for referrer in referrers:
+            li = "'<li>{}</li>'".format(referrer)
+            lis = '{}{}'.format(lis, li)
+        tlp_string = "'<ul>'{}'</ul>'".format(lis)
+    tlp_safe = mark_safe(tlp_string)
+    print(tlp_safe)
+    return tlp_safe

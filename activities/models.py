@@ -4,12 +4,10 @@ from core.models import BaseModel
 
 
 ACTIVITY_TYPE_CHOICES = (
-    ("ligacao_normal", "Ligação Normal"),
-    ("ligacao_whatsapp", "Ligação WhatsApp"),
-    ("mensagem_whatsapp", "Mensagem WhatsApp"),
-    ("audio_whatsapp", "Áudio WhatsApp"),
-    ("reuniao", "Reunião"),
-    ("Tarefa", "Tarefa"),
+    ('call', 'Ligação'),
+    ('whatsapp_message', 'WhatsApp Mensagem'),
+    ('whatsapp_audio', 'WhatsApp Áudio'),
+    ('presentation', 'Apresentação'),
 )
 
 class Activity(BaseModel):
@@ -18,7 +16,7 @@ class Activity(BaseModel):
         max_length=120,
         verbose_name='Tipo',
         choices= ACTIVITY_TYPE_CHOICES,
-        default='ligacao_normal',
+        default='call',
         null=False,
         blank=False,
     )
@@ -31,7 +29,7 @@ class Activity(BaseModel):
     )
 
     due_date = models.DateTimeField(
-        verbose_name='Data de Vencimento',
+        verbose_name='Data/Hora',
         null=True,
         blank=True,
     )

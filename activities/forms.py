@@ -2,6 +2,7 @@ import time
 
 from django import forms
 from activities.models import Activity, ACTIVITY_TYPE_CHOICES
+from leads import models as leads_models
 
 
 class ActivityForm(forms.ModelForm):
@@ -23,7 +24,7 @@ class ActivityForm(forms.ModelForm):
     )
 
     due_date = forms.DateTimeField(
-        label='Data de Vencimento',
+        label='Data/Hora',
         widget=forms.DateTimeInput(
             format='%Y-%m-%dT%H:%M',
             attrs={'type': 'datetime-local',}
@@ -40,3 +41,6 @@ class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = '__all__'
+
+    def clean_lead(self):
+        return leads_models.Lead.objects.get(id=self.cleaned_data['lead'])

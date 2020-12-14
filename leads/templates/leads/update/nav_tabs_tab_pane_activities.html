@@ -1,8 +1,48 @@
 <div class="tab-pane" id="nav-activities" role="tabpanel" aria-labelledby="nav-activities-tab">
-    <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Não atendeu (tentanto)</a>
-    <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Agendamento</a>
-    <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Sem interesse</a>
-    <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Sem dinheiro</a>
-    <a role="button" href="#" class="btn btn-lg btn-block btn-primary mt-3 text-left">Contato inválido</a>
-    <a role="button" href="#" class="btn btn-lg btn-block btn-success mt-3 text-left">Apresentação Realizada</a>
+
+
+
+    <ul class="nav nav-tabs mt-3" id="activities-nav-tabs" role="tablist">
+
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="activities-actions-tab" data-toggle="tab" 
+            href="#activities-actions-content" role="tab" 
+            aria-controls="activities-actions-content" aria-selected="true"><strong>Ações</strong></a>
+        </li>
+
+    </ul>
+
+    <div class="tab-content" id="activities-nav-tabs-content">
+
+        <div class="tab-pane show active" id="activities-actions-content" role="tabpanel" aria-labelledby="activities-actions-tab">
+            
+            <a  role="button" 
+                href="#"
+                class="btn btn-lg btn-block btn-success mt-3 text-left">Apresentação Realizada</a>
+            
+            <a  role="button"
+                href="#"
+                class="btn btn-lg btn-block btn-primary mt-3 text-left">Agendamento</a>
+
+            <a  role="button"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                class="btn btn-lg btn-block btn-primary mt-3 text-left">Não atendeu (tentanto)</a>
+            
+            <a  role="button"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=sem-interesse"
+                class="btn btn-lg btn-block btn-primary mt-3 text-left">Sem interesse</a>
+            
+            <a  role="button"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=sem-dinheiro"
+                class="btn btn-lg btn-block btn-primary mt-3 text-left">Sem dinheiro</a>
+    
+            <a  role="button"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=contato-invalido"
+                class="btn btn-lg btn-block btn-primary mt-3 text-left">Contato inválido</a>
+
+        </div>
+
+    </div>
+
+
 </div>

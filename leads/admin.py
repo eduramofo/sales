@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from leads.models import Lead
+from leads.models import Lead, Referrer
 from rangefilter.filter import DateRangeFilter
 
 
@@ -32,3 +32,25 @@ class LeadAdmin(admin.ModelAdmin):
     form = LeadForm
 
 admin.site.register(Lead, LeadAdmin)
+
+
+class ReferrerForm(forms.ModelForm):
+    class Meta:
+        model = Referrer
+        fields = '__all__'
+
+
+class ReferrerAdmin(admin.ModelAdmin):
+
+    search_fields = ('name',)
+
+    list_filter = (
+        ('created_at', DateRangeFilter),
+        ('referring_datetime', DateRangeFilter),
+    )
+
+    list_display = ('created_at', 'updated_at', 'name', 'lead', 'gmt', 'short_description', 'location', 'referring_datetime',)
+
+    form = ReferrerForm
+
+admin.site.register(Referrer, ReferrerAdmin)

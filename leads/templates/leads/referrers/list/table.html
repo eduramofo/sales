@@ -1,0 +1,43 @@
+
+{% if referrers %}
+<table id="referrers-table" class="table table-bordered table-striped table-responsive">
+  <thead>
+    <tr>
+      <th scope="col">Referenciador</th>
+      <th scope="col">Data/Hora da Indicação</th>
+      <th scope="col">Descrição Breve da Linha</th>
+      <th scope="col">GMT</th>
+      <th scope="col">Local</th>
+      <th scope="col">Qte Total</th>
+      <th scope="col">Qte Abertos</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for obj in referrers %}
+    <tr>
+
+        {% if obj.lead %}
+            <td><a href="{% url 'leads:update' obj.lead.id %}">{{obj.lead.name}}</a></td>
+        {% else %}
+            <td>{{obj.name}}</td>
+        {% endif %}
+
+        <td>{{obj.referring_datetime|date:"d/m/y"}} {{obj.referring_datetime|time:"H:i"}}</td>
+        
+        <td>{{obj.short_description|default_if_none:'N/A'}}</td>
+        
+        <td>{{obj.gmt}}</td>
+        
+        <td>{{obj.location}}</td>
+        
+        <td><a href="{% url 'leads:list' %}">20</a></td>
+        
+        <td><a href="{% url 'leads:list' %}">20</a></td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h6 class="text-danger">Não há referenciadores</h6>
+{% endif %}

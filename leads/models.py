@@ -152,16 +152,28 @@ class Referrer(BaseModel):
     name = models.CharField(
         max_length=1024,
         verbose_name='Nome do Referenciador',
+        null=True,
+        blank=True,
+    )
+
+    lead = models.ForeignKey(
+        'leads.Lead',
+        verbose_name='Lead/Referenciador',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     gmt = models.IntegerField(
         verbose_name='GMT',
         default=-3,
+        null=True,
+        blank=True,
     )
 
     short_description = models.CharField(
         max_length=1024,
-        verbose_name='Descrição curta da linha',
+        verbose_name='Descrição curta da "linha"',
         null=True,
         blank=True,
     )
@@ -183,10 +195,6 @@ class Referrer(BaseModel):
         verbose_name='Conteúdo em (texto/string) do Arquivo',
         null=True,
         blank=True,
-    )
-
-    leads = models.ManyToManyField(
-        'leads.Lead'
     )
 
     class Meta:

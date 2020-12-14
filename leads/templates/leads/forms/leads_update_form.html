@@ -2,9 +2,13 @@
 {% load leads_extras %}
 
 <div class="row mb-2 mt-3">
+    
     <div class="col-12">
         <a href="referrers_info.url" class="h6 text-secondary">{{referrers_info}}</a>
     </div>
+
+    {% get_leads_referrers lead %}
+
 </div>
 
 <div class="row mb-3">
