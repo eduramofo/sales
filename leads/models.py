@@ -191,6 +191,10 @@ class Referrer(BaseModel):
         blank=True,
     )
 
+    leads = models.ManyToManyField('leads.Lead', 
+        related_name='leads',
+    )
+
     file_content_string = models.TextField(
         verbose_name='Conteúdo em (texto/string) do Arquivo',
         null=True,
@@ -202,5 +206,15 @@ class Referrer(BaseModel):
         verbose_name_plural = "Referrers"
 
     def __str__(self):
-        if self.name: return str(self.name)
-        else: return str(self.id)
+
+        result = str(self.id)
+
+        if self.name:
+            result = str(self.name)
+
+        if self.name and self.referring_datetime:
+            referrer_dt = self.referring_datetime.strftime("%x")
+            referrer_tm = self.referring_datetime.strftime("%H:%M")
+            result = '{} {} {}'.format(result, referrer_dt, referrer_tm)
+        
+        return result

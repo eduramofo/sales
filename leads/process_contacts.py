@@ -12,6 +12,7 @@ def gerar_leads(form, request):
 
 
 def create_leads_by_contacts(contacts, referrer):
+    leads = []
     for contact in contacts:
         new_lead = Lead.objects.create(
             indicated_by=referrer.name,
@@ -21,6 +22,9 @@ def create_leads_by_contacts(contacts, referrer):
             waid=contact['tels'][0]['waid'],
             quality=1,
         )
+        leads.append(new_lead)
+    referrer.leads.set(leads)
+    referrer.save()
 
 
 def handle_uploaded_files(request_files):

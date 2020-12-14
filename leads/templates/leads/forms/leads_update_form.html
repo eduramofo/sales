@@ -2,12 +2,12 @@
 {% load leads_extras %}
 
 <div class="row mb-2 mt-3">
-    
-    <div class="col-12">
-        <a href="referrers_info.url" class="h6 text-secondary">{{referrers_info}}</a>
-    </div>
 
-    {% get_leads_referrers lead %}
+    {% for referrer in lead|get_referrers_from_lead %}
+        <div class="col-12">
+            <a href="{% url 'leads:referrers' %}" class="h6 text-secondary">{{referrer}}</a>
+        </div>
+    {% endfor %}
 
 </div>
 
@@ -38,7 +38,7 @@
 
 </div>
 
-<form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-1 mb-5 rounded">
+<form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-1 rounded">
     
     {% include 'leads/forms/leads_form_fields.html' with form=lead_form %}
 

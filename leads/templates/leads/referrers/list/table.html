@@ -1,3 +1,4 @@
+{% load leads_extras %}
 
 {% if referrers %}
 <table id="referrers-table" class="table table-bordered table-striped table-responsive">
@@ -30,9 +31,9 @@
         
         <td>{{obj.location}}</td>
         
-        <td><a href="{% url 'leads:list' %}">20</a></td>
+        <td><a href="{% url 'leads:leads_referrers_all' obj.id %}">{{obj.leads.count}}</a></td>
         
-        <td><a href="{% url 'leads:list' %}">20</a></td>
+        <td><a href="{% url 'leads:leads_referrers_opened' obj.id %}">{{obj|get_opened_leads|length}}</a></td>
 
     </tr>
   {% endfor %}

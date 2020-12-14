@@ -7,6 +7,7 @@ from leads.process_contacts import gerar_leads
 from leads.forms import ReferrerForm
 from leads import tools
 from leads import models as leads_models
+from leads.indicators import indicators_data
 
 from core.tools import paginator
 
@@ -62,3 +63,19 @@ def leads_upload(request):
     }
 
     return render(request, 'leads/upload/index.html', context)
+
+
+@login_required()
+def referrers_old(request):
+
+    indicators = indicators_data()
+    nav_name = 'leads_referrers'
+    page_title = 'Referenciadores'
+    
+    context = {
+        'nav_name': nav_name,
+        'page_title': page_title,
+        'indicators': indicators,
+    }
+
+    return render(request, 'leads/indicators_list/index.html', context)

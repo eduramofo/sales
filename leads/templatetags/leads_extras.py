@@ -1,6 +1,7 @@
 import urllib.parse
 import json
 
+from django.db.models import Q
 from django import template
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -165,16 +166,13 @@ def run_now_table_data_html(lead_id, lead_run_now):
     return mark_safe(td_html)
 
 
-@register.simple_tag
-def get_leads_referrers(lead):
-    referrers = Referrer.objects.filter(lead=lead)
-    tlp_string = ''
-    if referrers:
-        lis = ''
-        for referrer in referrers:
-            li = "'<li>{}</li>'".format(referrer)
-            lis = '{}{}'.format(lis, li)
-        tlp_string = "'<ul>'{}'</ul>'".format(lis)
-    tlp_safe = mark_safe(tlp_string)
-    print(tlp_safe)
-    return tlp_safe
+@register.filter
+def get_referrers_from_lead(lead):
+    return Referrer.objects.filter(leads=lead)
+
+
+@register.filter
+def get_opened_leads(referrer):
+    leads_filter_query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando') | Q(status='agendamento')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads

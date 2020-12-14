@@ -16,32 +16,9 @@ from activities.models import Activity
 from leads.process_contacts import gerar_leads
 from leads.models import Lead
 from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm
-from leads.indicators import indicators_data
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras
-
-
-@login_required()
-def leads_list(request):
-    
-    nav_name = 'leads_list'
-
-    page_title = 'Lista de Leads'
-    
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
-
-    pages = paginator.make_paginator(request, leads.qs, 30)
-
-    context = {
-        'page_title': page_title,
-        'leads': pages['page'],
-        'page_range': pages['page_range'],
-        'nav_name': nav_name,
-        'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
 
 
 @login_required()
@@ -169,6 +146,28 @@ def lead_next(request):
 
 
 @login_required()
+def leads_list(request):
+    
+    nav_name = 'leads_list'
+
+    page_title = 'Lista de Leads'
+    
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'nav_name': nav_name,
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
 def leads_now(request):
     
     nav_name = 'leads_now'
@@ -288,54 +287,3 @@ def leads_schedules(request):
     }
 
     return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def referrers_old(request):
-
-    indicators = indicators_data()
-    nav_name = 'leads_referrers'
-    page_title = 'Referenciadores'
-    
-    context = {
-        'nav_name': nav_name,
-        'page_title': page_title,
-        'indicators': indicators,
-    }
-
-    return render(request, 'leads/indicators_list/index.html', context)
-
-
-@login_required()
-def leads_upload(request):
-
-    indicated_by_datetime = timezone.now().strftime('%Y-%m-%dT%H:%M')
-
-    gmt = -3
-
-    form = ReferrerForm()
-
-    initial = {
-        'referring_datetime': indicated_by_datetime,
-        'gmt': gmt,
-    }
-
-    form = ReferrerForm(initial=initial)
-
-    if request.method == 'POST':
-        form = ReferrerForm(request.POST)
-        if form.is_valid():
-            gerar_leads(form, request)
-            message_text = 'Leads criados com sucesso =)'
-            messages.add_message(request,messages.SUCCESS, message_text)
-            return HttpResponseRedirect(reverse('leads:list'))
-        else:
-            message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
-            messages.add_message(request,messages.ERROR, message_text)
-
-    context = {
-        'nav_name': 'leads_upload',
-        'form': form,
-    }
-
-    return render(request, 'leads/upload/index.html', context)
