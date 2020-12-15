@@ -172,6 +172,16 @@ def get_referrers_from_lead(lead):
 
 
 @register.filter
+def get_referrers_from_lead_first_referring_datetime(lead):    
+    return Referrer.objects.filter(leads=lead).first().referring_datetime
+
+
+@register.filter
+def get_referrers_from_lead_first_name(lead):    
+    return Referrer.objects.filter(leads=lead).first().name
+
+
+@register.filter
 def get_opened_leads(referrer):
     leads_filter_query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando') | Q(status='agendamento')
     leads = referrer.leads.filter(leads_filter_query)

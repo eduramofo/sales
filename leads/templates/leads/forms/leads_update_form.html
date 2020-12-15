@@ -2,13 +2,13 @@
 {% load leads_extras %}
 
 <div class="row mb-2 mt-3">
-
     {% for referrer in lead|get_referrers_from_lead %}
-        <div class="col-12">
-            <a href="{% url 'leads:referrers' %}" class="h6 text-secondary">{{referrer}}</a>
+        <div class="col-12 {% if forloop.counter0 != 0 %}mt-2{% endif %}">
+            <div class="border border-dark p-2 rounded">
+                <a href="{% url 'leads:leads_referrers_all' referrer.id %}" class="h6 text-secondary">{{referrer}}</a>
+            </div>
         </div>
     {% endfor %}
-
 </div>
 
 <div class="row mb-3">

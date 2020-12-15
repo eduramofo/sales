@@ -9,22 +9,31 @@ def gerar_leads(form, request):
     files = request.FILES.getlist('vcf_files')
     contacts = handle_uploaded_files(files)
     create_leads_by_contacts(contacts, referrer)
+    return referrer
 
 
 def create_leads_by_contacts(contacts, referrer):
     leads = []
     for contact in contacts:
-        new_lead = Lead.objects.create(
-            indicated_by=referrer.name,
-            indicated_by_datetime=referrer.referring_datetime,
-            name=contact['nome'],
-            tel=contact['tels'][0]['numero'],
-            waid=contact['tels'][0]['waid'],
-            quality=1,
-        )
+        new_lead = create_lead(contact, referrer)
         leads.append(new_lead)
     referrer.leads.set(leads)
     referrer.save()
+
+
+def create_lead(contact, referrer):
+    tel = contact['tels'][0]['numero']
+    waid = contact['tels'][0]['waid']
+    name = contact['nome']
+    new_lead = Lead.objects.create(
+        name=name,
+        tel=tel,
+        waid=waid,
+        gmt=referrer.gmt,
+        location=referrer.location,
+        short_description=referrer.short_description,
+    )
+    return new_lead
 
 
 def handle_uploaded_files(request_files):

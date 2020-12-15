@@ -134,6 +134,13 @@ class Lead(BaseModel):
         default=False,
     )
 
+    short_description = models.CharField(
+        max_length=1024,
+        verbose_name='Descrição curta da "linha"',
+        null=True,
+        blank=True,
+    )
+
     class Meta:
         verbose_name = "Lead"
         verbose_name_plural = "Leads"

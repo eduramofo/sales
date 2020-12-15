@@ -1,5 +1,6 @@
 from django.utils import timezone
-from django.shortcuts import render, HttpResponseRedirect, reverse
+
+from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -33,15 +34,25 @@ def referrers(request):
 @login_required()
 def leads_upload(request):
 
-    indicated_by_datetime = timezone.now().strftime('%Y-%m-%dT%H:%M')
+    indicated_by_datetime = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')
 
     gmt = -3
 
     form = ReferrerForm()
 
+    lead_id_raw = request.GET.get('lead', '')
+    lead_name = ''
+    lead_id = ''
+    if lead_id_raw: 
+        lead = get_object_or_404(leads_models.Lead, id=lead_id_raw)
+        lead_name = str(lead)
+        lead_id = str(lead.id)
+
     initial = {
+        'name': lead_name,
         'referring_datetime': indicated_by_datetime,
         'gmt': gmt,
+        'lead': lead_id,
     }
 
     form = ReferrerForm(initial=initial)
@@ -49,10 +60,10 @@ def leads_upload(request):
     if request.method == 'POST':
         form = ReferrerForm(request.POST)
         if form.is_valid():
-            gerar_leads(form, request)
+            referrer = gerar_leads(form, request)
             message_text = 'Leads criados com sucesso =)'
             messages.add_message(request,messages.SUCCESS, message_text)
-            return HttpResponseRedirect(reverse('leads:list'))
+            return HttpResponseRedirect(reverse('leads:leads_referrers_all', args=[str(referrer.id),]))
         else:
             message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
             messages.add_message(request,messages.ERROR, message_text)

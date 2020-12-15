@@ -20,9 +20,11 @@ def add_through_lead(request, lead_id):
 
     lead = get_object_or_404(LeadsModels.Lead, id=lead_id)
 
+    lead_update_url = reverse_lazy('leads:update', args=(str(lead.id),))
+
     prefix_activity_form = 'activity_add_through_lead'
 
-    due_date = timezone.now().strftime('%Y-%m-%dT%H:%M')
+    due_date = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')
 
     subject = None
 
@@ -30,10 +32,54 @@ def add_through_lead(request, lead_id):
 
     if shortcut == 'nao-atendeu':
         subject = 'Não atendeu'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead_status = lead.status
+        if lead_status == 'novo' or lead_status == 'tentando_contato':
+            lead.status = 'tentando_contato'
+            lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        return HttpResponseRedirect(lead_update_url)
+
     if shortcut == 'sem-interesse':
         subject = 'Sem interesse'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead.status = 'sem_interesse'
+        lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Marcado como sem interesse.')
+        return HttpResponseRedirect(lead_update_url)
+
     if shortcut == 'sem-dinheiro':
         subject = 'Sem condições financeiras'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead.status = 'sem_condicoes_financeiras'
+        lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Marcado como sem dinheiro.')
+        return HttpResponseRedirect(lead_update_url)
+
+    if shortcut == 'contato-invalido':
+        subject = 'Contato Inválido'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead.status = 'contato_invalido'
+        lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Marcado como inválido.')
+        return HttpResponseRedirect(lead_update_url)
+
+    if shortcut == 'contato-invalido':
+        subject = 'Contato Inválido'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead.status = 'contato_invalido'
+        lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Marcado como inválido.')
+        return HttpResponseRedirect(lead_update_url)
+
+    if shortcut == 'agendamento':
+        subject = 'Agendamento'
+        lead.status = 'agendamento'
+        lead.save()
+
+    if shortcut == 'apresentacao':
+        subject = 'Apresentação Realizada'
+        lead.save()
 
     initial_activity_initial = {
         'lead': str(lead.id),
@@ -62,10 +108,9 @@ def add_through_lead(request, lead_id):
     if request.method == 'POST':
         activity_form = ActivityForm(request.POST, prefix=prefix_activity_form)
         if activity_form.is_valid():
-            activity = activity_form.save()
-            url = reverse_lazy('leads:update', args=(str(lead.id),))
+            activity = activity_form.save()            
             messages.add_message(request, messages.SUCCESS, 'Atividade criada com sucesso!')
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(lead_update_url)
         else:
             messages.add_message(request, messages.ERROR, 'Há erro(s) no formulário de atividade.')
             context['activity_form'] = activity_form
