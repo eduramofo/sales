@@ -172,13 +172,19 @@ def get_referrers_from_lead(lead):
 
 
 @register.filter
-def get_referrers_from_lead_first_referring_datetime(lead):    
-    return Referrer.objects.filter(leads=lead).first().referring_datetime
+def get_referrers_from_lead_first_referring_datetime(lead):
+    referrer_obj = Referrer.objects.filter(leads=lead).first()
+    if referrer_obj:
+        return referrer_obj.referring_datetime
+    return None
 
 
 @register.filter
-def get_referrers_from_lead_first_name(lead):    
-    return Referrer.objects.filter(leads=lead).first().name
+def get_referrers_from_lead_first_name(lead):
+    referrer_obj = Referrer.objects.filter(leads=lead).first()
+    if referrer_obj:
+        return referrer_obj.name
+    return None
 
 
 @register.filter
