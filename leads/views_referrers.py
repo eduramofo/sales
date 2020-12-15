@@ -16,7 +16,7 @@ from core.tools import paginator
 @login_required()
 def referrers(request):
 
-    referrers = leads_models.Referrer.objects.all()
+    referrers = leads_models.Referrer.objects.all().order_by('-referring_datetime')
 
     nav_name = 'leads_referrers'
     
