@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.utils import timezone
 
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
@@ -16,7 +17,7 @@ from core.tools import paginator
 @login_required()
 def referrers(request):
 
-    referrers = leads_models.Referrer.objects.all().order_by('-referring_datetime')
+    referrers = leads_models.Referrer.objects.all().order_by(F('referring_datetime').desc(nulls_last=True))
 
     nav_name = 'leads_referrers'
     
