@@ -13,15 +13,6 @@ class LeadForm(forms.ModelForm):
         required=False,
     )
 
-    indicated_by_datetime = forms.DateTimeField(
-        label='Data e hora da indicação',
-        widget=forms.DateTimeInput(
-            format='%Y-%m-%dT%H:%M',
-            attrs={'type': 'datetime-local',}
-        ),
-        required=False,
-    )
-
     run_now = forms.BooleanField(
         label='Lista de Agora?',
         required=False,
@@ -33,7 +24,7 @@ class LeadForm(forms.ModelForm):
     )
 
     location = forms.CharField(
-        label='Localização: País/Cidade',
+        label='Localização (País/UF/Cidade)',
         required=False,
     )
 
@@ -45,9 +36,16 @@ class LeadForm(forms.ModelForm):
 
     class Meta:
         model = leads_models.Lead
-        fields = ['status', 'run_now', 'priority', 'name', 'next_contact',
-        'indicated_by', 'indicated_by_datetime', 
-        'tel', 'waid', 'note', 'location', 'gmt',
+        fields = [
+            'status',
+            'run_now',
+            'priority',
+            'name',
+            'tel',
+            'waid',
+            'note',
+            'location',
+            'gmt',
         ]
 
 

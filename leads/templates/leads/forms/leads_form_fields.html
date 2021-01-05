@@ -1,15 +1,23 @@
 {% csrf_token %}
 
 <div class="row">
-    <div class="col-12 col-md-5">
+    
+    <div class="col-12 col-md-6">
         {% include 'core/inputs/default.html' with field=form.name %}
     </div>
-    <div class="col-8 col-md-5">
+    
+    <div class="col-12 col-md-6">
+        {% include 'core/inputs/default.html' with field=form.status %}
+    </div>
+
+    <div class="col-12 col-md-6">
         {% include 'core/inputs/default.html' with field=form.location %}
     </div>
-    <div class="col-4 col-md-2">
+    
+    <div class="col-12 col-md-6">
         {% include 'core/inputs/default.html' with field=form.gmt %}
     </div>
+
 </div>
 
 <div class="row">
@@ -22,23 +30,13 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-4">
-        {% include 'core/inputs/default.html' with field=form.status %}
-    </div>
-    <div class="col-12 col-md-4">
+
+    <div class="col-12 col-md-6">
         {% include 'core/inputs/default.html' with field=form.tel %}
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-6">
         {% include 'core/inputs/default.html' with field=form.waid %}
     </div>
 </div>
 
 {% include 'core/inputs/default.html' with field=form.note %}
-
-{{form.indicated_by.next_contact.as_hidden}}
-
-{{form.indicated_by.quality.as_hidden}}
-
-{{form.indicated_by.as_hidden}}
-
-{{form.indicated_by_datetime.as_hidden}}

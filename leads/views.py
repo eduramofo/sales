@@ -62,17 +62,9 @@ def lead_update(request, lead_id):
     nav_name = 'leads_list'
     method = request.method
     
-    referrers_info =  str(lead.indicated_by).split('(')[0]
-
-    if lead.indicated_by_datetime:
-        referrer_dt = lead.indicated_by_datetime.strftime("%x")
-        referrer_tm = lead.indicated_by_datetime.strftime("%H:%M")
-        referrers_info = '{} {} {}'.format(referrers_info, referrer_dt, referrer_tm)
-
     context = {
-        'page_title': '{} ({})'.format(page_title, referrers_info),
+        'page_title': page_title,
         'nav_name': nav_name,
-        'referrers_info': referrers_info,
         'lead': lead,
         'activities': activities,
         'lead_form': lead_form,
@@ -90,7 +82,6 @@ def lead_update(request, lead_id):
         else:
             messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
             context['lead_form'] = lead_form
-            print(lead_form)
 
     return render(request, 'leads/update/index.html', context)
 

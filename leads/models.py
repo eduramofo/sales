@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+
 from core.models import BaseModel
 
 
@@ -18,6 +20,7 @@ LEAD_STATUS_CHOICES = (
     ("contato_invalido", "Contato Inválido"),
     ("agendamento", "Agendamento"),
     ("ganho", "Ganho"),
+    ("perdido", "Perdido"),
 )
 
 GMT_CHOICES = (
@@ -220,8 +223,7 @@ class Referrer(BaseModel):
             result = str(self.name)
 
         if self.name and self.referring_datetime:
-            referrer_dt = self.referring_datetime.strftime("%x")
-            referrer_tm = self.referring_datetime.strftime("%H:%M")
-            result = '{} {} {}'.format(result, referrer_dt, referrer_tm)
-        
+            referrer_dt = timezone.localtime(self.referring_datetime).strftime('%x %H:%M')
+            result = '{} {}'.format(result, referrer_dt)
+
         return result

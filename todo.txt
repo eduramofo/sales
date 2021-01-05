@@ -24,3 +24,16 @@ Speech
 Fechamento
 Referidos
 Validação
+
+
+
+
+
+    # indicated_by_datetime = forms.DateTimeField(
+    #     label='Data e hora da indicação',
+    #     widget=forms.DateTimeInput(
+    #         format='%Y-%m-%dT%H:%M',
+    #         attrs={'type': 'datetime-local',}
+    #     ),
+    #     required=False,
+    # )

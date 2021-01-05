@@ -24,7 +24,7 @@
       <td>{{activity.lead|truncatechars:15}}</td>
       <td>{{activity.lead|truncatechars:15}}</td>
       <td>{% if activity.done %}Sim{% else %}Não{% endif %}</td>
-      <td>{{activity.note|truncatechars:40}}</td>
+      <td>{{activity.note|default_if_none:''|truncatechars:40}}</td>
     </tr>
   {% endfor %}
   </tbody>

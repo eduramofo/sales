@@ -64,21 +64,19 @@ def add_through_lead(request, lead_id):
         messages.add_message(request, messages.SUCCESS, 'Marcado como inválido.')
         return HttpResponseRedirect(lead_update_url)
 
-    if shortcut == 'contato-invalido':
-        subject = 'Contato Inválido'
-        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
-        lead.status = 'contato_invalido'
-        lead.save()
-        messages.add_message(request, messages.SUCCESS, 'Marcado como inválido.')
-        return HttpResponseRedirect(lead_update_url)
-
     if shortcut == 'agendamento':
         subject = 'Agendamento'
         lead.status = 'agendamento'
         lead.save()
 
-    if shortcut == 'apresentacao':
-        subject = 'Apresentação Realizada'
+    if shortcut == 'apresentacao-ganha':
+        subject = 'Apresentação realizada ganha'
+        lead.status = 'ganho'
+        lead.save()
+
+    if shortcut == 'apresentacao-perdida':
+        subject = 'Apresentação realizada perdida'
+        lead.status = 'perdido'
         lead.save()
 
     initial_activity_initial = {

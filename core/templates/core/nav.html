@@ -4,9 +4,6 @@
 
     <a class="navbar-brand" href="{% url 'core:home' %}">Sales</a>
     
-
-
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbarNav" aria-controls="navbarNav" 
             aria-expanded="false" aria-label="Toggle navigation">
@@ -162,7 +159,7 @@
             </a>
           </div>
           
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
+          {% comment %} <div class="d-flex justify-content-center align-items-center nav-item-item">
             <a id="search-call-modal-btn" class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center">
 
               <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -173,7 +170,7 @@
               <small class="w-100 text-center mt-1">Search</small>
 
             </a>
-          </div>
+          </div> {% endcomment %}
 
         </div>
       </li>

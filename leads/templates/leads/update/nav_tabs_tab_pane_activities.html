@@ -1,13 +1,5 @@
 <div class="tab-pane" id="nav-activities" role="tabpanel" aria-labelledby="nav-activities-tab">
 
-    <a  role="button" 
-        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=apresentacao"
-        class="btn btn-lg btn-block btn-success mt-3 text-left">Apresentação Realizada</a>
-
-    <a  role="button"
-        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=agendamento"
-        class="btn btn-lg btn-block btn-primary mt-3 text-left">Agendamento</a>
-
     <a  role="button"
         href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
         class="btn btn-lg btn-block btn-primary mt-3 text-left">Não atendeu (tentanto)</a>
@@ -21,11 +13,27 @@
         class="btn btn-lg btn-block btn-primary mt-3 text-left">Sem dinheiro</a>
 
     <a  role="button"
+        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=ja-estuda-ou-fala"
+        class="btn btn-lg btn-block btn-primary mt-3 text-left">Já estuda ou já fala</a>
+
+    <a  role="button"
         href="{% url 'activities:add-through-lead' lead.id %}?shortcut=contato-invalido"
         class="btn btn-lg btn-block btn-primary mt-3 text-left">Contato inválido</a>
 
     <a  role="button"
+        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=agendamento"
+        class="btn btn-lg btn-block btn-dark mt-3 text-left">Agendamento</a>
+
+    <a  role="button" 
+        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=apresentacao-ganha"
+        class="btn btn-lg btn-block btn-success mt-3 text-left">Apresentação [ GANHA ]</a>
+
+    <a  role="button" 
+        href="{% url 'activities:add-through-lead' lead.id %}?shortcut=apresentacao-perdida"
+        class="btn btn-lg btn-block btn-danger mt-3 text-left">Apresentação [ PERDIDA ]</a>
+
+    <a  role="button"
         href="{% url 'leads:upload' %}?lead={{lead.id}}"
-        class="btn btn-lg btn-block btn-primary mt-3 text-left">Upload de Leads</a>
+        class="btn btn-lg btn-block btn-secondary mt-3 text-left">Upload de Leads</a>
 
 </div>

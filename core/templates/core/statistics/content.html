@@ -1,7 +1,8 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
-            {% include "core/statistics/table_1.html" %}
+            <h5 class="mb-3 text-primary">Demonstração das Atividades</h5>
+            {% include "core/statistics/table_demonstration.html" %}
         </div>
     </div>
 </div>
@@ -9,7 +10,8 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12">
-            {% include "core/statistics/table_2.html" %}
+            <h5 class="mb-3 text-primary">Balanço dos leads</h5>
+            {% include "core/statistics/table_balance.html" with table=table_balance %}
         </div>
     </div>
 </div>

@@ -1,10 +1,13 @@
 from django.urls import path
-from . import views
+
+from .views import main
+from .views import statistics
+from .views import settings
 
 app_name = 'core'
 urlpatterns = [
-    path('', views.index, name='home'),
-    path('statistics/', views.statistics, name='statistics'),
-    path('settings/', views.settings, name='settings'),
-    path('messages/', views.messages, name='messages'),
+    path('', main.index, name='home'),
+    path('messages/', main.messages, name='messages'),
+    path('statistics/', statistics.statistics, name='statistics'),
+    path('settings/', settings.settings, name='settings'),
 ]
