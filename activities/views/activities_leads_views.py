@@ -30,6 +30,8 @@ def add_through_lead(request, lead_id):
 
     type_ = 'call'
 
+    initial_activity_done = True
+
     if shortcut == 'nao-atendeu':
         subject = 'Não atendeu'
         Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
@@ -67,6 +69,7 @@ def add_through_lead(request, lead_id):
     if shortcut == 'agendamento':
         subject = 'Agendamento'
         lead.status = 'agendamento'
+        initial_activity_done = False
         lead.save()
 
     if shortcut == 'apresentacao-ganha':
@@ -82,7 +85,7 @@ def add_through_lead(request, lead_id):
     initial_activity_initial = {
         'lead': str(lead.id),
         'due_date': due_date,
-        'done': True,
+        'done': initial_activity_done,
         'subject': subject,
         'type': type_,
     }

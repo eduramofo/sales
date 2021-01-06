@@ -3,34 +3,30 @@
 <div class="row">
 
     {% csrf_token %}
+    
+    {{activity_form.lead.as_hidden}}
 
-    <div class="col-12 d-none">
-        {% include 'core/inputs/default.html' with field=activity_form.lead %}
-    </div>
+    {{activity_form.done.as_hidden}}
 
-    <div class="col-12 d-none">
-        {% include 'core/inputs/boolean.html' with field=activity_form.done %}
-    </div>
-
-    <div class="col-12">
+    <div class="col-3">
         {% include 'core/inputs/default.html' with field=activity_form.type %}
     </div>
 
-    <div class="col-12">
+    <div class="col-5">
         {% include 'core/inputs/default.html' with field=activity_form.subject %}
     </div>
 
-    <div class="col-12">
+    <div class="col-4">
         {% include 'core/inputs/default.html' with field=activity_form.due_date %}
     </div>
 
     <div class="col-12">
         {% include 'core/inputs/default.html' with field=activity_form.note %}
     </div>
-    
+
     <div class="col-12">
         <button class="btn btn-lg btn-block btn-success">
-            {% btn_svg_icons 'google' 'save' '25px' 'center' 'Criar Atividade' %}
+            {% btn_svg_icons 'google' 'save' '25px' 'center' 'Salvar' %}
         </button>
     </div>
 

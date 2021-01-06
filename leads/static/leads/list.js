@@ -8,6 +8,11 @@ $(document).ready(function() {
         $('#filter-form-wrapper').toggleClass('d-none');
     });
 
+    $('#filter-news-btn').click(function(e) {
+        e.preventDefault();
+        insertParam('status', 'novo')
+    });
+
     // now - START
     leadTable.find('tbody tr td.run-now-td').css('cursor', 'pointer').click(changeLeadRunNowStatus);
     function changeLeadRunNowStatus (e) {
@@ -65,30 +70,30 @@ $(document).ready(function() {
             insertParam('page', pageNumber);
         }
 
-        function insertParam(key, value) {
+    }
 
-            key = encodeURI(key); value = encodeURI(value);
+    function insertParam(key, value) {
 
-            var kvp = document.location.search.substr(1).split('&');
+        key = encodeURI(key); value = encodeURI(value);
 
-            var i=kvp.length; var x; while(i--)
+        var kvp = document.location.search.substr(1).split('&');
+
+        var i=kvp.length; var x; while(i--)
+        {
+            x = kvp[i].split('=');
+
+            if (x[0]==key)
             {
-                x = kvp[i].split('=');
-
-                if (x[0]==key)
-                {
-                    x[1] = value;
-                    kvp[i] = x.join('=');
-                    break;
-                }
+                x[1] = value;
+                kvp[i] = x.join('=');
+                break;
             }
-
-            if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-            //this will reload the page, it's likely better to store this until finished
-            document.location.search = kvp.join('&');
         }
 
+        if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+        //this will reload the page, it's likely better to store this until finished
+        document.location.search = kvp.join('&');
     }
     // pagination - END
 

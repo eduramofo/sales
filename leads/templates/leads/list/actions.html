@@ -1,8 +1,10 @@
 <div class="row mb-3">
     <div class="col-12">
         <div class="bg-light p-2 border border-dark rounded">
-            <button id="filter-toggle-btn" class="btn btn-sm btn-secondary">Mostrar/Esconder Filtro</button>
-            <a role="button" href="{% url 'leads:add' %}" class="btn btn-sm btn-success ml-3">Adicionar Novo</a>
+            <button id="filter-toggle-btn" class="btn btn-sm btn-secondary">Mostrar/esconder filtro</button>
+            <a role="button" href="{% url 'leads:add' %}" class="btn btn-sm btn-success ml-3">Adicionar novo</a>            
+            <button id="filter-news-btn" class="btn btn-sm btn-primary ml-3">Exibir somente os novos</button>
+            <a role="button" href="{{ request.path }}" class="btn btn-sm btn-warning ml-3">Limpar filtro</a>            
         </div>
     </div>
 </div>

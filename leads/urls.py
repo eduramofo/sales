@@ -15,8 +15,11 @@ urlpatterns = [
     path('opened/', views_leads_lists.opened, name='opened'),
     path('now/', views_leads_lists.now, name='now'),
     path('priorities/', views_leads_lists.priorities, name='priorities'),
+
+    # leads lists referrers
     path('leads/referrers/all/<uuid:referrer_id>/', views_leads_lists.referrers_all, name='leads_referrers_all'),
     path('leads/referrers/opened/<uuid:referrer_id>/', views_leads_lists.referrers_opened, name='leads_referrers_opened'),
+    path('leads/referrers/news/<uuid:referrer_id>/', views_leads_lists.referrers_news, name='leads_referrers_news'),
 
     # lead next
     path('next/', views.lead_next, name='next'),
@@ -30,6 +33,7 @@ urlpatterns = [
     
     # referrers: list
     path('referrers/old/', views_referrers.referrers_old, name='referrers-old'),
+    path('referrers/opened/', views_referrers.referrers, name='referrers-opened'),
     path('referrers/', views_referrers.referrers, name='referrers'),
 
     # referrers: lead upload add by file

@@ -38,6 +38,10 @@ class ActivityForm(forms.ModelForm):
         required=False,
     )
 
+    done = forms.BooleanField(
+        label='Feita?',
+        required=False,
+    )
     class Meta:
         model = Activity
         fields = '__all__'

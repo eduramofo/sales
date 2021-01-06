@@ -17,7 +17,10 @@ from core.tools import paginator
 @login_required()
 def referrers(request):
 
-    referrers = leads_models.Referrer.objects.all().order_by(F('referring_datetime').desc(nulls_last=True))
+    referrers = leads_models.Referrer.objects.all().order_by(
+        F('referring_datetime').desc(nulls_last=True)
+    )
+
 
     nav_name = 'leads_referrers'
     

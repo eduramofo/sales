@@ -8,6 +8,8 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from leads.models import Lead, Referrer
+from activities.models import Activity
+
 
 register = template.Library()
 
@@ -188,7 +190,25 @@ def get_referrers_from_lead_first_name(lead):
 
 
 @register.filter
+def show_next_activities(lead):
+    activity = Activity.objects.filter(lead=lead, done=False).order_by('due_date')
+    if len(activity) > 0:
+        due_date = activity.filter(done=False).first().due_date
+        if due_date:
+            return due_date
+        return ''
+    else:
+        return ''
+
+@register.filter
 def get_opened_leads(referrer):
     leads_filter_query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando') | Q(status='agendamento')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
+def get_news_leads(referrer):
+    leads_filter_query = Q(status='novo')
     leads = referrer.leads.filter(leads_filter_query)
     return leads

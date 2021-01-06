@@ -9,6 +9,7 @@
             <th scope="col">Indicado em</th>
             <th scope="col">Nome</th>
             <th scope="col">Status</th>
+            <th scope="col">Prox. Tarefa</th>
             <th scope="col">Referenciador</th>
             <th scope="col">Prioridade?</th>
             <th scope="col">Anotações</th>
@@ -27,6 +28,7 @@
             </td>
             <td><a href="{% url 'leads:update' lead.id %}">{{lead.name}}</a></td>
             <td>{{lead.get_status_display}}</td>
+            <td>{{lead|show_next_activities|date:"d/m/y H:i"}}</td>
             <td>{{lead|get_referrers_from_lead_first_name|truncatechars:20}}</td>
             <td class="{% if lead.priority %}bg-success text-white{% endif %}">{% if lead.priority %}Sim{% else %}Não{% endif %}</td>
             <td>{{lead.note|default_if_none:""|truncatechars:45}}</td>

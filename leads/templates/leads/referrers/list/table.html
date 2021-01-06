@@ -1,43 +1,62 @@
 {% load leads_extras %}
 
 {% if referrers %}
-<table id="referrers-table" class="table table-bordered table-striped table-responsive">
-  <thead>
-    <tr>
-      <th scope="col">Referenciador</th>
-      <th scope="col">Data/Hora da Indicação</th>
-      <th scope="col">Descrição Breve da Linha</th>
-      <th scope="col">GMT</th>
-      <th scope="col">Local</th>
-      <th scope="col">Qte Total</th>
-      <th scope="col">Qte Abertos</th>
-    </tr>
-  </thead>
+<table id="referrers-table" class="table able-striped table-responsive">
+  
+<thead>
+
+  <tr>
+    <th scope="col" rowspan="2" class="border border-secondary text-center">Referenciador</th>
+    <th scope="col" rowspan="2" class="border border-secondary">
+      <div class="d-flex justify-content-center flex-align-center p-0">
+        <span>Data/hora da indicação</span>
+      </div>
+    </th>
+    <th scope="col" rowspan="2" class="border border-secondary">
+      <div class="d-flex justify-content-center flex-align-center p-0">
+        <span>Descrição breve da linha</span>
+      </div>
+    </th>
+    <th scope="col" rowspan="2" class="border border-secondary">
+      <div class="d-flex justify-content-center flex-align-center p-0">
+        <span>GMT</span>
+      </div>
+    </th>
+    <th scope="col" rowspan="2" class="border border-secondary">
+      <div class="d-flex justify-content-center flex-align-center p-0">
+        <span>Local</span>
+      </div>
+    </th>
+    <th scope="col" colspan="3" class="text-center border border-secondary">Quantidade</th>
+  </tr>
+
+  <tr>
+    <th scope="col" class="text-center border border-secondary">Total</th>
+    <th scope="col" class="text-center border border-secondary">Abertos</th>
+    <th scope="col" class="text-center border border-secondary">Novos</th>
+  </tr>
+
+</thead>
+
   <tbody>
-  {% for obj in referrers %}
-    <tr>
-
-        {% if obj.lead %}
-            <td><a href="{% url 'leads:update' obj.lead.id %}">{{obj.lead.name}}</a></td>
-        {% else %}
-            <td>{{obj.name}}</td>
-        {% endif %}
-
-        <td>{{obj.referring_datetime|date:"d/m/y"}} {{obj.referring_datetime|time:"H:i"}}</td>
-        
-        <td>{{obj.short_description|default_if_none:'N/A'}}</td>
-        
-        <td>{{obj.gmt}}</td>
-        
-        <td>{{obj.location}}</td>
-        
-        <td><a href="{% url 'leads:leads_referrers_all' obj.id %}">{{obj.leads.count}}</a></td>
-        
-        <td><a href="{% url 'leads:leads_referrers_opened' obj.id %}">{{obj|get_opened_leads|length}}</a></td>
-
-    </tr>
-  {% endfor %}
+    {% for obj in referrers %}
+      <tr>
+          {% if obj.lead %}
+              <td class="text-center border border-secondary"><a href="{% url 'leads:update' obj.lead.id %}">{{obj.lead.name}}</a></td>
+          {% else %}
+              <td class="text-center border border-secondary">{{obj.name}}</td>
+          {% endif %}
+          <td class="text-center border border-secondary">{{obj.referring_datetime|date:"d/m/y"}} {{obj.referring_datetime|time:"H:i"}}</td>
+          <td class="text-center border border-secondary">{{obj.short_description|default_if_none:'N/A'}}</td>
+          <td class="text-center border border-secondary">{{obj.gmt}}</td>
+          <td class="text-center border border-secondary">{{obj.location}}</td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_all' obj.id %}">{{obj.leads.count}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_opened' obj.id %}">{{obj|get_opened_leads|length}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_news' obj.id %}">{{obj|get_news_leads|length}}</a></td>
+      </tr>
+    {% endfor %}
   </tbody>
+
 </table>
 {% else %}
 <h6 class="text-danger">Não há referenciadores</h6>
