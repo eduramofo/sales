@@ -240,7 +240,7 @@ def referrers_news(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'Leads em aberto do referenciador [ {} ]'.format(referrer_obj)
+    page_title = 'Leads NOVOS do referenciador [ {} ]'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -251,3 +251,34 @@ def referrers_news(request, referrer_id):
     }
 
     return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_tentando(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+

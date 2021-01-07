@@ -55,7 +55,9 @@ def link_whats_oi(lead_object):
     
     whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
     
-    text = 'Ol%C3%A1%20Aqui%20%C3%A9%20o%20Eduardo%20da%20*Wise%20Up%20Online*!'
+    raw_text = 'Olá {}, td bem? Aqui é o Eduardo da Wise Up.'
+
+    text = urllib.parse.quote(raw_text)
     
     link_to_call = whatsapp_api_link + '&text=' + text
 
@@ -101,7 +103,7 @@ def link_whats_tentei_te_ligar(lead_object):
 
     indicated_by_first_name = str(lead_object.indicated_by).partition(' ')[0]
 
-    raw_text = 'Olá ' + lead_name + ', tudo bem?. Aqui é o Eduardo você pode falar agora?'
+    raw_text = 'Olá ' + lead_name + ', td bem? Aqui é o Eduardo vc pode falar agora?'
 
     text = urllib.parse.quote(raw_text)
     
@@ -200,6 +202,7 @@ def show_next_activities(lead):
     else:
         return ''
 
+
 @register.filter
 def get_opened_leads(referrer):
     leads_filter_query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando') | Q(status='agendamento')
@@ -210,5 +213,12 @@ def get_opened_leads(referrer):
 @register.filter
 def get_news_leads(referrer):
     leads_filter_query = Q(status='novo')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
+def get_tentanto_leads(referrer):
+    leads_filter_query = Q(status='tentando_contato')
     leads = referrer.leads.filter(leads_filter_query)
     return leads

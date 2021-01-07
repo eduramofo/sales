@@ -7,6 +7,11 @@ from leads import models as leads_models
 
 class ActivityForm(forms.ModelForm):
 
+    DONE_CHOICES = (
+        (False, 'Não'),
+        (True, 'Sim'),
+    )
+
     lead = forms.CharField(
         label='Lead ID',
         required=True,
@@ -38,10 +43,12 @@ class ActivityForm(forms.ModelForm):
         required=False,
     )
 
-    done = forms.BooleanField(
+    done = forms.ChoiceField(
         label='Feita?',
-        required=False,
+        choices=DONE_CHOICES,
+        required=True,
     )
+
     class Meta:
         model = Activity
         fields = '__all__'

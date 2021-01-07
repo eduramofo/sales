@@ -5,9 +5,8 @@
     <thead>
         <tr>
         <th scope="col">Criação</th>
-        <th scope="col">Assunto</th>
-        <th scope="col">Tipo</th>
         <th scope="col">Vencimento</th>
+        <th scope="col">Assunto</th>
         <th scope="col">Feita?</th>
         <th scope="col">Anotações</th>
         </tr>
@@ -16,11 +15,10 @@
     {% for activity in activities %}
         <tr>
         <td>{{activity.created_at|date:"d/m/y"}} {{ activity.created_at|time:"H:i" }}</td>
-        <td><a href="{% url 'activities:update' activity.id %}">{{activity.subject|truncatechars:35}}</a></td>
-        <td>{{activity.get_type_display}}</td>
         <td>{{activity.due_date|date:"d/m/y"}} {{ activity.due_date|time:"H:i" }}</td>
+        <td><a href="{% url 'activities:update-through-lead' activity.id %}">{{activity.subject|truncatechars:35}}</a></td>
         <td>{% if activity.done %}Sim{% else %}Não{% endif %}</td>
-        <td>{{activity.note|truncatechars:40}}</td>
+        <td>{{activity.note|default_if_none:""|truncatechars:40}}</td>
         </tr>
     {% endfor %}
     </tbody>

@@ -120,43 +120,16 @@ def add_through_lead(request, lead_id):
 
 
 @login_required()
-def activity_add(request, lead_id):
-
-    initial = {
-        'lead': lead_id,
-    }
-
-    activity_form = ActivityForm(initial=initial, prefix="activity-lead")
-    page_title = 'Criação de uma nova atividade'
-    nav_name = 'activities'
-
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'activity_form': activity_form,
-    }
-
-    if request.method == 'POST':
-        activity_form = ActivityForm(request.POST)
-        if activity_form.is_valid():
-            activity = activity_form.save()
-            url = reverse_lazy('activities:update', args=(str(activity.id),))
-            messages.add_message(request, messages.SUCCESS, 'Atividade criada com sucesso!')
-            return HttpResponseRedirect(url)
-        else:
-            messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário da atividade!')
-            context['activity_form'] = activity_form
-
-    return render(request, 'activities/leads/add.html', context)
-
-
-@login_required()
-def activity_update(request, activity_id):
+def update_through_lead(request, activity_id):
 
     activity = get_object_or_404(Activity, id=activity_id)
+    
     activity_form = ActivityForm(request.POST or None, instance=activity, prefix='activity')
-    page_title = 'Atualização de Atividade'
+    
+    page_title = 'Atualização de Atividade | LEAD: {}'.format(activity.lead)
+    
     nav_name = 'activities'
+
     method = request.method
 
     context = {
@@ -169,29 +142,10 @@ def activity_update(request, activity_id):
     if method == 'POST':
         if activity_form.is_valid():
             activity = activity_form.save()
-            url = reverse_lazy('activities:update', args=(str(activity.id),))
+            url = reverse_lazy('leads:update', args=(str(activity.lead.id),))
             messages.add_message(request, messages.SUCCESS, 'Atividade atualizado com sucesso!')
             return HttpResponseRedirect(url)
         else:
             messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário da atividade!')
 
-    return render(request, 'activities/update/index.html', context)
-
-
-@login_required()
-def activities_list(request):
-    
-    nav_name = 'activities'
-    page_title = 'Lista de Atividades'
-    activities = ActivityFilter(request.GET, queryset=Activity.objects.all().order_by('-created_at'))
-    pages = paginator.make_paginator(request, activities.qs, 10)
-
-    context = {
-        'page_title': page_title,
-        'activities': pages['page'],
-        'page_range': pages['page_range'],
-        'nav_name': nav_name,
-        'activities_filters_form': activities.form,
-    }
-
-    return render(request, 'activities/list/index.html', context)
+    return render(request, 'activities/leads/update_through_lead/index.html', context)

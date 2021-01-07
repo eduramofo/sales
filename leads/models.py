@@ -52,6 +52,7 @@ GMT_CHOICES = (
     (12, 'GMT+12'),
 )
 
+
 class Lead(BaseModel):
 
     status = models.CharField(
@@ -157,6 +158,27 @@ class Lead(BaseModel):
             return str(self.id)
 
 
+class WhatsappTemplate(BaseModel):
+
+    name = models.CharField(
+        max_length=150,
+        verbose_name='Descrição do template',
+    )
+
+    content = models.CharField(
+        max_length=1024,
+        verbose_name='Conteúdo do template',
+    )
+
+    class Meta:
+        verbose_name = "Modelo de Mensagem para WhatsApp"
+        verbose_name_plural = "Modelos de Mensagens para WhatsApp"
+
+
+    def __str__(self):
+        return self.name
+
+
 class Referrer(BaseModel):
 
     name = models.CharField(
@@ -223,7 +245,7 @@ class Referrer(BaseModel):
             result = str(self.name)
 
         if self.name and self.referring_datetime:
-            referrer_dt = timezone.localtime(self.referring_datetime).strftime('%x %H:%M')
+            referrer_dt = timezone.localtime(self.referring_datetime).strftime('%d/%m/%y %H:%M')
             result = '{} {}'.format(result, referrer_dt)
 
         return result
