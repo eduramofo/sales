@@ -30,8 +30,10 @@ urlpatterns = [
     
     # lead update
     path('<uuid:lead_id>/update/', views.lead_update, name='update'),
+    path('<uuid:lead_id>/lost/', views.lead_update_lost, name='lost'),
+    path('<uuid:lead_id>/win/', views.lead_update_win, name='win'),
     path('<uuid:lead_id>/update/run-now/<str:lead_run_now>/', views.lead_update_run_now, name='update-run-now'),
-    
+
     # referrers: list
     path('referrers/old/', views_referrers.referrers_old, name='referrers-old'),
     path('referrers/opened/', views_referrers.referrers, name='referrers-opened'),

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from leads.models import Lead, Referrer
+from leads.models import Lead, Referrer, WhatsappTemplate
 from rangefilter.filter import DateRangeFilter
 
 
@@ -54,3 +54,28 @@ class ReferrerAdmin(admin.ModelAdmin):
     form = ReferrerForm
 
 admin.site.register(Referrer, ReferrerAdmin)
+
+
+class WhatsappTemplateForm(forms.ModelForm):
+
+    content = forms.CharField(
+        label='Conteúdo',
+        widget=forms.Textarea(attrs={'rows': 20, 'cols': 60}),
+        required=False,
+    )
+
+    class Meta:
+        model = WhatsappTemplate
+        fields = '__all__'
+
+
+class WhatsappTemplateAdmin(admin.ModelAdmin):
+
+    search_fields = ('name',)
+
+    list_display = ('created_at', 'updated_at', 'name',)
+
+    form = WhatsappTemplateForm
+
+
+admin.site.register(WhatsappTemplate, WhatsappTemplateAdmin)

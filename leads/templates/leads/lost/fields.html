@@ -1,0 +1,15 @@
+{% csrf_token %}
+
+<div class="row">
+
+    <div class="col-12 col-md-6">
+        {% include 'core/inputs/default.html' with field=form.name %}
+    </div>
+
+    <div class="col-12 col-md-6">
+        {% include 'core/inputs/default.html' with field=form.status_lost_justification %}
+    </div>
+
+</div>
+
+{% include 'core/inputs/default.html' with field=form.note %}

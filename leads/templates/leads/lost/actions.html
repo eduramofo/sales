@@ -1,0 +1,19 @@
+{% load core_extras %}
+
+<div class="row mb-3">
+
+    <div class="col-6">
+        <a role="button" 
+            href="{% url 'leads:update' lead.id %}" 
+            class="btn btn-block btn-success text-center">
+            {% btn_svg_icons 'bootstrap' 'arrow-left-circle-fill' '25px' 'center' 'Voltar' %}
+        </a>
+    </div>
+
+    <div class="col-6">
+        <button type="submit" class="btn btn-block btn-danger">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Perder' %}
+        </button>
+    </div>
+
+</div>

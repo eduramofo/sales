@@ -4,24 +4,29 @@ from django.utils import timezone
 from core.models import BaseModel
 
 
-LEAD_QUALITY_CHOICES = (
-    (1, "1"),
-    (2, "2"),
-    (3, "3"),
-    (4, "4"),
-    (5, "5"),
-)
+LEAD_QUALITY_CHOICES = ((1, '1'),)
 
 LEAD_STATUS_CHOICES = (
-    ("novo", "Novo"),
-    ("tentando_contato", "Tentando Contato"),
-    ("sem_interesse", "Sem Interesse"),
-    ("sem_condicoes_financeiras", "Sem Dinheiro"),
-    ("contato_invalido", "Contato Inválido"),
-    ("agendamento", "Agendamento"),
-    ("ganho", "Ganho"),
-    ("perdido", "Perdido"),
+    ('novo', 'Novo'),
+    ('tentando_contato', 'Tentando'),
+    ('agendamento', 'Agendamento'),
+    ('acompanhamento', 'Acompanhamento'),
+    ('ganho', 'Ganho'),
 )
+
+LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
+    ('', 'Selecionar'),
+    ('sem_interesse', 'Sem Interesse'),
+    ('sem_dinheiro', 'Sem Dinheiro'),
+    ('ja_estuda_ingles', 'Já Estuda Inglês'),
+    ('ja_fala_ingles', 'Já Fala Inglês'),
+    ('invalido', 'Inválido'),
+    ('duplicado', 'Duplicado'),
+    ('ignorando', 'Ignorando'),
+    ('bloqueado', 'Bloqueado'),
+    ('outro', 'Outro'),
+)
+
 
 GMT_CHOICES = (
     (None, 'Selecionar'),
@@ -62,6 +67,14 @@ class Lead(BaseModel):
         default='novo',
         null=False,
         blank=False,
+    )
+
+    status_lost_justification = models.CharField(
+        max_length=300,
+        choices=LEAD_STATUS_LOST_JUSTIFICATION_CHOICES,
+        verbose_name='Justificativa da Perda',
+        null=True,
+        blank=True,
     )
 
     name = models.CharField(
@@ -140,14 +153,14 @@ class Lead(BaseModel):
 
     short_description = models.CharField(
         max_length=1024,
-        verbose_name='Descrição curta da "linha"',
+        verbose_name='Descrição curta da (linha)',
         null=True,
         blank=True,
     )
 
     class Meta:
-        verbose_name = "Lead"
-        verbose_name_plural = "Leads"
+        verbose_name = 'Lead'
+        verbose_name_plural = 'Leads'
 
     def __str__(self):
         if self.name and self.indicated_by:
@@ -171,8 +184,8 @@ class WhatsappTemplate(BaseModel):
     )
 
     class Meta:
-        verbose_name = "Modelo de Mensagem para WhatsApp"
-        verbose_name_plural = "Modelos de Mensagens para WhatsApp"
+        verbose_name = 'Modelo de Mensagem para WhatsApp'
+        verbose_name_plural = 'Modelos de Mensagens para WhatsApp'
 
 
     def __str__(self):
@@ -244,8 +257,11 @@ class Referrer(BaseModel):
         if self.name:
             result = str(self.name)
 
-        if self.name and self.referring_datetime:
+        if self.name and self.short_description:
+            result = '{} | {}'.format(result, self.short_description)
+
+        if self.name and self.referring_datetime and self.short_description:
             referrer_dt = timezone.localtime(self.referring_datetime).strftime('%d/%m/%y %H:%M')
-            result = '{} {}'.format(result, referrer_dt)
+            result = '{} | {}'.format(result, referrer_dt)
 
         return result

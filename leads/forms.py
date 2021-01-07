@@ -49,6 +49,27 @@ class LeadForm(forms.ModelForm):
         ]
 
 
+class LeadLostForm(forms.ModelForm):
+    
+    LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = leads_models.LEAD_STATUS_LOST_JUSTIFICATION_CHOICES
+
+    status_lost_justification = forms.ChoiceField(
+        label='Justificativa da Perda',
+        choices=LEAD_STATUS_LOST_JUSTIFICATION_CHOICES,
+        required=True,
+    )
+
+    note = forms.CharField(
+        label='Anotações',
+        widget=forms.Textarea(attrs={'rows': 2, 'cols': 60}),
+        required=False,
+    )
+
+    class Meta:
+        model = leads_models.Lead
+        fields = ['name', 'status_lost_justification', 'note']
+
+
 class LeadFormRunNow(forms.ModelForm):
     
     run_now = forms.BooleanField(

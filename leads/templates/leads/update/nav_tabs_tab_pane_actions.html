@@ -1,21 +1,11 @@
 {% load core_extras %}
 {% load leads_extras %}
 
-<div class="tab-pane mb-5" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
-
-    <a  role="button" id="leads-call-phone-btn" href="{% link_to_call_lead lead %}"
-        class="btn btn-lg btn-block btn-primary text-left mt-3">
-        {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '25px' 'left' 'Ligar' %}
-    </a>
-
-    <a  role="button" id="leads-call-whatsapp-btn" href="{% link_whats_open lead %}"
-        class="btn btn-lg btn-block btn-primary text-left mt-3">
-        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'WhatsApp: Abrir'%}
-    </a>
+<div class="tab-pane mb-5 " id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
 
     <a  role="button" id="leads-call-whatsapp-btn" href="{% link_whats_tentei_te_ligar lead %}"
         class="btn btn-lg btn-block btn-secondary text-left mt-3">
-        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'WhatsApp: Tentei te ligar' %}
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'WhatsApp: Pode falar agora?' %}
     </a>
 
     <a role="button" id="leads-call-whatsapp-btn" href="{% link_whats_oi lead %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">

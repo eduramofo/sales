@@ -3,21 +3,32 @@
 <div class="row mb-2 mt-3">
     {% for referrer in lead|get_referrers_from_lead %}
         <div class="col-12 {% if forloop.counter0 != 0 %}mt-2{% endif %} mb-2">
-            <div class="border border-dark px-2 py-2 rounded ">
+            <div class="border border-dark p-3 rounded ">
                 <div class="d-flex flex-wrap justify-content-left align-items-center">
+
                     <a href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="h5 text-primary p-0 m-0">Ref.: {{referrer}}</a>
-                    <div class="w-100 d-flex flex-wrap justify-content-between align-items-center mt-2">
+                                        
+                    <div class="w-100 d-none d-md-flex flex-wrap justify-content-left align-items-center mt-2">
+                        <a role="btn" href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="btn btn-sm btn-warning"><strong>Abertos ({{referrer|get_opened_leads|length}})</strong></a>
+                        <a role="btn" href="{% url 'leads:leads_referrers_news' referrer.id %}" class="btn btn-sm btn-warning ml-4"><strong>Novos ({{referrer|get_news_leads|length}})</strong></a>
+                        <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}" class="btn btn-sm btn-warning ml-4"><strong>Tentanto ({{referrer|get_tentanto_leads|length}})</strong></a>
+                    </div>
+
+                    <div class="w-100 d-flex d-md-none flex-wrap justify-content-between align-items-center mt-2">
                         <a role="btn" href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="btn btn-sm btn-warning"><strong>Abertos ({{referrer|get_opened_leads|length}})</strong></a>
                         <a role="btn" href="{% url 'leads:leads_referrers_news' referrer.id %}" class="btn btn-sm btn-warning"><strong>Novos ({{referrer|get_news_leads|length}})</strong></a>
                         <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}" class="btn btn-sm btn-warning"><strong>Tentanto ({{referrer|get_tentanto_leads|length}})</strong></a>
                     </div>
+
                 </div>
             </div>
         </div>
     {% endfor %}
 </div>
 
-{% include 'leads/forms/leads_update_form_actions.html' %}
+<div class="border border-dark p-3 rounded mb-3">
+    {% include 'leads/forms/leads_update_form_actions.html' %}
+</div>
 
 <form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-1 rounded">
     {% include 'leads/forms/leads_form_fields.html' with form=lead_form %}

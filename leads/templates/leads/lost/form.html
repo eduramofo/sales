@@ -1,0 +1,7 @@
+<form id="leads" method="post" action="{% url 'leads:lost' lead.id %}" class="bg-light border border-dark p-3 mt-1 rounded">
+
+    {% include "leads/lost/actions.html" %}
+
+    {% include "leads/lost/fields.html" with form=lead_lost_form %}
+
+</form>
