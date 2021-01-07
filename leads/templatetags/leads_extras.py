@@ -55,7 +55,7 @@ def link_whats_oi(lead_object):
     
     whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
     
-    raw_text = 'Olá {}, td bem? Aqui é o Eduardo da Wise Up.'
+    raw_text = 'Olá {}, td bem? Aqui é o Eduardo da Wise Up.'.format(str(lead_object.name).partition(' ')[0])
 
     text = urllib.parse.quote(raw_text)
     
