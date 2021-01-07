@@ -11,6 +11,7 @@ LEAD_STATUS_CHOICES = (
     ('tentando_contato', 'Tentando'),
     ('agendamento', 'Agendamento'),
     ('acompanhamento', 'Acompanhamento'),
+    ('perdido', 'Perdido'),
     ('ganho', 'Ganho'),
 )
 
