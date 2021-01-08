@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from leads.models import Lead, Referrer
+from leads import whatsapp_templates
 from activities.models import Activity
 
 
@@ -142,6 +143,16 @@ def link_modelo_referido_entrei(lead_object):
     link_to_call = whatsapp_api_link + '&text=' + text
 
     return link_to_call
+
+
+@register.simple_tag
+def whatsapp_template_api_link(lead, template_name):
+    return whatsapp_templates.whatsapp_template_api_link(lead, template_name)
+
+
+@register.simple_tag
+def whatsapp_template_api_link_all(lead):
+    return whatsapp_templates.whatsapp_template_api_link_all(lead, template_name)
 
 
 @register.simple_tag

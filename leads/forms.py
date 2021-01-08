@@ -30,7 +30,7 @@ class LeadForm(forms.ModelForm):
 
     note = forms.CharField(
         label='Anotações',
-        widget=forms.Textarea(attrs={'rows': 2, 'cols': 60}),
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 60}),
         required=False,
     )
 
@@ -61,7 +61,7 @@ class LeadLostForm(forms.ModelForm):
 
     note = forms.CharField(
         label='Anotações',
-        widget=forms.Textarea(attrs={'rows': 2, 'cols': 60}),
+        widget=forms.Textarea(attrs={'rows': 4, 'cols': 60}),
         required=False,
     )
 

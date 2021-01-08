@@ -1,0 +1,23 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a  class="nav-link active"
+        id="nav-lead-tab"
+        data-toggle="tab"
+        href="#nav-lead"
+        role="tab"
+        aria-controls="nav-lead"
+        aria-selected="true"><strong>Lead</strong></a>
+    <a  class="nav-link"
+        id="nav-whatsapp-tab"
+        data-toggle="tab"
+        href="#nav-whatsapp"
+        role="tab"
+        aria-controls="nav-whatsapp"
+        aria-selected="false"><strong>WhatsApp</strong></a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+    {% include "leads/update/tab_leads/tab.html" %}
+    {% include "leads/update/tab_whatsapp.html" %}
+</div>

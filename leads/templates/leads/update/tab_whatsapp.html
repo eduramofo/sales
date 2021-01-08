@@ -1,0 +1,39 @@
+{% load core_extras %}
+{% load leads_extras %}
+
+<div class="tab-pane mb-5 " id="nav-whatsapp" role="tabpanel" aria-labelledby="nav-whatsapp-tab">
+
+    <a  role="button" id="leads-call-whatsapp-btn" href="{% link_whats_tentei_te_ligar lead %}"
+        class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Pode falar agora?' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% link_whats_oi lead %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Oi' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% whatsapp_template_api_link lead 'agendamento_confirmacao' %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Agendamento Confirmação' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% whatsapp_template_api_link lead 'agendamento_lembrete' %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Agendamento Lembrete' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% link_wise_up_link lead %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Link afiliado normal' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% link_wise_up_boleto_link lead %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Link afiliado boleto' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% link_modelo_referido_conheci lead %}" class="btn btn-lg btn-block btn-secondary text-left mt-3">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Referido conheci' %}
+    </a>
+
+    <a role="button" id="leads-call-whatsapp-btn" href="{% link_modelo_referido_entrei lead %}" class="btn btn-lg btn-block btn-secondary text-left my-3 mb-5">
+        {% btn_svg_icons 'custom' 'whatsapp-fill' '25px' 'left' 'Referido entrei' %}
+    </a>
+
+</div>

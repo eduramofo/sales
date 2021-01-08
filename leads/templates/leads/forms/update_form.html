@@ -1,0 +1,18 @@
+{% load core_extras %}
+
+<form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-1 rounded">
+
+    {% include 'leads/forms/leads_form_fields.html' with form=lead_form %}
+
+    <div class="row">
+        <div class="col-12">
+            <button 
+                    id="leads-form-submit-btn"
+                    type="submit"
+                    class="btn btn-block btn-success">
+                {% btn_svg_icons 'google' 'save' '20px' 'center' 'Salvar' %}
+            </button>
+        </div>
+    </div>
+
+</form>

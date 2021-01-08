@@ -1,0 +1,94 @@
+{% load core_extras %}
+{% load leads_extras %}
+
+<div class="border border-dark p-3 rounded mb-3">
+
+    <div class="row mb-3">
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
+                class="btn btn-block btn-primary text-center">
+                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% link_whats_open lead %}" 
+                class="btn btn-block btn-primary text-center">
+                {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Whats' %}
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                class="btn btn-block btn-dark">
+                {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' 'Falha' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'leads:lost' lead.id %}"
+                class="btn btn-block btn-danger text-center">
+                {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Perder' %}
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="row mb-3">
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-phone-btn"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=apresentacao-ganha"
+                class="btn btn-block btn-success text-center">
+                {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Ganhar' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-phone-btn"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=agendamento"
+                class="btn btn-block bg-secondary text-white text-center">
+                {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '20px' 'center' 'Agendam.' %}
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=acompanhamento"
+                class="btn btn-block bg-secondary text-white text-center">
+                {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '20px' 'center' 'Follow-Up' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'leads:upload' %}?lead={{lead.id}}"
+                class="btn btn-block bg-secondary text-white text-center">
+                {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload' %}
+            </a>
+        </div>
+
+    </div>
+
+</div>

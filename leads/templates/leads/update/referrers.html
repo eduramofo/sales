@@ -6,15 +6,27 @@
             <div class="border border-dark p-3 rounded ">
                 <div class="d-flex flex-wrap justify-content-left align-items-center">
 
-                    <a href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="h5 text-primary p-0 m-0">Ref.: {{referrer}}</a>
-                                        
-                    <div class="w-100 d-none d-md-flex flex-wrap justify-content-left align-items-center mt-2">
+                    {% comment %} <p class="h5 text-primary p-0 m-0 mb-1">Ref.: {{referrer}}</p> {% endcomment %}
+                    
+                    <div class="w-100">
+                        <p class=""><strong>Referenciador:</strong> {{referrer.name}}</p>
+                    </div>
+
+                    <div class="w-100">
+                        <p class=""><strong>Data da indicação:</strong> {{referrer.referring_datetime|date:"d/M/y H:i"}}</p>
+                    </div>
+
+                    <div class="w-100">
+                        <p class=""><strong>Descrição da linha:</strong> {{referrer.short_description}}</p>
+                    </div>
+
+                    <div class="w-100 d-none d-md-flex flex-wrap justify-content-left align-items-center">
                         <a role="btn" href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="btn btn-sm btn-warning"><strong>Abertos ({{referrer|get_opened_leads|length}})</strong></a>
                         <a role="btn" href="{% url 'leads:leads_referrers_news' referrer.id %}" class="btn btn-sm btn-warning ml-4"><strong>Novos ({{referrer|get_news_leads|length}})</strong></a>
                         <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}" class="btn btn-sm btn-warning ml-4"><strong>Tentanto ({{referrer|get_tentanto_leads|length}})</strong></a>
                     </div>
 
-                    <div class="w-100 d-flex d-md-none flex-wrap justify-content-between align-items-center mt-2">
+                    <div class="w-100 d-flex d-md-none flex-wrap justify-content-between align-items-center">
                         <a role="btn" href="{% url 'leads:leads_referrers_opened' referrer.id %}" class="btn btn-sm btn-warning"><strong>Abertos ({{referrer|get_opened_leads|length}})</strong></a>
                         <a role="btn" href="{% url 'leads:leads_referrers_news' referrer.id %}" class="btn btn-sm btn-warning"><strong>Novos ({{referrer|get_news_leads|length}})</strong></a>
                         <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}" class="btn btn-sm btn-warning"><strong>Tentanto ({{referrer|get_tentanto_leads|length}})</strong></a>
@@ -25,11 +37,3 @@
         </div>
     {% endfor %}
 </div>
-
-<div class="border border-dark p-3 rounded mb-3">
-    {% include 'leads/forms/leads_update_form_actions.html' %}
-</div>
-
-<form id="leads" method="post" action="{% url 'leads:update' lead.id %}" class="bg-light border border-dark p-3 mt-1 rounded">
-    {% include 'leads/forms/leads_form_fields.html' with form=lead_form %}
-</form>

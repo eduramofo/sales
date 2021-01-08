@@ -25,6 +25,8 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('duplicado', 'Duplicado'),
     ('ignorando', 'Ignorando'),
     ('bloqueado', 'Bloqueado'),
+    ('desligou_na_cara', 'Desligou na Cara'),
+    ('rejeitando', 'Rejeitando'),
     ('outro', 'Outro'),
 )
 
@@ -176,7 +178,15 @@ class WhatsappTemplate(BaseModel):
 
     name = models.CharField(
         max_length=150,
-        verbose_name='Descrição do template',
+        verbose_name='Nome',
+        unique=True,
+    )
+
+    title = models.CharField(
+        max_length=150,
+        verbose_name='Título',
+        null=True,
+        blank=True,
     )
 
     content = models.CharField(
