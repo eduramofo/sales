@@ -71,9 +71,9 @@ class WhatsappTemplateForm(forms.ModelForm):
 
 class WhatsappTemplateAdmin(admin.ModelAdmin):
 
-    search_fields = ('name',)
+    search_fields = ('name', 'title',)
 
-    list_display = ('created_at', 'updated_at', 'name', 'title',)
+    list_display = ('title', 'active', 'order', 'name', 'created_at', 'updated_at')
 
     form = WhatsappTemplateForm
 

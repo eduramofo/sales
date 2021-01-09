@@ -1,32 +1,35 @@
 {% csrf_token %}
 
 <div class="row">
-    
-    <div class="col-12 col-md-6">
+
+    <div class="col-12 col-md-12">
         {% include 'core/inputs/default.html' with field=form.name %}
     </div>
-    
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.status %}
-    </div>
 
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.location %}
+    <div class="col-6">
+        {% include 'core/inputs/boolean.html' with field=form.run_now %}
     </div>
     
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.gmt %}
+    <div class="col-6">
+        {% include 'core/inputs/boolean.html' with field=form.priority %}
     </div>
 
 </div>
 
 <div class="row">
-    <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=form.run_now %}
+    
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.status %}
     </div>
-    <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=form.priority %}
+
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.location %}
     </div>
+    
+    <div class="col-12 col-md-4">
+        {% include 'core/inputs/default.html' with field=form.gmt %}
+    </div>
+
 </div>
 
 <div class="row">

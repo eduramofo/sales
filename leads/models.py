@@ -176,6 +176,18 @@ class Lead(BaseModel):
 
 class WhatsappTemplate(BaseModel):
 
+    active = models.BooleanField(
+        verbose_name='Ativo',
+        default=True,
+    )
+
+    order = models.PositiveSmallIntegerField(
+        verbose_name='Ordem',
+        unique=True,
+        null=True,
+        blank=True,
+    )
+
     name = models.CharField(
         max_length=150,
         verbose_name='Nome',
@@ -197,7 +209,7 @@ class WhatsappTemplate(BaseModel):
     class Meta:
         verbose_name = 'Modelo de Mensagem para WhatsApp'
         verbose_name_plural = 'Modelos de Mensagens para WhatsApp'
-
+        ordering = ['order']
 
     def __str__(self):
         return self.name
@@ -258,8 +270,8 @@ class Referrer(BaseModel):
     )
 
     class Meta:
-        verbose_name = "Referrer"
-        verbose_name_plural = "Referrers"
+        verbose_name = "Referenciador"
+        verbose_name_plural = "Referenciadores"
 
     def __str__(self):
 

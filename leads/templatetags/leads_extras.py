@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from leads.models import Lead, Referrer
-from leads import whatsapp_templates
+from leads import whatsapp_api
 from activities.models import Activity
 
 
@@ -38,121 +38,18 @@ def link_to_call_lead(lead_object):
 
 
 @register.simple_tag
-def link_whats_open(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send'
-
-    link_to_call = whatsapp_api_link + '?phone=' + whatsapp_number
-
-    return link_to_call
+def whatsapp_api_link_open(lead):
+    return whatsapp_api.whatsapp_api_link_open(lead)
 
 
 @register.simple_tag
-def link_whats_oi(lead_object):
-    
-    whatsapp_number = str(lead_object.waid)
-    
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-    
-    raw_text = 'Olá {}, td bem? Aqui é o Eduardo da Wise Up.'.format(str(lead_object.name).partition(' ')[0])
-
-    text = urllib.parse.quote(raw_text)
-    
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
+def whatsapp_api_btn_template(lead, user_nickname, template_name):
+    return whatsapp_api.whatsapp_api_btn_template(lead, user_nickname, template_name)
 
 
 @register.simple_tag
-def link_wise_up_link(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-
-    text = 'https%3A%2F%2Fwup.onl%2F0031R00002Dv1itQAB'
-
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
-
-
-@register.simple_tag
-def link_wise_up_boleto_link(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-
-    text = 'https%3A%2F%2Fwup.onl%2F0031R00002Dv1itQAB/boleto'
-
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
-
-
-@register.simple_tag
-def link_whats_tentei_te_ligar(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-    
-    lead_name = str(lead_object.name).partition(' ')[0]
-
-    indicated_by_first_name = str(lead_object.indicated_by).partition(' ')[0]
-
-    raw_text = 'Olá ' + lead_name + ', td bem? Aqui é o Eduardo vc pode falar agora?'
-
-    text = urllib.parse.quote(raw_text)
-    
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
-
-
-@register.simple_tag
-def link_modelo_referido_conheci(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-
-    raw_text = "Oi, conheci um curso de inglês bem bacana e te indiquei. O Eduardo vai entrar em contato com vc para te explicar, ok?"
-
-    text = urllib.parse.quote(raw_text)
-
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
-
-
-@register.simple_tag
-def link_modelo_referido_entrei(lead_object):
-
-    whatsapp_number = str(lead_object.waid)
-
-    whatsapp_api_link = 'https://api.whatsapp.com/send?phone=' + whatsapp_number
-
-    raw_text = "Oi, entrei um curso de inglês bem bacana e te indiquei. O Eduardo vai entrar em contato com vc para te explicar, ok?"
-
-    text = urllib.parse.quote(raw_text)
-
-    link_to_call = whatsapp_api_link + '&text=' + text
-
-    return link_to_call
-
-
-@register.simple_tag
-def whatsapp_template_api_link(lead, template_name):
-    return whatsapp_templates.whatsapp_template_api_link(lead, template_name)
-
-
-@register.simple_tag
-def whatsapp_template_api_link_all(lead):
-    return whatsapp_templates.whatsapp_template_api_link_all(lead, template_name)
+def whatsapp_api_all_btns_templates(lead, user_nickname):
+    return whatsapp_api.whatsapp_api_all_btns_templates(lead, user_nickname)
 
 
 @register.simple_tag
