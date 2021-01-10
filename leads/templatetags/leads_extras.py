@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from leads.models import Lead, Referrer
-from leads import whatsapp_api
+from leads.whatsapp import api as whatsapp_api
 from activities.models import Activity
 
 
