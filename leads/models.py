@@ -6,6 +6,7 @@ from core.models import BaseModel
 
 LEAD_QUALITY_CHOICES = ((1, '1'),)
 
+
 LEAD_STATUS_CHOICES = (
     ('novo', 'Novo'),
     ('tentando_contato', 'Tentando'),

@@ -154,20 +154,23 @@ def schedules(request):
     ).exclude(lead=None).order_by('due_date')
    
     leads_pks= []
+    leads___ = []
     for activity in activities:
         lead = activity.lead
-        leads_pks.append(lead.pk)
-    
-    leads = Lead.objects.filter(pk__in=leads_pks)
+        if lead.status == 'agendamento':
+            leads_pks.append(lead.pk)
+            leads___.append(lead)
 
-    leads = LeadFilter(request.GET, queryset=leads)
+    leads_ = Lead.objects.filter(pk__in=leads_pks, status='agendamento')
 
-    pages = paginator.make_paginator(request, leads.qs, 30)
+    leads = LeadFilter(request.GET, queryset=leads_)
+
+    pages = paginator.make_paginator(request, leads.qs, 1000)
 
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'leads': pages['page'],
+        'leads': leads___,
         'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }
