@@ -1,3 +1,4 @@
+from django.utils import timezone
 from urllib.parse import urlencode
 from random import choice as random_choice
 
@@ -8,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
+
 
 from core.tools import paginator
 
@@ -139,18 +141,26 @@ def priorities(request):
 
 @login_required()
 def schedules(request):
-    
+
     nav_name = 'leads_schedules'
 
     page_title = 'Lista de Leads em Agendamentos'
 
-    leads = Lead.objects.filter().order_by('next_contact')
+    now = timezone.now()
 
-    leads = LeadFilter(
-        request.GET, queryset=Lead.objects.filter(
-            status='agendamento'
-        ).order_by('next_contact')
-    )
+    activities = Activity.objects.filter(
+        done=False,
+        due_date__lte=now,
+    ).exclude(lead=None).order_by('due_date')
+   
+    leads_pks= []
+    for activity in activities:
+        lead = activity.lead
+        leads_pks.append(lead.pk)
+    
+    leads = Lead.objects.filter(pk__in=leads_pks)
+
+    leads = LeadFilter(request.GET, queryset=leads)
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
