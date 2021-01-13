@@ -19,6 +19,7 @@ LEAD_STATUS_CHOICES = (
 LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('', 'Selecionar'),
     ('sem_interesse', 'Sem Interesse'),
+    ('nao_e_prioridade', 'Não é prioridade'),
     ('sem_dinheiro', 'Sem Dinheiro'),
     ('ja_estuda_ingles', 'Já Estuda Inglês'),
     ('ja_fala_ingles', 'Já Fala Inglês'),
@@ -118,6 +119,11 @@ class Lead(BaseModel):
         verbose_name='GMT',
         choices=GMT_CHOICES,
         default=-3,
+    )
+
+    qualified = models.BooleanField(
+        verbose_name='Qualificado?',
+        default=False,
     )
 
     priority = models.BooleanField(

@@ -14,12 +14,17 @@ class LeadForm(forms.ModelForm):
     )
 
     run_now = forms.BooleanField(
-        label='Lista de Agora?',
+        label='Agora?',
         required=False,
     )
 
     priority = forms.BooleanField(
         label='Prioridade?',
+        required=False,
+    )
+
+    qualified = forms.BooleanField(
+        label='Bom?',
         required=False,
     )
 
@@ -40,6 +45,7 @@ class LeadForm(forms.ModelForm):
             'status',
             'run_now',
             'priority',
+            'qualified',
             'name',
             'tel',
             'waid',
