@@ -7,7 +7,8 @@
 
   <tr>
     <th scope="col" rowspan="2" class="border border-secondary text-center">Referenciador</th>
-    <th scope="col" colspan="3" class="text-center border border-secondary">Quantidade</th>
+
+    <th scope="col" colspan="9" class="text-center border border-secondary">Quantidade</th>
 
     <th scope="col" rowspan="2" class="border border-secondary">
       <div class="d-flex justify-content-center flex-align-center p-0">
@@ -32,9 +33,19 @@
   </tr>
 
   <tr>
-    <th scope="col" class="text-center border border-secondary">Total</th>
+
+    <th scope="col" class="text-center border border-secondary">Todos</th>
+    <th scope="col" class="text-center border border-secondary">Fechados</th>
     <th scope="col" class="text-center border border-secondary">Abertos</th>
+
     <th scope="col" class="text-center border border-secondary">Novos</th>
+    <th scope="col" class="text-center border border-secondary">Tentando</th>
+    <th scope="col" class="text-center border border-secondary">Agendamentos</th>
+
+    <th scope="col" class="text-center border border-secondary">Follow Up's</th>
+    <th scope="col" class="text-center border border-secondary">Perdidos</th>
+    <th scope="col" class="text-center border border-secondary">Ganhos</th>
+
   </tr>
 
 </thead>
@@ -42,14 +53,25 @@
   <tbody>
     {% for obj in referrers %}
       <tr>
+          
           {% if obj.lead %}
               <td class="text-left border border-secondary"><a href="{% url 'leads:update' obj.lead.id %}">{{obj.lead.name}}</a></td>
           {% else %}
               <td class="text-left border border-secondary">{{obj.name}}</td>
           {% endif %}
+
           <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_all' obj.id %}">{{obj.leads.count}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_closed' obj.id %}">{{obj|get_closed_leads|length}}</a></td>
           <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_opened' obj.id %}">{{obj|get_opened_leads|length}}</a></td>
+
           <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_news' obj.id %}">{{obj|get_news_leads|length}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_tentando' obj.id %}">{{obj|get_tentanto_leads|length}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_tentando' obj.id %}">{{obj|get_tentanto_leads|length}}</a></td>
+
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_tentando' obj.id %}">{{obj|get_tentanto_leads|length}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_perdido' obj.id %}">{{obj|get_perdido_leads|length}}</a></td>
+          <td class="text-center border border-secondary"><a href="{% url 'leads:leads_referrers_ganho' obj.id %}">{{obj|get_ganho_leads|length}}</a></td>
+
           <td class="text-left border border-secondary">{{obj.short_description|default_if_none:'N/A'}}</td>
           <td class="text-center border border-secondary">{{obj.gmt}}</td>
           <td class="text-left border border-secondary">{{obj.location}}</td>

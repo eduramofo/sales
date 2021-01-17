@@ -94,3 +94,4 @@ def referrers_old(request):
     }
 
     return render(request, 'leads/indicators_list/index.html', context)
+

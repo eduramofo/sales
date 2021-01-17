@@ -287,11 +287,4 @@ class Referrer(BaseModel):
         if self.name:
             result = str(self.name)
 
-        if self.name and self.short_description:
-            result = '{} | {}'.format(result, self.short_description)
-
-        if self.name and self.referring_datetime and self.short_description:
-            referrer_dt = timezone.localtime(self.referring_datetime).strftime('%d/%m/%y %H:%M')
-            result = '{} | {}'.format(result, referrer_dt)
-
         return result

@@ -119,6 +119,13 @@ def get_opened_leads(referrer):
 
 
 @register.filter
+def get_closed_leads(referrer):
+    leads_filter_query = Q(status='perdido') | Q(status='ganho')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
 def get_news_leads(referrer):
     leads_filter_query = Q(status='novo')
     leads = referrer.leads.filter(leads_filter_query)
@@ -128,5 +135,19 @@ def get_news_leads(referrer):
 @register.filter
 def get_tentanto_leads(referrer):
     leads_filter_query = Q(status='tentando_contato')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
+def get_ganho_leads(referrer):
+    leads_filter_query = Q(status='ganho')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
+def get_perdido_leads(referrer):
+    leads_filter_query = Q(status='perdido')
     leads = referrer.leads.filter(leads_filter_query)
     return leads
