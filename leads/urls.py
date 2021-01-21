@@ -2,6 +2,7 @@ from django.urls import path
 
 from leads import views
 from leads import views_leads_lists
+from leads import views_referrers_lists
 from leads import views_referrers
 
 
@@ -17,10 +18,15 @@ urlpatterns = [
     path('priorities/', views_leads_lists.priorities, name='priorities'),
 
     # leads lists referrers
-    path('leads/referrers/all/<uuid:referrer_id>/', views_leads_lists.referrers_all, name='leads_referrers_all'),
-    path('leads/referrers/opened/<uuid:referrer_id>/', views_leads_lists.referrers_opened, name='leads_referrers_opened'),
-    path('leads/referrers/news/<uuid:referrer_id>/', views_leads_lists.referrers_news, name='leads_referrers_news'),
-    path('leads/referrers/tentando/<uuid:referrer_id>/', views_leads_lists.referrers_tentando, name='leads_referrers_tentando'),
+    path('leads/referrers/all/<uuid:referrer_id>/', views_referrers_lists.referrers_all, name='leads_referrers_all'),
+    path('leads/referrers/closed/<uuid:referrer_id>/', views_referrers_lists.referrers_closed, name='leads_referrers_closed'),
+    path('leads/referrers/opened/<uuid:referrer_id>/', views_referrers_lists.referrers_opened, name='leads_referrers_opened'),
+    
+    path('leads/referrers/news/<uuid:referrer_id>/', views_referrers_lists.referrers_news, name='leads_referrers_news'),
+    path('leads/referrers/tentando/<uuid:referrer_id>/', views_referrers_lists.referrers_tentando, name='leads_referrers_tentando'),
+
+    path('leads/referrers/ganho/<uuid:referrer_id>/', views_referrers_lists.referrers_ganho, name='leads_referrers_ganho'),
+    path('leads/referrers/perdido/<uuid:referrer_id>/', views_referrers_lists.referrers_perdido, name='leads_referrers_perdido'),
 
     # lead next
     path('next/', views.lead_next, name='next'),
