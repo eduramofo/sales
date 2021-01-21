@@ -23,6 +23,7 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('sem_dinheiro', 'Sem Dinheiro'),
     ('ja_estuda_ingles', 'Já Estuda Inglês'),
     ('ja_fala_ingles', 'Já Fala Inglês'),
+    ('nao_gosta_de_ead', 'Não Gosta de EAD'),
     ('invalido', 'Inválido'),
     ('duplicado', 'Duplicado'),
     ('ignorando', 'Ignorando'),

@@ -7,8 +7,9 @@
     <div class="d-flex justify-content-center align-items-center" style="cursor:pointer">
       <a id="search-call-modal-btn" class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center">
         <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-search" fill="rgba(255,255,255,.5)" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-          <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+          <path fill-rule="evenodd" d="M15.3,13.9l-3.8-3.8l0,0L11.4,10c0.8-1.1,1.2-2.3,1.2-3.8C12.7,2.8,9.8,0,6.3,0S0,2.8,0,6.3s2.8,6.3,6.3,6.3
+                c1.4,0,2.7-0.5,3.8-1.2c0,0,0,0.1,0.1,0.1l3.8,3.8c0.4,0.4,1,0.4,1.4,0C15.7,14.9,15.7,14.3,15.3,13.9z M1,6.3C1,3.4,3.4,1,6.3,1
+                c3,0,5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4C3.4,11.7,1,9.3,1,6.3z"/>
         </svg>
       </a>
     </div>
@@ -147,39 +148,19 @@
           <div class="d-flex justify-content-center align-items-center nav-item-item">
             <a class="h6 text-white  p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:referrers' %}">
 
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-hand-index-thumb" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M6.75 1a.75.75 0 0 0-.75.75V9.5a.5.5 0 0 1-.854.354l-2.41-2.411a.517.517 0 0 0-.809.631l2.512 4.185 1.232 2.465a.5.5 0 0 0 .447.276h6.302a.5.5 0 0 0 .434-.252l1.395-2.442a2.5 2.5 0 0 0 .317-.991l.272-2.715a1 1 0 0 0-.995-1.1H13.5v1a.5.5 0 1 1-1 0V7.154a4.208 4.208 0 0 0-.2-.26c-.187-.222-.368-.383-.486-.43-.124-.05-.392-.063-.708-.039a4.844 4.844 0 0 0-.106.01V8a.5.5 0 1 1-1 0V5.986c0-.167-.073-.272-.15-.314a1.657 1.657 0 0 0-.448-.182c-.179-.035-.5-.04-.816-.027l-.086.004V8a.5.5 0 1 1-1 0V1.75A.75.75 0 0 0 6.75 1zM8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.272-2.715a2 2 0 0 0-1.99-2.199h-.582a5.114 5.114 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.634 2.634 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046l-.048.002zm2.094 2.025z"/>
+              <svg width="1.7em" height="1.7em" viewBox="0 0 20.4 20.4" class="bi bi-hand-index-thumb" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+                <path fill-rule="evenodd" d="M17.9,8.3c-0.1,0-0.2,0-0.3,0h-0.7c-0.1-0.1-0.2-0.2-0.2-0.3c-0.2-0.3-0.7-0.7-1.1-0.9
+                    c-0.5-0.2-1.1-0.2-1.5-0.1l-0.2,0c-0.1-0.3-0.4-0.6-0.7-0.8c-0.3-0.2-0.6-0.3-0.9-0.4c-0.4-0.1-0.9-0.1-1.3-0.1l-0.1,0V2.2
+                    C10.8,1,9.8,0,8.6,0S6.4,1,6.4,2.2v8.3l-2-2c-0.8-0.8-2-0.7-2.7,0C1,9.2,0.9,10.2,1.4,10.9l3.2,5.3l1.5,3.1c0.3,0.6,1,1.1,1.7,1.1h8
+                    c0.7,0,1.3-0.4,1.7-1l1.8-3.1c0.3-0.5,0.5-1.1,0.6-1.8l0.3-3.5C20.3,9.7,19.3,8.4,17.9,8.3z"/>
+              
               </svg>
 
               <small class="w-100 text-center mt-1">Referrers</small>
 
             </a>
           </div>
-
-          {% comment %} <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'activities:list' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-              </svg>
-              
-              <small class="w-100 text-center mt-1">Activities</small>
-
-            </a>
-          </div> {% endcomment %}
-          
-          {% comment %} <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a id="search-call-modal-btn" class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-              </svg>
-
-              <small class="w-100 text-center mt-1">Search</small>
-
-            </a>
-          </div> {% endcomment %}
 
         </div>
       </li>
