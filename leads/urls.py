@@ -25,6 +25,9 @@ urlpatterns = [
     path('leads/referrers/news/<uuid:referrer_id>/', views_referrers_lists.referrers_news, name='leads_referrers_news'),
     path('leads/referrers/tentando/<uuid:referrer_id>/', views_referrers_lists.referrers_tentando, name='leads_referrers_tentando'),
 
+    path('leads/referrers/agendamento/<uuid:referrer_id>/', views_referrers_lists.referrers_agendamento, name='leads_referrers_agendamento'),
+    path('leads/referrers/follow-up/<uuid:referrer_id>/', views_referrers_lists.referrers_follow_up, name='leads_referrers_follow_up'),
+
     path('leads/referrers/ganho/<uuid:referrer_id>/', views_referrers_lists.referrers_ganho, name='leads_referrers_ganho'),
     path('leads/referrers/perdido/<uuid:referrer_id>/', views_referrers_lists.referrers_perdido, name='leads_referrers_perdido'),
 

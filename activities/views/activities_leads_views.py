@@ -82,6 +82,11 @@ def add_through_lead(request, lead_id):
         lead.status = 'perdido'
         lead.save()
 
+    if shortcut == 'follow-up':
+        subject = 'Acompanhamento'
+        lead.status = 'acompanhamento'
+        lead.save()
+
     initial_activity_initial = {
         'lead': str(lead.id),
         'due_date': due_date,

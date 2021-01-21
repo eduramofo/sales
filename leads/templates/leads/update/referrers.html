@@ -69,19 +69,19 @@
                             </div>
 
                             <div class="col-4 mt-3">
-                                <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}"
+                                <a href="{% url 'leads:leads_referrers_agendamento' referrer.id %}"
                                 class="btn btn-sm btn-block btn-warning">
                                     <small>
-                                        <strong>Agend. ({{referrer|get_tentanto_leads|length}})</strong>
+                                        <strong>Agend. ({{referrer|get_agendamento_leads|length}})</strong>
                                     </small>
                                 </a>    
                             </div>
 
                             <div class="col-4 mt-3">
-                                <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}"
+                                <a href="{% url 'leads:leads_referrers_follow_up' referrer.id %}"
                                 class="btn btn-sm btn-block btn-warning">
                                     <small>
-                                        <strong>Follow ({{referrer|get_tentanto_leads|length}})</strong>
+                                        <strong>Follow ({{referrer|get_follow_up_leads|length}})</strong>
                                     </small>
                                 </a>
                             </div>
@@ -104,8 +104,8 @@
                                 </a>
                             </div>
 
-
-                            <div class="col-4 mt-3">
+                            {% comment %}
+                            <div class="col-6 mt-3">
                                 <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}"
                                 class="btn btn-sm btn-block btn-warning">
                                     <small>
@@ -114,7 +114,7 @@
                                 </a>
                             </div>
 
-                            <div class="col-4 mt-3">    
+                            <div class="col-6 mt-3">    
                                 <a role="button" href="{% url 'leads:leads_referrers_news' referrer.id %}"
                                 class="btn btn-sm btn-block btn-warning">
                                     <small>
@@ -122,15 +122,7 @@
                                     </small>
                                 </a>
                             </div>
-
-                            <div class="col-4 mt-3">    
-                                <a role="button" href="{% url 'leads:leads_referrers_news' referrer.id %}"
-                                class="btn btn-sm btn-block btn-warning">
-                                    <small>
-                                        <strong>Ganhos ({{referrer|get_news_leads|length}})</strong>
-                                    </small>
-                                </a>
-                            </div>
+                            {% endcomment %}
 
                         </div>
                     </div>
