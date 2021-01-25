@@ -1,34 +1,17 @@
-{% comment %} status {% endcomment %}
-<div class="col-6 col-md-3">
+<div class="col-12 col-md-3">
     {% include "core/fields_widgets/text.html" with field=form.status %}
 </div>
 
-<div class="col-6 col-md-3">
+<div class="col-12 col-md-3">
     {% include "core/fields_widgets/text.html" with field=form.name %}
 </div>
 
-<div class="col-6 col-md-3">
+<div class="col-12 col-md-3">
     {% include "core/fields_widgets/text.html" with field=form.indicated_by_contains %}
 </div>
 
-<div class="col-6 col-md-3">
+<div class="col-12 col-md-3">
     {% include "core/fields_widgets/text.html" with field=form.tel %}
-</div>
-
-{% comment %} quality {% endcomment %}
-<div class="col-6 col-md-3">
-    {% include "core/fields_widgets/text.html" with field=form.quality_gte %}
-</div>
-<div class="col-6 col-md-3">
-    {% include "core/fields_widgets/text.html" with field=form.quality_lte %}
-</div>
-
-{% comment %} next_contact {% endcomment %}
-<div class="col-6 col-md-3">
-    {% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_gte %}
-</div>
-<div class="col-6 col-md-3">
-    {% include "core/fields_widgets/datetime-local.html" with field=form.next_contact_lte %}
 </div>
 
 <div class="col-6 col-md-4 mb-0 pb-0">

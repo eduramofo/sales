@@ -1,170 +1,15 @@
 <div class="bg-dark">
-
   <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark container">
 
-    <a class="navbar-brand" href="{% url 'core:home' %}">Sales</a>
-    
-    <div class="d-flex justify-content-center align-items-center" style="cursor:pointer">
-      <a id="search-call-modal-btn" class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center">
-        <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-search" fill="rgba(255,255,255,.5)" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M15.3,13.9l-3.8-3.8l0,0L11.4,10c0.8-1.1,1.2-2.3,1.2-3.8C12.7,2.8,9.8,0,6.3,0S0,2.8,0,6.3s2.8,6.3,6.3,6.3
-                c1.4,0,2.7-0.5,3.8-1.2c0,0,0,0.1,0.1,0.1l3.8,3.8c0.4,0.4,1,0.4,1.4,0C15.7,14.9,15.7,14.3,15.3,13.9z M1,6.3C1,3.4,3.4,1,6.3,1
-                c3,0,5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4C3.4,11.7,1,9.3,1,6.3z"/>
-        </svg>
-      </a>
-    </div>
+    <a class="navbar-brand d-none d-md-block" href="{% url 'core:home' %}">Sales</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" 
-            data-target="#navbarNav" aria-controls="navbarNav" 
-            aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    {% include 'core/nav_items_mobile.html' %}
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto ">
-        
-        <li class="nav-item {% if nav_name == 'leads_next' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:next' %}">Next! <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_now' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:now' %}">Now <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_list' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:list' %}">Leads <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_news' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:news' %}">News <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_priorities' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:priorities' %}">Priorities <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_schedules' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:schedules' %}">Schedules <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_opened' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:opened' %}">Opened <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'activities' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'activities:list' %}">Activities</a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_referrers' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:referrers' %}">Referrers <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'statistics' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'core:statistics' %}">Statistics <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'leads:upload' %}">Upload de Leads</a>
-        </li>
-
-        <li class="nav-item {% if nav_name == 'settings' %}active{% endif%}">
-          <a class="nav-link" href="{% url 'core:settings' %}">Settings</a>
-        </li>
-
+        {% include 'core/nav_items_desktop.html' %}
       </ul>
     </div>
-    
-  </nav>
-
-</div>
-
-<div class="d-lg-none">
-  <nav id="main-navbar-bottom" class="navbar fixed-bottom navbar-dark bg-dark container-fluid p-0 m-0">
-  
-    <ul class="navbar-nav w-100">
-      <li class="nav-item">
-        <div class="items-wrapper d-flex justify-content-between align-items-center">
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:next' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-lightning-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/>
-              </svg>
-            
-              <small class="w-100 text-center mt-1">Next</small>
-
-            </a>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:now' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-clock-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-              </svg>
-              
-              <small class="w-100 text-center mt-1">Now</small>
-
-            </a>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:list' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-              </svg>
-
-              <small class="w-100 text-center mt-1">Leads</small>
-
-            </a>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:schedules' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-calendar-event-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
-              </svg>
-
-              <small class="w-100 text-center mt-1">Schedules</small>
-
-            </a>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:priorities' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg>
-
-              <small class="w-100 text-center mt-1">Priorities</small>
-
-            </a>
-          </div>
-
-          <div class="d-flex justify-content-center align-items-center nav-item-item">
-            <a class="h6 text-white  p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:referrers' %}">
-
-              <svg width="1.7em" height="1.7em" viewBox="0 0 20.4 20.4" class="bi bi-hand-index-thumb" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-
-                <path fill-rule="evenodd" d="M17.9,8.3c-0.1,0-0.2,0-0.3,0h-0.7c-0.1-0.1-0.2-0.2-0.2-0.3c-0.2-0.3-0.7-0.7-1.1-0.9
-                    c-0.5-0.2-1.1-0.2-1.5-0.1l-0.2,0c-0.1-0.3-0.4-0.6-0.7-0.8c-0.3-0.2-0.6-0.3-0.9-0.4c-0.4-0.1-0.9-0.1-1.3-0.1l-0.1,0V2.2
-                    C10.8,1,9.8,0,8.6,0S6.4,1,6.4,2.2v8.3l-2-2c-0.8-0.8-2-0.7-2.7,0C1,9.2,0.9,10.2,1.4,10.9l3.2,5.3l1.5,3.1c0.3,0.6,1,1.1,1.7,1.1h8
-                    c0.7,0,1.3-0.4,1.7-1l1.8-3.1c0.3-0.5,0.5-1.1,0.6-1.8l0.3-3.5C20.3,9.7,19.3,8.4,17.9,8.3z"/>
-              
-              </svg>
-
-              <small class="w-100 text-center mt-1">Referrers</small>
-
-            </a>
-          </div>
-
-        </div>
-      </li>
-    </ul>
 
   </nav>
 </div>
@@ -174,27 +19,23 @@
     <div class="modal-content">
       <div class="modal-body">
         <form class="bg-light border border-dark p-3 rounded" action="{% url 'leads:list' %}?ok">
-
             <div class="col-12">
               <div class="form-group">
                 <label for="search-name">Nome</label>
                 <input type="text" class="form-control form-control-lg" id="search-name" name="name" placeholder="Joao Pedro">
               </div>
             </div>
-
             <div class="col-12">
               <div class="form-group">
                 <label for="search-tel">Telefone</label>
                 <input type="text" class="form-control form-control-lg" id="search-tel" name="tel" placeholder="983433489">
               </div>
             </div>
-
             <div class="col-12">
               <div class="form-group">
                   <button class="btn btn-success btn-block btn-lg" type="submit">Buscar</button>
               </div>
             </div>
-
         </form>
       </div>
     </div>

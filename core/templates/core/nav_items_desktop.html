@@ -1,0 +1,48 @@
+
+<li class="nav-item {% if nav_name == 'leads_next' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:next' %}">Next! <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_now' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:now' %}">Now <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_list' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:list' %}">Leads <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_news' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:news' %}">News <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_priorities' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:priorities' %}">Priorities <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_schedules' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:schedules' %}">Schedules <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_opened' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:opened' %}">Opened <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'activities' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'activities:list' %}">Activities</a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_referrers' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:referrers' %}">Referrers <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'statistics' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'core:statistics' %}">Statistics <span class="sr-only">(current)</span></a>
+</li>
+
+<li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:upload' %}">Upload de Leads</a>
+</li>
+
+<li class="nav-item {% if nav_name == 'settings' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'core:settings' %}">Settings</a>
+</li>
