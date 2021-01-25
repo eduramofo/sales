@@ -7,7 +7,15 @@
                 <div class="d-flex flex-wrap justify-content-left align-items-center">
                     
                     <div class="w-100">
-                        <p class=""><strong>Referenciador:</strong><br/>{{referrer.name}}</p>
+                        <p class="">
+                            <strong>Referenciador:</strong>
+                            <br/>
+                            {% if referrer.lead %}
+                                <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>
+                            {% else %}
+                                {{referrer.name}}
+                            {% endif %}
+                        </p>
                     </div>
                     
                     <div class="w-100">
