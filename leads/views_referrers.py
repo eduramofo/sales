@@ -1,4 +1,4 @@
-from django.db.models import F
+from django.db.models import F, Q
 from django.utils import timezone
 
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
@@ -17,13 +17,21 @@ from core.tools import paginator
 @login_required()
 def referrers(request):
 
-    referrers = leads_models.Referrer.objects.all().order_by(
-        F('referring_datetime').desc(nulls_last=True)
-    )
-
+    is_mobile_link = request.GET.get('mobile')
+    if is_mobile_link:
+        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
+        leads = leads_models.Lead.objects.filter(query)
+        referrers = leads_models.Referrer.objects.filter(
+            leads__in=leads).order_by(
+                F('referring_datetime').desc(nulls_last=True),
+        ).distinct()
+    else:
+        referrers = leads_models.Referrer.objects.all().order_by(
+            F('referring_datetime').desc(nulls_last=True)
+        )
 
     nav_name = 'leads_referrers'
-    
+
     page_title = 'Referenciadores'
 
     context = {

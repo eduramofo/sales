@@ -31,6 +31,9 @@ urlpatterns = [
     path('leads/referrers/ganho/<uuid:referrer_id>/', views_referrers_lists.referrers_ganho, name='leads_referrers_ganho'),
     path('leads/referrers/perdido/<uuid:referrer_id>/', views_referrers_lists.referrers_perdido, name='leads_referrers_perdido'),
 
+    # leads lists referrers
+    path('leads/referrers/next/<uuid:referrer_id>/', views_referrers_lists.referrers_next, name='leads_referrers_next'),
+
     # lead next
     path('next/', views.lead_next, name='next'),
 

@@ -289,3 +289,21 @@ def referrers_perdido(request, referrer_id):
     }
 
     return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_next(request, referrer_id):
+
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),))
+
+    leads_filter_query = Q(status='novo')
+
+    leads = referrer_obj.leads.filter(leads_filter_query).order_by('-priority')
+
+    if len(leads) > 0:
+        lead = leads.first()
+        redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(redirect_url)
