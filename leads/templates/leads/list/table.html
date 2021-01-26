@@ -13,7 +13,6 @@
             <th scope="col">Referenciador</th>
             <th scope="col">Prioridade?</th>
             <th scope="col">Anotações</th>
-            <th scope="col">Agora?</th>
           </tr>
         </thead>
         <tbody>
@@ -32,7 +31,6 @@
             <td>{{lead|get_referrers_from_lead_first_name|truncatechars:20}}</td>
             <td class="{% if lead.priority %}bg-success text-white{% endif %}">{% if lead.priority %}Sim{% else %}Não{% endif %}</td>
             <td>{{lead.note|default_if_none:""|truncatechars:45}}</td>
-            {% run_now_table_data_html lead.id lead.run_now %}
           </tr>
         {% endfor %}
         </tbody>

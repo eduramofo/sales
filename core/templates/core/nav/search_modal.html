@@ -1,0 +1,50 @@
+<div id="search-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+
+        <form class="bg-light border border-dark p-4 rounded" action="{% url 'leads:list' %}?ok" style="border:3px solid #7c86fc!important;">
+        <div class="row">
+
+          <div class="col-12">
+              <div class="form-group mt-0">
+                <h4 class="h5 w-100 text-center">Busque pelo Nome, Telefone/Whats</h4>
+              </div>
+          </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                <input  type="text"
+                        class="form-control form-control-lg"
+                        id="id_search_query"
+                        name="search_query"
+                        value="{{leads_filters_form.search_query.value|default_if_none:''}}">
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                  <button class="btn btn-success btn-block btn-lg" type="submit">Buscar</button>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group">
+                  <button id="search-modal-clear-btn" class="btn btn-warning btn-block btn-lg" type="button">Limpar</button>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-group mb-0">
+                  <button data-dismiss="modal" aria-label="Close" class="btn btn-secondary btn-block btn-lg" type="button">Fechar</button>
+              </div>
+            </div>
+
+          </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 from urllib.parse import quote
 from django.utils.safestring import mark_safe
 from django.template import Context, Template
-from leads.models import WhatsappTemplate
+from leads.models import WhatsappTemplate, Referrer
 from core.templatetags.core_extras import btn_svg_icons
 
 
@@ -65,15 +65,40 @@ def adjust_context(text, lead, user_nickname):
 
 
 def get_context(lead, user_nickname):
+    
     lead_first_name = str(lead.name).partition(' ')[0]
+    
     if lead_first_name:
         lead_first_name = lead_first_name.capitalize()
     else:
         lead_first_name = ''
+
+    # referrer
+    referrer_first_name = ''
+    referrer_full_name = ''
+    referrers = Referrer.objects.filter(leads=lead)
+    if len(referrers) > 0:
+        referrer = referrers.first()
+        referrer_lead = referrers.first().lead
+        if referrer_lead:
+            referrer_name = str(referrer_lead)
+        else:
+            referrer_name = referrer.name
+
+        referrer_first_name = referrer_name.partition(' ')[0].capitalize().strip()
+        referrer_last_name = referrer_name.partition(' ')[2].capitalize().strip()
+        if referrer_last_name:
+            referrer_full_name = '{} {}'.format(referrer_first_name, referrer_last_name).strip()
+        else:
+            referrer_full_name = referrer_first_name
+
     context = {
         'user_nickname': user_nickname,
         'lead_first_name': lead_first_name,
+        'referrer_first_name': referrer_first_name,
+        'referrer_full_name': referrer_full_name,
     }
+
     return context
 
 

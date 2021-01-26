@@ -1,3 +1,4 @@
+from django.db.models import Q
 from leads.models import Lead, LEAD_STATUS_CHOICES
 import django_filters
 
@@ -10,6 +11,9 @@ class LeadFilter(django_filters.FilterSet):
     tel = django_filters.CharFilter(field_name='tel', lookup_expr='icontains')
     waid = django_filters.CharFilter(field_name='waid', lookup_expr='icontains')
 
+    # search
+    search_query = django_filters.CharFilter(method='search_query_method',)
+
     # status
     status = django_filters.ChoiceFilter(choices=LEAD_STATUS_CHOICES)
 
@@ -20,6 +24,11 @@ class LeadFilter(django_filters.FilterSet):
     # next contact
     next_contact_gte = django_filters.DateTimeFilter(field_name='next_contact', label='Próx. Cont.: Qualidade >= que', lookup_expr='gte')
     next_contact_lte = django_filters.DateTimeFilter(field_name='next_contact', label='Próx. Cont.: Qualidade <= que', lookup_expr='lte')
+
+    def search_query_method(self, queryset, name, value):
+        # nome, waid, tel
+        query = Q(name__icontains=value) | Q(tel__icontains=value) | Q(waid__icontains=value)
+        return queryset.filter(query)
 
     class Meta:
         model = Lead
