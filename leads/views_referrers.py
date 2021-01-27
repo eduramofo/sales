@@ -44,6 +44,33 @@ def referrers(request):
 
 
 @login_required()
+def referrers_2(request):
+
+    query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
+
+    leads = leads_models.Lead.objects.filter(query)
+
+    referrers = leads_models.Referrer.objects.filter(
+        leads__in=leads).order_by(
+            F('referring_datetime').desc(nulls_last=True),
+    ).distinct()
+
+    referrers[:10]
+
+    nav_name = 'leads_referrers'
+
+    page_title = 'Referenciadores'
+
+    context = {
+        'nav_name': nav_name,
+        'page_title': page_title,
+        'referrers': referrers,
+    }
+
+    return render(request, 'leads/referrers/list_2/index.html', context)
+
+
+@login_required()
 def leads_upload(request):
 
     indicated_by_datetime = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')

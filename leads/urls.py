@@ -50,6 +50,7 @@ urlpatterns = [
     path('referrers/old/', views_referrers.referrers_old, name='referrers-old'),
     path('referrers/opened/', views_referrers.referrers, name='referrers-opened'),
     path('referrers/', views_referrers.referrers, name='referrers'),
+    path('referrers/2/', views_referrers.referrers_2, name='referrers-2'),
 
     # referrers: lead upload add by file
     path('upload/', views_referrers.leads_upload, name='upload'),
