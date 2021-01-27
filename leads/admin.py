@@ -13,8 +13,6 @@ class LeadForm(forms.ModelForm):
 
 class LeadAdmin(admin.ModelAdmin):
 
-    change_form_template = "leads/admin/change_form.html"
-
     search_fields = ('name', 'tel', 'waid',)
 
     list_filter = (

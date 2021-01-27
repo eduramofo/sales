@@ -3,7 +3,6 @@ from leads import admin as admin_leads
 from leads import models as models_leads
 
 
-
 class LeadAdminSite(AdminSite):
     site_header = "Wiser Leads"
     site_title = "Wiser Leads"
