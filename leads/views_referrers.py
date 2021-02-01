@@ -55,7 +55,14 @@ def referrers_2(request):
             F('referring_datetime').desc(nulls_last=True),
     ).distinct()
 
-    referrers[:10]
+    qty = request.GET.get('qty')
+
+    if qty:
+        qty = int(qty)
+        referrers = referrers[:qty]
+    else:
+        qty = 5
+        referrers = referrers[:qty]
 
     nav_name = 'leads_referrers'
 

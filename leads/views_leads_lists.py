@@ -1,6 +1,7 @@
 from django.utils import timezone
 from urllib.parse import urlencode
 from random import choice as random_choice
+from datetime import timedelta
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
@@ -146,11 +147,11 @@ def schedules(request):
 
     page_title = 'Lista de Leads em Agendamentos'
 
-    now = timezone.now()
+    from_now_plus_24h = timezone.now() + timedelta(days=1)
 
     activities = Activity.objects.filter(
         done=False,
-        due_date__lte=now,
+        due_date__lte=from_now_plus_24h,
     ).exclude(lead=None).order_by('due_date')
    
     leads_pks= []
