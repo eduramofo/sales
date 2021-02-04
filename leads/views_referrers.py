@@ -45,23 +45,26 @@ def referrers(request):
 
 @login_required()
 def referrers_2(request):
-
-    query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
-
-    leads = leads_models.Lead.objects.filter(query)
-
-    referrers = leads_models.Referrer.objects.filter(
-        leads__in=leads).order_by(
-            F('referring_datetime').desc(nulls_last=True),
-    ).distinct()
-
+    
     qty = request.GET.get('qty')
-
+    
     if qty:
+        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
+        leads = leads_models.Lead.objects.filter(query)
+        referrers = leads_models.Referrer.objects.filter(
+            leads__in=leads).order_by(
+                F('referring_datetime').desc(nulls_last=True),
+        ).distinct()
         qty = int(qty)
         referrers = referrers[:qty]
     else:
-        qty = 5
+        query = Q(status='novo') | Q(status='tentando_contato')
+        leads = leads_models.Lead.objects.filter(query)
+        referrers = leads_models.Referrer.objects.filter(
+            leads__in=leads).order_by(
+                F('referring_datetime').desc(nulls_last=True),
+        ).distinct()
+        qty = 10
         referrers = referrers[:qty]
 
     nav_name = 'leads_referrers'

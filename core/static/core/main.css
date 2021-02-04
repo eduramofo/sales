@@ -9,6 +9,14 @@ nav#main-navbar button.navbar-toggler {
     outline: 0;    
 }
 
+nav#main-navbar.fixed-bottom {
+    margin-top: 63px;
+}
+
+body {
+    margin-bottom: 50px;
+}
+
 nav#main-navbar li a {
     font-weight: 400;
     font-size: 12;
