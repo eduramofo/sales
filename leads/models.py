@@ -169,6 +169,18 @@ class Lead(BaseModel):
         blank=True,
     )
 
+    def get_referrer(self):
+        referrer_obj = Referrer.objects.filter(leads=self).first()
+        if referrer_obj:
+            return referrer_obj
+        return None
+
+    def get_referrer_name(self):
+        referrer_obj = Referrer.objects.filter(leads=self).first()
+        if referrer_obj:
+            return referrer_obj.name
+        return None
+
     class Meta:
         verbose_name = 'Lead'
         verbose_name_plural = 'Leads'

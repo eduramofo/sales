@@ -1,0 +1,46 @@
+{% load leads_extras %}
+
+<div class="col-12 col-md-6 col-lg-4">
+
+    <div class="card w-100 border border-dark mb-4">
+      <div class="card-body">
+
+        <h5 class="card-title">{{lead.name}}</h5>
+
+        <h6 class="card-subtitle mb-2 text-muted">{{lead.get_referrer_name}}</h6>
+
+        <div class="border border-dark p-2 mb-2 rounded">
+          <p class="card-text">Descrição da linha: {{lead.short_description}}</p>
+        </div>
+
+        <div class="border border-dark p-2 mb-2 rounded">
+          <p class="card-text">Anotações do Lead: {{lead.note|default_if_none:"Não há."|truncatechars:60}}</p>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <a role="button" class="btn btn-block btn-success" href="{% url 'leads:update' lead.id %}">Abrir Lead</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+{% comment %}
+Indicado em: 
+{% if lead|get_referrers_from_lead_first_referring_datetime %}
+  {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/m/y"}} {{lead|get_referrers_from_lead_first_referring_datetime|date:"H:i"}}
+{% else %}
+  {{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}
+{% endif %}
+{% endcomment %}
+
+{% comment %} Status
+<td>{{lead.get_status_display}}</td>
+{% endcomment %}
+
+{% comment %}
+<td class="{% if lead.priority %}bg-success text-white{% endif %}">{% if lead.priority %}Sim{% else %}Não{% endif %}</td>
+{% endcomment %}

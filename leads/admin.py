@@ -16,16 +16,12 @@ class LeadAdmin(admin.ModelAdmin):
     search_fields = ('name', 'tel', 'waid',)
 
     list_filter = (
-        ('created_at', DateRangeFilter),
-        ('next_contact', DateRangeFilter),
-        'status',
-        'quality',
-        'indicated_by',
+        ('created_at', DateRangeFilter),'status',
     )
 
-    list_per_page = 8
+    list_per_page = 30
 
-    list_display = ('created_at', 'updated_at', 'name', 'status', 'indicated_by', 'quality', 'next_contact',)
+    list_display = ('name', 'status',)
 
     form = LeadForm
 
@@ -41,6 +37,8 @@ class ReferrerForm(forms.ModelForm):
 class ReferrerAdmin(admin.ModelAdmin):
 
     search_fields = ('name',)
+
+    list_per_page = 30
 
     list_filter = (
         ('created_at', DateRangeFilter),
