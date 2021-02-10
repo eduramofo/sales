@@ -210,7 +210,7 @@ def leads_list(request):
     
     leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
 
-    pages = paginator.make_paginator(request, leads.qs, 30)
+    pages = paginator.make_paginator(request, leads.qs, 9)
 
     context = {
         'page_title': page_title,
