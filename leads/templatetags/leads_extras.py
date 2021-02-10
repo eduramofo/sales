@@ -6,6 +6,7 @@ from django import template
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
+from django.template.defaultfilters import date
 
 from leads.models import Lead, Referrer
 from leads.whatsapp import api as whatsapp_api
@@ -101,12 +102,12 @@ def get_referrers_from_lead_first_name(lead):
 
 @register.filter
 def show_next_activities(lead):
-    result = None
+    result = 'Não Existe'
     activity_qs = Activity.objects.filter(lead=lead, done=False).order_by('due_date')
     if len(activity_qs) > 0:
         due_date = activity_qs.first().due_date
         if due_date:
-            result = due_date
+            result = date(due_date, 'd/M/y à\s H:i')
     return result
 
 
