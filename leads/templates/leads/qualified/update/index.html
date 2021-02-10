@@ -1,0 +1,10 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'leads/qualified.css' %}">
+{% endblock %}
+{% block content %}
+{% include "leads/qualified/add/content.html" %}
+{% endblock %}
+{% block js %}
+{% endblock %}

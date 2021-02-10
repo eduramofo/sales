@@ -1,0 +1,17 @@
+<form id="qualified" action="{% url 'core:home' %}" class="p-3 mt-4 rounded" method="post">
+
+    <div class="form-group">
+        <h3 class="h4 text-center w-100 text-warning mb-4">Preenchar JÁ o formulário abaixo e GARANTA sua vaga!</h3>
+    </div>
+
+    {% csrf_token %}
+
+    {% include 'core/inputs/default.html' with field=form.name %}
+
+    {% include 'core/inputs/default.html' with field=form.waid %}
+
+    <div class="form-group mb-0 mt-4">
+        <button type="submit" class="btn btn-lg btn-success w-100">Garantir Minha Vaga!</button>
+    </div>
+
+</form>

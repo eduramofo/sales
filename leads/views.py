@@ -14,8 +14,8 @@ from core.tools import paginator
 from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
-from leads.models import Lead
-from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm
+from leads.models import Lead, Qualified
+from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras
@@ -343,3 +343,39 @@ def leads_schedules(request):
     }
 
     return render(request, 'leads/list/index.html', context)
+
+
+def qualified(request):
+
+    initial = {}
+
+    form = QualifiedForm(initial=initial)
+
+    context = {
+        'form': form,
+    }
+
+    if request.method == 'POST':
+        form = QualifiedForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            waid = form.cleaned_data['waid']
+            qualified = Qualified.objects.create(name=name, waid=name,)
+            url = reverse_lazy('core:qualified_confirmed', args=(str(qualified.id),))
+            return HttpResponseRedirect(url)
+        else:
+            messages.add_message(request, messages.ERROR, 'Existem dados incorretos preenchido no formulário!')
+            context['form'] = form
+
+    return render(request, 'leads/qualified/add/index.html', context)
+
+
+def qualified_confirmed(request, qualified_id):
+
+    qualified = get_object_or_404(Qualified, id=qualified_id)
+
+    context = {
+        'qualified': qualified,
+    }
+
+    return render(request, 'leads/qualified/confirmed/index.html', context)

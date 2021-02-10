@@ -1,6 +1,6 @@
 from django import forms
 from leads import models as leads_models
-
+from leads import validators
 
 class LeadForm(forms.ModelForm):
     
@@ -146,3 +146,21 @@ class ReferrerForm(forms.ModelForm):
         if data_lead_id:
             lead = leads_models.Lead.objects.get(id=self.cleaned_data['lead'])
         return lead
+
+
+class QualifiedForm(forms.Form):
+
+    name = forms.CharField(
+        label='Nome e Sobrenome',
+        widget=forms.TextInput(attrs={'placeholder': 'Ex.: João da Silva'}),
+        max_length=500,
+        required=True,
+    )
+
+    waid = forms.CharField(
+        label='Celular/WhatsApp',
+        widget=forms.TextInput(attrs={'placeholder': 'Ex.: (31) 983433489'}),
+        validators=[validators.validate_telefone,],
+        max_length=50,
+        required=True,
+    )

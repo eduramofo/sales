@@ -301,3 +301,37 @@ class Referrer(BaseModel):
             result = str(self.name)
 
         return result
+
+
+class Qualified(BaseModel):
+
+    name = models.CharField(
+        max_length=500,
+        verbose_name='Nome',
+        null=True,
+        blank=True,
+    )
+
+    waid = models.CharField(
+        max_length=50,
+        verbose_name='WhatsApp',
+        null=True,
+        blank=True,
+    )
+
+    processed = models.BooleanField(
+        verbose_name='Processado?',
+        default=False,
+    )
+
+    class Meta:
+        verbose_name = 'Qualificado'
+        verbose_name_plural = 'Qualificados'
+        ordering = ('-created_at',)
+
+
+    def __str__(self):
+        result = str(self.id)
+        if self.name:
+            result = str(self.name)
+        return result
