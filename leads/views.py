@@ -360,7 +360,7 @@ def qualified(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             waid = form.cleaned_data['waid']
-            qualified = Qualified.objects.create(name=name, waid=name,)
+            qualified = Qualified.objects.create(name=name, waid=waid,)
             url = reverse_lazy('core:qualified_confirmed', args=(str(qualified.id),))
             return HttpResponseRedirect(url)
         else:

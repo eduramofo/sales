@@ -81,7 +81,7 @@ class QualifiedAdmin(admin.ModelAdmin):
 
     search_fields = ('waid',)
 
-    list_display = ('created_at', 'waid', 'processed',)
+    list_display = ('created_at', 'name', 'waid', 'processed',)
 
     list_filter = (
         'processed', ('created_at', DateRangeFilter),
