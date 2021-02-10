@@ -101,14 +101,13 @@ def get_referrers_from_lead_first_name(lead):
 
 @register.filter
 def show_next_activities(lead):
-    activity = Activity.objects.filter(lead=lead, done=False).order_by('due_date')
-    if len(activity) > 0:
-        due_date = activity.filter(done=False).first().due_date
+    result = None
+    activity_qs = Activity.objects.filter(lead=lead, done=False).order_by('due_date')
+    if len(activity_qs) > 0:
+        due_date = activity_qs.first().due_date
         if due_date:
-            return due_date
-        return ''
-    else:
-        return ''
+            result = due_date
+    return result
 
 
 @register.filter
