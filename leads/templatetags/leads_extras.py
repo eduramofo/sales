@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import date
+from django.utils.timezone import localtime
 
 from leads.models import Lead, Referrer
 from leads.whatsapp import api as whatsapp_api
@@ -107,7 +108,7 @@ def show_next_activities(lead):
     if len(activity_qs) > 0:
         due_date = activity_qs.first().due_date
         if due_date:
-            result = date(due_date, 'd/M/y à\s H:i')
+            result = date(localtime(due_date), 'd/M/y à\s H:i')
     return result
 
 
