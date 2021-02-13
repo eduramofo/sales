@@ -15,6 +15,7 @@ def gerar_leads(form, request):
 def create_leads_by_contacts(contacts, referrer):
     leads = []
     for contact in contacts:
+        check_duplicate(contact, referrer)
         new_lead = create_lead(contact, referrer)
         leads.append(new_lead)
     referrer.leads.set(leads)
@@ -25,6 +26,7 @@ def create_lead(contact, referrer):
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
+    
     new_lead = Lead.objects.create(
         name=name,
         tel=tel,
@@ -34,6 +36,10 @@ def create_lead(contact, referrer):
         short_description=referrer.short_description,
     )
     return new_lead
+
+
+def check_duplicate(contact, referrer):
+    pass
 
 
 def handle_uploaded_files(request_files):

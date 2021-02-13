@@ -352,6 +352,7 @@ def qualified(request):
     form = QualifiedForm(initial=initial)
 
     context = {
+        'page_title': 'Aprenda Inglês Online!',
         'form': form,
     }
 
@@ -375,6 +376,7 @@ def qualified_confirmed(request, qualified_id):
     qualified = get_object_or_404(Qualified, id=qualified_id)
 
     context = {
+        'page_title': 'Aprenda Inglês Online!',
         'qualified': qualified,
     }
 
