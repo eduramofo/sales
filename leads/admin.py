@@ -49,7 +49,7 @@ class ReferrerAdmin(admin.ModelAdmin):
 
     form = ReferrerForm
 
-    autocomplete_fields = ['leads',]
+    autocomplete_fields = ['lead', 'leads',]
 
 admin.site.register(Referrer, ReferrerAdmin)
 
