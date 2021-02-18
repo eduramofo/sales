@@ -1,0 +1,60 @@
+{% load core_extras %}
+{% load leads_extras %}
+
+<div class="border border-dark p-3 rounded mb-3 mt-3">
+
+
+    <div class="row mb-3">
+        
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% whatsapp_api_link_open lead %}" 
+                class="btn btn-block btn-primary text-center">
+                {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Whats' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
+                class="btn btn-block btn-primary text-center">
+                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-4">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                class="btn btn-block btn-dark">
+                {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' 'F1' %}
+            </a>
+        </div>
+
+        <div class="col-4">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                class="btn btn-block btn-dark">
+                {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' 'F2' %}
+            </a>
+        </div>
+
+        <div class="col-4">
+            <a role="button" 
+                id="leads-call-whatsapp-btn" 
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                class="btn btn-block btn-dark">
+                {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' 'F3' %}
+            </a>
+        </div>
+
+    </div>
+
+</div>

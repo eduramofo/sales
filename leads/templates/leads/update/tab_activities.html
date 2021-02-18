@@ -1,4 +1,6 @@
-<div class="mt-3 mb-5">
+<div class="tab-pane border border-dark rounded p-3" id="nav-activities" role="tabpanel" aria-labelledby="nav-activities-tab">
+
+<div class="mt-0">
     {% if activities %}
     <h6 class="text-success mb-3">Atividades relacionadas com esse lead</h6>
     <table id="activities-table-list" class="table table-bordered table-striped table-responsive">
@@ -14,11 +16,11 @@
     <tbody>
     {% for activity in activities %}
         <tr>
-        <td>{{activity.created_at|date:"d/m/y"}} {{ activity.created_at|time:"H:i" }}</td>
-        <td>{{activity.due_date|date:"d/m/y"}} {{ activity.due_date|time:"H:i" }}</td>
-        <td><a href="{% url 'activities:update-through-lead' activity.id %}">{{activity.subject|truncatechars:35}}</a></td>
-        <td>{% if activity.done %}Sim{% else %}Não{% endif %}</td>
-        <td>{{activity.note|default_if_none:""|truncatechars:40}}</td>
+            <td>{{activity.created_at|date:"d/m/y"}} {{ activity.created_at|time:"H:i" }}</td>
+            <td>{{activity.due_date|date:"d/m/y"}} {{ activity.due_date|time:"H:i" }}</td>
+            <td><a href="{% url 'activities:update-through-lead' activity.id %}">{{activity.subject|truncatechars:35}}</a></td>
+            <td>{% if activity.done %}Sim{% else %}Não{% endif %}</td>
+            <td>{{activity.note|default_if_none:""|truncatechars:40}}</td>
         </tr>
     {% endfor %}
     </tbody>
@@ -26,4 +28,6 @@
     {% else %}
     <h6 class="text-danger mb-3">Não há atividades relacionadas com esse lead</h6>
     {% endif %}
+</div>
+
 </div>

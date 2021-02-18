@@ -15,7 +15,31 @@
         href="#nav-whatsapp"
         role="tab"
         aria-controls="nav-whatsapp"
-        aria-selected="false"><strong>WhatsApp</strong></a>
+        aria-selected="false"><strong>WA</strong></a>
+  
+    <a  class="nav-link"
+        id="nav-activities-tab"
+        data-toggle="tab"
+        href="#nav-activities"
+        role="tab"
+        aria-controls="nav-activities"
+        aria-selected="false"><strong>Ativ.</strong></a>
+
+    <a  class="nav-link"
+        id="nav-actions-tab"
+        data-toggle="tab"
+        href="#nav-actions"
+        role="tab"
+        aria-controls="nav-actions"
+        aria-selected="false"><strong>Ações</strong></a>
+
+    <a  class="nav-link"
+        id="nav-referrers-tab"
+        data-toggle="tab"
+        href="#nav-referrers"
+        role="tab"
+        aria-controls="nav-referrers"
+        aria-selected="false"><strong>Ref.</strong></a>
 
   </div>
 </nav>
@@ -23,6 +47,7 @@
 <div class="tab-content" id="nav-tabContent">
     {% include "leads/update/tab_leads/tab.html" %}
     {% include "leads/update/tab_whatsapp.html" %}
+    {% include "leads/update/tab_actions.html" %}
+    {% include "leads/update/tab_activities.html" %}
+    {% include "leads/update/tab_referrers.html" %}
 </div>
-
-{% include "leads/update/tab_leads/activities.html" %}

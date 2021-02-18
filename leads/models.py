@@ -8,8 +8,9 @@ LEAD_QUALITY_CHOICES = ((1, '1'),)
 
 
 LEAD_STATUS_CHOICES = (
-    ('novo', 'Novo'),
-    ('tentando_contato', 'Tentando'),
+    ('novo', 'Novo: Ligação Inicial'),
+    ('tentando_contato', '2º Ligação + Áudio'),
+    ('tentando_contato_2', 'Ultimato'),
     ('agendamento', 'Agendamento'),
     ('acompanhamento', 'Acompanhamento'),
     ('perdido', 'Perdido'),
@@ -21,14 +22,15 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('sem_interesse', 'Sem Interesse'),
     ('nao_e_prioridade', 'Não é prioridade'),
     ('sem_dinheiro', 'Sem Dinheiro'),
-    ('ja_estuda_ingles', 'Já Estuda Inglês'),
-    ('ja_fala_ingles', 'Já Fala Inglês'),
-    ('nao_gosta_de_ead', 'Não Gosta de EAD'),
+    ('ja_estuda_ingles', 'Já estuda inglês'),
+    ('ja_fala_ingles', 'Já fala inglês'),
+    ('nao_gosta_de_ead', 'Não gosta de EAD'),
+    ('nao_gosta_de_ingles', 'Não gosta de inglês'),
     ('invalido', 'Inválido'),
     ('duplicado', 'Duplicado'),
     ('ignorando', 'Ignorando'),
     ('bloqueado', 'Bloqueado'),
-    ('desligou_na_cara', 'Desligou na Cara'),
+    ('desligou_na_cara', 'Desligou na cara'),
     ('rejeitando', 'Rejeitando'),
     ('outro', 'Outro'),
 )

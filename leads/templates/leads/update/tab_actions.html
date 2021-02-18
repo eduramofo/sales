@@ -1,24 +1,24 @@
 {% load core_extras %}
 {% load leads_extras %}
 
-<div class="border border-dark p-3 rounded mb-3">
+<div class="tab-pane border border-dark rounded p-3" id="nav-actions" role="tabpanel" aria-labelledby="nav-actions-tab">
 
     <div class="row mb-3">
-
-        <div class="col-6">
-            <a role="button" 
-                id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
-                class="btn btn-block btn-primary text-center">
-                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
-            </a>
-        </div>
-
+        
         <div class="col-6">
             <a role="button" 
                 id="leads-call-whatsapp-btn" 
                 href="{% whatsapp_api_link_open lead %}" 
                 class="btn btn-block btn-primary text-center">
                 {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Whats' %}
+            </a>
+        </div>
+
+        <div class="col-6">
+            <a role="button" 
+                id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
+                class="btn btn-block btn-primary text-center">
+                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
             </a>
         </div>
 
