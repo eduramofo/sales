@@ -19,9 +19,9 @@ LEAD_STATUS_CHOICES = (
 
 LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('', 'Selecionar'),
-    ('sem_interesse', 'Sem Interesse'),
+    ('sem_interesse', 'Sem interesse'),
     ('nao_e_prioridade', 'Não é prioridade'),
-    ('sem_dinheiro', 'Sem Dinheiro'),
+    ('sem_dinheiro', 'Sem dinheiro'),
     ('ja_estuda_ingles', 'Já estuda inglês'),
     ('ja_fala_ingles', 'Já fala inglês'),
     ('nao_gosta_de_ead', 'Não gosta de EAD'),
@@ -29,6 +29,7 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('invalido', 'Inválido'),
     ('duplicado', 'Duplicado'),
     ('ignorando', 'Ignorando'),
+    ('agendamento_bolo', 'Bolo após o agendamento'),
     ('bloqueado', 'Bloqueado'),
     ('desligou_na_cara', 'Desligou na cara'),
     ('rejeitando', 'Rejeitando'),
