@@ -24,7 +24,7 @@ class LeadForm(forms.ModelForm):
     )
 
     qualified = forms.BooleanField(
-        label='Bom?',
+        label='Qualificado?',
         required=False,
     )
 

@@ -4,15 +4,17 @@ from django.utils import timezone
 from core.models import BaseModel
 
 
-LEAD_QUALITY_CHOICES = ((1, '1'),)
-
+LEAD_QUALITY_CHOICES = (
+    (1, '1'),
+)
 
 LEAD_STATUS_CHOICES = (
-    ('novo', 'Novo: Ligação Inicial'),
-    ('tentando_contato', '2º Ligação + Áudio'),
-    ('tentando_contato_2', 'Ultimato'),
+    ('novo', '1º Ligação (Novo)'),
+    ('tentando_contato', '2º Ligação (Áudio)'),
+    ('tentando_contato_2', '3º Ligação (Ultimado)'),
     ('agendamento', 'Agendamento'),
-    ('acompanhamento', 'Acompanhamento'),
+    ('acompanhamento', 'Follow-up'),
+    ('geladeira', 'Geladeira'),
     ('perdido', 'Perdido'),
     ('ganho', 'Ganho'),
 )
@@ -22,6 +24,7 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('sem_interesse', 'Sem interesse'),
     ('nao_e_prioridade', 'Não é prioridade'),
     ('sem_dinheiro', 'Sem dinheiro'),
+    ('sem_cartao_credito', 'Sem cartão crédito'),
     ('ja_estuda_ingles', 'Já estuda inglês'),
     ('ja_fala_ingles', 'Já fala inglês'),
     ('nao_gosta_de_ead', 'Não gosta de EAD'),
@@ -29,7 +32,7 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('invalido', 'Inválido'),
     ('duplicado', 'Duplicado'),
     ('ignorando', 'Ignorando'),
-    ('agendamento_bolo', 'Bolo após o agendamento'),
+    ('agendamento_bolo', 'Bolo agendamento'),
     ('bloqueado', 'Bloqueado'),
     ('desligou_na_cara', 'Desligou na cara'),
     ('rejeitando', 'Rejeitando'),
