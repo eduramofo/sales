@@ -2,6 +2,13 @@
 {% load static %}
 {% block content %}
 {% include "core/nav.html" %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% include "leads/update/alert.html" %}
+        </div>
+    </div>
+</div>
 {% include "core/page_title.html" %}
 {% include "leads/update/content.html" %}
 {% endblock %}

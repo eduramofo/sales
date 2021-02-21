@@ -1,14 +1,11 @@
 {% if lead.status == 'perdido' %}
-  <div class="alert alert-danger mt-3" role="alert">
-      <p class="mb-2"><strong>PERDIDO</strong></p>
-      <p class="mb-0">
-        {{lead.get_status_lost_justification_display}}
-      </p>
+  <div class="alert alert-danger border-dark mt-3 mb-0" role="alert">
+      <p class="m-0 p-0"><strong>PERDIDO</strong> ({{lead.get_status_lost_justification_display}})</p>
   </div>
 {% endif %}
 
 {% if lead.status == 'ganho' %}
-  <div class="alert alert-success mt-3" role="alert">
+  <div class="alert alert-success border-dark mt-3 mb-0" role="alert">
     <strong>GANHO</strong>
   </div>
 {% endif %}

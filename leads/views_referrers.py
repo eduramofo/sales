@@ -49,7 +49,7 @@ def referrers_2(request):
     qty = request.GET.get('qty')
     
     if qty:
-        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
+        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='tentando_contato_2') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
         leads = leads_models.Lead.objects.filter(query)
         referrers = leads_models.Referrer.objects.filter(
             leads__in=leads).order_by(
@@ -58,7 +58,7 @@ def referrers_2(request):
         qty = int(qty)
         referrers = referrers[:qty]
     else:
-        query = Q(status='novo') | Q(status='tentando_contato')
+        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='tentando_contato_2')
         leads = leads_models.Lead.objects.filter(query)
         referrers = leads_models.Referrer.objects.filter(
             leads__in=leads).order_by(

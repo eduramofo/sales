@@ -19,7 +19,7 @@
             <a role="button" 
                 id="leads-call-phone-btn" href="{% link_to_call_lead lead %}" 
                 class="btn btn-block btn-primary text-center">
-                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
+                {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Call' %}
             </a>
         </div>
 
@@ -31,7 +31,7 @@
         <div class="col-4">
             <a role="button" 
                 id="leads-call-whatsapp-btn" 
-                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t1"
                 class="btn btn-block btn-dark">
                 {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º L' %}
             </a>
@@ -40,7 +40,7 @@
         <div class="col-4">
             <a role="button" 
                 id="leads-call-whatsapp-btn" 
-                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu-2"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t2"
                 class="btn btn-block btn-dark">
                 {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º L' %}
             </a>
@@ -49,7 +49,7 @@
         <div class="col-4">
             <a role="button" 
                 id="leads-call-whatsapp-btn" 
-                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu-3"
+                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t3"
                 class="btn btn-block btn-dark">
                 {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º L' %}
             </a>
@@ -60,30 +60,21 @@
 
     <div class="row">
 
-        <div class="col-4">
-            <a role="button" 
-                id="leads-call-whatsapp-btn" 
-                href="{% url 'activities:add-through-lead' lead.id %}?shortcut=nao-atendeu"
-                class="btn btn-block btn-warning">
-                {% btn_svg_icons 'bootstrap' 'lightning-fill' '22px' 'center' 'Next' %}
-            </a>
-        </div>
-
-        <div class="col-4">
+        <div class="col-6">
             <a role="button" 
                 id="leads-call-phone-btn"
                 href="{% url 'activities:add-through-lead' lead.id %}?shortcut=agendamento"
                 class="btn btn-block bg-secondary text-white text-center">
-                {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '20px' 'center' 'Age.' %}
+                {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '20px' 'center' 'Schedule' %}
             </a>
         </div>
 
-        <div class="col-4">
+        <div class="col-6">
             <a role="button" 
                 id="leads-call-whatsapp-btn" 
                 href="{% url 'leads:lost' lead.id %}"
                 class="btn btn-block btn-danger text-center">
-                {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Perder' %}
+                {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Lost' %}
             </a>
         </div>
 

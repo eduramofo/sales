@@ -172,6 +172,98 @@ def referrers_tentando(request, referrer_id):
 
 
 @login_required()
+def referrers_t1(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='novo')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_t2(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_t3(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato_2')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+
+
+@login_required()
 def referrers_agendamento(request, referrer_id):
     
     nav_name = 'leads_list'
@@ -298,10 +390,20 @@ def referrers_next(request, referrer_id):
 
     redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),))
 
-    leads_filter_query = Q(status='novo')
+    # T3
+    leads = referrer_obj.leads.filter(status='tentando_contato_2').order_by('-priority')
+    if len(leads) > 0:
+        lead = leads.first()
+        redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
 
-    leads = referrer_obj.leads.filter(leads_filter_query).order_by('-priority')
+    # T2
+    leads = referrer_obj.leads.filter(status='tentando_contato').order_by('-priority')
+    if len(leads) > 0:
+        lead = leads.first()
+        redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
 
+    # T1
+    leads = referrer_obj.leads.filter(status='novo').order_by('-priority')
     if len(leads) > 0:
         lead = leads.first()
         redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))

@@ -18,6 +18,11 @@ urlpatterns = [
     path('priorities/', views_leads_lists.priorities, name='priorities'),
 
     # leads lists referrers
+    ## Ts
+    path('leads/referrers/t1/<uuid:referrer_id>/', views_referrers_lists.referrers_t1, name='leads_referrers_t1'),
+    path('leads/referrers/t2/<uuid:referrer_id>/', views_referrers_lists.referrers_t2, name='leads_referrers_t2'),
+    path('leads/referrers/t3/<uuid:referrer_id>/', views_referrers_lists.referrers_t3, name='leads_referrers_t3'),
+
     path('leads/referrers/all/<uuid:referrer_id>/', views_referrers_lists.referrers_all, name='leads_referrers_all'),
     path('leads/referrers/closed/<uuid:referrer_id>/', views_referrers_lists.referrers_closed, name='leads_referrers_closed'),
     path('leads/referrers/opened/<uuid:referrer_id>/', views_referrers_lists.referrers_opened, name='leads_referrers_opened'),
@@ -36,6 +41,8 @@ urlpatterns = [
 
     # lead next
     path('next/', views.lead_next, name='next'),
+
+    path('next-referrer/', views.lead_next_referrer, name='next_referrer'),
 
     # lead add
     path('add/', views.lead_add, name='add'),

@@ -9,9 +9,9 @@ LEAD_QUALITY_CHOICES = (
 )
 
 LEAD_STATUS_CHOICES = (
-    ('novo', '1º Ligação (Novo)'),
-    ('tentando_contato', '2º Ligação (Áudio)'),
-    ('tentando_contato_2', '3º Ligação (Ultimado)'),
+    ('novo', 'Novo - T1'),
+    ('tentando_contato', 'Tentando - T2'),
+    ('tentando_contato_2', 'Ultimato - T3'),
     ('agendamento', 'Agendamento'),
     ('acompanhamento', 'Follow-up'),
     ('geladeira', 'Geladeira'),
@@ -184,6 +184,9 @@ class Lead(BaseModel):
     def get_referrer_name(self):
         referrer_obj = Referrer.objects.filter(leads=self).first()
         if referrer_obj:
+            referrer_obj_lead = referrer_obj.lead
+            if referrer_obj_lead:
+                return referrer_obj_lead
             return referrer_obj.name
         return None
 
@@ -305,6 +308,10 @@ class Referrer(BaseModel):
 
         if self.name:
             result = str(self.name)
+
+        lead = self.lead
+        if lead:
+            result = str(self.lead)
 
         return result
 

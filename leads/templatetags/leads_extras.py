@@ -141,6 +141,13 @@ def get_tentanto_leads(referrer):
 
 
 @register.filter
+def get_tentanto_2_leads(referrer):
+    leads_filter_query = Q(status='tentando_contato_2')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
+@register.filter
 def get_ganho_leads(referrer):
     leads_filter_query = Q(status='ganho')
     leads = referrer.leads.filter(leads_filter_query)

@@ -32,12 +32,32 @@ def add_through_lead(request, lead_id):
 
     initial_activity_done = True
 
-    if shortcut == 'nao-atendeu':
+    if shortcut == 't1':
         subject = 'Não atendeu'
         Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
         lead_status = lead.status
-        if lead_status == 'novo' or lead_status == 'tentando_contato':
+        if lead_status == 'novo' or lead_status == 'tentando_contato' or lead_status == 'tentando_contato_2':
             lead.status = 'tentando_contato'
+            lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        return HttpResponseRedirect(lead_update_url)
+
+    if shortcut == 't2':
+        subject = 'Não atendeu'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead_status = lead.status
+        if lead_status == 'novo' or lead_status == 'tentando_contato' or lead_status == 'tentando_contato_2':
+            lead.status = 'tentando_contato_2'
+            lead.save()
+        messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        return HttpResponseRedirect(lead_update_url)
+
+    if shortcut == 't3':
+        subject = 'Não atendeu'
+        Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject=subject, type=type_)
+        lead_status = lead.status
+        if lead_status == 'novo' or lead_status == 'tentando_contato' or lead_status == 'tentando_contato_2':
+            lead.status = 'geladeira'
             lead.save()
         messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
         return HttpResponseRedirect(lead_update_url)

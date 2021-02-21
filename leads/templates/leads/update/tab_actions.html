@@ -40,7 +40,7 @@
                 id="leads-call-whatsapp-btn" 
                 href="{% url 'leads:lost' lead.id %}"
                 class="btn btn-block btn-danger text-center">
-                {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Perder' %}
+                {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Lost' %}
             </a>
         </div>
 
@@ -54,7 +54,7 @@
                 id="leads-call-phone-btn"
                 href="{% url 'activities:add-through-lead' lead.id %}?shortcut=apresentacao-ganha"
                 class="btn btn-block btn-success text-center">
-                {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Ganhar' %}
+                {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Win' %}
             </a>
         </div>
 

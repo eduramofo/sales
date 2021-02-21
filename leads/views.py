@@ -58,7 +58,7 @@ def lead_update(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form = LeadForm(request.POST or None, instance=lead)
     activities = Activity.objects.filter(lead=lead).order_by('-created_at')
-    page_title = str(lead.name)
+    page_title = "{} ({})".format(lead.name, lead.get_status_display())
     nav_name = 'leads_list'
     method = request.method
     
@@ -198,6 +198,15 @@ def lead_next(request):
     pks = random_queryset_list.values_list('pk', flat=True)
     random_pk = random_choice(pks)
     next_lead_url = reverse('leads:update', args=[random_pk,])
+    return HttpResponseRedirect(next_lead_url)
+
+
+@login_required()
+def lead_next_referrer(request, lead_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    # next_lead = tools.get_referrers_next_lead(lead)
+    next_lead_id = tools.get_referrers_next_lead(lead)
+    next_lead_url = reverse('leads:update', args=[next_lead_id,])
     return HttpResponseRedirect(next_lead_url)
 
 

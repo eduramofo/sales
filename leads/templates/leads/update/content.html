@@ -1,37 +1,9 @@
-{% load leads_extras %}
-
-{% for referrer in lead|get_referrers_from_lead %}
-<div class="container">
-
-        <div class="row">
-
-            <div class="col-12">
-                <p class="p-0 m-0 my-2 text-dark">Ref.: {% if referrer.lead %}<a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>{% else %}{{referrer.name}}{% endif %} em {{referrer.referring_datetime|date:"d/M/y à\s H:i"}}</p>
-            </div>
-
-            <div class="col-4">    
-                <a role="button" href="{% url 'leads:leads_referrers_opened' referrer.id %}"
-                class="btn btn-sm btn-block btn-warning">
-                    <small>
-                        <strong>Abert. ({{referrer|get_opened_leads|length}})</strong>
-                    </small>
-                </a>
-            </div>
-
-        </div>
-</div>
-{% endfor %}
-
+{% include "leads/update/referrers_simple.html" %}
 <div class="container">
     <div class="row">
         <div class="col-12">
-
-            {% include "leads/update/alert.html" %}
-
             {% include "leads/update/cadence.html" %}
-
             {% include "leads/update/tabs.html" %}
-
         </div>
     </div>
 </div>

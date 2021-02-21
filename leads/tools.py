@@ -12,3 +12,7 @@ def get_open_leads():
 def get_open_run_now_leads():
     open_leads = get_open_leads()
     return open_leads.filter(run_now=True)
+
+
+def get_referrers_next_lead(lead):
+    return '1'
