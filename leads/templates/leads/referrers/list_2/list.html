@@ -2,8 +2,8 @@
 
 {% if referrers %}
     {% for obj in referrers %}
-      {% include "leads/referrers/list_2/list_item.html" %}
+      {% include "leads/referrers/referrer_item/list_item.html" %}
     {% endfor %}
 {% else %}
-<h6 class="text-danger">Não há referenciadores</h6>
+<h6 class="text-danger">Não há referenciadores.</h6>
 {% endif %}

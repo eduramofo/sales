@@ -21,6 +21,7 @@ from leads import tools
 from leads.templatetags import leads_extras
 
 
+
 @login_required()
 def lead_add(request):
 
@@ -61,12 +62,14 @@ def lead_update(request, lead_id):
     page_title = "{} ({})".format(lead.name, lead.get_status_display())
     nav_name = 'leads_list'
     method = request.method
-    
+    referrers = leads_extras.get_referrers_from_lead(lead)
+
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
         'lead': lead,
         'activities': activities,
+        'referrers': referrers,
         'lead_form': lead_form,
     }
 
