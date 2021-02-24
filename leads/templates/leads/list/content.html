@@ -1,6 +1,6 @@
 <div class="container mt-3 mb-5">
-    {% include "leads/list/actions.html" %}
-    {% include "leads/list/filters.html" with form=leads_filters_form %}
+    {% comment %} {% include "leads/list/actions.html" %}
+    {% include "leads/list/filters.html" with form=leads_filters_form %} {% endcomment %}
     {% include "leads/list/list.html" %}
     {% include "core/tools/pagination.html" with page=leads %}
 </div>

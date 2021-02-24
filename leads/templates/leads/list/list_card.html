@@ -1,50 +1,49 @@
 {% load leads_extras %}
 
 <div class="col-12 col-md-6 col-lg-4">
-
     <div class="card w-100 border border-dark mb-4">
-      <div class="card-body">
+      <div class="card-body p-2">
 
         <h5 class="card-title">{{lead.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">  
+          {% with lead.get_referrer as referrer %}
+          {% if referrer.lead %}
+          <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>
+          {% else %}{{referrer.name}}{% endif %}
+          {% endwith %}
+        </h6>
+        <p class="card-text mb-0"><strong>Criado/indicado:</strong>
+          {% if lead|get_referrers_from_lead_first_referring_datetime %}
+          {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/M/y à\s H:i"}}
+          {% else %}
+          {{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}
+          {% endif %}
+        </p>
+        <p class="card-text mb-0"><strong>Status:</strong> {{lead.get_status_display}}</p>
+        <p class="card-text mb-0 {% if lead.priority %}text-danger{% endif %}"><strong>Prioridade:</strong> {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
+        <p class="card-text mb-0"><strong>Próxima Atividade:</strong> {{lead|show_next_activities}}
+        <p class="card-text mb-0"><strong>Descrição da linha:</strong> {{lead.short_description}}</p>
+        <p class="card-text mb-0"><strong>Anotações do Lead:</strong> {{lead.note|default_if_none:"Não há."|truncatechars:60}}</p>
 
-        <h6 class="card-subtitle mb-2 text-muted">{{lead.get_referrer_name}}</h6>
-        
-        <div class="border border-dark p-2 mb-2 rounded">
-          <p class="card-text">Status: {{lead.get_status_display}}</p>
-        </div>
-
-        <div class="border border-dark p-2 mb-2 rounded {% if lead.priority %}bg-danger text-white{% endif %}">
-          <p class="card-text">Prioridade: {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
-        </div>
-
-        <div class="border border-dark p-2 mb-2 rounded">
-          <p class="card-text">Próxima Atividade: {{lead|show_next_activities}}
-        </div>
-
-        <div class="border border-dark p-2 mb-2 rounded">
-          <p class="card-text">Descrição da linha: {{lead.short_description}}</p>
-        </div>
-
-        <div class="border border-dark p-2 mb-2 rounded">
-          <p class="card-text">Anotações do Lead: {{lead.note|default_if_none:"Não há."|truncatechars:60}}</p>
-        </div>
-
-        <div class="row">
-          <div class="col-12">
-            <a role="button" class="btn btn-block btn-success" href="{% url 'leads:update' lead.id %}">Abrir Lead</a>
+        <div class="row mb-1 mt-2">
+          <div class="col-3">
+            <a role="button" class="btn btn-block btn-sm btn-success"
+            href="{% url 'leads:update' lead.id %}">Open</a>
+          </div>
+          <div class="col-3">
+            <a role="button" class="btn btn-block btn-sm btn-primary"
+            href="{% url 'leads:update' lead.id %}?action=wa">Whats</a>
+          </div>
+          <div class="col-3">
+            <a role="button" class="btn btn-block btn-sm btn-primary"
+            href="{% url 'leads:update' lead.id %}?action=call">Call</a>
+          </div>
+          <div class="col-3">
+            <a role="button" class="btn btn-block btn-sm btn-danger"
+            href="{% url 'leads:lost' lead.id %}">Lost</a>
           </div>
         </div>
 
       </div>
     </div>
-
 </div>
-
-{% comment %}
-Indicado em: 
-{% if lead|get_referrers_from_lead_first_referring_datetime %}
-  {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/m/y"}} {{lead|get_referrers_from_lead_first_referring_datetime|date:"H:i"}}
-{% else %}
-  {{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}
-{% endif %}
-{% endcomment %}

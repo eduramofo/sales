@@ -1,39 +1,9 @@
-100		Ligações;
-================================
+L2 -> Após clicar no botão abrir o whats com a mensagem de tentei te ligar.
 
-25		NAO ATENDEU;
-4		AGENDAMETOS;
-8		SEM INTERESSE;
-10		SEM DINHEIRO;
-40		APRESENTAÇÕES;
-13		VENDAS;
-================================
+L3 -> Após clicar no botão abrir o whats com a mensagem de ultimato (pensar numa mensagem unisex);
 
-APRESENTACAO:
-Lead
-Reffer
-Data
-Status: win, lost, follow-up
-Áudio
+Criar uma sistema de paginação para os leads e para os reffers;
 
-Text Fied
-Apresentações
-Conexão
-Decisão Imediata
-Speech
-Fechamento
-Referidos
-Validação
+Diminuir as opções de pesquisas para os leads;
 
-
-
-
-
-    # indicated_by_datetime = forms.DateTimeField(
-    #     label='Data e hora da indicação',
-    #     widget=forms.DateTimeInput(
-    #         format='%Y-%m-%dT%H:%M',
-    #         attrs={'type': 'datetime-local',}
-    #     ),
-    #     required=False,
-    # )
+Pensar uma forma de se criar uma notificação pata os agendamentos;

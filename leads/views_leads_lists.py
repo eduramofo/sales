@@ -29,7 +29,7 @@ def all(request):
     
     nav_name = 'leads_list'
 
-    page_title = 'Lista de Leads'
+    page_title = 'Leads'
     
     leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
 
@@ -75,7 +75,7 @@ def news(request):
     
     nav_name = 'leads_news'
 
-    page_title = 'Lista de Novos Leads'
+    page_title = 'Leads Novos'
 
     leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='novo').order_by('-priority'))
 
@@ -97,7 +97,7 @@ def opened(request):
     
     nav_name = 'leads_opened'
 
-    page_title = 'Lista de Leads em Aberto'
+    page_title = 'Leads em aberto'
 
     query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')
 
@@ -145,7 +145,7 @@ def schedules(request):
 
     nav_name = 'leads_schedules'
 
-    page_title = 'Lista de Leads em Agendamentos'
+    page_title = 'Leads em agendamentos abertos'
 
     from_now_plus_24h = timezone.now() + timedelta(days=1)
 

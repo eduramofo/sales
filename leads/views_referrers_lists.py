@@ -38,7 +38,7 @@ def referrers_all(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'TODOS os Leads do referenciador: {}'.format(referrer_obj)
+    page_title = 'Todos os leads do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -68,7 +68,7 @@ def referrers_closed(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'Leads FECHADOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads fechados leads do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -98,7 +98,7 @@ def referrers_opened(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'Leads ABERTOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads abertos do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -128,7 +128,7 @@ def referrers_news(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'Leads NOVOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads novos do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -139,129 +139,6 @@ def referrers_news(request, referrer_id):
     }
 
     return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def referrers_tentando(request, referrer_id):
-    
-    nav_name = 'leads_list'
-    
-    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
-
-    leads_filter_query = Q(status='tentando_contato')
-
-    leads = referrer_obj.leads.filter(leads_filter_query)
-
-    leads = LeadFilter(
-        request.GET, queryset=leads.order_by('-priority')
-    )
-
-    pages = paginator.make_paginator(request, leads.qs, 50)
-
-    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
-
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'leads': pages['page'],
-        'page_range': pages['page_range'],
-        'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def referrers_t1(request, referrer_id):
-    
-    nav_name = 'leads_list'
-    
-    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
-
-    leads_filter_query = Q(status='novo')
-
-    leads = referrer_obj.leads.filter(leads_filter_query)
-
-    leads = LeadFilter(
-        request.GET, queryset=leads.order_by('-priority')
-    )
-
-    pages = paginator.make_paginator(request, leads.qs, 50)
-
-    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
-
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'leads': pages['page'],
-        'page_range': pages['page_range'],
-        'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def referrers_t2(request, referrer_id):
-    
-    nav_name = 'leads_list'
-    
-    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
-
-    leads_filter_query = Q(status='tentando_contato')
-
-    leads = referrer_obj.leads.filter(leads_filter_query)
-
-    leads = LeadFilter(
-        request.GET, queryset=leads.order_by('-priority')
-    )
-
-    pages = paginator.make_paginator(request, leads.qs, 50)
-
-    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
-
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'leads': pages['page'],
-        'page_range': pages['page_range'],
-        'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def referrers_t3(request, referrer_id):
-    
-    nav_name = 'leads_list'
-    
-    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
-
-    leads_filter_query = Q(status='tentando_contato_2')
-
-    leads = referrer_obj.leads.filter(leads_filter_query)
-
-    leads = LeadFilter(
-        request.GET, queryset=leads.order_by('-priority')
-    )
-
-    pages = paginator.make_paginator(request, leads.qs, 50)
-
-    page_title = 'Leads TENTANDO do referenciador [ {} ]'.format(referrer_obj)
-
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'leads': pages['page'],
-        'page_range': pages['page_range'],
-        'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
-
-
-
 
 @login_required()
 def referrers_agendamento(request, referrer_id):
@@ -388,6 +265,7 @@ def referrers_next(request, referrer_id):
 
     referrer_obj = get_object_or_404(Referrer, id=referrer_id)
 
+    # ALL
     redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),))
 
     # T3
@@ -409,3 +287,123 @@ def referrers_next(request, referrer_id):
         redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
 
     return HttpResponseRedirect(redirect_url)
+
+
+@login_required()
+def referrers_tentando(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads tentando do(a) {}'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_t1(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='novo')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads T1 do(a) {}'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_t2(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads T2 do(a) {}'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def referrers_t3(request, referrer_id):
+    
+    nav_name = 'leads_list'
+    
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads_filter_query = Q(status='tentando_contato_2')
+
+    leads = referrer_obj.leads.filter(leads_filter_query)
+
+    leads = LeadFilter(
+        request.GET, queryset=leads.order_by('-priority')
+    )
+
+    pages = paginator.make_paginator(request, leads.qs, 50)
+
+    page_title = 'Leads T3 do(a) {}'.format(referrer_obj)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)

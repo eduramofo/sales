@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var messagesIsProcessing = false;
-    var delay = 2500;
+    var delay = 900;
 
     checkIfHasMessages();
     setInterval(checkIfHasMessages, 500);

@@ -40,6 +40,7 @@ def add_through_lead(request, lead_id):
             lead.status = 'tentando_contato'
             lead.save()
         messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        lead_update_url = lead_update_url + '?action=t1'
         return HttpResponseRedirect(lead_update_url)
 
     if shortcut == 't2':
@@ -50,6 +51,7 @@ def add_through_lead(request, lead_id):
             lead.status = 'tentando_contato_2'
             lead.save()
         messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        lead_update_url = lead_update_url + '?action=t2'
         return HttpResponseRedirect(lead_update_url)
 
     if shortcut == 't3':
@@ -60,6 +62,7 @@ def add_through_lead(request, lead_id):
             lead.status = 'geladeira'
             lead.save()
         messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendeu.')
+        lead_update_url = lead_update_url + '?action=t3'
         return HttpResponseRedirect(lead_update_url)
 
     if shortcut == 'sem-interesse':

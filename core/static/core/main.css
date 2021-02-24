@@ -1,4 +1,5 @@
 :root {
+    --main-color-primary: #004080;
     --main-navbar-bottom-main-color: var(--dark);
     --main-navbar-bottom-secondary-color: rgba(255,255,255,.5);
     --main-navbar-bottom-border-size: 3px;
@@ -11,6 +12,15 @@ nav#main-navbar button.navbar-toggler {
 
 nav#main-navbar.fixed-bottom {
     margin-top: 63px;
+    background-color: var(--main-color-primary)!important;
+}
+
+nav#main-navbar.fixed-bottom a.navbar-brand {
+    color: #fff!important;
+}
+
+nav#main-navbar.fixed-bottom li.nav-item a {
+    color: #fff!important;
 }
 
 body {
@@ -53,6 +63,12 @@ nav#main-navbar li a {
     font-size: 13px!important;
     color: var(--main-navbar-bottom-secondary-color)!important;
 }
+
+.page-title {
+    background-color: var(--main-color-primary)!important;
+    color: #fff;
+}
+
 
 .modal-backdrop.show {
     background: rgba(0, 0, 0)!important;
