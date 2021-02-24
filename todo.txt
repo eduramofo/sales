@@ -6,4 +6,8 @@ Criar uma sistema de paginação para os leads e para os reffers;
 
 Diminuir as opções de pesquisas para os leads;
 
+Enviar a mensagem de agendamento ao enviar;
+
+Criar um botão de bolo;
+
 Pensar uma forma de se criar uma notificação pata os agendamentos;

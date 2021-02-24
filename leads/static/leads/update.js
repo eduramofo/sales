@@ -28,9 +28,10 @@ $(document).ready(function() {
         }
 
         if (action === 'wa') {
+            window.location.href = waHref;
             openInNewTab(waHref);
         } else if (action === 'call') {
-            openInNewTab(callHref);
+            window.location.href = callHref;
         }
 
     })();

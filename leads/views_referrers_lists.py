@@ -38,7 +38,7 @@ def referrers_all(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
 
-    page_title = 'Todos os leads do(a) {}'.format(referrer_obj)
+    page_title = 'Leads do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -140,6 +140,7 @@ def referrers_news(request, referrer_id):
 
     return render(request, 'leads/list/index.html', context)
 
+
 @login_required()
 def referrers_agendamento(request, referrer_id):
     
@@ -157,7 +158,7 @@ def referrers_agendamento(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
     
-    page_title = 'Leads AGENDAMENTOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads  do: {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -187,7 +188,7 @@ def referrers_follow_up(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
     
-    page_title = 'Leads ACOMPANHAMENTOS do referenciador: {}'.format(referrer_obj)
+    page_title ='Leads em acompanhamento perdidos do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -217,7 +218,7 @@ def referrers_ganho(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
     
-    page_title = 'Leads GANHOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads ganho(s) do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
@@ -247,7 +248,7 @@ def referrers_perdido(request, referrer_id):
 
     pages = paginator.make_paginator(request, leads.qs, 50)
     
-    page_title = 'Leads PERDIDOS do referenciador: {}'.format(referrer_obj)
+    page_title = 'Leads perdido(s) do(a) {}'.format(referrer_obj)
 
     context = {
         'page_title': page_title,
