@@ -93,31 +93,16 @@ def lead_update(request, lead_id):
 def lead_update_lost(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
-    lead_lost_form = LeadLostForm(request.POST or None, instance=lead)
-    page_title = 'Confirmação da perda do Lead: ' + str(lead.name)
-    nav_name = 'leads_list'
-    method = request.method
+    
+    lead.status = 'perdido'
+    
+    lead.save()
 
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'lead': lead,
-        'lead_lost_form': lead_lost_form,
-    }
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
-    if method == 'POST':
-        if lead_lost_form.is_valid():
-            lead = lead_lost_form.save()
-            lead.status = 'perdido'
-            lead.save()
-            url = reverse_lazy('leads:update', args=(str(lead.id),))
-            messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-            return HttpResponseRedirect(url)
-        else:
-            messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
-            context['lead_lost_form'] = lead_lost_form
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
 
-    return render(request, 'leads/lost/index.html', context)
+    return HttpResponseRedirect(url)
 
 
 @login_required()

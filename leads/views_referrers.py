@@ -17,18 +17,16 @@ from core.tools import paginator
 @login_required()
 def referrers(request):
 
-    is_mobile_link = request.GET.get('mobile')
-    if is_mobile_link:
-        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
-        leads = leads_models.Lead.objects.filter(query)
-        referrers = leads_models.Referrer.objects.filter(
-            leads__in=leads).order_by(
-                F('referring_datetime').desc(nulls_last=True),
-        ).distinct()
-    else:
-        referrers = leads_models.Referrer.objects.all().order_by(
-            F('referring_datetime').desc(nulls_last=True)
-        )
+    leads = leads_models.Lead.objects.all()
+
+    referrers = leads_models.Referrer.objects.filter(
+        leads__in=leads).order_by(
+            F('referring_datetime').desc(nulls_last=True),
+    ).distinct()
+
+    pages = paginator.make_paginator(request, referrers, 9)
+        
+    referrers = pages['page']
 
     nav_name = 'leads_referrers'
 
@@ -38,34 +36,27 @@ def referrers(request):
         'nav_name': nav_name,
         'page_title': page_title,
         'referrers': referrers,
+        'page_range': pages['page_range'],
     }
 
-    return render(request, 'leads/referrers/list/index.html', context)
+    return render(request, 'leads/referrers/list_2/index.html', context)
 
 
 @login_required()
 def referrers_2(request):
     
-    qty = request.GET.get('qty')
-    
-    if qty:
-        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='tentando_contato_2') | Q(status='agendamento') | Q(status='acompanhamento') | Q(status='processando')
-        leads = leads_models.Lead.objects.filter(query)
-        referrers = leads_models.Referrer.objects.filter(
-            leads__in=leads).order_by(
-                F('referring_datetime').desc(nulls_last=True),
-        ).distinct()
-        qty = int(qty)
-        referrers = referrers[:qty]
-    else:
-        query = Q(status='novo') | Q(status='tentando_contato') | Q(status='tentando_contato_2')
-        leads = leads_models.Lead.objects.filter(query)
-        referrers = leads_models.Referrer.objects.filter(
-            leads__in=leads).order_by(
-                F('referring_datetime').desc(nulls_last=True),
-        ).distinct()
-        qty = 10
-        referrers = referrers[:qty]
+    query = Q(status='novo') | Q(status='tentando_contato') | Q(status='tentando_contato_2')
+        
+    leads = leads_models.Lead.objects.filter(query)
+
+    referrers = leads_models.Referrer.objects.filter(
+        leads__in=leads).order_by(
+            F('referring_datetime').desc(nulls_last=True),
+    ).distinct()
+
+    pages = paginator.make_paginator(request, referrers, 9)
+        
+    referrers = pages['page']
 
     nav_name = 'leads_referrers'
 
@@ -75,6 +66,7 @@ def referrers_2(request):
         'nav_name': nav_name,
         'page_title': page_title,
         'referrers': referrers,
+        'page_range': pages['page_range'],
     }
 
     return render(request, 'leads/referrers/list_2/index.html', context)
