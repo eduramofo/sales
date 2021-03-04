@@ -378,3 +378,18 @@ def qualified_confirmed(request, qualified_id):
     }
 
     return render(request, 'leads/qualified/confirmed/index.html', context)
+
+
+def speech(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead_first_name = lead.name.partition(' ')[0]
+
+    context = {
+        'page_title': 'Modelo de Speech',
+        'lead': lead,
+        'lead_first_name': lead_first_name,
+    }
+
+    return render(request, 'leads/speech/index.html', context)

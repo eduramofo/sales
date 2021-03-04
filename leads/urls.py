@@ -62,4 +62,7 @@ urlpatterns = [
     # referrers: lead upload add by file
     path('upload/', views_referrers.leads_upload, name='upload'),
 
+    # speech
+    path('<uuid:lead_id>/speech/', views.speech, name='speech'),
+
 ]
