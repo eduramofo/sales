@@ -44,18 +44,18 @@
                 <div class="col-6 mt-2">
                     <a role="button" 
                         id="leads-call-whatsapp-btn" 
-                        href="{% url 'leads:leads_referrers_next' referrer.id %}"
+                        href="{% url 'leads:speech' lead.id %}"
                         class="btn btn-block btn-info">
-                        {% btn_svg_icons 'bootstrap' 'lightning-fill' '22px' 'center' 'Next' %}
+                        {% btn_svg_icons 'bootstrap' 'megaphone-fill' '22px' 'center' 'Speech' %}
                     </a>
                 </div>
 
                 <div class="col-6 mt-2">
                     <a role="button" 
                         id="leads-call-whatsapp-btn" 
-                        href="{% url 'leads:speech' lead.id %}"
+                        href="{% url 'leads:leads_referrers_next' referrer.id %}"
                         class="btn btn-block btn-info">
-                        {% btn_svg_icons 'bootstrap' 'megaphone-fill' '22px' 'center' 'Speech' %}
+                        {% btn_svg_icons 'bootstrap' 'lightning-fill' '22px' 'center' 'Next' %}
                     </a>
                 </div>
 
