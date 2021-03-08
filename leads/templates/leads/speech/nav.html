@@ -32,6 +32,18 @@
                     <a class="nav-link" id="speech-nav-tab-7" data-toggle="tab" href="#speech-nav-content-7" role="tab" aria-controls="speech-nav-tab-7" aria-selected="false">Validação</a>
                 </li>
 
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="speech-nav-tab-objections" data-toggle="tab" href="#speech-nav-content-objections" role="tab" aria-controls="speech-nav-tab-objections" aria-selected="false">Objeções</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="speech-nav-tab-after-sales" data-toggle="tab" href="#speech-nav-content-after-sales" role="tab" aria-controls="speech-nav-tab-after-sales" aria-selected="false">Pós-vendas</a>
+                </li>
+                
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="speech-nav-tab-wa" data-toggle="tab" href="#speech-nav-content-wa" role="tab" aria-controls="speech-nav-tab-wa" aria-selected="false">WhatsApp</a>
+                </li>
+
             </ul>
 
             <div class="tab-content" id="speech-nav-tabs-content">
@@ -63,7 +75,19 @@
                 <div class="tab-pane" id="speech-nav-content-7" role="tabpanel" aria-labelledby="speech-nav-tab-7">
                     {% include 'leads/speech/seven_steps/7_validacao/index.html' %}
                 </div>
+                
+                <div class="tab-pane" id="speech-nav-content-objections" role="tabpanel" aria-labelledby="speech-nav-tab-objections">
+                    {% include 'leads/speech/objections/index.html' %}
+                </div>
 
+                <div class="tab-pane" id="speech-nav-content-after-sales" role="tabpanel" aria-labelledby="speech-nav-tab-after-sales">
+                    {% include 'leads/speech/after_sales/index.html' %}
+                </div>
+
+                <div class="tab-pane" id="speech-nav-content-wa" role="tabpanel" aria-labelledby="speech-nav-tab-wa">
+                    {% include 'leads/speech/wa/index.html' %}
+                </div>
+            
             </div>
 
         </div>
