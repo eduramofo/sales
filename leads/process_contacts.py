@@ -52,10 +52,21 @@ def handle_uploaded_files(request_files):
 def process_contacts_file(contacts_file):
     contacts = []
     source_file_readed = contacts_file.read().decode('utf-8')
-    for vcard in vobject.readComponents(source_file_readed):
+    source_file_readed = adjust_vcards_string(source_file_readed)
+    vcards = vobject.readComponents(source_file_readed)
+    for vcard in vcards:
         contact = process_vcard(vcard)
         contacts.append(contact)
     return contacts
+
+
+def adjust_vcards_string(vcards_string):
+    start, end = 'BEGIN:VCARD', 'END:VCARD'
+    vcards_body = [item for item in (item.strip().strip(start) for item in vcards_string.split(end)) if item]
+    new_vcards_string  = ''
+    for card in vcards_body:
+        new_vcards_string = new_vcards_string + '{}{}\n{}\n'.format(start, card, end)
+    return new_vcards_string
 
 
 def process_vcard(vcard):
