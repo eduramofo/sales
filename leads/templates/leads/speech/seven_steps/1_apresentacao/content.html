@@ -11,22 +11,33 @@
 </div>
 
 <div class="text-group mb-3">
-    <p class="m-0 p-0"><span class="text-danger"><strong>NÃO</strong></span>: Como assim? Ele(a) pede para eu te ligar e não fala nada com você... Mas não tem problema. Você tá tranquilo(a) agora pra falar?</p>
+
+    <p class="m-0 p-0">
+        <span class="text-success">
+            <strong>SIM:</strong>
+        </span><br/>
+        <span>Maravilha! O que ele(a) te falou?</span>
+    </p>
+
+    <p class="m-0 p-0 mt-1">
+        Você tá tranquila agora para falar?
+    </p>
+
 </div>
 
 <div class="text-group mb-3">
-    
-    <p class="m-0 p-0"><span class="text-success"><strong>SIM</strong></span>: Maravilha! O que ele(a) te falou?</p>
-
-    <p class="m-0 p-0 mt-1">Você tá tranquila agora para falar?</p>
-
+    <p class="m-0 p-0">
+        <span class="text-danger">
+            <strong>NÃO:</strong>
+        </span>
+        <br> Como assim!? <br />Ele(a) pede para eu te ligar e não fala nada com você...<br />Mas não tem problema. <br />Você tá tranquilo(a) agora pra falar?</p>
 </div>
 
-{% comment %}
 <div class="text-group mb-3">
-    <p class="m-0 p-0"><strong>{{lead_first_name}}</strong> deixa eu te explicar o motivo deu tá te ligando. Tudo bem?</p>
+    <p class="m-0 p-0">
+        <strong>{{lead_first_name}}</strong>, eu vou te explicar porque a <strong>{{referrer_name}}</strong> me pediu para eu te ligar e se fizer sentido para você a gente continua a ligação, tudo bem?
+    </p>
 </div>
-{% endcomment %}
 
 <div class="text-group mb-3">
     <p class="m-0 p-0">
@@ -35,7 +46,34 @@
 </div>
 
 <div class="text-group mb-3">
-    <p class="m-0 p-0">De coisa boa ou coisa ruim?</p>
+
+    <p class="m-0 p-0">
+        <span class="text-success">
+            <strong>SIM:</strong>
+        </span>
+        <br/>
+        <span>De coisa boa ou coisa ruim?</span>
+        <br />
+        <span>Me conta o que você ouviu falar da gente.</span>
+    </p>
+</div>
+
+<div class="text-group mb-3">
+    <p class="m-0 p-0">
+        <span class="text-danger">
+            <strong>NÃO:</strong>
+        </span>
+        <br/>NÃO!? Como assim você nunca ouviu falar dá gente!?
+    </p>
+</div>
+
+<div class="text-group mb-3">
+    <p class="m-0 p-0 mb-1">Sobre a <strong>Wise Up</strong>:</p>
+    <ul class="mb-0">
+        <li>Mais de 400 escolas espalhas por todo Brasil</li>
+        <li>Existe a mais de 25 anos</li>
+        <li>Especializada em inglês para adulto</li>
+    </ul>
 </div>
 
 <div class="text-group mb-3">
@@ -64,5 +102,9 @@
 </div>
 
 <div class="text-group bg-success">
-        <p class="m-0 p-0 text-white">E <strong>{{lead_first_name}}</strong> me conta aí. Você acha que faz sentido a gente tá aí conversando sobre o seu inglês?</p>
+        <p class="m-0 p-0 text-white">
+            E <strong>{{lead_first_name}}</strong>
+            <br/> me conta aí.
+            <br/> Você acha que faz sentido a gente tá aí conversando sobre o seu inglês?
+        </p>
 </div>
