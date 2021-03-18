@@ -173,3 +173,21 @@ def get_follow_up_leads(referrer):
     leads_filter_query = Q(status='acompanhamento')
     leads = referrer.leads.filter(leads_filter_query)
     return leads
+
+
+@register.simple_tag
+def mfb(gender, m, f):
+
+    masculinity = 'm'
+    
+    femininity = 'f'
+
+    final_word = m
+
+    if gender == masculinity:
+        final_word = m
+
+    elif gender == femininity:
+        final_word = f
+    
+    return final_word

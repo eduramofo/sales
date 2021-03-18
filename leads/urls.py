@@ -63,6 +63,8 @@ urlpatterns = [
     path('upload/', views_referrers.leads_upload, name='upload'),
 
     # speech
-    path('<uuid:lead_id>/speech/', views.speech, name='speech'),
+    path('<uuid:lead_id>/speech/', views.speech_start, name='speech'),
+    path('<uuid:lead_id>/speech-show/', views.speech_show, name='speech-show'),
+    # path('<uuid:lead_id>/speech/', views.speech, name='speech'),
 
 ]

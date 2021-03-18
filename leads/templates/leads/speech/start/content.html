@@ -1,0 +1,43 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:speech-show' lead.id %}?r=f&l=f">
+                        {{referrer_name}} (Ela) | {{lead_first_name}} (Ela)
+                    </a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:speech-show' lead.id %}?r=f&l=m">
+                        {{referrer_name}} (Ela) | {{lead_first_name}} (Ele)
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:speech-show' lead.id %}?r=m&l=m">
+                        {{referrer_name}} (Ele) | {{lead_first_name}} (Ele)
+                    </a>
+                </li>
+
+                <li class="list-group-item">
+                    <a href="{% url 'leads:speech-show' lead.id %}?r=m&l=f">
+                        {{referrer_name}} (Ele) | {{lead_first_name}} (Ela)
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

@@ -380,7 +380,7 @@ def qualified_confirmed(request, qualified_id):
     return render(request, 'leads/qualified/confirmed/index.html', context)
 
 
-def speech(request, lead_id):
+def speech_start(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
 
@@ -389,10 +389,37 @@ def speech(request, lead_id):
     referrer_name = lead.get_referrer_name()
 
     context = {
-        'page_title': 'Modelo de Speech',
+        'page_title': 'Escolha o Speech',
         'lead': lead,
         'lead_first_name': lead_first_name,
         'referrer_name': referrer_name,
+    }
+
+    return render(request, 'leads/speech/start/index.html', context)
+
+
+def speech_show(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead_first_name = lead.name.partition(' ')[0]
+
+    lead_gender = request.GET.get('l', None)
+
+    referrer_name = lead.get_referrer_name()
+
+    referrer_gender = request.GET.get('r', None)
+
+    context = {
+
+        'page_title': 'Modelo de Speech ({} - {})'.format(referrer_name, lead_first_name),
+
+        'lead': lead,
+        'lead_first_name': lead_first_name,
+        'lead_gender': lead_gender,
+
+        'referrer_name': referrer_name,
+        'referrer_gender': referrer_gender,
     }
 
     return render(request, 'leads/speech/index.html', context)

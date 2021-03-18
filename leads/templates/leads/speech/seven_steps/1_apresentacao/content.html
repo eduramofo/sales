@@ -1,3 +1,5 @@
+{% load leads_extras %}
+
 <div class="text-group mb-3">
     <p class="m-0 p-0">Alô <strong>{{lead_first_name}}</strong>!</p>
 </div>
@@ -7,7 +9,7 @@
 </div>
 
 <div class="text-group mb-3">
-    <p class="m-0 p-0">Então <strong>{{lead_first_name}}</strong>, eu tou te ligando a pedido do(a) <strong>{{referrer_name}}</strong>. Ele(a) te avisou que eu ia te ligar?</p>
+    <p class="m-0 p-0">Então <strong>{{lead_first_name}}</strong>, eu tou te ligando a pedido {% mfb referrer_gender 'do' 'da' %} <strong>{{referrer_name}}</strong>. {% mfb referrer_gender 'Ele' 'Ela' %} te avisou que eu ia te ligar?</p>
 </div>
 
 <div class="text-group mb-3">
@@ -16,15 +18,18 @@
         <span class="text-success">
             <strong>SIM:</strong>
         </span><br/>
-        <span>Maravilha! O que ele(a) te falou?</span>
+        <span>
+            Você tá {% mfb referrer_gender 'tranquilo' 'tranquila' %} agora para falar?
+        </span>
     </p>
 
     <p class="m-0 p-0 mt-1">
-        Você tá tranquila agora para falar?
+        Maravilha! O que {% mfb referrer_gender 'ele' 'ela' %} te falou?
     </p>
 
 </div>
 
+{% comment %}
 <div class="text-group mb-3">
     <p class="m-0 p-0">
         <span class="text-danger">
@@ -32,6 +37,7 @@
         </span>
         <br> Como assim!? <br />Ele(a) pede para eu te ligar e não fala nada com você...<br />Mas não tem problema. <br />Você tá tranquilo(a) agora pra falar?</p>
 </div>
+{% endcomment %}
 
 <div class="text-group mb-3">
     <p class="m-0 p-0">
@@ -39,12 +45,15 @@
     </p>
 </div>
 
+{% comment %}
 <div class="text-group mb-3">
     <p class="m-0 p-0">
         <strong>{{lead_first_name}}</strong>, eu tou falando aqui da <strong>Wise Up</strong> que é a maior rede de escolas de Inglês do Brasil. Você conhece a <strong>Wise Up</strong>?
     </p>
 </div>
+{% endcomment %}
 
+{% comment %}
 <div class="text-group mb-3">
 
     <p class="m-0 p-0">
@@ -57,7 +66,9 @@
         <span>Me conta o que você ouviu falar da gente.</span>
     </p>
 </div>
+{% endcomment %}
 
+{% comment %}
 <div class="text-group mb-3">
     <p class="m-0 p-0">
         <span class="text-danger">
@@ -66,15 +77,7 @@
         <br/>NÃO!? Como assim você nunca ouviu falar dá gente!?
     </p>
 </div>
-
-<div class="text-group mb-3">
-    <p class="m-0 p-0 mb-1">Sobre a <strong>Wise Up</strong>:</p>
-    <ul class="mb-0">
-        <li>Mais de 400 escolas espalhas por todo Brasil</li>
-        <li>Existe a mais de 25 anos</li>
-        <li>Especializada em inglês para adulto</li>
-    </ul>
-</div>
+{% endcomment %}
 
 <div class="text-group mb-3">
         <p class="m-0 p-0 mb-1 text-danger">
@@ -83,7 +86,8 @@
             </mark>
         </p>
         <p class="m-0 p-0">
-            O(a) <strong>{{referrer_name}}</strong> se matriculou na nossa plataforma para <strong>Aprender Inglês Online</strong> e ele(a) gostou tanto que me pediu para eu te ligar. Acreditando que você também ia gostar.
+            <span>Eu tou falando aqui da <strong>Wise Up</strong> que é maior rede de escolas de inglês do Brasil. A gente tem mais de 400 escolas.</span><br/>
+            {% mfb referrer_gender 'O' 'A' %} <strong>{{referrer_name}}</strong> se matriculou na nossa plataforma para <strong>aprender inglês online</strong> e {% mfb referrer_gender 'ele' 'ela' %} gostou tanto que me pediu para eu te ligar. Acreditando que você também ia gostar.
         </p>
 </div>
 
@@ -96,15 +100,25 @@
         </p>
 
         <p class="m-0 p-0">
-            O(a) <strong>{{referrer_name}}</strong> conheceu a nossa plataforma para <strong>Aprender Inglês Online</strong> e ele(a) gostou tanto que me pediu para eu te ligar. Acreditando que você também ia gostar.
+            <span>Eu tou falando aqui da <strong>Wise Up</strong> que é maior rede de escolas de inglês do Brasil. A gente tem mais de 400 escolas.</span><br/>
+            {% mfb referrer_gender 'O' 'A' %} <strong>{{referrer_name}}</strong> conheceu a nossa plataforma para <strong>aprender inglês online</strong> e {% mfb referrer_gender 'ele' 'ela' %} gostou tanto que me pediu para eu te ligar. Acreditando que você também ia gostar.
         </p>
 
+</div>
+
+<div class="text-group mb-3">
+    <p class="m-0 p-0 mb-1">Sobre a <strong>Wise Up</strong>:</p>
+    <ul class="mb-0">
+        <li>A gente é a maior escola de inglês do Brasil</li>
+        <li>Mais de 400 escolas espalhas por todo Brasil</li>
+        <li>Existe a mais de 25 anos</li>
+        <li>Especializada em inglês para adulto</li>
+    </ul>
 </div>
 
 <div class="text-group bg-success">
         <p class="m-0 p-0 text-white">
             E <strong>{{lead_first_name}}</strong>
-            <br/> me conta aí.
-            <br/> Você acha que faz sentido a gente tá aí conversando sobre o seu inglês?
+            <br/> Você acha que faz sentido a gente tá conversando sobre o seu inglês?
         </p>
 </div>
