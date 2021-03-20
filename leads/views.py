@@ -410,6 +410,8 @@ def speech_show(request, lead_id):
 
     referrer_gender = request.GET.get('r', None)
 
+    referrer_win = request.GET.get('rm', None)
+
     context = {
 
         'page_title': 'Modelo de Speech ({} - {})'.format(referrer_name, lead_first_name),
@@ -420,6 +422,7 @@ def speech_show(request, lead_id):
 
         'referrer_name': referrer_name,
         'referrer_gender': referrer_gender,
+        'referrer_win': referrer_win,
     }
 
     return render(request, 'leads/speech/index.html', context)
