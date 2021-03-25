@@ -42,12 +42,9 @@
                 </div>
 
                 <div class="col-6 mt-2">
-                    <a role="button" 
-                        id="leads-call-whatsapp-btn" 
-                        href="{% url 'leads:speech' lead.id %}"
-                        class="btn btn-block btn-info">
+                    <button id="speech-modal-btn" class="btn btn-block btn-info" data-toggle="modal" data-target="#speech-modal">
                         {% btn_svg_icons 'bootstrap' 'megaphone-fill' '22px' 'center' 'Speech' %}
-                    </a>
+                    </button>
                 </div>
 
                 <div class="col-6 mt-2">

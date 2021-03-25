@@ -1,5 +1,8 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'leads/speech/speech.css' %}">
+{% endblock %}
 {% block content %}
 {% include "core/nav.html" %}
 {% include "core/page_title.html" %}
