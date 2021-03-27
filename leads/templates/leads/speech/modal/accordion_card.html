@@ -1,0 +1,17 @@
+<div class="card">
+
+  <div class="card-header" id="card-header-{{id}}">
+    <h2 class="mb-0">
+      <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse-{{id}}" aria-expanded="false" aria-controls="collapse-{{id}}">
+        {{headline}}
+      </button>
+    </h2>
+  </div>
+
+  <div id="collapse-{{id}}" class="collapse" aria-labelledby="card-header-{{id}}" data-parent="#accordion-speech">
+    <div class="card-body">
+      {% include content_template_address %}
+    </div>
+  </div>
+
+</div>

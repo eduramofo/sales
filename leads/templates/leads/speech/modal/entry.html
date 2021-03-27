@@ -2,19 +2,21 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title w-100 text-center text-primary">Speech</h3>
+        <h3 class="modal-title w-100 text-center text-dark">Speech</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">        
-        {% include 'leads/speech/modal/conexao.html' %}
-        {% include 'leads/speech/modal/di.html' %}
-        {% include 'leads/speech/modal/speech.html' %}
-        {% include 'leads/speech/modal/fechamento.html' %}
-        {% include 'leads/speech/modal/referidos.html' %}
-        {% include 'leads/speech/modal/validacao.html' %}
-        {% include 'leads/speech/modal/pos_venda.html' %}
+      <div class="modal-body">
+        <div class="accordion" id="accordion-speech">
+            {% include 'leads/speech/modal/accordion_card.html' with id='conexao' headline='Conexão' content_template_address='leads/speech/modal/conexao.html' %}
+            {% include 'leads/speech/modal/accordion_card.html' with id='di' headline='DI' content_template_address='leads/speech/modal/di.html' %}
+            {% include 'leads/speech/modal/speech.html' %}
+            {% include 'leads/speech/modal/accordion_card.html' with id='fechamento' headline='Fechamento' content_template_address='leads/speech/modal/fechamento.html' %}
+            {% include 'leads/speech/modal/accordion_card.html' with id='referidos' headline='Referidos' content_template_address='leads/speech/modal/referidos.html' %}
+            {% include 'leads/speech/modal/accordion_card.html' with id='validacao' headline='Validação' content_template_address='leads/speech/modal/validacao.html' %}
+            {% include 'leads/speech/modal/accordion_card.html' with id='pos_venda' headline='Pós-Venda' content_template_address='leads/speech/modal/pos_venda.html' %}
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
