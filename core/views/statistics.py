@@ -1,7 +1,8 @@
 import json
 
 from django.utils.timezone import datetime
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
@@ -10,9 +11,24 @@ from activities.models import Activity
 
 
 @login_required()
-def statistics(request):
+def home(request):
 
-    page_title = 'Estatísticas'
+    page_title = 'Estatísticas (Home)'
+
+    nav_name = 'statistics'
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+    }
+
+    return render(request, 'statistics/home/index.html', context)
+
+
+@login_required()
+def balance(request):
+
+    page_title = 'Estatísticas (Balanço dos Leads)'
 
     nav_name = 'statistics'
 
@@ -20,31 +36,79 @@ def statistics(request):
         'page_title': page_title,
         'nav_name': nav_name,
         'table_balance': table_balance(),
-        'table_productivity': table_productivity(),
     }
 
-    return render(request, 'core/statistics/index.html', context)
+    return render(request, 'statistics/balance/index.html', context)
 
 
-def table_productivity():
+@login_required()
+def day_detail(request):
+
+    page_title = 'Estatísticas (Detalhe de um Dia)'
+
+    nav_name = 'statistics'
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+    }
+
+    day_detail_date_str = request.GET.get('day-detail-date', None)
+    if day_detail_date_str:
+        day_detail_date_url = reverse_lazy('core:statistics_day_detail_result', args=(day_detail_date_str,))
+        return HttpResponseRedirect(day_detail_date_url)
+
+    return render(request, 'statistics/day_detail/index.html', context)
+
+
+@login_required()
+def day_detail_result(request, dt):
+
+    dt_obj = datetime.strptime(dt, '%Y-%m-%d')
+    
+    activities = Activity.objects.filter(
+        created_at__year=dt_obj.year,
+        created_at__month=dt_obj.month,
+        created_at__day=dt_obj.day
+    )
+    
+    page_title = 'Estatísticas (Detalhe de um Dia | Resultado)'
+
+    nav_name = 'statistics'
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'activities': activities,
+        'abstract': abstract(dt_obj),
+    }
+
+    return render(request, 'statistics/day_detail_result/index.html', context)
+
+
+def abstract(dt_obj):
 
     table = {
         'leads_processed': None,
         'leads_lost': None,
+        'activities': None,
     }
 
-    today = datetime.today()
-
     activities = Activity.objects.filter(
-        created_at__year=today.year,
-        created_at__month=today.month,
-        created_at__day=today.day
+        created_at__year=dt_obj.year,
+        created_at__month=dt_obj.month,
+        created_at__day=dt_obj.day
     )
 
     leads_pks = leads_processed = activities.values_list('lead', flat=True).distinct()
+
     leads = leads_models.Lead.objects.filter(pk__in=leads_pks)
+
     table['leads_processed'] = leads.count()
+
     table['leads_lost'] = leads.filter(status='perdido').count()
+
+    table['activities'] = activities.count()
 
     return table
 

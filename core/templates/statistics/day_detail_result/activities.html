@@ -1,0 +1,26 @@
+<table class="table table-responsive">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Data/Hora</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Assunto</th>
+      <th scope="col">Lead</th>
+      <th scope="col">Feito?</th>
+      <th scope="col">Anotações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for activity in activities %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{activity.created_at}}</td>
+            <td>{{activity.get_type_display}}</td>
+            <td>{{activity.subject}}</td>
+            <td>{{activity.lead}}</td>
+            <td>{{activity.done}}</td>
+            <td>{{activity.notes}}</td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>

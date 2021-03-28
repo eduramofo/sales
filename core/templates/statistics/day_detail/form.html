@@ -1,0 +1,26 @@
+<form action="{% url 'core:statistics_day_detail' %}" method="get" class="border border-dark p-3 rounded">
+
+    <h5 class="mb-3 text-dark">Selecione a data para visualizar os detalhes do dia</h5>
+
+    <div class="form-group">
+        <label for="day-detail-date">Data do dia para análise</label>
+        <input type="date" class="form-control" id="day-detail-date" name="day-detail-date">
+    </div>
+
+    <div class="row">
+        
+        <div class="col-6">
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-success btn-block">Visualizar Detalhes</button>
+            </div>
+        </div>
+        
+        <div class="col-6">
+            <div class="form-group">
+                <a href="{% url 'core:statistics_day_detail' %}" role="button" class="btn btn-lg btn-warning btn-block">Limpar</a>
+            </div>
+        </div>
+
+    </div>
+
+</form>
