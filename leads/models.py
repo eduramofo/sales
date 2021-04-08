@@ -12,9 +12,8 @@ LEAD_STATUS_CHOICES = (
     ('novo', 'Novo - T1'),
     ('tentando_contato', 'Tentando - T2'),
     ('tentando_contato_2', 'Ultimato - T3'),
-    ('agendamento', 'Agendamento'),
-    ('acompanhamento', 'Follow-up'),
     ('geladeira', 'Geladeira'),
+    ('agendamento', 'Agendamento'),
     ('perdido', 'Perdido'),
     ('ganho', 'Ganho'),
 )

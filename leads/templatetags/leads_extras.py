@@ -175,6 +175,13 @@ def get_follow_up_leads(referrer):
     return leads
 
 
+@register.filter
+def get_cnr_leads(referrer):
+    leads_filter_query = Q(status='geladeira')
+    leads = referrer.leads.filter(leads_filter_query)
+    return leads
+
+
 @register.simple_tag
 def mfb(gender, m, f):
 

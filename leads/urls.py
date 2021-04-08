@@ -22,6 +22,7 @@ urlpatterns = [
     path('leads/referrers/t1/<uuid:referrer_id>/', views_referrers_lists.referrers_t1, name='leads_referrers_t1'),
     path('leads/referrers/t2/<uuid:referrer_id>/', views_referrers_lists.referrers_t2, name='leads_referrers_t2'),
     path('leads/referrers/t3/<uuid:referrer_id>/', views_referrers_lists.referrers_t3, name='leads_referrers_t3'),
+    path('leads/referrers/cnr/<uuid:referrer_id>/', views_referrers_lists.referrers_cnr, name='leads_referrers_cnr'),
 
     path('leads/referrers/all/<uuid:referrer_id>/', views_referrers_lists.referrers_all, name='leads_referrers_all'),
     path('leads/referrers/closed/<uuid:referrer_id>/', views_referrers_lists.referrers_closed, name='leads_referrers_closed'),

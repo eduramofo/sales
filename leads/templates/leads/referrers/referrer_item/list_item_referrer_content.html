@@ -42,6 +42,24 @@
             </a>
         </div>
 
+        <div class="col-4 mt-2">    
+            <a role="button" href="{% url 'leads:leads_referrers_cnr' referrer.id %}"
+            class="btn btn-sm btn-block btn-warning">
+                <small>
+                    <strong>CNR ({{referrer|get_cnr_leads|length}})</strong>
+                </small>
+            </a>
+        </div>
+
+        <div class="col-4 mt-2">
+            <a href="{% url 'leads:leads_referrers_agendamento' referrer.id %}"
+            class="btn btn-sm btn-block btn-warning">
+                <small>
+                    <strong>Agenda ({{referrer|get_agendamento_leads|length}})</strong>
+                </small>
+            </a>    
+        </div>
+
         <div class="col-4 mt-2">
             <a  role="button"
                 href="{% url 'leads:leads_referrers_all' referrer.id %}"
@@ -50,68 +68,16 @@
             </a>                
         </div>
 
-        <div class="col-4 mt-2">    
-            <a role="button" href="{% url 'leads:leads_referrers_closed' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small>
-                    <strong>Fechad. ({{referrer|get_closed_leads|length}})</strong>
-                </small>
-            </a>
-        </div>
-
-        <div class="col-4 mt-2">    
-            <a role="button" href="{% url 'leads:leads_referrers_opened' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small>
-                    <strong>Abert. ({{referrer|get_opened_leads|length}})</strong>
-                </small>
-            </a>
-        </div>
-
-        <div class="col-4 mt-2">    
-            <a role="button" href="{% url 'leads:leads_referrers_news' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small><strong>Novos ({{referrer|get_news_leads|length}})</strong></small>
-            </a>
-        </div>
-
-        <div class="col-4 mt-2">
-            <a href="{% url 'leads:leads_referrers_tentando' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small>
-                    <strong>Tentan. ({{referrer|get_tentanto_leads|length}})</strong>
-                </small>
-            </a>    
-        </div>
-
-        <div class="col-4 mt-2">
-            <a href="{% url 'leads:leads_referrers_agendamento' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small>
-                    <strong>Agend. ({{referrer|get_agendamento_leads|length}})</strong>
-                </small>
-            </a>    
-        </div>
-
-        <div class="col-4 mt-2">
-            <a href="{% url 'leads:leads_referrers_follow_up' referrer.id %}"
-            class="btn btn-sm btn-block btn-warning">
-                <small>
-                    <strong>Follow ({{referrer|get_follow_up_leads|length}})</strong>
-                </small>
-            </a>
-        </div>
-
-        <div class="col-4 mt-2">    
+        <div class="col-6 mt-2">    
             <a role="button" href="{% url 'leads:leads_referrers_perdido' referrer.id %}"
             class="btn btn-sm btn-block btn-warning">
                 <small>
-                    <strong>Perdid. ({{referrer|get_perdido_leads|length}})</strong>
+                    <strong>Perdidos ({{referrer|get_perdido_leads|length}})</strong>
                 </small>
             </a>
         </div>
 
-        <div class="col-4 mt-2">    
+        <div class="col-6 mt-2">    
             <a role="button" href="{% url 'leads:leads_referrers_ganho' referrer.id %}"
             class="btn btn-sm btn-block btn-warning">
                 <small>
