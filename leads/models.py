@@ -18,6 +18,12 @@ LEAD_STATUS_CHOICES = (
     ('ganho', 'Ganho'),
 )
 
+LEAD_GENDER_CHOICES = (
+    ('f', 'Feminino'),
+    ('m', 'Masculino'),
+    ('o', 'Outros'),
+)
+
 LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('', 'Selecionar'),
     ('sem_interesse', 'Sem interesse'),
@@ -91,6 +97,22 @@ class Lead(BaseModel):
     name = models.CharField(
         max_length=1024,
         verbose_name='Nome',
+    )
+
+    nickname = models.CharField(
+        max_length=1024,
+        verbose_name='Apelido',
+        null=True,
+        blank=True,
+    )
+
+    gender = models.CharField(
+        max_length=50,
+        verbose_name='Sexo',
+        choices=LEAD_GENDER_CHOICES,
+        default='m',
+        null=False,
+        blank=False,
     )
 
     indicated_by = models.CharField(

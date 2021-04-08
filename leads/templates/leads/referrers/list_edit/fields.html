@@ -1,0 +1,76 @@
+{% load widget_tweaks %}
+{% for lead in leads %}
+    <div class="row border boder-warning m-1 mb-3 rounded">
+
+        <div class="col-2">
+            <div class="form-group">
+                <label for="nome">Status</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.get_status_display}}">
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.name}}">
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <label for="nome">Apelido</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.nickname}}">
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <div class="form-group">
+                <label for="nome">Sexo</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.get_gender_display}}">
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="form-group">
+                <label for="nome">Prioridade</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.priority}}">
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="form-group">
+                <label for="nome">Telefone</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.tel}}">
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <div class="form-group">
+                <label for="nome">WhatsApp</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.waid}}">
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group">
+                <label for="nome">Localização</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.location}}">
+            </div>
+        </div>
+        
+        <div class="col-1">
+            <div class="form-group">
+                <label for="nome">GMT</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.gmt}}">
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <label for="nome">Anotações</label>
+                <input type="text" class="form-control form-control-sm" id="nome" value="{{lead.note}}">
+            </div>
+        </div>
+
+    </div>
+{% endfor %}

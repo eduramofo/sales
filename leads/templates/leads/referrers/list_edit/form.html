@@ -1,0 +1,10 @@
+{% comment %} {{lead}} {% endcomment %}
+{% comment %} {{lead_simple_form}} {% endcomment %}
+{% comment %} <form method="post" action="{% url 'leads:upload' %}" enctype="multipart/form-data" class="bg-light border border-primary p-4 rounded"> {% endcomment %}
+<form class="bg-light border border-primary p-3 rounded mb-3">
+    {% csrf_token %}
+    {% include "leads/referrers/list_edit/fields.html" %}
+    <div class="form-group mb-0">
+        <button type="submit" class="btn btn-block btn-success">Salvar</button>
+    </div>
+</form>

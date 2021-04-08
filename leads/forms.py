@@ -2,6 +2,7 @@ from django import forms
 from leads import models as leads_models
 from leads import validators
 
+
 class LeadForm(forms.ModelForm):
     
     next_contact = forms.DateTimeField(
@@ -47,6 +48,41 @@ class LeadForm(forms.ModelForm):
             'priority',
             'qualified',
             'name',
+            'nickname',
+            'gender',
+            'tel',
+            'waid',
+            'note',
+            'location',
+            'gmt',
+        ]
+
+
+class LeadSimpleForm(forms.ModelForm):
+
+    priority = forms.BooleanField(
+        label='Prioridade?',
+        required=False,
+    )
+
+    location = forms.CharField(
+        label='Localização (País/UF/Cidade)',
+        required=False,
+    )
+
+    note = forms.CharField(
+        label='Anotações',
+        required=False,
+    )
+
+    class Meta:
+        model = leads_models.Lead
+        fields = [
+            'status',
+            'name',
+            'nickname',
+            'gender',
+            'priority',
             'tel',
             'waid',
             'note',

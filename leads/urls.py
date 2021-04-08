@@ -18,6 +18,10 @@ urlpatterns = [
     path('priorities/', views_leads_lists.priorities, name='priorities'),
 
     # leads lists referrers
+
+    ## edit
+    path('leads/referrers/edit/<uuid:referrer_id>/', views_referrers_lists.referrers_edit, name='leads_referrers_edit'),
+
     ## Ts
     path('leads/referrers/t1/<uuid:referrer_id>/', views_referrers_lists.referrers_t1, name='leads_referrers_t1'),
     path('leads/referrers/t2/<uuid:referrer_id>/', views_referrers_lists.referrers_t2, name='leads_referrers_t2'),

@@ -17,10 +17,33 @@ from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead, Referrer
-from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm
+from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm, LeadSimpleForm
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras
+
+
+@login_required()
+def referrers_edit(request, referrer_id):
+
+    nav_name = 'leads_list'
+
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+
+    leads = referrer_obj.leads.order_by('name')
+
+    page_title = 'Editar Leads do(a) {}'.format(referrer_obj)
+
+    lead_simple_form = LeadSimpleForm()
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': leads,
+        'lead_simple_form': lead_simple_form,
+    }
+
+    return render(request, 'leads/referrers/list_edit/index.html', context)
 
 
 @login_required()

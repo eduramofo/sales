@@ -21,19 +21,20 @@ def create_leads_by_contacts(contacts, referrer):
     referrer.leads.set(leads)
     referrer.save()
 
-
 def create_lead(contact, referrer):
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
-    
+    note = ''
     new_lead = Lead.objects.create(
         name=name,
+        nickname=name,
         tel=tel,
         waid=waid,
         gmt=referrer.gmt,
         location=referrer.location,
         short_description=referrer.short_description,
+        note=note,
     )
     return new_lead
 
@@ -73,7 +74,10 @@ def process_vcard(vcard):
     nome = vcard.fn.value
     contents = vcard.contents
     tels = get_vcard_tels_from_contents(contents)
-    contact = {'nome': nome, 'tels': tels,}
+    contact = {
+        'nome': nome,
+        'tels': tels,
+    }
     return contact
 
 
