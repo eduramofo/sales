@@ -27,7 +27,9 @@ def lead_add(request):
 
     initial = {}
     
-    lead_form = LeadForm(initial=initial)
+    lead_form = LeadForm(
+        initial=initial
+    )
 
     page_title = 'Criação de um novo do Lead'
 

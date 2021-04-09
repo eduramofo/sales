@@ -104,7 +104,10 @@ def leads_upload(request):
             referrer = gerar_leads(form, request)
             message_text = 'Leads criados com sucesso =)'
             messages.add_message(request,messages.SUCCESS, message_text)
-            return HttpResponseRedirect(reverse('leads:leads_referrers_all', args=[str(referrer.id),]))
+
+
+            # HttpResponseRedirect(reverse('leads:leads_referrers_edit', args=[str(referrer_obj.id),]))
+            return HttpResponseRedirect(reverse('leads:leads_referrers_edit', args=[str(referrer.id),]))
         else:
             message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
             messages.add_message(request,messages.ERROR, message_text)

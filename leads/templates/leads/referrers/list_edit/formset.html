@@ -1,0 +1,8 @@
+<form method="post" action="{% url 'leads:leads_referrers_edit' referrer.id %}" class="bg-light p-0 rounded mb-3">
+    {{ formset.management_form }}
+    {% csrf_token %}
+    <div class="form-group mb-0">
+        {% include "leads/referrers/list_edit/form.html" %}
+        <button type="submit" class="btn btn-block btn-success">Salvar</button>
+    </div>
+</form>

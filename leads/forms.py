@@ -60,13 +60,22 @@ class LeadForm(forms.ModelForm):
 
 class LeadSimpleForm(forms.ModelForm):
 
-    priority = forms.BooleanField(
-        label='Prioridade?',
-        required=False,
+    lead_id = forms.CharField(
+        label='Lead Id',
+        required=True,
+    )
+
+    priority = forms.ChoiceField(
+        label='Prioridade',
+        choices=(
+            (False, 'Não'),
+            (True, 'Sim'),
+        ),
+        required=True,
     )
 
     location = forms.CharField(
-        label='Localização (País/UF/Cidade)',
+        label='Localização',
         required=False,
     )
 
