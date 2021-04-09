@@ -1,5 +1,6 @@
 import urllib.parse
 import json
+import humanize
 
 from django.db.models import Q
 from django import template
@@ -7,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import date
+from django.utils import timezone
 from django.utils.timezone import localtime
 
 from leads.models import Lead, Referrer
@@ -109,6 +111,19 @@ def show_next_activities(lead):
         due_date = activity_qs.first().due_date
         if due_date:
             result = date(localtime(due_date), 'd/M/y à\s H:i')
+    return result
+
+
+@register.filter
+def show_last_activities(lead):
+    result = 'Não Existe'
+    activity_qs = Activity.objects.filter(lead=lead).order_by('-due_date')
+    if len(activity_qs) > 0:
+        due_date = activity_qs.first().created_at
+        if due_date:
+            delta = timezone.localtime(timezone.now()) - due_date
+            delta_humanize = humanize.precisedelta(delta, format="%0.1f")
+            result = delta_humanize
     return result
 
 
