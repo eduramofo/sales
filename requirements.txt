@@ -10,3 +10,4 @@ django-widget-tweaks
 django-filter
 vobject
 humanize
+python-telegram-bot

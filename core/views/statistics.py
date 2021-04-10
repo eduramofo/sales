@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+from core import telegram
 from leads import models as leads_models
 from activities.models import Activity
 
@@ -16,6 +17,8 @@ def home(request):
     page_title = 'Estatísticas (Home)'
 
     nav_name = 'statistics'
+
+    telegram.setup()
 
     context = {
         'page_title': page_title,

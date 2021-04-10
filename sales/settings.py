@@ -218,3 +218,13 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
 #########################################################
 # Email configuration - END
 #########################################################
+
+
+#########################################################
+# Telegram BOT - START
+#########################################################
+TELEGRAM_BOT_API = config('TELEGRAM_BOT_API', default='')
+TELEGRAM_BOT_CHAT_ID = config('TELEGRAM_BOT_CHAT_ID', default='')
+#########################################################
+# Telegram BOT - END
+#########################################################
