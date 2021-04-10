@@ -30,7 +30,7 @@ class LeadForm(forms.ModelForm):
     )
 
     location = forms.CharField(
-        label='Localização (País/UF/Cidade)',
+        label='Localização',
         required=False,
     )
 

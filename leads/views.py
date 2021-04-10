@@ -100,6 +100,14 @@ def lead_update_lost(request, lead_id):
     
     lead.save()
 
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Perdido',
+        type='call'
+    )
+
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
     url = reverse_lazy('leads:update', args=(str(lead.id),))
@@ -111,34 +119,24 @@ def lead_update_lost(request, lead_id):
 def lead_update_win(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
-    lead_form = LeadForm(request.POST or None, instance=lead)
-    activities = Activity.objects.filter(lead=lead).order_by('-created_at')
-    page_title = str(lead.name)
-    nav_name = 'leads_list'
-    method = request.method
     
-    context = {
-        'page_title': page_title,
-        'nav_name': nav_name,
-        'lead': lead,
-        'activities': activities,
-        'lead_form': lead_form,
-    }
+    lead.status = 'ganho'
+    
+    lead.save()
 
-    if method == 'POST':
-        if lead_form.is_valid():
-            lead = lead_form.save()
-            go_next = request.GET.get('next', None)
-            url = reverse_lazy('leads:update', args=(str(lead.id),))
-            if go_next:
-                url = reverse_lazy('leads:next')
-            messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-            return HttpResponseRedirect(url)
-        else:
-            messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário do lead!')
-            context['lead_form'] = lead_form
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Ganho',
+        type='call'
+    )
 
-    return render(request, 'leads/update/index.html', context)
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
 
 
 @login_required()

@@ -5,6 +5,15 @@
     --main-navbar-bottom-border-size: 3px;
 }
 
+#past-due-activities-stripe:focus,
+#past-due-activities-stripe:hover,
+#past-due-activities-stripe p.h6:focus,
+#past-due-activities-stripe p.h6:focus {
+    color: none!important;
+    text-decoration: none!important;
+    background-color: transparent!important;
+}
+
 nav#main-navbar button.navbar-toggler {
     border: 0;
     outline: 0;    

@@ -6,9 +6,11 @@
   <a class="nav-link" href="{% url 'leads:list' %}">Leads</a>
 </li>
 
+{% comment %}
 <li class="nav-item {% if nav_name == 'leads_news' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:news' %}">News</a>
 </li>
+{% endcomment %}
 
 <li class="nav-item {% if nav_name == 'leads_priorities' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:priorities' %}">Priorities</a>
@@ -18,13 +20,17 @@
   <a class="nav-link" href="{% url 'leads:schedules' %}">Schedules</a>
 </li>
 
+{% comment %}
 <li class="nav-item {% if nav_name == 'leads_opened' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:opened' %}">Opened</a>
 </li>
+{% endcomment %}
 
+{% comment %}
 <li class="nav-item {% if nav_name == 'activities' %}active{% endif%}">
   <a class="nav-link" href="{% url 'activities:list' %}">Activities</a>
 </li>
+{% endcomment %}
 
 <li class="nav-item {% if nav_name == 'leads_referrers' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:referrers' %}">Referrers</a>
@@ -34,9 +40,11 @@
   <a class="nav-link" href="{% url 'core:statistics' %}">Statistics</a>
 </li>
 
+{% comment %}
 <li class="nav-item {% if nav_name == 'leads_upload' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:upload' %}">Upload</a>
 </li>
+{% endcomment %}
 
 <li class="nav-item {% if nav_name == 'settings' %}active{% endif%}">
   <a class="nav-link" href="{% url 'core:settings' %}">Settings</a>
