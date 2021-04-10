@@ -15,18 +15,20 @@ def gerar_leads(form, request):
 def create_leads_by_contacts(contacts, referrer):
     leads = []
     for contact in contacts:
-        check_duplicate(contact, referrer)
-        new_lead = create_lead(contact, referrer)
+        new_lead = create_or_get_lead(contact, referrer)
         leads.append(new_lead)
+
     referrer.leads.set(leads)
     referrer.save()
 
-def create_lead(contact, referrer):
+def create_or_get_lead(contact, referrer):
+    
     tels = contact['tels']
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
     note = ''
+
     if len(tels) > 1:
         for current_tel in tels:
             current_tel_numero =  current_tel['numero']
@@ -46,23 +48,26 @@ def create_lead(contact, referrer):
                 elif current_tel_waid:
                     note = note + '[ Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
 
+    if waid == 'NN':
+        new_lead = None
 
-    new_lead = Lead.objects.create(
-        name=name,
-        nickname=name,
-        tel=tel,
-        waid=waid,
-        gmt=referrer.gmt,
-        location=referrer.location,
-        short_description=referrer.short_description,
-        note=note,
-    )
+    else:
+        lead = Lead.objects.filter(waid=waid).first()
+        if lead is None:
+            new_lead = Lead.objects.create(
+                name=name,
+                nickname=name,
+                tel=tel,
+                waid=waid,
+                gmt=referrer.gmt,
+                location=referrer.location,
+                short_description=referrer.short_description,
+                note=note,
+            )
+        else:
+            new_lead = lead
 
     return new_lead
-
-
-def check_duplicate(contact, referrer):
-    pass
 
 
 def handle_uploaded_files(request_files):
@@ -110,7 +115,7 @@ def get_vcard_tels_from_contents(contents):
             tel_obj = process_tel_if_exist(tel)
             tels.append(tel_obj)
     else:
-        current_tel_obj = {'numero': 'SEM NUMERO', 'waid': 'SEM NUMERO'}
+        current_tel_obj = {'numero': 'NN', 'waid': 'NN'}
         tels.append(current_tel_obj)
     return tels
 
