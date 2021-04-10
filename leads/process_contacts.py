@@ -22,10 +22,31 @@ def create_leads_by_contacts(contacts, referrer):
     referrer.save()
 
 def create_lead(contact, referrer):
+    tels = contact['tels']
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
     note = ''
+    if len(tels) > 1:
+        for current_tel in tels:
+            current_tel_numero =  current_tel['numero']
+            current_tel_waid = current_tel['waid']
+
+            if current_tel_numero and current_tel_waid:
+                tel = current_tel_numero
+                waid = current_tel_waid
+
+            else:
+                if current_tel_numero and current_tel_waid:
+                    note = note + '[ Tel: {}, Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
+
+                elif current_tel_numero:
+                    note = note + '[ Tel: {} ]\n'.format(current_tel_numero, current_tel_waid)
+
+                elif current_tel_waid:
+                    note = note + '[ Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
+
+
     new_lead = Lead.objects.create(
         name=name,
         nickname=name,
@@ -36,6 +57,7 @@ def create_lead(contact, referrer):
         short_description=referrer.short_description,
         note=note,
     )
+
     return new_lead
 
 
