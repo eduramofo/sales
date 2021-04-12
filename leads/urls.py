@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from leads import views
 from leads import views_leads_lists
@@ -7,7 +7,15 @@ from leads import views_referrers
 
 
 app_name = 'leads'
+
 urlpatterns = [
+    path('actions/', include('leads.actions.urls'), name='actions'),
+    # path('referrers/', include('leads.referrers.urls'), name='referrers'),
+
+
+
+
+
 
     # leads lists
     path('', views_leads_lists.all, name='list'),
@@ -54,9 +62,6 @@ urlpatterns = [
     
     # lead update
     path('<uuid:lead_id>/update/', views.lead_update, name='update'),
-    path('<uuid:lead_id>/lost/', views.lead_update_lost, name='lost'),
-    path('<uuid:lead_id>/win/', views.lead_update_win, name='win'),
-    path('<uuid:lead_id>/update/run-now/<str:lead_run_now>/', views.lead_update_run_now, name='update-run-now'),
 
     # referrers: list
     path('referrers/old/', views_referrers.referrers_old, name='referrers-old'),

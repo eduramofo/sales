@@ -3,9 +3,9 @@
 <div class="form-group">
     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
     {% if not field.errors %}
-        {{field|add_class:'form-control form-control-lg'}}
+        {{field|add_class:''}}
     {% else %}
-        {{field|add_class:'form-control form-control-lg is-invalid'}}
+        {{field|add_class:'is-invalid'}}
     {% endif %}
     <div class="invalid-feedback">{{ field.errors }}</div>
 </div>

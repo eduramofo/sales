@@ -15,7 +15,7 @@ from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead, Qualified
-from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm
+from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm, ScheduleForm
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras
@@ -92,93 +92,6 @@ def lead_update(request, lead_id):
 
 
 @login_required()
-def lead_update_lost(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'perdido'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Perdido',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def lead_update_win(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'ganho'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Ganho',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def lead_update_run_now(request, lead_id, lead_run_now):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    lead_form_run_now = LeadFormRunNow(request.POST or None, instance=lead)
-    method = request.method
-    lead_run_now = lead_run_now.lower()
-    run_now_status = None
-
-    if lead_run_now == 'true':
-        run_now_status = True
-
-    elif lead_run_now == 'false':
-        run_now_status = False
-
-    response = {
-        'success': False,
-        'run_now': run_now_status,
-        'td_html': '',
-    }
-
-    if method == 'POST':
-        if lead_form_run_now.is_valid() and not run_now_status == None:
-            lead = lead_form_run_now.save()
-            lead_id = lead.id
-            run_now = lead.run_now
-            response['success'] = True
-            response['run_now'] = run_now
-            response['td_html'] =  leads_extras.run_now_table_data_html(lead_id, run_now),
-            if run_now:         
-                messages.add_message(request, messages.SUCCESS, 'Lead INCLUÍDO na lista de execução de AGORA com sucesso!')
-            else:
-                messages.add_message(request, messages.SUCCESS, 'Lead EXCLUÍDO na lista de execução de AGORA com sucesso!')
-        else:
-            messages.add_message(request, messages.ERROR, 'Ocorreu um ERRO durante a inclusão/excluído do Lead na lista de execução de agora!')
-
-    return JsonResponse(response)
-
-
-@login_required()
 def lead_next(request):
     random_queryset_list =  tools.get_open_run_now_leads()
     if not random_queryset_list:
@@ -192,7 +105,6 @@ def lead_next(request):
 @login_required()
 def lead_next_referrer(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
-    # next_lead = tools.get_referrers_next_lead(lead)
     next_lead_id = tools.get_referrers_next_lead(lead)
     next_lead_url = reverse('leads:update', args=[next_lead_id,])
     return HttpResponseRedirect(next_lead_url)

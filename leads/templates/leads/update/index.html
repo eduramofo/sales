@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'leads/speech/speech.css' %}">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
 {% include "core/nav.html" %}
@@ -9,6 +9,8 @@
 {% include "leads/update/content.html" %}
 {% endblock %}
 {% block js %}
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <script src="{% static 'leads/update.js' %}"></script>
+<script src="{% static 'leads/schedule.js' %}"></script>
 <script src="{% static 'activities/activities_lead_update.js' %}"></script>
 {% endblock %}

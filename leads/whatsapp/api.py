@@ -29,6 +29,26 @@ def whatsapp_api_btn_template(lead, user_nickname, template_name):
     return btn_safe
 
 
+def schedule_due_date(lead, user_nickname, template_name, schedule_due_date):
+    waid = lead.waid
+    template_object = get_object_or_none(WhatsappTemplate, name=template_name)
+    link = '#'
+    if waid and template_object:
+        text = template_object.content
+        template = Template(text)
+        context = get_context(lead, user_nickname)
+        print(schedule_due_date)
+        context['schedule_due_date'] = schedule_due_date
+        context = Context(context)
+        raw_text_context = template.render(context)
+        text = quote(raw_text_context)
+        whatsapp_api_endpoint = 'https://api.whatsapp.com'
+        whatsapp_api_link = '{}/send?phone={}'.format(whatsapp_api_endpoint, waid)
+        link = '{}&text={}'.format(whatsapp_api_link, text)
+        link = mark_safe(link)
+    return link
+
+
 def make_whatsapp_template_btn_html(lead, user_nickname, template_name):
     waid = lead.waid
     template_object = get_object_or_none(WhatsappTemplate, name=template_name)

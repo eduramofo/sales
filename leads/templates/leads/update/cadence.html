@@ -17,7 +17,8 @@
                     </div>
                     <div class="col-6">
                         <a role="button" 
-                            id="leads-call-phone-sc-btn" href="{% link_to_call_lead lead %}" 
+                            id="leads-call-phone-sc-btn"
+                            href="{% link_to_call_lead lead %}" 
                             class="btn btn-block btn-primary text-center">
                             {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Call' %}
                         </a>
@@ -28,8 +29,8 @@
 
                     <div class="col-4">
                         <a role="button" 
-                            id="leads-call-whatsapp-btn" 
-                            href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t1"
+                            id="leads-call-whatsapp-btn"
+                            href="{% url 'leads:actions:t1' lead.id %}"
                             class="btn btn-block btn-dark">
                             {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º L' %}
                         </a>
@@ -37,8 +38,8 @@
 
                     <div class="col-4">
                         <a role="button" 
-                            id="leads-call-whatsapp-btn" 
-                            href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t2"
+                            id="leads-call-whatsapp-btn"
+                            href="{% url 'leads:actions:t2' lead.id %}"
                             class="btn btn-block btn-dark">
                             {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º L' %}
                         </a>
@@ -46,8 +47,8 @@
 
                     <div class="col-4">
                         <a role="button" 
-                            id="leads-call-whatsapp-btn" 
-                            href="{% url 'activities:add-through-lead' lead.id %}?shortcut=t3"
+                            id="leads-call-whatsapp-btn"
+                            href="{% url 'leads:actions:t3' lead.id %}"
                             class="btn btn-block btn-dark">
                             {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º L' %}
                         </a>
@@ -58,17 +59,17 @@
                 <div class="row mb-2">
 
                     <div class="col-6">
-                        <a role="button" 
-                            id="leads-call-phone-btn"
-                            href="{% url 'activities:add-through-lead' lead.id %}?shortcut=agendamento"
-                            class="btn btn-block bg-secondary text-white text-center">
-                            {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '20px' 'center' 'Schedule' %}
-                        </a>
+                        <button id='schedule-modal-btn'
+                                data-url="{% url 'leads:actions:schedule' lead.id %}"
+                                class='btn btn-block bg-secondary text-white text-center'>
+                            {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Schedule' %}
+                        </button>                    
                     </div>
 
                     <div class="col-6">
                         <a role="button" 
                             id="leads-call-whatsapp-btn" 
+                            {% comment %} href="{% url 'leads:actions:upload' lead.id %}" {% endcomment %}
                             href="{% url 'leads:upload' %}?lead={{lead.id}}"
                             class="btn btn-block bg-secondary text-white text-center">
                             {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload' %}
@@ -82,16 +83,17 @@
                     <div class="col-6">
                         <a role="button" 
                             id="leads-call-phone-btn"
-                            href="{% url 'leads:win' lead.id %}"
+                            href="{% url 'leads:actions:win' lead.id %}"
                             class="btn btn-block btn-success text-center">
                             {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Win' %}
                         </a>
                     </div>
 
+
                     <div class="col-6">
                         <a role="button" 
                             id="leads-call-whatsapp-btn" 
-                            href="{% url 'leads:lost' lead.id %}"
+                            href="{% url 'leads:actions:lost' lead.id %}"
                             class="btn btn-block btn-danger text-center">
                             {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Lost' %}
                         </a>

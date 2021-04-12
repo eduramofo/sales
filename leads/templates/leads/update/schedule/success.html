@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3 class="modal-title h5 w-100 text-center text-success">Agendamento Confirmado!</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+
+            <div class="col-12 mb-2">
+                <p><strong>Nome:</strong><br/>{{lead.name}}</p>
+                <p><strong>Data/Hora:</strong><br/>{{activity.due_date}}</p>
+            </div>
+
+            <div class="col-12 mb-2">
+                <a  role="button"
+                    href="{{whatsapp_confirm}}"
+                    target="_blank"
+                    class="btn btn-lg btn-block btn-success text-center">Confirmação via WhatsApp</a>
+            </div>
+
+            <div class="col-12 mb-1">
+                <button type="button" class="btn btn-lg btn-block btn-secondary text-center" data-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+</div>

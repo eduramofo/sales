@@ -209,3 +209,25 @@ class QualifiedForm(forms.Form):
         max_length=50,
         required=True,
     )
+
+
+class ScheduleForm(forms.Form):
+
+    due_date = forms.DateTimeField(
+        label='Data/hora',
+        widget=forms.DateTimeInput(
+            format='%Y-%m-%d %H:%M',
+            attrs={
+                'type': 'text',
+            }
+        ),
+        required=True,
+    )
+
+    note = forms.CharField(
+        label='Anotações',
+        widget=forms.Textarea(
+            attrs={'rows': 2, 'cols':60}
+        ),
+        required=False,
+    )
