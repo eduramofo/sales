@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rangefilter',
     'django_filters',
+    # thirds -> celery
+    'django_celery_beat',
+    'django_celery_results',
 
 ]
 
@@ -221,6 +224,17 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
 
 
 #########################################################
+# CELERY CONFIGURATION OPTIONS - START
+#########################################################
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://localhost')
+BROKER_POOL_LIMIT = 3
+CELERY_RESULT_BACKEND = 'django-db'
+#########################################################
+# CELERY CONFIGURATION OPTIONS - END
+#########################################################
+
+
+#########################################################
 # Telegram BOT - START
 #########################################################
 TELEGRAM_BOT_API = config('TELEGRAM_BOT_API', default='')
@@ -228,3 +242,9 @@ TELEGRAM_BOT_CHAT_ID = config('TELEGRAM_BOT_CHAT_ID', default='')
 #########################################################
 # Telegram BOT - END
 #########################################################
+
+
+
+
+
+

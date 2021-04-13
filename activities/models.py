@@ -55,6 +55,13 @@ class Activity(BaseModel):
         null=True,
     )
 
+    notification_sent = models.BooleanField(
+        verbose_name='Notificação Enviada',
+        default=False,
+        null=False,
+        blank=False,
+    )
+
     class Meta:
         verbose_name = "Atividade"
         verbose_name_plural = "Atividades"
