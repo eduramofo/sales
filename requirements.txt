@@ -14,3 +14,4 @@ python-telegram-bot
 celery
 django-celery-beat
 django-celery-results
+google-api-python-client

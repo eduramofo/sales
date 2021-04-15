@@ -18,8 +18,6 @@ def home(request):
 
     nav_name = 'statistics'
 
-    telegram.setup()
-
     context = {
         'page_title': page_title,
         'nav_name': nav_name,

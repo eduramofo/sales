@@ -243,8 +243,11 @@ TELEGRAM_BOT_CHAT_ID = config('TELEGRAM_BOT_CHAT_ID', default='')
 # Telegram BOT - END
 #########################################################
 
-
-
-
-
-
+#########################################################
+# Google Calendar API - START
+#########################################################
+GOOGLE_CALENDAR_API_KEY_V1 = config('GOOGLE_CALENDAR_API_KEY_V1', default='')
+GOOGLE_CALENDAR_CALENDAR_ID = config('GOOGLE_CALENDAR_CALENDAR_ID', default='')
+#########################################################
+# Google Calendar API - END
+#########################################################
