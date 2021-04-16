@@ -10,9 +10,8 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 
 from core.tools import paginator
-
+from integrations.google_calendar import events
 from activities.models import Activity
-
 from leads.process_contacts import gerar_leads
 from leads.models import Lead, Qualified
 from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm, ScheduleForm
@@ -134,6 +133,7 @@ def schedule(request, lead_id):
                 subject='Agendamento criado',
                 type='call'
             )
+            events.create(activity_obj)
             activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
             whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
             context['whatsapp_confirm'] = whatsapp_confirm
