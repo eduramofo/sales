@@ -51,6 +51,8 @@ urlpatterns = [
 
     path('', include("core.urls")),
 
+    path('integrations/', include("integrations.urls")),
+
     path('leads/', include("leads.urls")),
     
     path('activities/', include("activities.urls")),
