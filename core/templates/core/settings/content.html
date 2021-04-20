@@ -1,15 +1,25 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-
             <ul class="mt-3">
-                <li>Ajustar dados pessoais: Telefone, WhatsApp e Link WOL</li>
-                <li>Texto de tentei te ligar</li>
-                <li>Modelo de texto WhatsApp: (Oi)</li>
-                <li>Texto padrão para enviar para os referidos: MATRÍCULA FEITA</li>
-                <li>Texto padrão para enviar para os referidos: CONHECI</li>
-            </ul>
 
+                <li class="mb-2">
+                    <a  href="">Meu Perfil</a>
+                </li>
+
+                <li class="mb-2">
+                    <a  href="/admin/leads/whatsapptemplate/">Template de mensagens de WhatsApp</a>
+                </li>
+
+               <li class="mb-2">
+                    <a  href="{% url 'integrations:google_calendar:oauth2' %}">Integração com o  Google Calendar (Login)</a>
+                </li>
+
+                <li class="">
+                    <a  href="/admin/integrations/googleapi/">Integração com o  Google Calendar (Configurações)</a>
+                </li>
+
+            </ul>
         </div>
     </div>
 </div>
