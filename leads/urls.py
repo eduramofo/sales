@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 from leads import views
+from leads import views_update_v2
 from leads import views_leads_lists
 from leads import views_referrers_lists
 from leads import views_referrers
@@ -76,5 +77,9 @@ urlpatterns = [
     path('<uuid:lead_id>/speech/', views.speech_start, name='speech'),
     path('<uuid:lead_id>/speech-show/', views.speech_show, name='speech-show'),
     # path('<uuid:lead_id>/speech/', views.speech, name='speech'),
+
+    # v2
+    path('v2/', views_update_v2.update, name='update-v2'),
+    path('v2/<uuid:lead_id>/', views_update_v2.update_content, name='update-v2-content'),
 
 ]
