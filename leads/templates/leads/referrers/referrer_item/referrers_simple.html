@@ -8,10 +8,14 @@
 
                 <div class="col-12">
                     <p class="p-0 m-0 mt-0 mb-2 text-dark">
-                    Ref.: {% if referrer.lead %}
+                    <strong>Ref.:</strong> {% if referrer.lead %}
                         <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>
                         {% else %}{{referrer.name}}{% endif %} 
                     em {{referrer.referring_datetime|date:"d/M/y à\s H:i"}}.</p>
+                </div>
+              
+                <div class="col-12">
+                    <p class="mb-2"><strong>Descrição da linha:</strong> {{referrer.short_description}}</p>
                 </div>
 
                 <div class="col-4">    

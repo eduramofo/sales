@@ -1,59 +1,48 @@
 <div class="container">
 <div class="row">
-<div class="col-12 px-0">
+<div class="col-12">
 
     <nav>
-    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
 
-        <a  class="nav-link active"
-            id="nav-lead-tab"
-            data-toggle="tab"
-            href="#nav-lead"
-            role="tab"
-            aria-controls="nav-lead"
-            aria-selected="true"><strong>Lead</strong></a>
+            <a  class="nav-link active"
+                id="nav-lead-tab"
+                data-toggle="tab"
+                href="#nav-lead"
+                role="tab"
+                aria-controls="nav-lead"
+                aria-selected="true"><strong>Lead</strong></a>
 
-        <a  class="nav-link"
-            id="nav-whatsapp-tab"
-            data-toggle="tab"
-            href="#nav-whatsapp"
-            role="tab"
-            aria-controls="nav-whatsapp"
-            aria-selected="false"><strong>Whats</strong></a>
-    
-        <a  class="nav-link"
-            id="nav-activities-tab"
-            data-toggle="tab"
-            href="#nav-activities"
-            role="tab"
-            aria-controls="nav-activities"
-            aria-selected="false"><strong>Activities</strong></a>
+            <a  class="nav-link"
+                id="nav-whatsapp-tab"
+                data-toggle="tab"
+                href="#nav-whatsapp"
+                role="tab"
+                aria-controls="nav-whatsapp"
+                aria-selected="false"><strong>Whats</strong></a>
+        
+            <a  class="nav-link"
+                id="nav-activities-tab"
+                data-toggle="tab"
+                href="#nav-activities"
+                role="tab"
+                aria-controls="nav-activities"
+                aria-selected="false"><strong>Activities</strong></a>
 
-        {% comment %}
-        <a  class="nav-link"
-            id="nav-actions-tab"
-            data-toggle="tab"
-            href="#nav-actions"
-            role="tab"
-            aria-controls="nav-actions"
-            aria-selected="false"><strong>Ações</strong></a>
-        {% endcomment %}
+            <a  class="nav-link"
+                id="nav-referrers-tab"
+                data-toggle="tab"
+                href="#nav-referrers"
+                role="tab"
+                aria-controls="nav-referrers"
+                aria-selected="false"><strong>Referres</strong></a>
 
-        <a  class="nav-link"
-            id="nav-referrers-tab"
-            data-toggle="tab"
-            href="#nav-referrers"
-            role="tab"
-            aria-controls="nav-referrers"
-            aria-selected="false"><strong>Referres</strong></a>
-
-    </div>
+        </div>
     </nav>
 
     <div class="tab-content" id="nav-tabContent">
         {% include "leads/update/tab/tab_leads.html" %}
         {% include "leads/update/tab/tab_whatsapp.html" %}
-        {% comment %} {% include "leads/update/tab/tab_actions.html" %} {% endcomment %}
         {% include "leads/update/tab/tab_activities.html" %}
         {% include "leads/update/tab/tab_referrers.html" %}
     </div>
