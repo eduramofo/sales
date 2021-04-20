@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     # thirds -> celery
+    'tempus_dominus',
     'django_celery_beat',
     'django_celery_results',
 

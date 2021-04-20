@@ -4,7 +4,6 @@ from django import forms
 from activities.models import Activity, ACTIVITY_TYPE_CHOICES
 from leads import models as leads_models
 
-
 class ActivityForm(forms.ModelForm):
 
     DONE_CHOICES = (
@@ -29,10 +28,12 @@ class ActivityForm(forms.ModelForm):
     )
 
     due_date = forms.DateTimeField(
-        label='Data/Hora',
+        label='Data/hora',
         widget=forms.DateTimeInput(
-            format='%Y-%m-%dT%H:%M',
-            attrs={'type': 'datetime-local',}
+            format='%Y-%m-%d %H:%M',
+            attrs={
+                'type': 'text',
+            }
         ),
         required=True,
     )

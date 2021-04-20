@@ -14,7 +14,7 @@ $(document).ready(function() {
         $.get(url, success);
 
         function success(resp) {
-            
+
             var scheduleModal = $(resp);
             var dueDateInput = scheduleModal.find('#id_due_date');
             var form = scheduleModal.find('#schedule-modal-form');
@@ -24,7 +24,9 @@ $(document).ready(function() {
                 uiLibrary: 'bootstrap4',
                 format: 'yyyy-mm-dd HH:MM',
                 modal: false,
-                footer: true
+                showOnFocus: true,
+                header: true,
+                footer: true,
             });
 
             formConfirmBtn.click(function(e) {

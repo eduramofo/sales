@@ -1,9 +1,15 @@
 {% extends 'core/base.html' %}
 {% load static %}
+
+{% block css %}
+<link href="{% static 'core/gijgo/css/gijgo.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
 {% block content %}
 {% include "core/nav.html" %}
 {% include "core/page_title.html" %}
 {% include "activities/leads/update_through_lead/content.html" %}
 {% endblock %}
 {% block js %}
+<script src="{% static 'core/gijgo/js/gijgo.min.js' %}"></script>
+<script src="{% static 'activities/gijgo.js' %}"></script>
 {% endblock %}
