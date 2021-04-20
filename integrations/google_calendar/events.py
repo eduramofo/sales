@@ -82,66 +82,29 @@ def create(activity):
 
 def update(activity):
 
-    lead = activity.lead
-
-    service_result = authorize.get_service()
-
     data = {
         'success': False,
         'result': None,
     }
 
-    if service_result['success']:
+    calendar_id = activity.google_calendar_calendar_id
 
-        service = service_result['service']
+    event_id = activity.google_calendar_event_id
 
-        duration_in_minutes = 35
+    if calendar_id is not None and event_id is not None:
         
-        datetime_format = '%Y-%m-%dT%H:%M:%S'
-        
-        start_datetime = activity.due_date.strftime(datetime_format) + '-03:00'
+        service_result = authorize.get_service()
 
-        end_datetime = (activity.due_date + datetime.timedelta(minutes=duration_in_minutes)).strftime(datetime_format) + '-03:00'
-
-        lead_url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-        description = str(lead_url)
-
-        event_dict = {
-
-            'summary': '[WOL] {} '.format(lead),
-        
-            'description': description,
-
-            'start': {
-                'dateTime': start_datetime,
-                'timeZone': 'America/Sao_Paulo',
-            },
-
-            'end': {
-                'dateTime': end_datetime,
-                'timeZone': 'America/Sao_Paulo',
-            },
-
-            'reminders': {
-
-                'useDefault': False,
-
-                'overrides': [
-                    {'method': 'popup', 'minutes': 5},
-                ],
-
-            },
-
-        }
-
-        # event = service.events().insert(calendarId=calendar_id, body=event_dict).execute()
-
-        # result = 'Event created: %s' % (event.get('htmlLink'))
-
-        # data = {
-        #     'success': False,
-        #     'result': result,
-        # }
+        if service_result['success']:
+            
+            service = service_result['service']
+            event = service.events().get(calendarId=calendar_id, eventId=event_id).execute()
+            duration_in_minutes = 35
+            datetime_format = '%Y-%m-%dT%H:%M:%S'
+            start_datetime = activity.due_date.strftime(datetime_format) + '-03:00'
+            end_datetime = (activity.due_date + datetime.timedelta(minutes=duration_in_minutes)).strftime(datetime_format) + '-03:00'
+            event['start']['dateTime'] = start_datetime
+            event['end']['dateTime'] = end_datetime
+            updated_event = service.events().update(calendarId=calendar_id, eventId=event['id'], body=event).execute()
 
     return data

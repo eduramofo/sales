@@ -50,8 +50,17 @@ class ActivityForm(forms.ModelForm):
     )
 
     class Meta:
+        
         model = Activity
-        fields = '__all__'
+
+        fields = [
+            'lead',
+            'type',
+            'subject',
+            'due_date',
+            'note',
+            'done',
+        ]
 
     def clean_lead(self):
         return leads_models.Lead.objects.get(id=self.cleaned_data['lead'])

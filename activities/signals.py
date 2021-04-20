@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=Activity)
 def on_update_schedule_integrates_with_google_calendar(sender, instance, created, **kwargs):
+
     if created:
         try:
             lead = instance.lead
@@ -27,7 +28,7 @@ def on_update_schedule_integrates_with_google_calendar(sender, instance, created
         except Exception as error:
             logger.error(str(error))
 
-    # edit
+    # update
     else:
         try:
             lead = instance.lead
