@@ -55,6 +55,20 @@ class Activity(BaseModel):
         null=True,
     )
 
+    google_calendar_calendar_id = models.CharField(
+        verbose_name='Google Calendar: [calendarId]',
+        max_length=500,
+        null=True,
+        blank=True,
+    )
+
+    google_calendar_event_id = models.CharField(
+        verbose_name='Google Calendar: [eventId]',
+        max_length=500,
+        null=True,
+        blank=True,
+    )
+
     notification_sent = models.BooleanField(
         verbose_name='Notificação Enviada',
         default=False,
@@ -65,6 +79,7 @@ class Activity(BaseModel):
     class Meta:
         verbose_name = "Atividade"
         verbose_name_plural = "Atividades"
+        ordering = ['-created_at']
 
     def __str__(self):
 

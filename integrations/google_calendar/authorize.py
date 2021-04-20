@@ -80,18 +80,41 @@ def credentials_to_json_string(credentials):
     return credentials_json_string
 
 
-def get_servide():
+def get_service():
+
     credentials = get_credentials()
-    service = build('calendar', 'v3', credentials=credentials)
-    return service
+
+    result = {
+        'success': False,
+        'service': None,
+    }
+
+    if credentials.valid:
+
+        service = build(
+            'calendar',
+            'v3',
+            credentials=credentials
+        )
+
+        result = {
+            'success': True,
+            'service': service,
+        }
+
+    return result
 
 
 def authorize(request):
+    
     SCOPES = [
         'https://www.googleapis.com/auth/calendar',
     ]
+    
     flow = InstalledAppFlow.from_client_config(get_client_config(), scopes=SCOPES,)
+
     flow.redirect_uri = get_callback_url(request)
+    
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
         # re-prompting the user for permission. Recommended for web server apps.
@@ -99,6 +122,7 @@ def authorize(request):
         # Enable incremental authorization. Recommended as a best practice.
         include_granted_scopes='true'
     )
+
     return authorization_url
 
 
@@ -117,7 +141,20 @@ def callback(request):
 
 
 def success():
-    service = get_servide()
-    calendar = service.calendars().get(calendarId='primary').execute()
-    data = {'success': True, 'result': calendar['summary'],}
+    
+    service_result = get_service()
+    
+    data = {'success': False,}
+    
+    if service_result['success']:
+        
+        service = service_result['service']
+        
+        calendar = service.calendars().get(calendarId='primary').execute()
+        
+        data = {
+            'success': True,
+            'result': calendar['summary'],
+        }
+
     return data
