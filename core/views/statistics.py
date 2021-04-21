@@ -109,7 +109,11 @@ def abstract(dt_obj):
 
     table['leads_lost'] = leads.filter(status='perdido').count()
 
+    table['leads_win'] = leads.filter(status='ganho').count()
+
     table['activities'] = activities.count()
+
+    table['activities_leads'] = activities.count() / leads.count()
 
     return table
 
