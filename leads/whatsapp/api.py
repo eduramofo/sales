@@ -12,6 +12,13 @@ def whatsapp_api_link_open(lead):
     return link_to_call
 
 
+def whatsapp_api_link_call(lead):
+    whatsapp_number = str(lead.waid)
+    whatsapp_api_link = 'whatsapp://'
+    link_to_call = whatsapp_api_link + whatsapp_number
+    return link_to_call
+
+
 def whatsapp_api_all_btns_templates(lead, user_nickname):
     whatsapp_templates = WhatsappTemplate.objects.filter(active=True)
     btns_html = ''

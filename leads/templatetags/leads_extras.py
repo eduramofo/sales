@@ -47,6 +47,11 @@ def whatsapp_api_link_open(lead):
 
 
 @register.simple_tag
+def whatsapp_api_link_call(lead):
+    return whatsapp_api.whatsapp_api_link_call(lead)
+
+
+@register.simple_tag
 def whatsapp_api_btn_template(lead, user_nickname, template_name):
     return whatsapp_api.whatsapp_api_btn_template(lead, user_nickname, template_name)
 

@@ -7,17 +7,26 @@
             <div class="border border-dark p-2 rounded mt-3 mt-md-2">
 
                 <div class="row">
+                    
+                    <div class="col-4">
+                        <a role="button" 
+                            id="leads-call-whatsapp-sc-btn" 
+                            href="{% whatsapp_api_link_call lead %}" 
+                            class="btn btn-block btn-primary text-center">
+                            {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Call' %}
+                        </a>
+                    </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <a role="button" 
                             id="leads-call-whatsapp-sc-btn" 
                             href="{% whatsapp_api_link_open lead %}" 
                             class="btn btn-block btn-primary text-center">
-                            {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Whats' %}
+                            {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Open' %}
                         </a>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <a role="button" 
                             id="leads-call-phone-sc-btn"
                             href="{% link_to_call_lead lead %}" 
