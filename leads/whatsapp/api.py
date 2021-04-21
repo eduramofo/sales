@@ -14,7 +14,7 @@ def whatsapp_api_link_open(lead):
 
 def whatsapp_api_link_call(lead):
     whatsapp_number = str(lead.waid)
-    whatsapp_api_link = 'whatsapp://'
+    whatsapp_api_link = 'whatsapp://tel:'
     link_to_call = whatsapp_api_link + whatsapp_number
     return link_to_call
 
