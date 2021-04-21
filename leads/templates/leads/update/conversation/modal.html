@@ -1,0 +1,42 @@
+{% load core_extras %}
+{% load leads_extras %}
+
+<div id="conversation-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title h4 w-100 text-center text-dark">Registro de Ligação Atendida</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <button class="btn btn-block btn-secondary">Sem interesse</button>
+
+        <button class="btn btn-block btn-secondary">Parou na DI</button>
+
+        <button id='schedule-modal-btn'
+                data-url="{% url 'leads:actions:schedule' lead.id %}"
+                class='btn btn-block bg-primary text-white text-center'>
+            {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Agendamento' %}
+        </button>
+
+        <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% url 'leads:actions:lost' lead.id %}"
+            class="btn btn-block btn-danger text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista completa perdida' %}
+        </a>
+
+        <a role="button" 
+            id="leads-call-phone-btn"
+            href="{% url 'leads:actions:win' lead.id %}"
+            class="btn btn-block btn-success text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Entrevista ganha' %}
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>

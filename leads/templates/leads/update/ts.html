@@ -30,19 +30,20 @@
         </a>
     </div>
 
-</div>
-
-<div class="row mb-2">
-
-    <div class="col-6">
-        <button id='schedule-modal-btn'
-                data-url="{% url 'leads:actions:schedule' lead.id %}"
-                class='btn btn-block bg-secondary text-white text-center'>
-            {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Schedule' %}
-        </button>                    
+    <div class="col-12 mt-2">
+        <button 
+                id="registration-call-modal-btn"
+                class="btn btn-block btn-dark"
+                data-toggle="modal" data-target="#conversation-modal">
+                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Ligação Atendida' %}
+        </button>
     </div>
 
-    <div class="col-6">
+</div>
+
+<div class="row">
+
+    <div class="col-12">
         <a role="button" 
             id="leads-call-whatsapp-btn" 
             {% comment %} href="{% url 'leads:actions:upload' lead.id %}" {% endcomment %}
