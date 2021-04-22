@@ -118,49 +118,75 @@ def abstract(dt_obj):
     leads_lost_di = leads.filter(status='perdido', status_lost_justification='di').count()
     leads_lost_entrevista = leads.filter(status='perdido', status_lost_justification='entrevista_perdida').count()
 
+
+    # activities
+    table['activities'] = activities_count
+
     # LEADS TOTAL
     table['leads_processed'] = leads_count
-    table['leads_processed_per'] = round(leads_count / leads_count * 100, 2)
+
+    table['leads_processed_per'] = 'N/A'
+    if leads_count != 0:
+        table['leads_processed_per'] = round(leads_count / leads_count * 100, 2)
 
     # LEADS LOST
     table['leads_lost'] = leads_lost
-    table['leads_lost_per'] = round(leads_lost / leads_count * 100, 2)
+    table['leads_lost_per'] = 'N/A'
+    if leads_count != 0:
+        table['leads_lost_per'] = round(leads_lost / leads_count * 100, 2)
 
     # LEADS LOST - SEM INTERESSE
     table['leads_lost_sem_interesse'] = leads_lost_sem_interesse
-    table['leads_lost_sem_interesse_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
+    table['leads_lost_sem_interesse_per'] = 'N/A'
+    if leads_count != 0:
+        table['leads_lost_sem_interesse_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
 
     # LEADS LOST - DI
     table['leads_lost_di'] = leads_lost_sem_interesse
-    table['leads_lost_di_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
+    table['leads_lost_di_per'] = 'N/A'
+    if leads_count != 0:
+        table['leads_lost_di_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
 
     # LEADS LOST - ENTREVISTAS
     table['leads_lost_entrevistas'] = leads_lost_entrevista
-    table['leads_lost_entrevistas_per'] = round(leads_lost_entrevista / leads_count * 100, 2)
+    table['leads_lost_entrevistas_per'] = 'N/A'
+    if leads_count != 0:
+        table['leads_lost_entrevistas_per'] = round(leads_lost_entrevista / leads_count * 100, 2)
 
     # OTHERS
     table['leads_win'] = leads_win
-    table['leads_win_per'] = round(leads_win / leads_count * 100, 2)
-    table['activities'] = leads_count
-    table['activities_leads'] = round(leads_count / leads_count, 2)
-    
+
+    table['leads_win_per'] = 'N/A'
+    table['activities_leads'] = 'N/A'
+    if leads_count != 0:
+        table['leads_win_per'] = round(leads_win / leads_count * 100, 2)
+        table['activities_leads'] = round(activities_count / leads_count, 2)
+
     # LEADS LOST LOST
-    leads_lost_lost_sem_interesse_per = round(leads_lost_sem_interesse / leads_lost * 100, 2)
-    leads_lost_lost_sem_dinheiro_per = round(leads_lost_sem_dinheiro / leads_lost * 100, 2)
-    leads_lost_lost_di_per = round(leads_lost_di / leads_lost * 100, 2)
-    leads_lost_lost_entrevista_per = round(leads_lost_entrevista / leads_lost * 100, 2)
-    table['leads_lost_lost_per'] = round(leads_lost / leads_lost * 100, 2)
-    table['leads_lost_lost_sem_interesse'] = leads_lost_sem_interesse
-    table['leads_lost_lost_sem_interesse_per'] = leads_lost_lost_sem_interesse_per
-    table['leads_lost_lost_sem_dinheiro'] = leads_lost_sem_dinheiro
-    table['leads_lost_lost_sem_dinheiro_per'] = leads_lost_lost_sem_dinheiro_per
-    table['leads_lost_lost_di'] = leads_lost_di
-    table['leads_lost_lost_di_per'] = leads_lost_lost_di_per
-    table['leads_lost_lost_entrevista'] = leads_lost_entrevista
-    table['leads_lost_lost_entrevista_per'] = leads_lost_lost_entrevista_per
+    leads_lost_lost_sem_interesse_per = 'N/A'
+    leads_lost_lost_sem_dinheiro_per = 'N/A'
+    leads_lost_lost_di_per = 'N/A'
+    if leads_lost != 0:
+        leads_lost_lost_sem_interesse_per = round(leads_lost_sem_interesse / leads_lost * 100, 2)
+        leads_lost_lost_sem_dinheiro_per = round(leads_lost_sem_dinheiro / leads_lost * 100, 2)
+        leads_lost_lost_di_per = round(leads_lost_di / leads_lost * 100, 2)
+        leads_lost_lost_entrevista_per = round(leads_lost_entrevista / leads_lost * 100, 2)
+        table['leads_lost_lost_per'] = round(leads_lost / leads_lost * 100, 2)
+        table['leads_lost_lost_sem_interesse'] = leads_lost_sem_interesse
+        table['leads_lost_lost_sem_interesse_per'] = leads_lost_lost_sem_interesse_per
+        table['leads_lost_lost_sem_dinheiro'] = leads_lost_sem_dinheiro
+        table['leads_lost_lost_sem_dinheiro_per'] = leads_lost_lost_sem_dinheiro_per
+        table['leads_lost_lost_di'] = leads_lost_di
+        table['leads_lost_lost_di_per'] = leads_lost_lost_di_per
+        table['leads_lost_lost_entrevista'] = leads_lost_entrevista
+        table['leads_lost_lost_entrevista_per'] = leads_lost_lost_entrevista_per
 
     table['kpi_entrevistas'] = leads_lost_entrevista + leads_win
-    table['kpi_perdidos_entrevistas'] = round(leads_count / (leads_lost_entrevista + leads_win), 1)
+
+
+    table['kpi_perdidos_entrevistas'] = 'N/A'
+    if (leads_lost_entrevista + leads_win) != 0:
+        table['kpi_perdidos_entrevistas'] = round(leads_count / (leads_lost_entrevista + leads_win), 1)
 
     return table
 
