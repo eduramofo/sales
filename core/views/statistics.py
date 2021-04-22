@@ -142,10 +142,10 @@ def abstract(dt_obj):
         table['leads_lost_sem_interesse_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
 
     # LEADS LOST - DI
-    table['leads_lost_di'] = leads_lost_sem_interesse
+    table['leads_lost_di'] = leads_lost_di
     table['leads_lost_di_per'] = 'N/A'
     if leads_count != 0:
-        table['leads_lost_di_per'] = round(leads_lost_sem_interesse / leads_count * 100, 2)
+        table['leads_lost_di_per'] = round(leads_lost_di / leads_count * 100, 2)
 
     # LEADS LOST - ENTREVISTAS
     table['leads_lost_entrevistas'] = leads_lost_entrevista
