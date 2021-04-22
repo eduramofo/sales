@@ -88,7 +88,7 @@ class Lead(BaseModel):
 
     status_lost_justification = models.CharField(
         max_length=300,
-        choices=LEAD_STATUS_LOST_JUSTIFICATION_CHOICES,
+        # choices=LEAD_STATUS_LOST_JUSTIFICATION_CHOICES,
         verbose_name='Justificativa da Perda',
         null=True,
         blank=True,

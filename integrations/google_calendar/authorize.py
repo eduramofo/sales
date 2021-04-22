@@ -5,7 +5,7 @@ import json
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
-
+from google.auth.transport.requests import Request
 
 # django
 from django.conf import settings
@@ -14,6 +14,9 @@ from django.urls import reverse_lazy
 
 # app
 from integrations.models import GoogleApi
+
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
 def get_credentials():
@@ -29,7 +32,7 @@ def get_credentials():
         token_uri = credentials_dict["token_uri"],
         client_id = credentials_dict["client_id"],
         client_secret = credentials_dict["client_secret"],
-        scopes = credentials_dict["scopes"]
+        scopes = SCOPES,
     )
     return credentials
 
@@ -74,7 +77,7 @@ def credentials_to_json_string(credentials):
         'token_uri': credentials.token_uri,
         'client_id': credentials.client_id,
         'client_secret': credentials.client_secret,
-        'scopes': credentials.scopes,
+        'scopes': SCOPES,
     }
     credentials_json_string = json.dumps(credentials_dict)
     return credentials_json_string
@@ -89,28 +92,24 @@ def get_service():
         'service': None,
     }
 
-    if credentials.valid:
-
+    if credentials and credentials.valid:
         service = build(
             'calendar',
             'v3',
             credentials=credentials
         )
-
         result = {
             'success': True,
             'service': service,
         }
+    else:
+        print('Need login again!')
 
     return result
 
 
 def authorize(request):
-    
-    SCOPES = [
-        'https://www.googleapis.com/auth/calendar',
-    ]
-    
+
     flow = InstalledAppFlow.from_client_config(get_client_config(), scopes=SCOPES,)
 
     flow.redirect_uri = get_callback_url(request)
@@ -129,7 +128,7 @@ def authorize(request):
 def callback(request):
     state = request.GET.get('state')
     code = request.GET.get('code')
-    scopes = request.GET.get('scope')  
+    scopes = request.GET.get('scope')
     flow = InstalledAppFlow.from_client_config(get_client_config(), scopes=scopes, state=state)
     flow.redirect_uri = get_callback_url(request)
     flow.fetch_token(code=code)

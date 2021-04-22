@@ -1,4 +1,21 @@
-<table class="table table-bordered table-striped table-responsive">
+{% load humanize %}
+
+
+<div class="card border-primary mb-3">
+  <div class="card-header"><strong>Perdido / Entrevistas</strong></div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Para cada {{abstract.leads_lost}} perdidos foram realizadas {{abstract.kpi_entrevistas}} entrevistas.</h5>
+    <p class="card-text">Quantidade de entrevistas realizadas em relação aos leads perdidos (Quanto menor melhor), referência: <strong>3</strong>.</p>
+  </div>
+</div>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th scope="col" colspan="3" class="text-center bg-secondary text-white">Sumário do Dia</th>
+        </tr>
+    </thead>
 
     <thead>
 
@@ -13,21 +30,21 @@
     <tbody>
 
         <tr>
-            <td>Leads Processados</td>
+            <td>Leads</td>
             <td>{{abstract.leads_processed}}</td>
-            <td>N/A</td>
+            <td>{{abstract.leads_processed_per}}</td>
         </tr>
 
         <tr>
             <td>Perdidos</td>
             <td>{{abstract.leads_lost}}</td>
-            <td>N/A</td>
+            <td>{{abstract.leads_lost_per}}</td>
         </tr>
-        
+
         <tr>
             <td>Ganho</td>
             <td>{{abstract.leads_win}}</td>
-            <td>N/A</td>
+            <td>{{abstract.leads_win_per}}</td>
         </tr>
 
         <tr>
@@ -45,3 +62,118 @@
     </tbody>
 
 </table>
+
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th scope="col" colspan="3" class="text-center bg-secondary text-white">Detalhamento das Perdas</th>
+        </tr>
+    </thead>
+
+    <thead>
+
+        <tr>
+            <th scope="col">Descrição da Variável</th>
+            <th scope="col">Valores</th>
+            <th scope="col">(%)</th>
+        </tr>
+        
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td>Total</td>
+            <td>{{abstract.leads_lost}}</td>
+            <td>{{abstract.leads_lost_lost_per}}</td>
+        </tr>
+
+        <tr>
+            <td>Sem interesse</td>
+            <td>{{abstract.leads_lost_lost_sem_interesse}}</td>
+            <td>{{abstract.leads_lost_lost_sem_interesse_per}}</td>
+        </tr>
+
+        <tr>
+            <td>Não passou na DI</td>
+            <td>{{abstract.leads_lost_lost_di}}</td>
+            <td>{{abstract.leads_lost_lost_di_per}}</td>
+        </tr>
+
+        <tr>
+            <td>Entrevista</td>
+            <td>{{abstract.leads_lost_lost_entrevista}}</td>
+            <td>{{abstract.leads_lost_lost_entrevista_per}}</td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<div class="w-100 border border-dark rounded p-3 mb-3">
+
+    <h5 class="mb-3">Pipeline</h5>
+
+    <h6 class="text-dark m-0 p-0 mb-2">Leads: <span class="text-danger">{{abstract.leads_processed}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-primary" role="progressbar"
+        style="width: 100%;"
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>100%</strong>
+        </div>
+    </div>
+
+    <h6 class="text-dark m-0 p-0 mt-3 mb-2">Perdidos: <span class="text-danger">{{abstract.leads_lost}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-dark" role="progressbar"
+        style="width: {{abstract.leads_lost_per|floatformat:0|intcomma }}%" 
+        aria-valuenow="{{abstract.leads_lost_per|floatformat:0|intcomma }}"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>{{abstract.leads_lost_per|floatformat:0|intcomma }}%</strong>
+        </div>
+    </div>
+
+    <h6 class="text-dark m-0 p-0 mt-3 mb-2">Sem interesse: <span class="text-danger">{{abstract.leads_lost_sem_interesse}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-info" role="progressbar"
+        style="width: {{abstract.leads_lost_sem_interesse_per|floatformat:0|intcomma }}%" 
+        aria-valuenow="{{abstract.leads_lost_sem_interesse_per|floatformat:0|intcomma }}"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>{{abstract.leads_lost_sem_interesse_per|floatformat:0|intcomma }}%</strong>
+        </div>
+    </div>
+
+    <h6 class="text-dark m-0 p-0 mt-3 mb-2">DI: <span class="text-danger">{{abstract.leads_lost_di}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-warning" role="progressbar"
+        style="width: {{abstract.leads_lost_di_per|floatformat:0|intcomma }}%"
+        aria-valuenow="{{abstract.leads_lost_di_per|floatformat:0|intcomma }}"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>{{abstract.leads_lost_di_per}}%</strong>
+        </div>
+    </div>
+
+    <h6 class="text-dark m-0 p-0 mt-3 mb-2">Entrevistas perdidas: <span class="text-danger">{{abstract.leads_lost_entrevistas}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-danger" role="progressbar"
+        style="width: {{abstract.leads_lost_entrevistas_per|floatformat:0|intcomma }}%"
+        aria-valuenow="{{abstract.leads_lost_entrevistas_per|floatformat:0|intcomma }}"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>{{abstract.leads_lost_entrevistas_per|floatformat:0|intcomma }}%</strong>
+        </div>
+    </div>
+
+    <h6 class="text-dark m-0 p-0 mt-3 mb-2">Matrículas: <span class="text-danger">{{abstract.leads_win}}</span></h6>
+    <div style="height: 30px;" class="progress">
+        <div class="progress-bar bg-success" role="progressbar"
+        style="width: {{abstract.leads_win_per|floatformat:0|intcomma }}%"
+        aria-valuenow="{{abstract.leads_win_per|floatformat:0|intcomma }}"
+        aria-valuemin="0"
+        aria-valuemax="100"><strong>{{abstract.leads_win_per|floatformat:0|intcomma }}%</strong>
+        </div>
+    </div>
+
+</div>

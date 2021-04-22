@@ -5,16 +5,33 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title h4 w-100 text-center text-dark">Registro de Ligação Atendida</h3>
+        <h3 class="modal-title h5 w-100 text-center text-dark">Registro de Ligação Atendida</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
-        <button class="btn btn-block btn-secondary">Sem interesse</button>
+        <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% url 'leads:actions:lost' lead.id %}?justification=sem_interesse"
+            class="btn btn-block btn-secondary text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Sem interesse' %}
+        </a>
 
-        <button class="btn btn-block btn-secondary">Parou na DI</button>
+        {% comment %} <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% url 'leads:actions:lost' lead.id %}?justification=interessado_sem_condicoes_financeiras"
+            class="btn btn-block btn-secondary text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Interessado, mas sem condições' %}
+        </a> {% endcomment %}
+
+        <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% url 'leads:actions:lost' lead.id %}?justification=di"
+            class="btn btn-block btn-secondary text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Parou na DI' %}
+        </a>
 
         <button id='schedule-modal-btn'
                 data-url="{% url 'leads:actions:schedule' lead.id %}"
@@ -24,9 +41,9 @@
 
         <a role="button" 
             id="leads-call-whatsapp-btn" 
-            href="{% url 'leads:actions:lost' lead.id %}"
+            href="{% url 'leads:actions:lost' lead.id %}?justification=entrevista_perdida"
             class="btn btn-block btn-danger text-center">
-            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista completa perdida' %}
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista perdida' %}
         </a>
 
         <a role="button" 

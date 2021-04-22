@@ -174,8 +174,12 @@ def lost(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
     
+    status_lost_justification = request.GET.get('justification', None)
+    
     lead.status = 'perdido'
     
+    lead.status_lost_justification = status_lost_justification
+
     lead.save()
 
     Activity.objects.create(
