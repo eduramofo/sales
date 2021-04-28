@@ -4,20 +4,20 @@
 
     <div class="form-group">
         <label for="day-detail-date">Data do dia para análise</label>
-        <input type="date" class="form-control form-control-lg" id="day-detail-date" name="day-detail-date">
+        <input type="date" class="form-control form-control-lg" id="day-detail-date" name="day-detail-date" value="{{today_date}}">
     </div>
 
     <div class="row">
-        
+
         <div class="col-12 col-md-6">
             <div class="form-group mb-0 pb-0">
-                <button type="submit" class="btn btn-lg btn-success btn-block">Visualizar Detalhes</button>
+                <a href="{% url 'core:statistics_day_detail' %}" role="button" class="btn btn-lg btn-warning btn-block">Limpar</a>
             </div>
         </div>
-        
+
         <div class="col-12 col-md-6 mt-3 mt-md-0">
             <div class="form-group mb-0 pb-0">
-                <a href="{% url 'core:statistics_day_detail' %}" role="button" class="btn btn-lg btn-warning btn-block">Limpar</a>
+                <button type="submit" class="btn btn-lg btn-success btn-block">Visualizar Detalhes</button>
             </div>
         </div>
 

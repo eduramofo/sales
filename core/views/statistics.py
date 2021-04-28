@@ -49,9 +49,12 @@ def day_detail(request):
 
     nav_name = 'statistics'
 
+    today_date = datetime.now().strftime('%Y-%m-%d')
+
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
+        'today_date': today_date
     }
 
     day_detail_date_str = request.GET.get('day-detail-date', None)

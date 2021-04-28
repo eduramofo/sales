@@ -27,21 +27,9 @@
         <p class="card-text mb-0"><strong>Anotações do Lead:</strong> {{lead.note|default_if_none:"Não há."|truncatechars:60}}</p>
 
         <div class="row mb-1 mt-2">
-          <div class="col-3">
+          <div class="col-12">
             <a role="button" class="btn btn-block btn-sm btn-success"
             href="{% url 'leads:update' lead.id %}">Open</a>
-          </div>
-          <div class="col-3">
-            <a role="button" class="btn btn-block btn-sm btn-primary"
-            href="{% url 'leads:update' lead.id %}?action=wa">Whats</a>
-          </div>
-          <div class="col-3">
-            <a role="button" class="btn btn-block btn-sm btn-primary"
-            href="{% url 'leads:update' lead.id %}?action=call">Call</a>
-          </div>
-          <div class="col-3">
-            <a role="button" class="btn btn-block btn-sm btn-danger"
-            href="{% url 'leads:actions:lost' lead.id %}">Lost</a>
           </div>
         </div>
 
