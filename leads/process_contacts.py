@@ -34,40 +34,46 @@ def create_or_get_lead(contact, referrer):
             current_tel_numero =  current_tel['numero']
             current_tel_waid = current_tel['waid']
 
-            if current_tel_numero and current_tel_waid:
+            if current_tel_numero and current_tel_numero != 'NN' and current_tel_waid and current_tel_waid != 'NN':
                 tel = current_tel_numero
                 waid = current_tel_waid
 
             else:
-                if current_tel_numero and current_tel_waid:
+                if current_tel_numero and current_tel_numero != 'NN' and current_tel_waid and current_tel_waid != 'NN':
                     note = note + '[ Tel: {}, Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
 
-                elif current_tel_numero:
+                elif current_tel_numero and current_tel_numero != 'NN':
                     note = note + '[ Tel: {} ]\n'.format(current_tel_numero, current_tel_waid)
 
-                elif current_tel_waid:
+                elif current_tel_waid and current_tel_waid != 'NN':
                     note = note + '[ Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
 
+
     if waid == 'NN':
-        new_lead = None
+        new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note)
 
     else:
         lead = Lead.objects.filter(waid=waid).first()
         if lead is None:
-            new_lead = Lead.objects.create(
-                name=name,
-                nickname=name,
-                tel=tel,
-                waid=waid,
-                gmt=referrer.gmt,
-                location=referrer.location,
-                short_description=referrer.short_description,
-                note=note,
-            )
+            new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note)
         else:
             new_lead = lead
-
+    
     return new_lead
+
+
+def create_lead(name, tel, waid, gmt, location, short_description, note):
+    new_created_lead = Lead.objects.create(
+        name=name,
+        nickname=name,
+        tel=tel,
+        waid=waid,
+        gmt=gmt,
+        location=location,
+        short_description=short_description,
+        note=note,
+    )
+    return new_created_lead
 
 
 def handle_uploaded_files(request_files):
@@ -122,8 +128,11 @@ def get_vcard_tels_from_contents(contents):
 
 def process_tel_if_exist(tel):
     current_numero = tel.value
-    current_waid = None 
+    if current_numero == '':
+        current_numero == 'NN'
+    current_waid = 'NN' 
     if 'WAID' in tel.params.keys():
         current_waid = tel.params['WAID'][0]
+    
     current_tel_obj = {'numero': current_numero, 'waid': current_waid}
     return current_tel_obj
