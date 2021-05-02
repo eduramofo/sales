@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'sales.wsgi.application'
 
 default_dburl = 'postgres://postgres:postgres@localhost:5432/sales'
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'default': config(config('DATABASE_URL_EV', default='DATABASE_URL'), default=default_dburl, cast=dburl),
 }
 
 
