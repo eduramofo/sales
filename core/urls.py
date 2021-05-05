@@ -2,7 +2,9 @@ from django.urls import path
 
 from .views import main
 from .views import statistics
+from .views import academy
 from .views import settings
+
 from leads.views import qualified, qualified_confirmed
 
 
@@ -16,5 +18,6 @@ urlpatterns = [
     path('statistics/balance/', statistics.balance, name='statistics_balance'),
     path('statistics/day-detail/', statistics.day_detail, name='statistics_day_detail'),
     path('statistics/day-detail/result/<str:dt>/', statistics.day_detail_result, name='statistics_day_detail_result'),
+    path('academy/', academy.home, name='academy'),
     path('settings/', settings.settings, name='settings'),
 ]
