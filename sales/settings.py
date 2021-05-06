@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'leads.apps.LeadsConfig',
     'activities.apps.ActivitiesConfig',
     'integrations.apps.IntegrationsConfig',
+    'academy.apps.AcademyConfig',
 
     # django apps
     'django.contrib.admin',

@@ -57,4 +57,6 @@ urlpatterns = [
     
     path('activities/', include("activities.urls")),
 
+    path('academy/', include("academy.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

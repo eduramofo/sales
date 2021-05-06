@@ -1,11 +1,9 @@
-import json
-
 from django.shortcuts import render
 
 def home(request):
 
     context = {
-        'page_title': 'Academia',
+        'page_title': 'Academy',
         'nav_name': 'core_home'
     }
 
