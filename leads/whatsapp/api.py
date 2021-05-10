@@ -68,7 +68,6 @@ def schedule_due_date(lead, user_nickname, template_name, schedule_due_date):
         text = template_object.content
         template = Template(text)
         context = get_context(lead, user_nickname)
-        print(schedule_due_date)
         context['schedule_due_date'] = schedule_due_date
         context = Context(context)
         raw_text_context = template.render(context)
