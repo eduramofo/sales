@@ -19,6 +19,30 @@ def whatsapp_api_link_call(lead):
     return link_to_call
 
 
+def whatsapp_api_recommendation_i_enrolled():
+    whatsapp_api_endpoint = 'https://api.whatsapp.com'
+    template_name = 'referido_entrei'
+    template_object = get_object_or_none(WhatsappTemplate, name=template_name)
+    whatsapp_api_link = None
+    if template_object is not None:
+        text_raw = template_object.content
+        text = quote(text_raw)
+        whatsapp_api_link = '{}/send?text={}'.format(whatsapp_api_endpoint, text)
+    return whatsapp_api_link
+
+
+def whatsapp_api_recommendation_i_knew():
+    whatsapp_api_endpoint = 'https://api.whatsapp.com'
+    template_name = 'referido_conheci'
+    template_object = get_object_or_none(WhatsappTemplate, name=template_name)
+    whatsapp_api_link = None
+    if template_object is not None:
+        text_raw = template_object.content
+        text = quote(text_raw)
+        whatsapp_api_link = '{}/send?text={}'.format(whatsapp_api_endpoint, text)
+    return whatsapp_api_link
+
+
 def whatsapp_api_all_btns_templates(lead, user_nickname):
     whatsapp_templates = WhatsappTemplate.objects.filter(active=True)
     btns_html = ''

@@ -10,13 +10,10 @@ from leads import views_referrers
 app_name = 'leads'
 
 urlpatterns = [
+
     path('actions/', include('leads.actions.urls'), name='actions'),
+    
     # path('referrers/', include('leads.referrers.urls'), name='referrers'),
-
-
-
-
-
 
     # leads lists
     path('', views_leads_lists.all, name='list'),
