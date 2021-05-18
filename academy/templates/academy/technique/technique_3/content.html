@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="container mt-3">
+    {% include "academy/technique/technique_3/summary.html" %}
+    {% include "academy/technique/technique_3/wise_up.html" %}
+    {% include "academy/technique/technique_3/pre_di.html" %}
+    {% include "academy/technique/technique_3/deal.html" %}
+</div>
+
+{% url 'academy:technique-4' as academy_technique_4_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_4_url title="Ir para o Speech" %}

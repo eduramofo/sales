@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>Alô Maria?</strong></p>
+                <p class="text-success p-0 mb-0"><strong>Oi, quem é?</strong></p>
+            </div>
+            
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>Mária, bom dia! Aqui é o Jõao, tudo bem?</strong></p>
+                <p class="text-success mb-0"><strong>Tudo bem...</strong></p>
+            </div>
+
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>Mária, eu tou te ligando a pedido do Pedro, você tem 2 minutos pra falar agora?</strong></p>
+                <p class="text-success mb-0"><strong>Se for 2 minutos eu tenho...</strong></p>
+                <p class="text-danger mb-0"><strong>Tudo bem!</strong></p>
+            </div>
+            
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>Mária, eu vou te explicar do que se trata e você pode ficar a vontade para me dizer se faz sentindo pra você ou não, tudo bem?</strong></p>
+                <p class="text-success mb-0"><strong>Tudo bem...</strong></p>
+            </div>
+
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>Mária e o seguinte:</strong></p>
+                <p class="text-danger mb-0"><strong>O Pedro conheceu uma plataforma para aprender inglês online aqui dá Wise Up (que é a maior escola de inglês dá America Latina).</strong></p>
+                <p class="text-danger mb-0"><strong>Gostou e acreditou que faria sentindo para você.</strong></p>
+                <p class="text-danger mb-0"><strong>E Maria... Essa questão do inglês para você é um assunto importante?</strong></p>
+                <p class="text-success mb-0"><strong>Sim... Inglês é importante pra todo mundo, né....</strong></p>
+            </div>
+
+            <div class="p-2 border border-dark rounded mb-3">
+                <p class="text-danger mb-0"><strong>E Maria... porque seria importante (pra você)?</strong></p>
+                <p class="text-success mb-0"><strong>Sim... Inglês é importante pra todo mundo, né....</strong></p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% url 'academy:technique-2' as academy_technique_2_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_2_url title="Ir para Conexão" %}

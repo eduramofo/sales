@@ -1,0 +1,18 @@
+{% load static %}
+<div class="container mt-3 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center items-aligen-center">
+                <div class="col-12 d-lg-none p-0">
+                    <img class="w-100 w-lg-75 border border-dark rounded" src="{% static 'academy/technique/home/technique_bp.jpeg' %}" alt="Técnica Matrícula WSP">
+                </div>
+                <div class="col-8 d-none d-lg-block">
+                    <img class="w-100 w-lg-75 border border-dark rounded" src="{% static 'academy/technique/home/technique_bp.jpeg' %}" alt="Técnica Matrícula WSP">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% url 'academy:technique-1' as academy_technique_1_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_1_url title="Ir para Abertura/Apresentação" %}

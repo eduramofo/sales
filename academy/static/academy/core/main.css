@@ -1,0 +1,113 @@
+:root {
+    --color-theme-academy-1: #A51C30;
+    --color-theme-academy-2: #656f77;
+    --color-theme-academy-3: #000;
+}
+
+/* NAV [ START ] */
+
+nav#main {
+    -webkit-box-shadow: 1px 1px 20px -2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 1px 1px 20px -2px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 20px -2px rgba(0,0,0,0.2);
+    background-color: #fff!important;
+}
+
+/* nav#main button.navbar-toggler {
+    border-color: var(--color-theme-academy-1);
+    background-color: var(--color-theme-academy-1);
+} */
+
+nav#main button.navbar-toggler:focus {
+    outline: var(--color-theme-academy-1);
+    outline: var(--color-theme-academy-1);
+}
+
+nav#main .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(165, 28, 48, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+nav#main {
+    margin-bottom: 0!important;
+}
+
+nav#main .navbar-brand {
+    color: var(--color-theme-academy-1)!important;
+    font-weight: bolder;
+}
+
+nav#main li > .nav-link {
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--color-theme-academy-1)!important;
+    transition: all .35s ease;
+}
+
+nav#main ul:first-child li > .nav-link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-theme-academy-1);
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+nav#main ul:first-child li > .nav-link:hover {
+    color: var(--color-theme-academy-1)!important;
+}
+
+nav#main ul:first-child li > .nav-link:hover::before  {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+/*
+nav#main ul.navbar-nav .nav-link button.btn.login-btn {
+    color: var(--color-scapole-orange);
+    border-color: var(--color-scapole-orange);
+}
+
+nav#main ul.navbar-nav .nav-link:hover button.btn.login-btn {
+    background-color: var(--color-scapole-orange);
+    color: #fff;
+}
+*/
+/* NAV [ END ] */
+
+
+h1.page-title {
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--color-theme-academy-2)!important;
+    transition: all .35s ease;
+}
+
+h1.page-title::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -8px;
+    left: 0;
+    background-color: var(--color-theme-academy-1);
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+h1.page-title::before  {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}

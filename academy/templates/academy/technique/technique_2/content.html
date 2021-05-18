@@ -1,0 +1,4 @@
+{% load static %}
+{% include "academy/technique/technique_2/questions.html" %}
+{% url 'academy:technique-3' as academy_technique_3_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_3_url title="Ir para Decisão Imediata (D.I.)" %}
