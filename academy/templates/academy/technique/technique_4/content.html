@@ -1,12 +1,6 @@
-{% load static %}
-
 <div class="container mt-3">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-danger">Em Construção</h2>
-        </div>
-    </div>
+    {% include "academy/technique/technique_4/speech.html" %}
 </div>
 
-{% url 'academy:home' as academy_technique_4_url  %}
-{% include "academy/core/go_to_btn.html" with url=academy_technique_4_url title="Ir para Home" %}
+{% url 'academy:technique-5' as academy_technique_5_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_5_url title="Ir para Fechamento" %}

@@ -111,3 +111,21 @@ h1.page-title::before  {
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
 }
+
+div.text-group {
+    border: 2px solid var(--color-theme-academy-2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+div.text-group.question-1 {
+    border-color: var(--bs-success)!important;
+}
+
+div.text-group.question-2 {
+    border-color: var(--bs-warning)!important;
+}
+
+div.text-group.question-3 {
+    border-color: var(--bs-danger)!important;
+}

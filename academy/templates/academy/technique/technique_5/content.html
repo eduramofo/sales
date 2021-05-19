@@ -1,0 +1,6 @@
+<div class="container mt-3">
+    {% include "academy/technique/technique_5/fechamento.html" %}
+</div>
+
+{% url 'academy:technique-6' as academy_technique_6_url  %}
+{% include "academy/core/go_to_btn.html" with url=academy_technique_6_url title="Ir para Referidos" %}

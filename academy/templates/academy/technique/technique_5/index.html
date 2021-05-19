@@ -1,0 +1,12 @@
+{% extends 'academy/core/base.html' %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.6/mediaelementplayer.css">
+{% endblock %}
+{% block content %}
+{% include "academy/core/nav.html" %}
+{% include "academy/core/page_title.html" %}
+{% include "academy/technique/technique_5/content.html" %}
+{% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/gh/CDNSFree/mediaelement@latest/mediaelement.js"></script>
+{% endblock %}

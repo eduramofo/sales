@@ -54,7 +54,7 @@ def technique_5(request):
         'page_title': 'Fechamento',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/technique/technique_4/index.html', context)
+    return render(request, 'academy/technique/technique_5/index.html', context)
 
 
 def technique_6(request):
@@ -62,7 +62,7 @@ def technique_6(request):
         'page_title': 'Referidos',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/technique/technique_4/index.html', context)
+    return render(request, 'academy/technique/technique_5/index.html', context)
 
 
 def technique_7(request):
@@ -70,4 +70,4 @@ def technique_7(request):
         'page_title': 'Validação',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/technique/technique_4/index.html', context)
+    return render(request, 'academy/technique/technique_5/index.html', context)
