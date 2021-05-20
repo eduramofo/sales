@@ -3,6 +3,14 @@
 
 <div class="row mb-2">
 
+    <div class="col-12 mb-2">
+        <button data-toggle="modal" data-target="#conversation-modal"
+                id="registration-call-modal-btn"
+                class="btn btn-block btn-primary">
+                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Ligação Atendida' %}
+        </button>
+    </div>
+
     <div class="col-4">
         <a role="button" 
             id="leads-call-whatsapp-btn"
@@ -30,20 +38,59 @@
         </a>
     </div>
 
-    <div class="col-12 mt-2">
-        <button 
-                id="registration-call-modal-btn"
-                class="btn btn-block btn-primary"
-                data-toggle="modal" data-target="#conversation-modal">
-                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Ligação Atendida' %}
-        </button>
+    <div class="col-6 mt-2">
+        <a  role="button" 
+            href="{% url 'leads:actions:jump' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'bootstrap' 'arrow-down-circle-fill' '22px' 'center' 'Pular' %}
+        </a>
+    </div>
+
+    <div class="col-6 mt-2">
+        <a  role="button" 
+            href="{% url 'leads:actions:lost_direct' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down-fill' '22px' 'center' 'Sem Interesse' %}
+        </a>
+    </div>
+
+    <div class="col-6 mt-2">
+        <a  role="button" 
+            href="{% url 'leads:actions:ultimatum' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'bootstrap' 'x-lg' '22px' 'center' 'Ultimato' %}
+        </a>
+    </div>
+
+    <div class="col-6 mt-2">
+        <a  role="button" 
+            href="{% url 'leads:actions:invalid' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'bootstrap' 'trash-fill' '22px' 'center' 'Inválido' %}
+        </a>
     </div>
 
 </div>
 
-<div class="row">
+<div class="row mt-2">
 
-    <div class="col-12">
+    <div class="col-6">
+        <a  role="button" 
+            href="{% url 'leads:actions:ghosting' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 1' %}
+        </a>
+    </div>
+
+    <div class="col-6">
+        <a  role="button" 
+            href="{% url 'leads:actions:ghosting_2' lead.id %}"
+            class="btn btn-block btn-dark">
+            {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 2' %}
+        </a>
+    </div>
+
+    <div class="col-12 mt-2">
         <a role="button" 
             id="leads-call-whatsapp-btn" 
             {% comment %} href="{% url 'leads:actions:upload' lead.id %}" {% endcomment %}

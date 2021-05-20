@@ -21,6 +21,8 @@
         </p>
         <p class="card-text mb-0"><strong>Status:</strong> {{lead.get_status_display}}</p>
         <p class="card-text mb-0 {% if lead.priority %}text-danger{% endif %}"><strong>Prioridade:</strong> {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
+        <p class="card-text mb-0"><strong>Tel: </strong>{{lead.tel}}</p>
+        <p class="card-text mb-0"><strong>Whats: </strong>{{lead.waid}}</p>
         <p class="card-text mb-0"><strong>Próxima Atividade:</strong> {{lead|show_next_activities}}
         <p class="card-text mb-0"><strong>Última Atividade:</strong> {{lead|show_last_activities}}
         <p class="card-text mb-0"><strong>Descrição da linha:</strong> {{lead.short_description}}</p>
@@ -29,7 +31,7 @@
         <div class="row mb-1 mt-2">
           <div class="col-12">
             <a role="button" class="btn btn-block btn-sm btn-success"
-            href="{% url 'leads:update' lead.id %}">Open</a>
+            href="{% url 'leads:update' lead.id %}">Abrir</a>
           </div>
         </div>
 

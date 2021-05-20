@@ -198,6 +198,34 @@ def lost(request, lead_id):
 
 
 @login_required()
+def lost_direct(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead.status = 'perdido'
+
+    status_lost_justification = 'lost_direct'
+
+    lead.status_lost_justification = status_lost_justification
+
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Perdido Direto (Mensagem etc)',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
 def win(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
@@ -211,6 +239,118 @@ def win(request, lead_id):
         due_date=timezone.now(),
         done=True,
         subject='Ganho',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def jump(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead.order = lead.order + 1
+
+    lead.save()
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def ultimatum(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ultimatum'
+
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Ultimato',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def invalid(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'invalid'
+    
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Inválido',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def ghosting(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ghosting'
+    
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Bolo 1',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def ghosting_2(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ghosting_2'
+    
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Bolo 2',
         type='call'
     )
 

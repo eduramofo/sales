@@ -330,26 +330,29 @@ def referrers_next(request, referrer_id):
 
     referrer_obj = get_object_or_404(Referrer, id=referrer_id)
 
-    # ALL
-    redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),))
-
-    # T3
-    leads = referrer_obj.leads.filter(status='tentando_contato_2').order_by('-priority')
+    # T1
+    leads = referrer_obj.leads.filter(status='novo').order_by('order', '-priority')
     if len(leads) > 0:
         lead = leads.first()
         redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
+        return HttpResponseRedirect(redirect_url)
 
     # T2
-    leads = referrer_obj.leads.filter(status='tentando_contato').order_by('-priority')
+    leads = referrer_obj.leads.filter(status='tentando_contato').order_by('order', '-priority')
     if len(leads) > 0:
         lead = leads.first()
         redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
+        return HttpResponseRedirect(redirect_url)
+    
+    # T3
+    leads = referrer_obj.leads.filter(status='tentando_contato_2').order_by('order', '-priority')
+    if len(leads) > 0:
+        lead = leads.first()
+        redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
+        return HttpResponseRedirect(redirect_url)
 
-    # T1
-    leads = referrer_obj.leads.filter(status='novo').order_by('-priority')
-    if len(leads) > 0:
-        lead = leads.first()
-        redirect_url = reverse_lazy('leads:update', args=(str(lead.id),))
+    # ALL
+    redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),)).order_by('order', '-priority')
 
     return HttpResponseRedirect(redirect_url)
 

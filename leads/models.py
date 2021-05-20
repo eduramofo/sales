@@ -14,14 +14,25 @@ LEAD_STATUS_CHOICES = (
     ('tentando_contato_2', 'Ultimato - T3'),
     ('geladeira', 'Geladeira'),
     ('agendamento', 'Agendamento'),
+    ('ghosting', 'Bolo 1'),
+    ('ghosting_2', 'Bolo 2'),
     ('perdido', 'Perdido'),
     ('ganho', 'Ganho'),
+    ('invalid', 'Inválido'),
+    ('ultimatum', 'Ultimato'),
 )
 
 LEAD_GENDER_CHOICES = (
     ('f', 'Feminino'),
     ('m', 'Masculino'),
     ('o', 'Outros'),
+)
+
+BEST_TIME_CHOICES = (
+    (None, 'Selecionar'),
+    (1, 'Manhã'),
+    (2, 'Tarde'),
+    (3, 'Noite'),
 )
 
 LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
@@ -41,6 +52,7 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('bloqueado', 'Bloqueado'),
     ('desligou_na_cara', 'Desligou na cara'),
     ('rejeitando', 'Rejeitando'),
+    ('lost_direct', 'lost_direct'),
     ('outro', 'Outro'),
 )
 
@@ -97,6 +109,11 @@ class Lead(BaseModel):
     name = models.CharField(
         max_length=1024,
         verbose_name='Nome',
+    )
+
+    order = models.PositiveSmallIntegerField(
+        verbose_name='Ordem',
+        default=1,
     )
 
     nickname = models.CharField(
