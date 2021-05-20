@@ -130,8 +130,10 @@ def get_context(lead, user_nickname):
     if len(referrers) > 0:
         referrer = referrers.first()
         referrer_lead = referrers.first().lead
+        referrer_waid = ""
         if referrer_lead:
             referrer_name = str(referrer_lead)
+            referrer_waid = str(referrer_lead.waid)
         else:
             referrer_name = referrer.name
 
@@ -147,6 +149,7 @@ def get_context(lead, user_nickname):
         'lead_first_name': lead_first_name,
         'referrer_first_name': referrer_first_name,
         'referrer_full_name': referrer_full_name,
+        'referrer_waid': referrer_waid,
     }
 
     return context

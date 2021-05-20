@@ -38,7 +38,7 @@
         </a>
     </div>
 
-    <div class="col-6 mt-2">
+    <div class="col-12 mt-2">
         <a  role="button" 
             href="{% url 'leads:actions:jump' lead.id %}"
             class="btn btn-block btn-dark">
@@ -46,11 +46,11 @@
         </a>
     </div>
 
-    <div class="col-6 mt-2">
+    <div class="col-12 mt-2">
         <a  role="button" 
             href="{% url 'leads:actions:lost_direct' lead.id %}"
             class="btn btn-block btn-dark">
-            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down-fill' '22px' 'center' 'Sem Interesse' %}
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down-fill' '22px' 'center' 'Sem Interesse Direto' %}
         </a>
     </div>
 
@@ -96,7 +96,7 @@
             {% comment %} href="{% url 'leads:actions:upload' lead.id %}" {% endcomment %}
             href="{% url 'leads:upload' %}?lead={{lead.id}}"
             class="btn btn-block bg-secondary text-white text-center">
-            {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload' %}
+            {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload dos Referidos' %}
         </a>
     </div>
 
