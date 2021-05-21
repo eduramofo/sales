@@ -1,0 +1,16 @@
+{% load leads_extras %}
+<div id="lead-form-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title h5 w-100 text-center text-dark">Lead</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% include 'leads/forms/update_form.html' with form=lead_form %}
+      </div>
+    </div>
+  </div>
+</div>

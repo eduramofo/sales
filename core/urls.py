@@ -5,7 +5,7 @@ from .views import statistics
 from .views import settings
 from .views import recommendation
 
-from leads.views import qualified, qualified_confirmed
+from leads.views.lead import qualified, qualified_confirmed
 
 
 app_name = 'core'

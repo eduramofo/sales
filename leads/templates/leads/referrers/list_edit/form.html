@@ -1,3 +1,20 @@
+<div class="accordion mb-4" id="accordion-formset">
 {% for form in formset %}
-    {% include "leads/referrers/list_edit/fields.html" %}
+  <div class="card">
+    <div class="card-header" id="heading-{{forloop.counter}}">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left collapsed" 
+                type="button" data-toggle="collapse" 
+                data-target="#collapse-{{forloop.counter}}" aria-expanded="false" aria-controls="collapse-{{forloop.counter}}">
+          {{form.nickname.value}}
+        </button>
+      </h2>
+    </div>
+    <div id="collapse-{{forloop.counter}}" class="collapse" aria-labelledby="heading-{{forloop.counter}}" data-parent="#accordion-formset">
+      <div class="card-body">
+            {% include "leads/referrers/list_edit/fields.html" %}
+      </div>
+    </div>
+  </div>
 {% endfor %}
+</div>

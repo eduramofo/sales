@@ -1,0 +1,28 @@
+<div id="speech-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title w-100 text-center text-dark">Speech</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="accordion-speech">
+          {% with accordion_card_address='leads/update/modals/speech/accordion_card.html' %}
+            {% include accordion_card_address with id='conexao' headline='Conexão' content_template_address='leads/update/modals/speech/conexao.html' %}
+            {% include accordion_card_address with id='di' headline='DI' content_template_address='leads/update/modals/speech/di.html' %}
+            {% include 'leads/update/modals/speech/speech.html' %}
+            {% include accordion_card_address with id='fechamento' headline='Fechamento' content_template_address='leads/update/modals/speech/fechamento.html' %}
+            {% include accordion_card_address with id='referidos' headline='Referidos' content_template_address='leads/update/modals/speech/referidos.html' %}
+            {% include accordion_card_address with id='validacao' headline='Validação' content_template_address='leads/update/modals/speech/validacao.html' %}
+            {% include accordion_card_address with id='pos_venda' headline='Pós-Venda' content_template_address='leads/update/modals/speech/pos_venda.html' %}
+          {% endwith %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

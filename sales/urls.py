@@ -51,10 +51,10 @@ urlpatterns = [
 
     path('', include("core.urls")),
 
+    path('leads/', include("leads.urls.main")),
+
     path('integrations/', include("integrations.urls")),
 
-    path('leads/', include("leads.urls")),
-    
     path('activities/', include("activities.urls")),
 
     path('academy/', include("academy.urls")),

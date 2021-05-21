@@ -228,6 +228,30 @@ class Lead(BaseModel):
             return referrer_obj.name
         return None
 
+    def get_call_link(self):
+        # BR CHECK
+        tel = self.tel
+        tel_temp = tel.replace(" ", "").replace("-", "")
+        br_ddi = '+55'
+        tel_ddi_check_br = tel[:3]
+        if tel_ddi_check_br == br_ddi:
+            ddd = tel_temp[3:5]
+            tel_temp = tel_temp[5:]
+            tel_size = len(tel_temp)
+            if tel_size == 8:
+                tel =  br_ddi + " " + ddd + " " + str(9) + tel_temp
+        # BR CHECK
+        link_to_call = 'tel:' + tel
+        return link_to_call
+
+    def get_whatsapp_link(self):
+        whatsapp_number = str(self.waid)
+        link_to_call = None
+        if whatsapp_number and whatsapp_number != 'NN':
+            whatsapp_api_link = 'https://api.whatsapp.com/send'
+            link_to_call = whatsapp_api_link + '?phone=' + whatsapp_number
+        return link_to_call
+
     class Meta:
         verbose_name = 'Lead'
         verbose_name_plural = 'Leads'

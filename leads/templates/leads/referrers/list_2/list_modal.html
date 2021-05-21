@@ -1,0 +1,9 @@
+{% load leads_extras %}
+
+{% if referrers %}
+    {% for obj in referrers %}
+      {% include "leads/referrers/referrer_item/list_item_referrer_modal.html" with referrer=obj %}
+    {% endfor %}
+{% else %}
+<h6 class="text-danger">Não há referenciadores.</h6>
+{% endif %}

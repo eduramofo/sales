@@ -20,28 +20,6 @@ register = template.Library()
 
 
 @register.simple_tag
-def link_to_call_lead(lead_object):
-
-    # BR CHECK
-    tel = str(lead_object.tel)
-    tel_temp = tel.replace(" ", "").replace("-", "")
-    br_ddi = '+55'
-    tel_ddi_check_br = tel[:3]
-    if tel_ddi_check_br == br_ddi:
-        ddd = tel_temp[3:5]
-        tel_temp = tel_temp[5:]
-        tel_size = len(tel_temp)
-        if tel_size == 8:
-            tel =  br_ddi + " " + ddd + " " + str(9) + tel_temp
-    # BR CHECK
-
-
-    link_to_call = 'tel:' + tel
-
-    return link_to_call
-
-
-@register.simple_tag
 def whatsapp_templates_all():
     return WhatsappTemplate.objects.filter(active=True)
 

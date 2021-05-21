@@ -1,8 +1,16 @@
-<form method="post" action="{% url 'leads:leads_referrers_edit' referrer.id %}" class="bg-light p-0 rounded mb-3">
+<form method="post" action="{% url 'leads:leads_referrers_edit' referrer.id %}">
+    
     {{ formset.management_form }}
+
     {% csrf_token %}
-    <div class="form-group mb-0">
+
+    <div class="form-group mb-3">
         {% include "leads/referrers/list_edit/form.html" %}
         <button type="submit" class="btn btn-block btn-success">Salvar</button>
     </div>
+
+    <div class="form-group mb-5">
+        <a role="button" href="{% url 'leads:leads_referrers_edit' referrer.id %}"  class="btn btn-block btn-primary">Ir para Lista de Leads</a>
+    </div>
+
 </form>

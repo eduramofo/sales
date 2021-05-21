@@ -1,5 +1,58 @@
+{% load core_extras %}
+{% load leads_extras %}
+
 <div class="container">
     <div class="border border-dark p-2 rounded mb-3 mt-3">
-        {% include 'leads/update/relationships_content.html' %}
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <button
+                    data-target="#whatsapp-modal"
+                    data-toggle="modal"
+                    id="whatsapp-modal-btn"
+                    class="btn btn-block bg-secondary text-white text-center">
+                    {% btn_svg_icons 'custom' 'whatsapp' '25px' 'center' 'Enviar Mensagem via WhatsApp' %}
+                </button>
+            </div>
+            <div class="col-6 mt-2">
+                <button
+                    data-target="#activities-modal"
+                    data-toggle="modal"
+                    id="activities-modal-btn"
+                    class="btn btn-block bg-secondary text-white text-center">
+                    {% btn_svg_icons 'bootstrap' 'list-task' '25px' 'center' 'Atividades' %}
+                </button>
+            </div>
+            <div class="col-6 mt-2">
+                <button
+                    data-target="#referrers-modal"
+                    data-toggle="modal"
+                    id="referrers-modal-btn"
+                    class="btn btn-block bg-secondary text-white text-center">
+                    {% btn_svg_icons 'bootstrap' 'hand-index-thumb-fill' '25px' 'center' 'Refs.' %}
+                </button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-6">
+                <button
+                    data-target="#lead-form-modal"
+                    data-toggle="modal"
+                    id="lead-form-modal-btn"
+                    class="btn btn-block bg-secondary text-white text-center">
+                    {% btn_svg_icons 'bootstrap' 'file-earmark-text-fill' '25px' 'center' 'Form' %}
+                </button>
+            </div>
+            <div class="col-6">
+                <a role="button" 
+                    id="leads-call-whatsapp-btn" 
+                    href="{% url 'leads:actions:upload' lead.id %}"
+                    class="btn btn-block bg-secondary text-white text-center">
+                    {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload' %}
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
