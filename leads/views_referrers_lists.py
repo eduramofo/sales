@@ -352,7 +352,7 @@ def referrers_next(request, referrer_id):
         return HttpResponseRedirect(redirect_url)
 
     # ALL
-    redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),)).order_by('order', '-priority')
+    redirect_url = reverse_lazy('leads:leads_referrers_all', args=(str(referrer_obj.id),))
 
     return HttpResponseRedirect(redirect_url)
 
