@@ -18,4 +18,5 @@ urlpatterns = [
     path('<uuid:lead_id>/invalid/', views.invalid, name='invalid'),
     path('<uuid:lead_id>/ghosting/', views.ghosting, name='ghosting'),
     path('<uuid:lead_id>/ghosting-2/', views.ghosting_2, name='ghosting_2'),
+    path('<uuid:lead_id>/whatsapp/<uuid:whatsapp_template_id>/', views.whatsapp, name='whatsapp'),
 ]

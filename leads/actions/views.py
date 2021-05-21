@@ -12,7 +12,7 @@ from django.contrib import messages
 from core.tools import paginator
 from activities.models import Activity
 from leads.process_contacts import gerar_leads
-from leads.models import Lead, Qualified
+from leads.models import Lead, Qualified, WhatsappTemplate
 from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm, ScheduleForm
 from leads.filters import LeadFilter
 from leads import tools
@@ -358,4 +358,14 @@ def ghosting_2(request, lead_id):
 
     url = reverse_lazy('leads:update', args=(str(lead.id),))
 
+    return HttpResponseRedirect(url)
+
+
+@login_required()
+def whatsapp(request, lead_id, whatsapp_template_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    whatsapp_template_object = get_object_or_404(WhatsappTemplate, id=whatsapp_template_id)
+    first_name = request.user.first_name
+    waid = lead.waid
+    url = whatsapp_api.make_whastapp_api_link(waid, whatsapp_template_object, lead, first_name)
     return HttpResponseRedirect(url)

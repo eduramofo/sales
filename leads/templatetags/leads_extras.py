@@ -11,7 +11,7 @@ from django.template.defaultfilters import date
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from leads.models import Lead, Referrer
+from leads.models import Lead, Referrer, WhatsappTemplate
 from leads.whatsapp import api as whatsapp_api
 from activities.models import Activity
 
@@ -39,6 +39,11 @@ def link_to_call_lead(lead_object):
     link_to_call = 'tel:' + tel
 
     return link_to_call
+
+
+@register.simple_tag
+def whatsapp_templates_all():
+    return WhatsappTemplate.objects.filter(active=True)
 
 
 @register.simple_tag

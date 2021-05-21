@@ -1,15 +1,9 @@
 {% include "leads/update/alert.html" %}
 {% include "leads/update/wa_call.html" %}
 {% include "leads/referrers/referrer_item/referrers_simple.html" %}
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="border border-dark p-2 rounded mb-3 mt-3">
-                {% include "leads/update/ts.html" %}
-            </div>
-        </div>
-    </div>
-</div>
+{% include "leads/update/ts.html" %}
+{% include "leads/update/relationships.html" %}
 {% include "leads/update/tab/tabs.html" %}
 {% include "leads/update/conversation/modal.html" %}
+{% include "leads/update/whatsapp_modal.html" %}
 {% include "leads/speech/modal/entry.html" %}
