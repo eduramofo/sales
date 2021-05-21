@@ -4,6 +4,7 @@ from leads.views import lists as views
 
 urlpatterns = [
     path('', views.all, name='list'),
+    path('search/', views.search, name='search'),
     path('news/', views.news, name='news'),
     path('schedules/', views.schedules, name='schedules'),
     path('opened/', views.opened, name='opened'),

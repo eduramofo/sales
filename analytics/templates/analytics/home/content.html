@@ -1,0 +1,43 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+
+            <a href="{% url 'analytics:home' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Home</p>
+                </div>
+            </a>
+
+            <a href="{% url 'analytics:today' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Produção de Hoje</p>
+                </div>
+            </a>
+
+            <a href="{% url 'analytics:this_week' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Produção da Semana</p>
+                </div>
+            </a>
+
+            <a href="{% url 'analytics:day_select' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Produção de um Dia Específico</p>
+                </div>
+            </a>
+
+            <a href="{% url 'analytics:day_select' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Produção de um Intervalo Específico</p>
+                </div>
+            </a>
+
+            <a href="{% url 'analytics:balance' %}">
+                <div class="border border-dark rounded p-3 mb-3">
+                    <p class="h5 m-0 p-0">Balanço dos Leads</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>

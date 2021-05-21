@@ -50,10 +50,12 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('', include("core.urls")),
-
+    
     path('leads/', include("leads.urls.main")),
 
     path('integrations/', include("integrations.urls")),
+
+    path('analytics/', include("analytics.urls")),
 
     path('activities/', include("activities.urls")),
 

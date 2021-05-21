@@ -177,3 +177,34 @@ def schedules(request):
     }
 
     return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def search(request):
+
+    nav_name = 'leads_list'
+
+    page_title = 'Pesquisa de Leads'
+    
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
+
+    form = leads.form
+
+    pages = paginator.make_paginator(request, leads.qs, 5)
+    
+    page = pages['page']
+
+    if len(page) == 1:
+        lead_id_str = str(page[0].id)
+        url = reverse_lazy('leads:update', args=(lead_id_str,))
+        return HttpResponseRedirect(url)
+
+    context = {
+        'page_title': page_title,
+        'leads': page,
+        'page_range': pages['page_range'],
+        'nav_name': nav_name,
+        'leads_filters_form': form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
