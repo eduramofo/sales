@@ -18,9 +18,12 @@
   <a class="nav-link" href="{% url 'leads:schedules' %}">Schedules</a>
 </li>
 
-
 <li class="nav-item {% if nav_name == 'leads_referrers' %}active{% endif%}">
   <a class="nav-link" href="{% url 'leads:referrers' %}">Referrers</a>
+</li>
+
+<li class="nav-item {% if nav_name == 'statistics' %}active{% endif%}">
+  <a class="nav-link" href="{% url 'leads:lists:home' %}">Listas</a>
 </li>
 
 <li class="nav-item {% if nav_name == 'statistics' %}active{% endif%}">

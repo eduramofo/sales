@@ -11,9 +11,7 @@ from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-
 from core.tools import paginator
-
 from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
@@ -22,6 +20,64 @@ from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras
+
+
+@login_required()
+def home(request):
+    
+    nav_name = 'leads_list'
+    page_title = 'Listas de Leads'
+    
+    # Done
+    priorities = {'title': 'Prioridades', 'url': 'leads:lists:priorities'}
+    schedules = {'title': 'Agendamentos', 'url': 'leads:lists:schedules'}
+    ultimatum = {'title': 'Enviar Ultimato', 'url': 'leads:lists:ultimatum'}
+    all = {'title': 'Todos', 'url': 'leads:lists:all'}
+    news = {'title': 'Novos', 'url': 'leads:lists:news'}
+    opened = {'title': 'Abertos', 'url': 'leads:lists:opened'}
+    flow = {'title': 'Flow', 'url': 'leads:lists:flow'}
+    bolo_1 = {'title': 'Bolo 1', 'url': 'leads:lists:flow'}
+    bolo_2 = {'title': 'Bolo 2', 'url': 'leads:lists:flow'}
+
+    lists = [priorities, schedules, ultimatum, flow, all, news, opened, flow, bolo_1, bolo_2,]
+
+    context = {
+        'page_title': page_title,
+        'lists': lists,
+    }
+
+    return render(request, 'leads/list/home/index.html', context)
+
+
+@login_required()
+def search(request):
+
+    nav_name = 'leads_list'
+
+    page_title = 'Pesquisa de Leads'
+    
+    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
+
+    form = leads.form
+
+    pages = paginator.make_paginator(request, leads.qs, 5)
+    
+    page = pages['page']
+
+    if len(page) == 1:
+        lead_id_str = str(page[0].id)
+        url = reverse_lazy('leads:update', args=(lead_id_str,))
+        return HttpResponseRedirect(url)
+
+    context = {
+        'page_title': page_title,
+        'leads': page,
+        'page_range': pages['page_range'],
+        'nav_name': nav_name,
+        'leads_filters_form': form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
 
 
 @login_required()
@@ -174,37 +230,6 @@ def schedules(request):
         'leads': leads___,
         'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
-    }
-
-    return render(request, 'leads/list/index.html', context)
-
-
-@login_required()
-def search(request):
-
-    nav_name = 'leads_list'
-
-    page_title = 'Pesquisa de Leads'
-    
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
-
-    form = leads.form
-
-    pages = paginator.make_paginator(request, leads.qs, 5)
-    
-    page = pages['page']
-
-    if len(page) == 1:
-        lead_id_str = str(page[0].id)
-        url = reverse_lazy('leads:update', args=(lead_id_str,))
-        return HttpResponseRedirect(url)
-
-    context = {
-        'page_title': page_title,
-        'leads': page,
-        'page_range': pages['page_range'],
-        'nav_name': nav_name,
-        'leads_filters_form': form,
     }
 
     return render(request, 'leads/list/index.html', context)

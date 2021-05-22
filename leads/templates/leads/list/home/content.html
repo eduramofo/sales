@@ -1,0 +1,9 @@
+<div class="container mt-3 mb-5">
+    <ul class="list-group">
+        {% for list_items in lists %}
+            <a href="{% url list_items.url %}">
+                <li class="list-group-item mb-2 border border-dark rounded">{{list_items.title}}</li>
+            </a>
+        {% endfor %}
+    </ul>
+</div>
