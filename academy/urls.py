@@ -3,8 +3,10 @@ from django.urls import path
 from . import views
 
 app_name = 'academy'
+
 urlpatterns = [
     path('', views.home, name='home'),
+    path('audio-speechs/', views.audio_speechs, name='audio-speechs'),
     path('technique/', views.technique_home, name='technique-home'),
     path('technique/1/', views.technique_1, name='technique-1'),
     path('technique/2/', views.technique_2, name='technique-2'),

@@ -1,0 +1,7 @@
+<div class="container mt-3">
+    <div class="row">
+        {% for audio_speech in audio_speechs %}
+            {% include "academy/audio_speechs/audio.html" with class="" title=audio_speech.title src=audio_speech.src %}
+        {% endfor %}
+    </div>
+</div>

@@ -59,7 +59,7 @@ def day_result(request, dt):
         created_at__year=dt_obj.year,
         created_at__month=dt_obj.month,
         created_at__day=dt_obj.day
-    )
+    ).exclude(subject='Inválido')
     page_title = 'Análise das Atividades do Dia ' + dt_obj.strftime('%d/%m/%Y')
     nav_name = 'analyze'
     context = {
@@ -91,7 +91,7 @@ def range_select(request):
 def range_result(request, dts, dte):
     gte_date = make_aware(datetime.strptime(dts, '%Y-%m-%d'))
     lte_date = make_aware(datetime.strptime(dte, '%Y-%m-%d'))
-    activities = Activity.objects.filter(created_at__gte=gte_date, created_at__lte=lte_date)
+    activities = Activity.objects.filter(created_at__gte=gte_date, created_at__lte=lte_date).exclude(subject='Inválido')
     page_title = 'Análise das Atividades dos Dias Entre ({} e {})'.format(gte_date.strftime('%d/%m/%Y'), lte_date.strftime('%d/%m/%Y'))
     nav_name = 'analyze'
     context = {

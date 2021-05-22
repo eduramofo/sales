@@ -2,11 +2,34 @@ from django.shortcuts import render
 
 
 def home(request):
+
     context = {
-        'page_title': 'Gravações de Entrevistas',
+        'page_title': 'Seja Bem-Vindo à Academia da Matrícula',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/index.html', context)
+
+    return render(request, 'academy/home/index.html', context)
+
+
+def audio_speechs(request):
+
+    audio_speechs = [
+        {'title': 'Wendrio Bicaio', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/1_wendrio_bicaio.mp3'},
+        {'title': 'Tayana Carvalho', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/2_tayana_carvalho.mp3'},
+        {'title': 'Tarek Omar', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/3_tarek_omar.mp3'},
+        {'title': 'Mariana Nascimento', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/4_mariana_nascimento.mp3'},
+        {'title': 'Wendrio Bicaio 2', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/5_wendrio_bicaio.mp3'},
+        {'title': 'Roberto Korea (DI)', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/6_roberto_korea.mp3'},
+        {'title': 'Giovana La Farina', 'src': 'https://edu-fontes.s3-eu-west-1.amazonaws.com/speechs/7_giovana_la_farina.mp3'},
+    ]
+
+    context = {
+        'page_title': 'Gravações de Entrevistas em Áudios',
+        'nav_name': 'core_home',
+        'audio_speechs': audio_speechs,
+    }
+
+    return render(request, 'academy/audio_speechs/index.html', context)
 
 
 def technique_home(request):
@@ -62,7 +85,7 @@ def technique_6(request):
         'page_title': 'Referidos',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/technique/technique_5/index.html', context)
+    return render(request, 'academy/technique/technique_6/index.html', context)
 
 
 def technique_7(request):
@@ -70,4 +93,4 @@ def technique_7(request):
         'page_title': 'Validação',
         'nav_name': 'core_home'
     }
-    return render(request, 'academy/technique/technique_5/index.html', context)
+    return render(request, 'academy/technique/technique_7/index.html', context)
