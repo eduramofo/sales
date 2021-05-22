@@ -14,7 +14,7 @@ def get_data_clean(activities):
     leads_count = leads.count()
     leads_win = leads.filter(status='ganho').count()
 
-    contact_attempts = ['tentando_contato', 'tentando_contato_2', 'geladeira', 'ghosting', 'ghosting_2', 'invalid' , 'ultimatum']
+    contact_attempts = ['tentando_contato', 'tentando_contato_2', 'geladeira', 'ghosting', 'ghosting_2', 'ultimatum']
     leads_contact_attempts = leads.filter(status__in=contact_attempts).count()
 
     #### LOST
