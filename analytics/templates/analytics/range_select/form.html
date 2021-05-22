@@ -1,0 +1,29 @@
+<form action="{% url 'analytics:range_select' %}" method="get" class="border border-dark p-3 rounded">
+
+    <div class="form-group">
+        <label for="day-detail-date-start">Início da Data para Análise</label>
+        <input type="date" class="form-control form-control-lg" id="day-detail-date-start" name="day-detail-date-start" value="{{today_date_start}}">
+    </div>
+
+    <div class="form-group">
+        <label for="day-detail-date-end">Fim da Data para Análise</label>
+        <input type="date" class="form-control form-control-lg" id="day-detail-date-end" name="day-detail-date-end" value="{{today_date_end}}">
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 mb-3">
+            <div class="form-group mb-0 pb-0">
+                <button type="submit" class="btn btn-lg btn-success btn-block">Visualizar Detalhes</button>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group mb-0 pb-0">
+                <a href="{% url 'core:statistics_day_detail' %}" role="button" class="btn btn-lg btn-warning btn-block">Limpar</a>
+            </div>
+        </div>
+
+    </div>
+
+</form>

@@ -35,7 +35,12 @@ def get_data_clean(activities):
     #### speechs
     leads_speechs = leads_lost_entrevista + leads_win
 
-    attendance_rate = round(leads_conversations / activities_count * 100, 2)
+    attendance_rate = 'N/A'
+    if activities_count > 0:
+        attendance_rate = round(leads_conversations / activities_count * 100, 1)
+        attendance_rate = str(attendance_rate).replace('.', ',') + '%'
+    else:
+        pass
 
     data['leads'] = {
 
@@ -93,11 +98,11 @@ def get_data_clean(activities):
         'rows': [
             {'title': 'Atividades', 'value': activities_count},
             {'title': 'Tentativas sem Sucesso', 'value': leads_contact_attempts},
-            {'title': 'Conversas (7)', 'value': leads_conversations},
-            {'title': 'Entrevistas (3)', 'value': leads_speechs},
-            {'title': 'Matrículas (1)', 'value': leads_win},
+            {'title': 'Conversas', 'value': leads_conversations},
+            {'title': 'Entrevistas', 'value': leads_speechs},
+            {'title': 'Matrículas', 'value': leads_win},
             {'title': 'Referidos', 'value': 'N/A'},
-            {'title': 'Taxa de Atendimento', 'value': str(attendance_rate) + '%'},
+            {'title': 'Taxa de Atendimento', 'value': attendance_rate},
         ],
 
     }
