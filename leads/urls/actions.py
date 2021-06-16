@@ -11,6 +11,7 @@ urlpatterns = [
     path('schedule/', views.schedule, name='schedule'),
     path('upload/', views.upload, name='upload'),
     path('lost/', views.lost, name='lost'),
+    path('off/', views.off, name='off'),
     path('win/', views.win, name='win'),
     path('jump/', views.jump, name='jump'),
     path('lost-direct/', views.lost_direct, name='lost_direct'),

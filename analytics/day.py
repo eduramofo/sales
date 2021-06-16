@@ -29,11 +29,14 @@ def get_data_clean(activities):
     #### schedules
     leads_schedules = leads.filter(status='agendamento',).count()
 
+    #### off
+    leads_off = leads.filter(status='off').count()
+
     #### conversations
-    leads_conversations = leads_lost_sem_interesse + leads_lost_di + leads_lost_entrevista + leads_win + leads_schedules
+    leads_conversations = leads_lost_sem_interesse + leads_lost_di + leads_lost_entrevista + leads_win + leads_schedules + leads_off
 
     #### speechs
-    leads_speechs = leads_lost_entrevista + leads_win
+    leads_speechs = leads_lost_entrevista + leads_win + leads_off
 
     attendance_rate = 'N/A'
     if activities_count > 0:
@@ -58,9 +61,10 @@ def get_data_clean(activities):
             {'title': 'Sem Interesse', 'value': leads_lost_sem_interesse},
             {'title': 'Agendamentos', 'value': leads_schedules},
             {'title': 'DI', 'value': leads_lost_di},
-            {'title': 'Entrevistas Totais', 'value': leads_speechs},
-            {'title': 'Entrevistas Perdidas', 'value': leads_lost_entrevista},
-            {'title': 'Entrevistas Matrículas', 'value': leads_win},
+            {'title': 'Entrevistas: Totais', 'value': leads_speechs},
+            {'title': 'Entrevistas: Perdidas', 'value': leads_lost_entrevista},
+            {'title': 'Entrevistas: Off', 'value': leads_off},
+            {'title': 'Entrevistas: Matrículas', 'value': leads_win},
         ],
 
     }
@@ -80,9 +84,10 @@ def get_data_clean(activities):
             {'title': 'Sem Interesse', 'value': leads_lost_sem_interesse},
             {'title': 'Agendamentos', 'value': leads_schedules},
             {'title': 'DI', 'value': leads_lost_di},
-            {'title': 'Entrevistas Totais', 'value': leads_speechs},
-            {'title': 'Entrevistas Perdidas', 'value': leads_lost_entrevista},
-            {'title': 'Entrevistas Matrículas', 'value': leads_win},
+            {'title': 'Entrevistas: Totais', 'value': leads_speechs},
+            {'title': 'Entrevistas: Perdidas', 'value': leads_lost_entrevista},
+            {'title': 'Entrevistas: Off', 'value': leads_off},
+            {'title': 'Entrevistas: Matrículas', 'value': leads_win},
         ],
 
     }
@@ -99,8 +104,10 @@ def get_data_clean(activities):
             {'title': 'Atividades', 'value': activities_count},
             {'title': 'Tentativas sem Sucesso', 'value': leads_contact_attempts},
             {'title': 'Conversas', 'value': leads_conversations},
-            {'title': 'Entrevistas', 'value': leads_speechs},
-            {'title': 'Matrículas', 'value': leads_win},
+            {'title': 'Entrevistas: Totais', 'value': leads_speechs},
+            {'title': 'Entrevistas: Perdidas', 'value': leads_lost_entrevista},
+            {'title': 'Entrevistas: Off', 'value': leads_off},
+            {'title': 'Entrevistas: Matrículas', 'value': leads_win},
             {'title': 'Referidos', 'value': 'N/A'},
             {'title': 'Taxa de Atendimento', 'value': attendance_rate},
         ],

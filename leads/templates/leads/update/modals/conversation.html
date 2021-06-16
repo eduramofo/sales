@@ -15,21 +15,14 @@
         <a role="button" 
             id="leads-call-whatsapp-btn" 
             href="{% url 'leads:actions:lost' lead.id %}?justification=sem_interesse"
-            class="btn btn-block btn-secondary text-center">
+            class="btn btn-block btn-info text-center">
             {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Sem interesse' %}
         </a>
-
-        {% comment %} <a role="button" 
-            id="leads-call-whatsapp-btn" 
-            href="{% url 'leads:actions:lost' lead.id %}?justification=interessado_sem_condicoes_financeiras"
-            class="btn btn-block btn-secondary text-center">
-            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Interessado, mas sem condições' %}
-        </a> {% endcomment %}
 
         <a role="button" 
             id="leads-call-whatsapp-btn" 
             href="{% url 'leads:actions:lost' lead.id %}?justification=di"
-            class="btn btn-block btn-secondary text-center">
+            class="btn btn-block btn-info text-center">
             {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Parou na DI' %}
         </a>
 
@@ -47,11 +40,24 @@
         </a>
 
         <a role="button" 
+            id="leads-call-whatsapp-btn" 
+            href="{% url 'leads:actions:off' lead.id %}"
+            class="btn btn-block btn-dark text-center">
+            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista Off' %}
+        </a>
+        
+        <a role="button" 
             id="leads-call-phone-btn"
             href="{% url 'leads:actions:win' lead.id %}"
             class="btn btn-block btn-success text-center">
             {% btn_svg_icons 'bootstrap' 'hand-thumbs-up' '25px' 'center' 'Entrevista ganha' %}
         </a>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
 
       </div>
     </div>

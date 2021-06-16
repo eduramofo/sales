@@ -17,6 +17,7 @@ LEAD_STATUS_CHOICES = (
     ('ghosting', 'Bolo 1'),
     ('ghosting_2', 'Bolo 2'),
     ('perdido', 'Perdido'),
+    ('off', 'Off'),
     ('ganho', 'Ganho'),
     ('invalid', 'Inválido'),
     ('ultimatum', 'Ultimato'),

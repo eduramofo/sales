@@ -198,6 +198,30 @@ def lost(request, lead_id):
 
 
 @login_required()
+def off(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+        
+    lead.status = 'off'
+
+    lead.save()
+
+    Activity.objects.create(
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Off',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+@login_required()
 def lost_direct(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)

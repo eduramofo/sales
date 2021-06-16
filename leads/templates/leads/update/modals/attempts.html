@@ -15,30 +15,30 @@
 
                 <div class="row mb-2">
 
-                    <div class="col-4">
+                    <div class="col-12 mb-2">
                         <a role="button" 
                             id="leads-call-whatsapp-btn"
                             href="{% url 'leads:actions:t1' lead.id %}"
                             class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º L' %}
+                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º Tentativa' %}
                         </a>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-12 mb-2">
                         <a role="button" 
                             id="leads-call-whatsapp-btn"
                             href="{% url 'leads:actions:t2' lead.id %}"
                             class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º L' %}
+                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º Tentativa' %}
                         </a>
                     </div>
 
-                    <div class="col-4">
+                    <div class="col-12">
                         <a role="button" 
                             id="leads-call-whatsapp-btn"
                             href="{% url 'leads:actions:t3' lead.id %}"
                             class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º L' %}
+                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º Tentativa' %}
                         </a>
                     </div>
 
@@ -66,7 +66,7 @@
 
                 <div class="row mb-2">
 
-                    <div class="col-6">
+                    <div class="col-12 mb-2">
                         <a  role="button" 
                             href="{% url 'leads:actions:ultimatum' lead.id %}"
                             class="btn btn-block btn-dark">
@@ -74,7 +74,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-12">
                         <a  role="button" 
                             href="{% url 'leads:actions:invalid' lead.id %}"
                             class="btn btn-block btn-dark">
@@ -86,7 +86,7 @@
 
                 <div class="row">
 
-                    <div class="col-6">
+                    <div class="col-12 mb-2">
                         <a  role="button" 
                             href="{% url 'leads:actions:ghosting' lead.id %}"
                             class="btn btn-block btn-dark">
@@ -94,7 +94,7 @@
                         </a>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-12">
                         <a  role="button" 
                             href="{% url 'leads:actions:ghosting_2' lead.id %}"
                             class="btn btn-block btn-dark">
