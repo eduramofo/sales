@@ -5,7 +5,7 @@
       <div class="card-body p-2">
 
         <h5 class="card-title">{{lead.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">  
+        <h6 class="card-subtitle mb-2 text-muted">
           {% with lead.get_referrer as referrer %}
           {% if referrer.lead %}
           <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>

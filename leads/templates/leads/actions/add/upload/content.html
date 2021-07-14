@@ -1,0 +1,17 @@
+<div class="container">
+
+    <div class="row mb-4">
+
+        <div class="col-12">
+            <a role="button" href="{% url 'leads:update' lead.id %}" class="btn btn-secondary btn-block mt-3 border" >Voltar para o Cadastro</a>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            {% include "leads/actions/add/upload/form.html" %}
+        </div>
+    </div>
+
+</div>

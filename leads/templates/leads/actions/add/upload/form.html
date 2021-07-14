@@ -1,7 +1,6 @@
 {% load widget_tweaks %}
 
-<form method="post" action="{% url 'leads:actions:upload' lead.id %}" enctype="multipart/form-data" 
-class="bg-light border border-dark p-4 rounded">
+<form method="post" action="{% url 'leads:actions:add_upload' lead.id %}" enctype="multipart/form-data" class="bg-light border border-dark p-4 rounded">
     
     {% csrf_token %}
 

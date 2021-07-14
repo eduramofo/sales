@@ -187,30 +187,6 @@ def schedule_direct(request, lead_id):
 
 
 @login_required()
-def upload(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'perdido'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Perdido',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
 def lost(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)
@@ -427,7 +403,7 @@ def ghosting_2(request, lead_id):
 
 
 @login_required()
-def upload(request, lead_id):
+def add(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     indicated_by_datetime = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')
     gmt = -3
@@ -460,7 +436,44 @@ def upload(request, lead_id):
         'lead': lead,
     }
 
-    return render(request, 'leads/actions/upload/index.html', context)
+    return render(request, 'leads/actions/add/index.html', context)
+
+
+@login_required()
+def add_upload(request, lead_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    indicated_by_datetime = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')
+    gmt = -3
+    initial = {
+        'name': str(lead),
+        'lead': str(lead.id),
+        'referring_datetime': indicated_by_datetime,
+        'gmt': gmt,
+    }
+    form = ReferrerForm()
+    form = ReferrerForm(initial=initial)
+
+    if request.method == 'POST':
+        form = ReferrerForm(request.POST)
+        if form.is_valid():
+            referrer = gerar_leads(form, request)
+            message_text = 'Leads criados com sucesso =)'
+            messages.add_message(request,messages.SUCCESS, message_text)
+            return HttpResponseRedirect(reverse('leads:leads_referrers_edit', args=[str(referrer.id),]))
+        else:
+            message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
+            messages.add_message(request,messages.ERROR, message_text)
+
+    page_title = 'Upload de Contatos para ' + str(lead)
+
+    context = {
+        'nav_name': 'leads_upload',
+        'page_title': page_title,
+        'form': form,
+        'lead': lead,
+    }
+
+    return render(request, 'leads/actions/add/upload/index.html', context)
 
 
 @login_required()
