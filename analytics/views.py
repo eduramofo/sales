@@ -5,6 +5,7 @@ from django.utils.timezone import datetime, make_aware, timedelta
 
 from activities.models import Activity
 from analytics import day
+from analytics import balance_data
 
 
 @login_required()
@@ -104,10 +105,11 @@ def range_result(request, dts, dte):
 
 @login_required()
 def balance(request):
-    page_title = 'Análise de Dados'
+    page_title = 'Balanço dos Leads'
     nav_name = 'analyze'
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
+        'data': balance_data.get_data(),
     }
-    return render(request, 'analytics/home/index.html', context)
+    return render(request, 'analytics/balance/index.html', context)
