@@ -165,13 +165,13 @@ def schedule_direct(request, lead_id):
         if schedule_form.is_valid():
             schedule_form_cleaned_data = schedule_form.cleaned_data
             due_date = schedule_form_cleaned_data['due_date']
-            lead.status = 'agendamento'
+            lead.status = 'agendamento_direct'
             lead.save()
             activity_obj = Activity.objects.create(
                 lead=lead,
                 due_date=due_date,
                 done=False,
-                subject='Agendamento Direto criado',
+                subject='Agendamento direto (mensagem etc) criado',
                 type='call'
             )
             activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
@@ -279,7 +279,7 @@ def lost_direct(request, lead_id):
         lead=lead,
         due_date=timezone.now(),
         done=True,
-        subject='Perdido Direto (Mensagem etc)',
+        subject='Perdido direto (mensagem etc)',
         type='call'
     )
 

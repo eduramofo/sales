@@ -16,7 +16,8 @@ def on_update_schedule_integrates_with_google_calendar(sender, instance, created
     if created:
         try:
             lead = instance.lead
-            if lead.status == 'agendamento':
+            status_list = ['agendamento', 'agendamento_direct']
+            if lead.status in status_list:
                 google_calendar_event = events.create(instance)
                 if google_calendar_event['success']:
                     event_data = google_calendar_event['event']

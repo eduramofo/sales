@@ -19,7 +19,6 @@ def get_data_clean(activities):
 
     #### LOST
     ##### conversations
-    leads_lost = leads.filter(status='perdido').count()
     leads_lost_sem_interesse = leads.filter(status='perdido', status_lost_justification='sem_interesse').count()
     leads_lost_di = leads.filter(status='perdido', status_lost_justification='di').count()
     leads_lost_entrevista = leads.filter(status='perdido', status_lost_justification='entrevista_perdida').count()
@@ -87,10 +86,8 @@ def get_data_clean(activities):
             {'title': 'Sem Interesse', 'value': leads_lost_sem_interesse},
             {'title': 'Agendamentos', 'value': leads_schedules},
             {'title': 'DI', 'value': leads_lost_di},
-            {'title': 'Entrevistas: Totais', 'value': leads_speechs},
-            {'title': 'Entrevistas: Perdidas', 'value': leads_lost_entrevista},
-            {'title': 'Entrevistas: Off', 'value': leads_off},
-            {'title': 'Entrevistas: Matrículas', 'value': leads_win},
+            {'title': 'Entrevistas', 'value': leads_speechs},
+            {'title': 'Matrículas', 'value': leads_win},
         ],
 
     }

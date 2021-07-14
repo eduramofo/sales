@@ -8,18 +8,18 @@
     {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Sem interesse' %}
 </a>
 
+<button id='schedule-conversation-modal-btn'
+        data-url="{% url 'leads:actions:schedule' lead.id %}"
+        class='btn btn-block bg-primary text-white text-center'>
+    {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Agendamento' %}
+</button>
+
 <a role="button" 
     id="leads-call-whatsapp-btn" 
     href="{% url 'leads:actions:lost' lead.id %}?justification=di"
     class="btn btn-block btn-info text-center">
     {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Parou na DI' %}
 </a>
-
-<button id='schedule-conversation-modal-btn'
-        data-url="{% url 'leads:actions:schedule' lead.id %}"
-        class='btn btn-block bg-primary text-white text-center'>
-    {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Agendamento' %}
-</button>
 
 <a role="button" 
     id="leads-call-whatsapp-btn" 
@@ -32,7 +32,7 @@
     id="leads-call-whatsapp-btn" 
     href="{% url 'leads:actions:off' lead.id %}"
     class="btn btn-block btn-dark text-center">
-    {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista Off' %}
+    {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista off' %}
 </a>
 
 <a role="button" 

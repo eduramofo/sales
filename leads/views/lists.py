@@ -1,25 +1,16 @@
 from django.utils import timezone
-from urllib.parse import urlencode
-from random import choice as random_choice
 from datetime import timedelta
-
 from django.utils import timezone
-from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
-from django.http import JsonResponse
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
-from django.contrib import messages
-
 from core.tools import paginator
 from activities.models import Activity
-
 from leads.process_contacts import gerar_leads
-from leads.models import Lead, Referrer
-from leads.forms import LeadForm, LeadFormRunNow, ReferrerForm
+from leads.models import Lead
 from leads.filters import LeadFilter
 from leads import tools
-from leads.templatetags import leads_extras
 
 
 @login_required()
@@ -36,10 +27,11 @@ def home(request):
     news = {'title': 'Novos', 'url': 'leads:lists:news'}
     opened = {'title': 'Abertos', 'url': 'leads:lists:opened'}
     flow = {'title': 'Flow', 'url': 'leads:lists:flow'}
-    bolo_1 = {'title': 'Bolo 1', 'url': 'leads:lists:flow'}
-    bolo_2 = {'title': 'Bolo 2', 'url': 'leads:lists:flow'}
-
-    lists = [priorities, schedules, ultimatum, flow, all, news, opened, flow, bolo_1, bolo_2,]
+    bolo_1 = {'title': 'Bolos 1', 'url': 'leads:lists:ghosting'}
+    bolo_2 = {'title': 'Bolos 2', 'url': 'leads:lists:ghosting_2'}
+    off_1 = {'title': 'Offs 1', 'url': 'leads:lists:off'}
+    off_2 = {'title': 'Offs 2', 'url': 'leads:lists:off_2'}
+    lists = [priorities, schedules, ultimatum, flow, all, news, opened, flow, bolo_1, bolo_2, off_1, off_2]
 
     context = {
         'page_title': page_title,
@@ -214,11 +206,13 @@ def schedules(request):
     leads___ = []
     for activity in activities:
         lead = activity.lead
-        if lead.status == 'agendamento':
+        if lead.status == 'agendamento' or lead.status == 'agendamento_direct':
             leads_pks.append(lead.pk)
             leads___.append(lead)
 
-    leads_ = Lead.objects.filter(pk__in=leads_pks, status='agendamento')
+    query = Q(status='agendamento') | Q(status='agendamento_direct')
+
+    leads_ = Lead.objects.filter(pk__in=leads_pks).filter(query)
 
     leads = LeadFilter(request.GET, queryset=leads_)
 
@@ -228,6 +222,94 @@ def schedules(request):
         'page_title': page_title,
         'nav_name': nav_name,
         'leads': leads___,
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def ghosting(request):
+    
+    nav_name = 'leads_list'
+
+    page_title = 'Leads Bolo 1'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='ghosting').order_by('-created_at'))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def ghosting_2(request):
+    
+    nav_name = 'leads_list'
+
+    page_title = 'Leads Bolo 2'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='ghosting_2').order_by('-created_at'))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def off(request):
+    
+    nav_name = 'leads_list'
+
+    page_title = 'Leads Off 1'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='off').order_by('-created_at'))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
+        'page_range': pages['page_range'],
+        'leads_filters_form': leads.form,
+    }
+
+    return render(request, 'leads/list/index.html', context)
+
+
+@login_required()
+def off_2(request):
+
+    nav_name = 'leads_list'
+
+    page_title = 'Leads Off 2'
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='off_2').order_by('-created_at'))
+
+    pages = paginator.make_paginator(request, leads.qs, 30)
+
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'leads': pages['page'],
         'page_range': pages['page_range'],
         'leads_filters_form': leads.form,
     }

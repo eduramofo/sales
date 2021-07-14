@@ -14,4 +14,8 @@ urlpatterns = [
     path('flow/', views.now, name='flow'),
     path('priorities/', views.priorities, name='priorities'),
     path('ultimatum/', views.priorities, name='ultimatum'),
+    path('ghosting/', views.ghosting, name='ghosting'),
+    path('ghosting-2/', views.ghosting_2, name='ghosting_2'),
+    path('off/', views.off, name='off'),
+    path('off-2/', views.off_2, name='off_2'),
 ]

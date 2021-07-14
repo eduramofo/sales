@@ -28,20 +28,12 @@
         {% include 'core/inputs/default.html' with field=activity_form.done %}
     </div>
 
-    {% comment %} <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=activity_form.done %}
-    </div>
-
-    <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=activity_form.done %}
-    </div> {% endcomment %}
-
     <div class="col-12">
         {% include 'core/inputs/default.html' with field=activity_form.note %}
     </div>
 
     <div class="col-12">
-        <button class="btn btn-lg btn-block btn-success">
+        <button class="btn btn-block btn-success">
             {% btn_svg_icons 'google' 'save' '25px' 'center' 'Salvar' %}
         </button>
     </div>

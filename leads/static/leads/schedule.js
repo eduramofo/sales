@@ -30,7 +30,7 @@ $(document).ready(function() {
             
             formConfirmBtn.click(function(e) {    
                 e.preventDefault();
-                formSubmit(scheduleModal);
+                formSubmit(scheduleModal, url);
             });
 
             appendScheduleModalToBody(scheduleModal);
@@ -63,7 +63,7 @@ $(document).ready(function() {
             
             formConfirmBtn.click(function(e) {    
                 e.preventDefault();
-                formSubmit(scheduleModal);
+                formSubmit(scheduleModal, url);
             });
 
             appendScheduleModalToBody(scheduleModal);
@@ -93,11 +93,11 @@ $(document).ready(function() {
 
     };
 
-    function formSubmit(modal) {
+    function formSubmit(modal, url) {
 
         var form = modal.find('#schedule-modal-form');
+        
         var data = form.serialize();
-        var url = form.attr('action');
 
         var ajaxOption = {
             url: url,
@@ -128,6 +128,7 @@ $(document).ready(function() {
 
     function destroyScheduleModal(modal) {
         modal.remove();
+        location.reload();
     };
 
     function closeConversionModal() {
