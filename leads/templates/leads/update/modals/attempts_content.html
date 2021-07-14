@@ -1,0 +1,66 @@
+{% load core_extras %}
+
+<a role="button" 
+    id="leads-call-whatsapp-btn"
+    href="{% url 'leads:actions:t1' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º Tentativa' %}
+</a>
+
+<a role="button" 
+    id="leads-call-whatsapp-btn"
+    href="{% url 'leads:actions:t2' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º Tentativa' %}
+</a>
+
+<a role="button" 
+    id="leads-call-whatsapp-btn"
+    href="{% url 'leads:actions:t3' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º Tentativa' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:jump' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'arrow-down-circle-fill' '22px' 'center' 'Pular' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:lost_direct' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'hand-thumbs-down-fill' '22px' 'center' 'Sem Interesse Direto' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:ultimatum' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'x-lg' '22px' 'center' 'Ultimato' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:invalid' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'bootstrap' 'trash-fill' '22px' 'center' 'Inválido' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:ghosting' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 1' %}
+</a>
+
+<a  role="button" 
+    href="{% url 'leads:actions:ghosting_2' lead.id %}"
+    class="btn btn-block btn-dark">
+    {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 2' %}
+</a>
+
+<button id='schedule-direct-modal-btn'
+        data-url="{% url 'leads:actions:schedule_direct' lead.id %}"
+        class='btn btn-block bg-primary text-white text-center'>
+    {% btn_svg_icons 'bootstrap' 'calendar-event-fill' '22px' 'center' 'Agendamento' %}
+</button>
+
+<button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Fechar</button>

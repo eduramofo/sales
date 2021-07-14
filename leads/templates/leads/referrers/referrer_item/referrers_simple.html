@@ -3,7 +3,7 @@
 
 {% for referrer in lead|get_referrers_from_lead %}
 <div class="container">
-        <div class="border border-dark mt-3 p-2 rounded">
+        <div class="border border-dark mt-3 p-3 rounded">
             <div class="row">
 
                 <div class="col-12">
@@ -45,13 +45,7 @@
                     </a>
                 </div>
 
-                <div class="col-6 mt-2">
-                    <button id="speech-modal-btn" class="btn btn-block btn-info" data-toggle="modal" data-target="#speech-modal">
-                        {% btn_svg_icons 'bootstrap' 'megaphone-fill' '22px' 'center' 'Speech' %}
-                    </button>
-                </div>
-
-                <div class="col-6 mt-2">
+                <div class="col-12 mt-2">
                     <a  role='button' 
                         id='leads-call-whatsapp-btn' 
                         href="{% url 'leads:leads_referrers_next' referrer.id %}"

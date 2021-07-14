@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="border border-dark p-2 rounded mt-3 mt-md-2">
+            <div class="border border-dark p-3 rounded mt-3 mt-md-2">
 
                 <div class="row">
                     <div class="col-6">
@@ -23,23 +23,13 @@
                     </div>
                 </div>
 
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <button
-                            data-target="#whatsapp-modal"
-                            data-toggle="modal"
-                            id="whatsapp-modal-btn"
-                            class="btn btn-block bg-success text-white text-center">
-                            {% btn_svg_icons 'custom' 'whatsapp' '25px' 'center' 'Enviar Mensagem via WhatsApp' %}
-                        </button>
-                    </div>    
-                </div>
+
 
                 <div class="row mb-2 mt-2">
                     <div class="col-12">
                         <button data-toggle="modal" data-target="#conversation-modal" id="registration-call-modal-btn"
                                 class="btn btn-block btn-primary">
-                                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Ligação Atendida' %}
+                                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Conversa' %}
                         </button>
                     </div>
                 </div>
@@ -48,11 +38,22 @@
                     <div class="col-12">
                         <button data-toggle="modal" data-target="#attempts-modal" id="attempts-call-modal-btn"
                                 class="btn btn-block btn-dark">
-                                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Tantativas' %}
+                                {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Tantativa' %}
                         </button>
                     </div>
                 </div>
 
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <button
+                            data-target="#whatsapp-modal"
+                            data-toggle="modal"
+                            id="whatsapp-modal-btn"
+                            class="btn btn-block bg-warning text-center">
+                            {% btn_svg_icons 'custom' 'whatsapp' '25px' 'center' 'Enviar WhatsApp' %}
+                        </button>
+                    </div>    
+                </div>
 
             </div>
         </div>

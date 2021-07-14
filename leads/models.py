@@ -9,18 +9,20 @@ LEAD_QUALITY_CHOICES = (
 )
 
 LEAD_STATUS_CHOICES = (
-    ('novo', 'Novo - T1'),
-    ('tentando_contato', 'Tentando - T2'),
-    ('tentando_contato_2', 'Ultimato - T3'),
+    ('novo', 'Novo [T1]'),
+    ('tentando_contato', 'Tentando [T2]'),
+    ('tentando_contato_2', 'Tentando [T3]'),
     ('geladeira', 'Geladeira'),
     ('agendamento', 'Agendamento'),
+    ('agendamento_direct', 'Agendamento Direto'),
     ('ghosting', 'Bolo 1'),
     ('ghosting_2', 'Bolo 2'),
+    ('off_2', 'Off 2'),
+    ('invalid', 'Inválido'),
+    ('ultimatum', 'Ultimato'),
     ('perdido', 'Perdido'),
     ('off', 'Off'),
     ('ganho', 'Ganho'),
-    ('invalid', 'Inválido'),
-    ('ultimatum', 'Ultimato'),
 )
 
 LEAD_GENDER_CHOICES = (

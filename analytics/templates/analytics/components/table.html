@@ -2,10 +2,10 @@
     <thead>
         <tr>
             <th class="text-center" scope="col" colspan="{{table.columns|length}}">
-                <h2 class="h5 p-0 m-0">{{table.title}}</h2>
+                <h2 class="h5 p-0 m-0 w-100">{{table.title}}</h2>
             </th>
         </tr>
-        <tr>
+        <tr class="text-center">
             {% for item in table.columns %}
                 <th scope="col">{{item}}</th>
             {% endfor %}
@@ -16,7 +16,7 @@
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
                 <td>{{item.title}}</td>
-                <td>{{item.value}}</td>
+                <td class="text-center">{{item.value}}</td>
             </tr>
         {% endfor %}
     </tbody>

@@ -2,19 +2,19 @@ from leads import models as leads_models
 
 
 def get_data_clean(activities):
-    
+
     data = {}
-    
+
     # activities
     activities_count = activities.count()
 
     # leads
-    leads_pks = leads_processed = activities.values_list('lead', flat=True).distinct()
+    leads_pks = activities.values_list('lead', flat=True).distinct()
     leads = leads_models.Lead.objects.filter(pk__in=leads_pks)
     leads_count = leads.count()
     leads_win = leads.filter(status='ganho').count()
 
-    contact_attempts = ['tentando_contato', 'tentando_contato_2', 'geladeira', 'ghosting', 'ghosting_2', 'ultimatum']
+    contact_attempts = ['tentando_contato', 'tentando_contato_2', 'geladeira', 'ghosting', 'ghosting_2', 'ultimatum', 'agendamento_direct']
     leads_contact_attempts = leads.filter(status__in=contact_attempts).count()
 
     #### LOST
@@ -42,8 +42,11 @@ def get_data_clean(activities):
     if activities_count > 0:
         attendance_rate = round(leads_conversations / activities_count * 100, 1)
         attendance_rate = str(attendance_rate).replace('.', ',') + '%'
-    else:
-        pass
+
+    speech_rate = 'N/A'
+    if leads_conversations > 0:
+        speech_rate = round(leads_speechs / leads_conversations * 100, 1)
+        speech_rate = str(speech_rate).replace('.', ',') + '%'
 
     data['leads'] = {
 
@@ -102,14 +105,12 @@ def get_data_clean(activities):
 
         'rows': [
             {'title': 'Atividades', 'value': activities_count},
-            {'title': 'Tentativas sem Sucesso', 'value': leads_contact_attempts},
             {'title': 'Conversas', 'value': leads_conversations},
-            {'title': 'Entrevistas: Totais', 'value': leads_speechs},
-            {'title': 'Entrevistas: Perdidas', 'value': leads_lost_entrevista},
-            {'title': 'Entrevistas: Off', 'value': leads_off},
-            {'title': 'Entrevistas: Matrículas', 'value': leads_win},
+            {'title': 'Entrevistas', 'value': leads_speechs},
+            {'title': 'Matrículas', 'value': leads_win},
+            {'title': 'Taxa de Conversas', 'value': attendance_rate},
+            {'title': 'Taxa de Entrevistas', 'value': speech_rate},
             {'title': 'Referidos', 'value': 'N/A'},
-            {'title': 'Taxa de Atendimento', 'value': attendance_rate},
         ],
 
     }

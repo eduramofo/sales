@@ -9,6 +9,7 @@ urlpatterns = [
     path('t2/', views.t2, name='t2'),
     path('t3/', views.t3, name='t3'),
     path('schedule/', views.schedule, name='schedule'),
+    path('schedule/direct/', views.schedule_direct, name='schedule_direct'),
     path('upload/', views.upload, name='upload'),
     path('lost/', views.lost, name='lost'),
     path('off/', views.off, name='off'),

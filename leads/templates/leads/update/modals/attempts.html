@@ -1,116 +1,15 @@
-{% load leads_extras %}
-{% load core_extras %}
-
 <div id="attempts-modal" class="modal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title h5 w-100 text-center text-dark">Tentativas de Contato</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-            <div class="modal-body">
-
-                <div class="row mb-2">
-
-                    <div class="col-12 mb-2">
-                        <a role="button" 
-                            id="leads-call-whatsapp-btn"
-                            href="{% url 'leads:actions:t1' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '1º Tentativa' %}
-                        </a>
-                    </div>
-
-                    <div class="col-12 mb-2">
-                        <a role="button" 
-                            id="leads-call-whatsapp-btn"
-                            href="{% url 'leads:actions:t2' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '2º Tentativa' %}
-                        </a>
-                    </div>
-
-                    <div class="col-12">
-                        <a role="button" 
-                            id="leads-call-whatsapp-btn"
-                            href="{% url 'leads:actions:t3' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'telephone-x-fill' '22px' 'center' '3º Tentativa' %}
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:jump' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'arrow-down-circle-fill' '22px' 'center' 'Pular' %}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row mb-2">
-                    <div class="col-12">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:lost_direct' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'hand-thumbs-down-fill' '22px' 'center' 'Sem Interesse Direto' %}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row mb-2">
-
-                    <div class="col-12 mb-2">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:ultimatum' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'x-lg' '22px' 'center' 'Ultimato' %}
-                        </a>
-                    </div>
-
-                    <div class="col-12">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:invalid' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'bootstrap' 'trash-fill' '22px' 'center' 'Inválido' %}
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-12 mb-2">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:ghosting' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 1' %}
-                        </a>
-                    </div>
-
-                    <div class="col-12">
-                        <a  role="button" 
-                            href="{% url 'leads:actions:ghosting_2' lead.id %}"
-                            class="btn btn-block btn-dark">
-                            {% btn_svg_icons 'custom' 'cake' '22px' 'center' 'Bolo 2' %}
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-
-            </div>
+        <div class="modal-header">
+            <h3 class="modal-title h5 w-100 text-center text-dark">Tentativas de Contato</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            {% include "leads/update/modals/attempts_content.html" %}
+        </div>
     </div>
   </div>
 </div>

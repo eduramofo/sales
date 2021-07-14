@@ -146,6 +146,47 @@ def schedule(request, lead_id):
 
 
 @login_required()
+def schedule_direct(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    schedule_form = ScheduleForm()
+
+    context = {
+        'schedule_form': schedule_form,
+        'lead': lead,
+        'activity': None,
+        'whatsapp_confirm': None,
+    }
+
+    if request.method == 'POST':
+        schedule_form = ScheduleForm(request.POST or None)
+        context['schedule_form'] = schedule_form
+        if schedule_form.is_valid():
+            schedule_form_cleaned_data = schedule_form.cleaned_data
+            due_date = schedule_form_cleaned_data['due_date']
+            lead.status = 'agendamento'
+            lead.save()
+            activity_obj = Activity.objects.create(
+                lead=lead,
+                due_date=due_date,
+                done=False,
+                subject='Agendamento Direto criado',
+                type='call'
+            )
+            activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
+            whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
+            context['whatsapp_confirm'] = whatsapp_confirm
+            context['activity'] = activity_obj
+            messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
+            return render(request, 'leads/update/schedule/success.html', context)
+        else:
+            context['schedule_form'] = schedule_form
+
+    return render(request, 'leads/update/schedule/entry.html', context)
+
+
+@login_required()
 def upload(request, lead_id):
 
     lead = get_object_or_404(Lead, id=lead_id)

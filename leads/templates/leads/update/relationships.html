@@ -2,10 +2,10 @@
 {% load leads_extras %}
 
 <div class="container">
-    <div class="border border-dark p-2 rounded mb-3 mt-3">
+    <div class="border border-dark p-3 rounded mb-3 mt-3">
 
         <div class="row mb-2">
-            <div class="col-6 mt-2">
+            <div class="col-6">
                 <button
                     data-target="#activities-modal"
                     data-toggle="modal"
@@ -14,7 +14,7 @@
                     {% btn_svg_icons 'bootstrap' 'list-task' '25px' 'center' 'Atividades' %}
                 </button>
             </div>
-            <div class="col-6 mt-2">
+            <div class="col-6">
                 <button
                     data-target="#referrers-modal"
                     data-toggle="modal"
@@ -32,7 +32,7 @@
                     data-toggle="modal"
                     id="lead-form-modal-btn"
                     class="btn btn-block bg-secondary text-white text-center">
-                    {% btn_svg_icons 'bootstrap' 'file-earmark-text-fill' '25px' 'center' 'Form' %}
+                    {% btn_svg_icons 'bootstrap' 'file-earmark-text-fill' '25px' 'center' 'Editar' %}
                 </button>
             </div>
             <div class="col-6">
@@ -40,7 +40,7 @@
                     id="leads-call-whatsapp-btn" 
                     href="{% url 'leads:actions:upload' lead.id %}"
                     class="btn btn-block bg-secondary text-white text-center">
-                    {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Upload' %}
+                    {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Add Leads' %}
                 </a>
             </div>
         </div>
