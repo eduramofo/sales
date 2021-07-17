@@ -13,7 +13,8 @@
 
 #goal-of-the-day #goal-of-the-day-wrapper .progress {
     height: 100%;
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: bold;
     background-color: rgb(195 195 195);
 }
 
