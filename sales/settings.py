@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'integrations.apps.IntegrationsConfig',
     'analytics.apps.AnalyticsConfig',
     'academy.apps.AcademyConfig',
+    'conversation.apps.ConversationConfig',
 
     # django apps
     'django.contrib.admin',
@@ -93,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.past_due_activities',
+                'core.context_processors.goal_of_the_day',
             ],
         },
     },

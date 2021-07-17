@@ -5,6 +5,22 @@
     --main-navbar-bottom-border-size: 3px;
 }
 
+#goal-of-the-day #goal-of-the-day-wrapper {
+    border: 4px solid #000;
+    height: 45px;
+    border-radius: 4px;
+}
+
+#goal-of-the-day #goal-of-the-day-wrapper .progress {
+    height: 100%;
+    font-size: 20px;
+    background-color: rgb(195 195 195);
+}
+
+#goal-of-the-day #goal-of-the-day-wrapper .progress-bar {
+    background-color: rgb(60, 121, 11);
+}
+
 #past-due-activities-stripe:focus,
 #past-due-activities-stripe:hover,
 #past-due-activities-stripe p.h6:focus,
@@ -76,8 +92,8 @@ nav#main-navbar li a {
 .page-title {
     background-color: var(--main-color-primary)!important;
     color: #fff;
+    padding: 10px;
 }
-
 
 .modal-backdrop.show {
     background: rgba(0, 0, 0)!important;

@@ -1,22 +1,17 @@
-from urllib.parse import urlencode
 from random import choice as random_choice
-
 from django.utils import timezone
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+
 from django.urls import reverse_lazy
 from django.contrib import messages
 
-from core.tools import paginator
 from activities.models import Activity
+from conversation.models import Conversation
 from leads.process_contacts import gerar_leads
-from leads.models import Lead, Qualified, WhatsappTemplate
-from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm, ScheduleForm
-from leads.filters import LeadFilter
+from leads.models import Lead,  WhatsappTemplate
+from leads.forms import ReferrerForm, ScheduleForm
 from leads import tools
-from leads.templatetags import leads_extras
 from leads.whatsapp import api as whatsapp_api
 
 
@@ -137,6 +132,7 @@ def schedule(request, lead_id):
             whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
             context['whatsapp_confirm'] = whatsapp_confirm
             context['activity'] = activity_obj
+            Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_AGENDAMENTO)
             messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
             return render(request, 'leads/update/schedule/success.html', context)
         else:
@@ -207,6 +203,13 @@ def lost(request, lead_id):
         type='call'
     )
 
+    if status_lost_justification == 'entrevista_perdida':
+        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_LOST)
+    elif status_lost_justification == 'di':
+        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_DI)
+    elif status_lost_justification == 'sem_interesse':
+        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_SEM_INTERESSE)
+    
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
     url = reverse_lazy('leads:update', args=(str(lead.id),))
@@ -230,6 +233,8 @@ def off(request, lead_id):
         subject='Off',
         type='call'
     )
+
+    Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_OFF)
 
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
@@ -275,13 +280,9 @@ def win(request, lead_id):
     
     lead.save()
 
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Ganho',
-        type='call'
-    )
+    Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject='Ganho', type='call')
+
+    Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_WIN)
 
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
