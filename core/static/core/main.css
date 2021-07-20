@@ -121,7 +121,8 @@ nav#main-navbar li a {
 }
 
 #card-referrer-simple .card-referrer-simple-wrapper,
-.card-referrer-card,
+.card-referrer,
+.lead-card,
 #lead-update-relationships #lead-update-relationships-wrapper,
 #lead-update-info #lead-update-info-wrapper,
 #lead-update-main #lead-update-main-wrapper {
