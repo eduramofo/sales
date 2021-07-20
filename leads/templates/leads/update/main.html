@@ -1,15 +1,15 @@
 {% load core_extras %}
-<div class="container">
+<div id="lead-update-main" class="container">
     <div class="row">
         <div class="col-12">
-            <div class="border border-dark p-3 rounded mt-3 mt-md-2">
+            <div id="lead-update-main-wrapper" class="p-3 rounded mt-3 mt-md-2">
 
                 <div class="row">
                     <div class="col-6">
                         <a role="button" 
                             id="leads-call-phone-sc-btn"
                             href="{{lead.get_call_link}}"
-                            class="btn btn-block btn-success text-center">
+                            class="btn btn-block btn-success btn-custom text-center">
                             {% btn_svg_icons 'bootstrap' 'telephone-outbound-fill' '20px' 'center' 'Ligar' %}
                         </a>
                     </div>
@@ -17,18 +17,16 @@
                         <a role="button" 
                             id="leads-call-whatsapp-sc-btn" 
                             href="{{lead.get_whatsapp_link}}"
-                            class="btn btn-block btn-success text-center">
+                            class="btn btn-block btn-success btn-custom text-center">
                             {% btn_svg_icons 'custom' 'whatsapp-fill' '20px' 'center' 'Whats' %}
                         </a>
                     </div>
                 </div>
 
-
-
                 <div class="row mb-2 mt-2">
                     <div class="col-12">
                         <button data-toggle="modal" data-target="#conversation-modal" id="registration-call-modal-btn"
-                                class="btn btn-block btn-primary">
+                                class="btn btn-block btn-primary btn-custom">
                                 {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Conversa' %}
                         </button>
                     </div>
@@ -37,7 +35,7 @@
                 <div class="row">
                     <div class="col-12">
                         <button data-toggle="modal" data-target="#attempts-modal" id="attempts-call-modal-btn"
-                                class="btn btn-block btn-dark">
+                                class="btn btn-block btn-dark btn-custom">
                                 {% btn_svg_icons 'custom' 'conversation' '22px' 'center' 'Registrar Tantativa' %}
                         </button>
                     </div>
@@ -49,7 +47,7 @@
                             data-target="#whatsapp-modal"
                             data-toggle="modal"
                             id="whatsapp-modal-btn"
-                            class="btn btn-block bg-warning text-center">
+                            class="btn btn-block btn-warning btn-custom text-center">
                             {% btn_svg_icons 'custom' 'whatsapp' '25px' 'center' 'Enviar WhatsApp' %}
                         </button>
                     </div>    

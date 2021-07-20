@@ -1,6 +1,6 @@
 {% load leads_extras %}
-<div class="container">
-    <div class="border border-dark p-3 rounded mb-3 mt-3">
+<div id="lead-update-info" class="container">
+    <div id="lead-update-info-wrapper" class="p-3 rounded mb-3 mt-3">
         <p class="card-text mb-0"><strong>Indicado em:</strong>
             {% if lead|get_referrers_from_lead_first_referring_datetime %}
             {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/M/y à\s H:i"}}

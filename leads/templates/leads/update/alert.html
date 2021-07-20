@@ -2,13 +2,13 @@
     <div class="row">
         <div class="col-12">
             {% if lead.status == 'perdido' %}
-              <div class="alert alert-danger border-dark py-1 px-2 mt-3 mb-0" role="alert">
-                  <p class="m-0 p-0"><strong>PERDIDO</strong></p>
+              <div class="alert alert-danger alert-main py-1 px-2 mt-3 mb-0" role="alert">
+                  <p class="m-0 p-1"><strong>PERDIDO</strong></p>
               </div>
             {% endif %}
             {% if lead.status == 'ganho' %}
-              <div class="alert alert-success border-dark py-1 px-2 mt-3 mb-0" role="alert">
-                <strong>GANHO</strong>
+              <div class="alert alert-success alert-main py-1 px-2 mt-3 mb-0" role="alert">
+                  <p class="m-0 p-1"><strong>GANHO</strong></p>
               </div>
             {% endif %}
         </div>

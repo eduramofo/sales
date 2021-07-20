@@ -1,8 +1,8 @@
 {% load core_extras %}
 {% load leads_extras %}
 
-<div class="container">
-    <div class="border border-dark p-3 rounded mb-3 mt-3">
+<div id="lead-update-relationships" class="container">
+    <div id="lead-update-relationships-wrapper" class="p-3 rounded mb-3 mt-3">
 
         <div class="row mb-2">
             <div class="col-6">
@@ -10,7 +10,7 @@
                     data-target="#activities-modal"
                     data-toggle="modal"
                     id="activities-modal-btn"
-                    class="btn btn-block bg-secondary text-white text-center">
+                    class="btn btn-block btn-secondary text-white text-center">
                     {% btn_svg_icons 'bootstrap' 'list-task' '25px' 'center' 'Atividades' %}
                 </button>
             </div>
@@ -19,7 +19,7 @@
                     data-target="#referrers-modal"
                     data-toggle="modal"
                     id="referrers-modal-btn"
-                    class="btn btn-block bg-secondary text-white text-center">
+                    class="btn btn-block btn-secondary text-white text-center">
                     {% btn_svg_icons 'bootstrap' 'hand-index-thumb-fill' '25px' 'center' 'Refs.' %}
                 </button>
             </div>
@@ -31,7 +31,7 @@
                     data-target="#lead-form-modal"
                     data-toggle="modal"
                     id="lead-form-modal-btn"
-                    class="btn btn-block bg-secondary text-white text-center">
+                    class="btn btn-block btn-secondary text-white text-center">
                     {% btn_svg_icons 'bootstrap' 'file-earmark-text-fill' '25px' 'center' 'Editar' %}
                 </button>
             </div>
@@ -39,7 +39,7 @@
                 <a role="button" 
                     id="leads-call-whatsapp-btn" 
                     href="{% url 'leads:actions:add' lead.id %}"
-                    class="btn btn-block bg-secondary text-white text-center">
+                    class="btn btn-block btn-secondary text-white text-center">
                     {% btn_svg_icons 'bootstrap' 'cloud-arrow-up-fill' '25px' 'center' 'Add Leads' %}
                 </a>
             </div>
