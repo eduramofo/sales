@@ -11,12 +11,11 @@
 }
 
 #goal-of-the-day #goal-of-the-day-wrapper {
-    border: 3px solid #0a2711;
     height: 46px;
-    border-radius: 4px;
 }
 
 #goal-of-the-day #goal-of-the-day-wrapper .progress {
+    border: 3px solid #165324;
     height: 100%;
     font-size: 12px;
     font-weight: bold;
