@@ -6,20 +6,18 @@
     --main-navbar-bottom-border-size: 3px;
 }
 
-#goal-of-the-day .ldBar-label {
-    display: none!important;
-}
-
 #goal-of-the-day #goal-of-the-day-wrapper {
     height: 46px;
+    background-color: #165324;
+    padding: 2px;
 }
 
 #goal-of-the-day #goal-of-the-day-wrapper .progress {
-    border: 3px solid #165324;
-    height: 100%;
-    font-size: 12px;
+    height: 100%!important;
+    font-size: 15px;
     font-weight: bold;
     background-color: #d4edda;
+    border: 1px solid #165324;
 }
 
 #goal-of-the-day #goal-of-the-day-wrapper .progress-bar {
@@ -98,7 +96,7 @@ nav#main-navbar li a {
     color: var(--main-color-primary)!important;
     border: 3px solid var(--main-color-primary)!important;
     background-color: var(--main-color-primary-light)!important;
-    height: 46px;
+    min-height: 46px;
 }
 
 .page-title h1 {
@@ -119,33 +117,38 @@ nav#main-navbar li a {
     border: 3px solid #721c24;
 }
 
+.bolder-border {
+    border: 3px solid var(--main-color-primary)!important;
+}
+
 #card-referrer-simple .card-referrer-simple-wrapper,
 .card-referrer,
 .lead-card,
 #lead-update-relationships #lead-update-relationships-wrapper,
 #lead-update-info #lead-update-info-wrapper,
+#upload-leads-form,
 #lead-update-main #lead-update-main-wrapper {
     border: 3px solid var(--main-color-primary)!important;
 }
 
 .btn.btn-success {
-    border: 3px solid #155724;
+    border: 3px solid #155724!important;
 }
 
 .btn.btn-primary {
-    border: 3px solid #04366b;
+    border: 3px solid #04366b!important;
 }
 
 .btn.btn-warning {
-    border: 3px solid #a17b07;
+    border: 3px solid #a17b07!important;
 }
 
 .btn.btn-dark {
-    border: 3px solid #a0a0a0;
+    border: 3px solid #a0a0a0!important;
 }
 
 .btn.btn-info {
-    border: 3px solid #005361;
+    border: 3px solid #005361!important;
 }
 
 .btn.btn-secondary {

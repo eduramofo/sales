@@ -2,7 +2,9 @@
     <ul class="list-group">
         {% for list_items in lists %}
             <a href="{% url list_items.url %}">
-                <li class="list-group-item mb-2 border border-dark rounded">{{list_items.title}}</li>
+                <li class="list-group-item mb-2 bolder-border rounded">
+                    <strong>{{list_items.title}}</strong>
+                </li>
             </a>
         {% endfor %}
     </ul>

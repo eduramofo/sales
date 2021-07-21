@@ -1,21 +1,4 @@
-<div id="goal-of-the-day" class="mt-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div id="goal-of-the-day-wrapper">
-                    <div class="progress rounded p-0 m-0">
-                        <div    class="progress-bar"
-                                role="progressbar"
-                                style="width: {{goal_of_the_day.percentage_str}};"
-                                aria-valuenow="{{goal_of_the_day.percentage_int_str}}"
-                                aria-valuemin="0"
-                                aria-valuemax="100">{{goal_of_the_day.percentage_str}}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'core/nav/goal_of_the_day.html' %}
 <nav id="main-navbar" class="navbar fixed-bottom navbar-expand-lg navbar-primary bg-primary text-white container-fluid">
     {% include 'core/nav/mobile.html' %}
     {% include 'core/nav/desktop.html' %}
