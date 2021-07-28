@@ -12,24 +12,6 @@
     font-weight: bold;
 }
 
-/* #goal-of-the-day #goal-of-the-day-wrapper {
-    height: 46px;
-    background-color: #165324;
-    padding: 2px;
-}
-
-#goal-of-the-day #goal-of-the-day-wrapper .progress {
-    height: 100%!important;
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #d4edda;
-    border: 1px solid #165324;
-}
-
-#goal-of-the-day #goal-of-the-day-wrapper .progress-bar {
-    background-color: #208638;
-} */
-
 #past-due-activities-stripe:focus,
 #past-due-activities-stripe:hover,
 #past-due-activities-stripe p.h6:focus,
