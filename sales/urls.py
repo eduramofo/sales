@@ -49,16 +49,18 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('', include("core.urls")),
+    path('', include('core.urls')),
     
-    path('leads/', include("leads.urls.main")),
+    path('leads/', include('leads.urls.main')),
 
-    path('integrations/', include("integrations.urls")),
+    path('integrations/', include('integrations.urls')),
 
-    path('analytics/', include("analytics.urls")),
+    path('analytics/', include('analytics.urls')),
 
-    path('activities/', include("activities.urls")),
+    path('activities/', include('activities.urls')),
 
-    path('academy/', include("academy.urls")),
+    path('signup/', include('signup.urls')),
+
+    path('academy/', include('academy.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

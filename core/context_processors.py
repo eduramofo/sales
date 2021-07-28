@@ -7,17 +7,17 @@ from analytics.data import get_conversations_day
 
 def past_due_activities(request):
     result = False
-    # from_now_plus_1s = timezone.now() + timedelta(seconds=1)
-    # activities = Activity.objects.filter(
-    #     done=False,
-    #     due_date__lte=from_now_plus_1s,
-    # ).exclude(lead=None).filter(lead__status='agendamento').order_by('due_date')
-    # if len(activities) > 0: result = True
+    from_now_plus_1s = timezone.now() + timedelta(seconds=1)
+    activities = Activity.objects.filter(
+        done=False,
+        due_date__lte=from_now_plus_1s,
+    ).exclude(lead=None).filter(lead__status='agendamento').order_by('due_date')
+    if len(activities) > 0: result = True
     return {'past_due_activities': result,}
 
 
 def goal_of_the_day(request):
-    conversations_goal = 30
+    conversations_goal = 21
     conversations = get_conversations_day()
     percentage = conversations / conversations_goal
     percentage_int = int(math.floor(percentage*100))

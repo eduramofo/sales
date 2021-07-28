@@ -1,17 +1,15 @@
-<div id="goal-of-the-day" class="mt-3">
-    <div class="container">
+<div id="goal-of-the-day" class="mt-0">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div id="goal-of-the-day-wrapper" class="rounded">
-                    <div class="progress p-0 m-0 rounded">
-                        <div
-                            class="progress-bar"
-                            role="progressbar"
-                            style="width: {{goal_of_the_day.percentage_str}};"
-                            aria-valuenow="{{goal_of_the_day.percentage_int_str}}"
-                            aria-valuemin="0"
-                            aria-valuemax="100">{{goal_of_the_day.percentage_str}}
-                        </div>
+            <div class="col-12 px-0">
+                <div class="progress p-0 m-0 rounded-0">
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{goal_of_the_day.percentage_str}};"
+                        aria-valuenow="{{goal_of_the_day.percentage_int_str}}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">{{goal_of_the_day.percentage_str}}
                     </div>
                 </div>
             </div>

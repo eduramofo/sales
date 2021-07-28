@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+<form method="post" action="{% url 'signup:home' %}" class="bg-light border border-primary p-4 rounded">
+
+    <div class="form-group">
+        <h1 class="h4 w-100 text-center mb-3">Formulário de Cadastro</h1>
+    </div>
+
+    {% csrf_token %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.username %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.name %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.waid %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.email %}
+
+    <div class="form-group mb-1 mt-4">
+        <button type="submit" class="btn btn-block btn-success">Realizar Cadastro</button>
+    </div>
+
+</form>

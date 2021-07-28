@@ -29,7 +29,10 @@ def today(request):
 @login_required()
 def this_week(request):
     today = datetime.now()
-    week_start = today - timedelta(days=today.weekday()) + timedelta(days=2)
+    weekday = today.weekday()
+    week_start = today - timedelta(days=weekday) + timedelta(days=2)
+    if weekday == 1:
+        week_start = today - timedelta(days=6)
     week_end = week_start + timedelta(days=6)
     week_start_str = week_start.strftime('%Y-%m-%d')
     week_end_str = week_end.strftime('%Y-%m-%d')

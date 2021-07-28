@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'analytics.apps.AnalyticsConfig',
     'academy.apps.AcademyConfig',
     'conversation.apps.ConversationConfig',
+    'signup.apps.SignupConfig',
 
     # django apps
     'django.contrib.admin',

@@ -212,11 +212,11 @@ def schedules(request):
 
     query = Q(status='agendamento') | Q(status='agendamento_direct')
 
-    leads_ = Lead.objects.filter(pk__in=leads_pks).filter(query)
+    leads_ = Lead.objects.filter(pk__in=leads_pks).filter(query).order_by('name')
 
     leads = LeadFilter(request.GET, queryset=leads_)
 
-    pages = paginator.make_paginator(request, leads.qs, 1000)
+    pages = paginator.make_paginator(request, leads.qs, 50)
 
     context = {
         'page_title': page_title,
