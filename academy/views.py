@@ -4,7 +4,7 @@ from django.shortcuts import render
 def home(request):
 
     context = {
-        'page_title': 'Seja Bem-Vindo à Academia da Matrícula',
+        'page_title': 'Página Inicial',
         'nav_name': 'core_home'
     }
 

@@ -1,11 +1,8 @@
-import json
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from django.http import JsonResponse
-
+from django.urls import reverse_lazy
+from django.contrib import messages
 from . import authorize
-from . import events
 
 
 @login_required()
@@ -22,5 +19,6 @@ def oauth2callback(request):
 
 @login_required()
 def oauth2success(request):
-    data = authorize.success()
-    return JsonResponse(data)
+    oauth2success_url = reverse_lazy('core:home', args=())
+    messages.add_message(request, messages.SUCCESS, 'Login realizado com sucesso no Google Calendar!')
+    return HttpResponseRedirect(oauth2success_url)

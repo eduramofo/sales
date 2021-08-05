@@ -1,9 +1,7 @@
 from urllib.parse import urlencode
 from random import choice as random_choice
 
-from django.utils import timezone
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
@@ -15,7 +13,7 @@ from activities.models import Activity
 
 from leads.process_contacts import gerar_leads
 from leads.models import Lead, Qualified
-from leads.forms import LeadForm, LeadLostForm, LeadFormRunNow, ReferrerForm, QualifiedForm, ScheduleForm
+from leads.forms import LeadForm, QualifiedForm
 from leads.filters import LeadFilter
 from leads import tools
 from leads.templatetags import leads_extras

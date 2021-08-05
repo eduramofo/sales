@@ -1,25 +1,43 @@
 # thirds
 import json
+import httplib2
 
 # google api
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
-from google.auth.transport.requests import Request
 
 # django
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.utils import timezone
 
 # app
 from integrations.models import GoogleApi
 
 
-SCOPES = ['https://www.googleapis.com/auth/calendar']
+SCOPES = [
+    'https://www.googleapis.com/auth/calendar'
+]
 
 
-def get_credentials():
+def refresh_tokens(credentials):
+    credentials = credentials.refresh(httplib2.Http())
+    google_calendar_api = set_credentials(credentials)
+    return google_calendar_api
+
+
+def is_required_refresh_tokens(google_calendar_api):
+    updated_at = google_calendar_api.updated_at
+    required_refresh_in = updated_at + timezone.timedelta(hours=1)
+    now = timezone.now()
+    result = True
+    if now < required_refresh_in:
+        result = False
+    return result
+
+
+def get_current_credentials_dict(google_calendar_api):
     identifier = 'GOOGLE_CALENDAR'
     google_calendar_api = get_object_or_404(
         GoogleApi,
@@ -34,6 +52,18 @@ def get_credentials():
         client_secret = credentials_dict["client_secret"],
         scopes = SCOPES,
     )
+    return credentials
+
+
+def get_credentials():
+    identifier = 'GOOGLE_CALENDAR'
+    google_calendar_api = get_object_or_404(
+        GoogleApi,
+        identifier=identifier
+    )
+    if is_required_refresh_tokens(google_calendar_api):
+        google_calendar_api = refresh_tokens(google_calendar_api)
+    credentials = get_current_credentials_dict(google_calendar_api)
     return credentials
 
 
