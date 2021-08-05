@@ -19,6 +19,10 @@ SCOPES = [
     'https://www.googleapis.com/auth/calendar'
 ]
 
+def get_google_calendar_id():
+    return get_google_calendar_api_obj().calendar_id
+
+
 def get_google_calendar_api_obj():
     identifier = 'GOOGLE_CALENDAR'
     google_calendar_api = get_object_or_404(

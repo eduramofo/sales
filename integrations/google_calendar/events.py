@@ -4,9 +4,7 @@ from . import authorize
 
 from django.urls import reverse_lazy
 from django.contrib.sites.models import Site
-from integrations.google_calendar.authorize import get_google_calendar_api_obj
-
-calendar_id = get_google_calendar_api_obj().calendar_id
+from integrations.google_calendar.authorize import get_google_calendar_id
 
 
 def get_lead_url(lead):
@@ -18,6 +16,7 @@ def get_lead_url(lead):
 def create(activity):
     lead = activity.lead
     service_result = authorize.get_service()
+    calendar_id = get_google_calendar_id()
     data = {
         'success': False,
         'result': None,
