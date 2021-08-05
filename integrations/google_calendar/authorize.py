@@ -21,26 +21,26 @@ SCOPES = [
 ]
 
 
-def get_current_credentials_dict(google_calendar_api):
-    credentials_dict = json.loads(google_calendar_api.o_auth_2_token_json)
-    credentials = Credentials(
-        credentials_dict["token"],
-        refresh_token = credentials_dict["refresh_token"],
-        token_uri = credentials_dict["token_uri"],
-        client_id = credentials_dict["client_id"],
-        client_secret = credentials_dict["client_secret"],
-        scopes = SCOPES,
-    )
-    return credentials
-
-
 def get_credentials():
     identifier = 'GOOGLE_CALENDAR'
     google_calendar_api = get_object_or_404(
         GoogleApi,
         identifier=identifier
     )
-    credentials = get_current_credentials_dict(google_calendar_api)
+    credentials_dict = json.loads(google_calendar_api.o_auth_2_token_json)
+    token = credentials_dict['token']
+    refresh_token = credentials_dict['refresh_token']
+    token_uri = credentials_dict['token_uri']
+    client_id = credentials_dict['client_id']
+    client_secret = credentials_dict["client_secret"],
+    credentials = Credentials(
+        token,
+        refresh_token=refresh_token,
+        token_uri=token_uri,
+        client_id=client_id,
+        client_secret=client_secret,
+        scopes = SCOPES,
+    )
     return credentials
 
 
@@ -124,7 +124,7 @@ def authorize(request):
         # Enable incremental authorization. Recommended as a best practice.
         include_granted_scopes='true'
     )
-    return authorization_url
+    return authorization_url, state
 
 
 def callback(request):
