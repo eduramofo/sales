@@ -53,7 +53,7 @@ def set_credentials(credentials):
     client_secret = credentials.client_secret
     google_calendar_api = get_google_calendar_api_obj()
     if refresh_token:
-        google_calendar_api.o_auth_2_credentials_refresh_token
+        google_calendar_api.o_auth_2_credentials_refresh_token = refresh_token
     google_calendar_api.o_auth_2_credentials_token = token
     google_calendar_api.o_auth_2_credentials_token_uri = token_uri
     google_calendar_api.o_auth_2_credentials_client_id = client_id
