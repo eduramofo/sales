@@ -10,7 +10,6 @@ from google.oauth2.credentials import Credentials
 # django
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.utils import timezone
 
 # app
 from integrations.models import GoogleApi
@@ -20,47 +19,47 @@ SCOPES = [
     'https://www.googleapis.com/auth/calendar'
 ]
 
-
-def get_credentials():
+def get_google_calendar_api_obj():
     identifier = 'GOOGLE_CALENDAR'
     google_calendar_api = get_object_or_404(
         GoogleApi,
         identifier=identifier
     )
-    credentials_dict = json.loads(google_calendar_api.o_auth_2_token_json)
-    token = credentials_dict['token']
-    refresh_token = credentials_dict['refresh_token']
-    token_uri = credentials_dict['token_uri']
-    client_id = credentials_dict['client_id']
-    client_secret = credentials_dict["client_secret"],
+    return google_calendar_api
+
+
+def get_credentials():
+    google_calendar_api = get_google_calendar_api_obj()    
     credentials = Credentials(
-        token,
-        refresh_token=refresh_token,
-        token_uri=token_uri,
-        client_id=client_id,
-        client_secret=client_secret,
+        google_calendar_api.o_auth_2_credentials_token,
+        refresh_token=google_calendar_api.o_auth_2_credentials_refresh_token,
+        token_uri=google_calendar_api.o_auth_2_credentials_token_uri,
+        client_id=google_calendar_api.o_auth_2_credentials_client_id,
+        client_secret=google_calendar_api.o_auth_2_credentials_client_secret,
         scopes = SCOPES,
     )
     return credentials
 
 
 def set_credentials(credentials):
-    identifier = 'GOOGLE_CALENDAR'
-    google_calendar_api = get_object_or_404(
-        GoogleApi,
-        identifier=identifier
-    )
-    google_calendar_api.o_auth_2_token_json = credentials
+    token = credentials.token
+    refresh_token = credentials.refresh_token
+    token_uri = credentials.token_uri
+    client_id = credentials.client_id
+    client_secret = credentials.client_secret
+    google_calendar_api = get_google_calendar_api_obj()
+    if refresh_token:
+        google_calendar_api.o_auth_2_credentials_refresh_token
+    google_calendar_api.o_auth_2_credentials_token = token
+    google_calendar_api.o_auth_2_credentials_token_uri = token_uri
+    google_calendar_api.o_auth_2_credentials_client_id = client_id
+    google_calendar_api.o_auth_2_credentials_client_secret = client_secret
+    google_calendar_api.o_auth_2_credentials_scopes = None
     google_calendar_api.save()
-    return google_calendar_api
 
 
 def get_client_secret():
-    identifier = 'GOOGLE_CALENDAR'
-    google_calendar_api = get_object_or_404(
-        GoogleApi,
-        identifier=identifier
-    )
+    google_calendar_api = get_google_calendar_api_obj()
     return google_calendar_api.o_auth_2_client_secret_json
 
 
@@ -75,19 +74,6 @@ def get_client_config():
     client_secret = get_client_secret()
     client_config = json.loads(client_secret)
     return client_config
-
-
-def credentials_to_json_string(credentials):
-    credentials_dict = {
-        'token': credentials.token,
-        'refresh_token': credentials.refresh_token,
-        'token_uri': credentials.token_uri,
-        'client_id': credentials.client_id,
-        'client_secret': credentials.client_secret,
-        'scopes': SCOPES,
-    }
-    credentials_json_string = json.dumps(credentials_dict)
-    return credentials_json_string
 
 
 def get_service():
@@ -124,7 +110,7 @@ def authorize(request):
         # Enable incremental authorization. Recommended as a best practice.
         include_granted_scopes='true'
     )
-    return authorization_url, state
+    return authorization_url
 
 
 def callback(request):
@@ -134,9 +120,7 @@ def callback(request):
     flow = InstalledAppFlow.from_client_config(get_client_config(), scopes=scopes, state=state)
     flow.redirect_uri = get_callback_url(request)
     flow.fetch_token(code=code)
-    credentials = flow.credentials
-    credentials_json_string = credentials_to_json_string(credentials)
-    set_credentials(credentials_json_string)
+    set_credentials(flow.credentials)
     success_url = reverse_lazy('integrations:google_calendar:oauth2success', args=())
     return success_url
 
