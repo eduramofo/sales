@@ -1,8 +1,8 @@
 # thirds
 import json
-import httplib2
 
 # google api
+from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
@@ -21,28 +21,7 @@ SCOPES = [
 ]
 
 
-def refresh_tokens(credentials):
-    credentials = credentials.refresh(httplib2.Http())
-    google_calendar_api = set_credentials(credentials)
-    return google_calendar_api
-
-
-def is_required_refresh_tokens(google_calendar_api):
-    updated_at = google_calendar_api.updated_at
-    required_refresh_in = updated_at + timezone.timedelta(hours=1)
-    now = timezone.now()
-    result = True
-    if now < required_refresh_in:
-        result = False
-    return result
-
-
 def get_current_credentials_dict(google_calendar_api):
-    identifier = 'GOOGLE_CALENDAR'
-    google_calendar_api = get_object_or_404(
-        GoogleApi,
-        identifier=identifier
-    )
     credentials_dict = json.loads(google_calendar_api.o_auth_2_token_json)
     credentials = Credentials(
         credentials_dict["token"],
@@ -61,8 +40,6 @@ def get_credentials():
         GoogleApi,
         identifier=identifier
     )
-    if is_required_refresh_tokens(google_calendar_api):
-        google_calendar_api = refresh_tokens(google_calendar_api)
     credentials = get_current_credentials_dict(google_calendar_api)
     return credentials
 
@@ -114,14 +91,14 @@ def credentials_to_json_string(credentials):
 
 
 def get_service():
-
     credentials = get_credentials()
-
+    if credentials and credentials.expired and credentials.refresh_token:
+        credentials.refresh(Request())
+        set_credentials(credentials)
     result = {
         'success': False,
         'service': None,
     }
-
     if credentials and credentials.valid:
         service = build(
             'calendar',
@@ -134,16 +111,12 @@ def get_service():
         }
     else:
         print('Need login again!')
-
     return result
 
 
 def authorize(request):
-
     flow = InstalledAppFlow.from_client_config(get_client_config(), scopes=SCOPES,)
-
     flow.redirect_uri = get_callback_url(request)
-    
     authorization_url, state = flow.authorization_url(
         # Enable offline access so that you can refresh an access token without
         # re-prompting the user for permission. Recommended for web server apps.
@@ -151,7 +124,6 @@ def authorize(request):
         # Enable incremental authorization. Recommended as a best practice.
         include_granted_scopes='true'
     )
-
     return authorization_url
 
 
@@ -170,20 +142,13 @@ def callback(request):
 
 
 def success():
-    
     service_result = get_service()
-    
     data = {'success': False,}
-    
     if service_result['success']:
-        
         service = service_result['service']
-        
         calendar = service.calendars().get(calendarId='primary').execute()
-        
         data = {
             'success': True,
             'result': calendar['summary'],
         }
-
     return data
