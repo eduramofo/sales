@@ -10,13 +10,17 @@
                 <li class="mb-2">
                     <a  href="/admin/leads/whatsapptemplate/">Template de mensagens de WhatsApp</a>
                 </li>
-
-               <li class="mb-2">
-                    <a  href="{% url 'integrations:google_calendar:oauth2' %}">Integração com o  Google Calendar (Login)</a>
+                
+                <li class="mb-2">
+                    <a  href="/admin/integrations/googleapi/">Google Calendar (Configurações)</a>
                 </li>
 
-                <li class="">
-                    <a  href="/admin/integrations/googleapi/">Integração com o  Google Calendar (Configurações)</a>
+               <li class="mb-2">
+                    <a  href="{% url 'integrations:google_calendar:oauth2' %}">Google Calendar (Login)</a>
+                </li>
+                
+                <li class="mb-2">
+                    <a  href="{% url 'integrations:google_calendar:oauth2revoke' %}">Google Calendar (Revogar acesso)</a>
                 </li>
 
             </ul>

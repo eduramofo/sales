@@ -1,5 +1,6 @@
 # thirds
 import json
+import requests
 
 # google api
 from google.auth.transport.requests import Request
@@ -140,3 +141,14 @@ def success():
             'result': calendar['summary'],
         }
     return data
+
+
+def revoke():
+    credentials = get_credentials()
+    revoke = requests.post(
+        'https://oauth2.googleapis.com/revoke',
+        params = {'token': credentials.token},
+        headers = {'content-type': 'application/x-www-form-urlencoded'},
+    )
+    status_code = getattr(revoke, 'status_code')
+    return status_code
