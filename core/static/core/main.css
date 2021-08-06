@@ -119,6 +119,10 @@ nav#main-navbar li a {
     border: 3px solid var(--main-color-primary)!important;
 }
 
+.btn.btn-danger {
+    border: 3px solid #721c24!important;
+}
+
 .btn.btn-success {
     border: 3px solid #155724!important;
 }

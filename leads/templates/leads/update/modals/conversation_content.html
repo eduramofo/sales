@@ -16,13 +16,6 @@
 
 <a role="button" 
     id="leads-call-whatsapp-btn" 
-    href="{% url 'leads:actions:lost' lead.id %}?justification=di"
-    class="btn btn-block btn-info text-center">
-    {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Parou na DI' %}
-</a>
-
-<a role="button" 
-    id="leads-call-whatsapp-btn" 
     href="{% url 'leads:actions:lost' lead.id %}?justification=entrevista_perdida"
     class="btn btn-block btn-danger text-center">
     {% btn_svg_icons 'bootstrap' 'hand-thumbs-down' '25px' 'center' 'Entrevista perdida' %}
