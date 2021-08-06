@@ -23,17 +23,29 @@ class SignupForm(forms.Form):
     )
 
     waid = forms.CharField(
-        label='Celular/WhatsApp',
+        label='WhatsApp',
         widget=forms.TextInput(
-            attrs={'placeholder': 'Ex.: (31) 9-8343-3489'}
+            attrs={'placeholder': 'Ex.: 5511987654321'}
         ),
-        validators=[validators.validate_telefone,],
+        # validators=[validators.validate_telefone,],
         max_length=50,
         required=True,
     )
 
     email = forms.EmailField(
         label='E-mail',
-        required=False,
+        required=True,
         widget=forms.EmailInput(attrs={'placeholder': 'email@exemple.com'}),
+    )
+
+    password = forms.CharField(
+        label='Defina sua senha',
+        required=True,
+        widget=forms.PasswordInput(attrs={'placeholder': '**************'}),
+    )
+
+    password_check = forms.CharField(
+        label='Confirme sua senha',
+        required=False,
+        widget=forms.PasswordInput(attrs={'placeholder': '**************'}),
     )

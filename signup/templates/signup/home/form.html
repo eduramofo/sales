@@ -1,9 +1,12 @@
 {% load widget_tweaks %}
 
-<form method="post" action="{% url 'signup:home' %}" class="bg-light border border-primary p-4 rounded">
+<form method="post" action="{% url 'signup:home' %}" class="bg-light p-4 rounded bolder-border">
 
     <div class="form-group">
-        <h1 class="h4 w-100 text-center mb-3">Formulário de Cadastro</h1>
+        <h1 class="h3 w-100 text-center mb-3">
+            <strong>Formulário de Cadastro</strong>
+        </h1>
+        <hr class="mb-4">
     </div>
 
     {% csrf_token %}
@@ -15,6 +18,10 @@
     {% include "core/fields_widgets/input_default.html" with field=form.waid %}
 
     {% include "core/fields_widgets/input_default.html" with field=form.email %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.password %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.password_check %}
 
     <div class="form-group mb-1 mt-4">
         <button type="submit" class="btn btn-block btn-success">Realizar Cadastro</button>

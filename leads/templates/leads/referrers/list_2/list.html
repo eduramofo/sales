@@ -1,9 +1,53 @@
 {% load leads_extras %}
 
 {% if referrers %}
+
+  <div class="col-12 mx-0 mb-3">
+    <div class="row">
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers-1' %}" class="btn btn-block btn-dark">T1 e T2</a>
+      </div>
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers-2' %}" class="btn btn-block btn-dark">T1, T2 e T3</a>
+      </div>
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers' %}" class="btn btn-block btn-dark">Todos</a>
+      </div>
+
+    </div>
+  </div>
+
     {% for obj in referrers %}
       {% include "leads/referrers/referrer_item/list_item.html" %}
     {% endfor %}
 {% else %}
-<h6 class="text-danger">Não há referenciadores.</h6>
+
+<div class="col-12">
+
+    <div class="row mb-3">
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers-1' %}" class="btn btn-block btn-dark">T1 e T2</a>
+      </div>
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers-2' %}" class="btn btn-block btn-dark">T1, T2 e T3</a>
+      </div>
+
+      <div class="col-4">
+        <a href="{% url 'leads:referrers' %}" class="btn btn-block btn-dark">Todos</a>
+      </div>
+
+    </div>
+
+  <div class="alert alert-danger bolder-border" role="alert">
+    <h6 class="text-danger mb-0 p-0">
+      <strong>Não há referenciadores.</strong>
+    </h6>
+  </div>
+</div>
+
 {% endif %}

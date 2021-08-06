@@ -1,11 +1,13 @@
-from django.conf import settings
-from leads.models import Lead
 import vobject
-import json
+from leads.models import Lead
+from account.models import Account
 
 
 def gerar_leads(form, request):
     referrer = form.save()
+    account = Account.objects.get(user=request.user)
+    referrer.account = account
+    account.save()
     files = request.FILES.getlist('vcf_files')
     contacts = handle_uploaded_files(files)
     create_leads_by_contacts(contacts, referrer)
@@ -17,18 +19,16 @@ def create_leads_by_contacts(contacts, referrer):
     for contact in contacts:
         new_lead = create_or_get_lead(contact, referrer)
         leads.append(new_lead)
-
     referrer.leads.set(leads)
     referrer.save()
 
+
 def create_or_get_lead(contact, referrer):
-    
     tels = contact['tels']
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
     note = ''
-
     if len(tels) > 1:
         for current_tel in tels:
             current_tel_numero =  current_tel['numero']
@@ -47,22 +47,18 @@ def create_or_get_lead(contact, referrer):
 
                 elif current_tel_waid and current_tel_waid != 'NN':
                     note = note + '[ Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
-
-
     if waid == 'NN':
-        new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note)
-
+        new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
     else:
         lead = Lead.objects.filter(waid=waid).first()
         if lead is None:
-            new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note)
+            new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
         else:
             new_lead = lead
-    
     return new_lead
 
 
-def create_lead(name, tel, waid, gmt, location, short_description, note):
+def create_lead(name, tel, waid, gmt, location, short_description, note, account):
     new_created_lead = Lead.objects.create(
         name=name,
         nickname=name,
@@ -72,6 +68,7 @@ def create_lead(name, tel, waid, gmt, location, short_description, note):
         location=location,
         short_description=short_description,
         note=note,
+        account=account,
     )
     return new_created_lead
 

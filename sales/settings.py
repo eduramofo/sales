@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'analytics.apps.AnalyticsConfig',
     'academy.apps.AcademyConfig',
     'conversation.apps.ConversationConfig',
+    'account.apps.AccountConfig',
     'signup.apps.SignupConfig',
     'event.apps.EventConfig',
 

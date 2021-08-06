@@ -1,3 +1,4 @@
+from account.models import Account
 from django.db import models
 from django.utils import timezone
 
@@ -58,7 +59,6 @@ LEAD_STATUS_LOST_JUSTIFICATION_CHOICES = (
     ('lost_direct', 'lost_direct'),
     ('outro', 'Outro'),
 )
-
 
 GMT_CHOICES = (
     (None, 'Selecionar'),
@@ -216,6 +216,14 @@ class Lead(BaseModel):
         blank=True,
     )
 
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
     def get_referrer(self):
         referrer_obj = Referrer.objects.filter(leads=self).first()
         if referrer_obj:
@@ -361,6 +369,14 @@ class Referrer(BaseModel):
         verbose_name='Conteúdo em (texto/string) do Arquivo',
         null=True,
         blank=True,
+    )
+
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
     )
 
     class Meta:
