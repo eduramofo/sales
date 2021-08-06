@@ -1,29 +1,41 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <ul class="mt-3">
 
-                <li class="mb-2">
-                    <a  href="">Meu Perfil</a>
-                </li>
+            <div>
 
-                <li class="mb-2">
-                    <a  href="/admin/leads/whatsapptemplate/">Template de mensagens de WhatsApp</a>
-                </li>
+                <a  href="" class="mb-0 p-0">
+                    <div class="rounded bolder-border p-2 mt-3">
+                            <strong>Meu Perfil</strong>  
+                    </div>
+                </a>
+            
+                <a  href="/admin/leads/whatsapptemplate/" class="mb-0 p-0">
+                    <div class="rounded bolder-border p-2 mt-3">
+                        <strong>Template de mensagens de WhatsApp</strong>
+                    </div>
+                </a>
+
+                <a  href="/admin/integrations/googleapi/" class="mb-0 p-0">
+                    <div class="rounded bolder-border p-2 mt-3">
+                        <strong>Google Calendar (Configurações)</strong>
+                    </div>
+                </a>
+
+                <a  href="{% url 'integrations:google_calendar:oauth2' %}" class="mb-0 p-0">
+                    <div class="rounded bolder-border p-2 mt-3">
+                        <strong>Google Calendar (Login)</strong>
+                    </div>
+                </a>
+
+                <a  href="{% url 'integrations:google_calendar:oauth2revoke' %}" class="mb-0 p-0">
+                    <div class="rounded bolder-border p-2 mt-3">
+                        <strong>Google Calendar (Revogar acesso)</strong>
+                    </div>
+                </a>
                 
-                <li class="mb-2">
-                    <a  href="/admin/integrations/googleapi/">Google Calendar (Configurações)</a>
-                </li>
+            </div>
 
-               <li class="mb-2">
-                    <a  href="{% url 'integrations:google_calendar:oauth2' %}">Google Calendar (Login)</a>
-                </li>
-                
-                <li class="mb-2">
-                    <a  href="{% url 'integrations:google_calendar:oauth2revoke' %}">Google Calendar (Revogar acesso)</a>
-                </li>
-
-            </ul>
         </div>
     </div>
 </div>

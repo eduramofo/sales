@@ -5,15 +5,16 @@ from activities.models import Activity
 from analytics.data import get_conversations_day
 
 
-def past_due_activities(request):
-    result = False
+def globallabel(request):
+    result = 'bg-success'
     from_now_plus_1s = timezone.now() + timedelta(seconds=1)
     activities = Activity.objects.filter(
         done=False,
         due_date__lte=from_now_plus_1s,
     ).exclude(lead=None).filter(lead__status='agendamento').order_by('due_date')
-    if len(activities) > 0: result = True
-    return {'past_due_activities': result,}
+    if len(activities) > 0:
+        result = 'bg-danger'
+    return {'globallabel': result,}
 
 
 def goal_of_the_day(request):

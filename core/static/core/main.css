@@ -6,6 +6,12 @@
     --main-navbar-bottom-border-size: 3px;
 }
 
+#global-label .progress {
+    height: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 #goal-of-the-day .progress {
     height: 30px;
     font-size: 15px;
