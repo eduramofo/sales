@@ -1,13 +1,15 @@
-from django.utils import timezone
 from datetime import timedelta
+
+from django.utils import timezone
 from django.utils import timezone
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
+
 from core.tools import paginator
 from activities.models import Activity
-from leads.process_contacts import gerar_leads
+
 from leads.models import Lead
 from leads.filters import LeadFilter
 from leads import tools
