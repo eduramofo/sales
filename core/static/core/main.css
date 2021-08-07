@@ -6,6 +6,10 @@
     --main-navbar-bottom-border-size: 3px;
 }
 
+body {
+    margin-bottom: 75px;
+}
+
 #global-label .progress {
     height: 5px;
     font-size: 15px;
@@ -13,18 +17,9 @@
 }
 
 #goal-of-the-day .progress {
-    height: 30px;
+    height: 20px;
     font-size: 15px;
     font-weight: bold;
-}
-
-#past-due-activities-stripe:focus,
-#past-due-activities-stripe:hover,
-#past-due-activities-stripe p.h6:focus,
-#past-due-activities-stripe p.h6:focus {
-    color: none!important;
-    text-decoration: none!important;
-    background-color: transparent!important;
 }
 
 nav#main-navbar button.navbar-toggler {
@@ -41,49 +36,17 @@ nav#main-navbar.fixed-bottom a.navbar-brand {
     color: #fff!important;
 }
 
-nav#main-navbar.fixed-bottom li.nav-item a {
-    color: #fff!important;
+nav#main-navbar .nav-item-item {
+    padding: 5px;
 }
 
-body {
-    margin-bottom: 75px;
+nav#main-navbar .nav-item-item svg {
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
-nav#main-navbar li a {
-    font-weight: 400;
-    font-size: 12;
-}
-
-#main-navbar-bottom,
-#main-navbar-bottom .navbar-nav {
-    background-color: var(--main-navbar-bottom-main-color);
-}
-
-
-#main-navbar-bottom,
-#main-navbar-bottom .navbar-nav,
-#main-navbar-bottom .navbar-nav .items-wrapper,
-#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    height: 60px!important;
-}
-
-#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    border-top: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
-    border-bottom: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
-    border-left: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
-}
-
-#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item:last-child {
-    border-right: var(--main-navbar-bottom-border-size) solid var(--main-navbar-bottom-secondary-color);
-}
-
-#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item {
-    width: 25%;
-}
-
-#main-navbar-bottom .navbar-nav .items-wrapper .nav-item-item .h6 {
-    font-size: 13px!important;
-    color: var(--main-navbar-bottom-secondary-color)!important;
+nav#main-navbar .nav-item-item small {
+    font-size: 12px;
 }
 
 .page-title {

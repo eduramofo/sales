@@ -1,1 +1,9 @@
-{% include 'core/nav/entry.html' %}
+{% include 'core/nav/global_label.html' %}
+{% include 'core/nav/goal_of_the_day.html' %}
+<nav id="main-navbar" class="navbar fixed-bottom navbar-expand-lg navbar-primary bg-primary text-white container-fluid">
+    <a class="navbar-brand d-none d-lg-block" href="{% url 'core:home' %}">Sales</a>
+    <div class="w-100 d-flex justify-content-center align-items-center">
+        {% include 'core/nav/nav_items.html' %}
+    </div>
+</nav>
+{% include 'core/nav/search_modal.html' %}

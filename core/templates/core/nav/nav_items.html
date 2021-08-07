@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a class="h6 text-white  p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'core:home' %}">
+    {% include 'core/nav/icons/house_door_fill.svg' %}
+    <small class="w-100 text-center mt-1">Home</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a class="h6 text-white  p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:referrers-1' %}">
+    {% include 'core/nav/icons/people_fill.svg' %}
+    <small class="w-100 text-center mt-1">Contatos</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:lists:home' %}">
+    {% include 'core/nav/icons/card_list.svg' %}
+    <small class="w-100 text-center mt-1">Listas</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:lists:schedules' %}">
+    {% include 'core/nav/icons/calendar_event_fill.svg' %}
+    <small class="w-100 text-center mt-1">Eventos</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a id="search-call-modal-btn" class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'leads:schedules' %}">
+    {% include 'core/nav/icons/search.svg' %}
+    <small class="w-100 text-center mt-1">Buscar</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a  class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'analytics:home' %}">
+    {% include 'core/nav/icons/bar_chart_fill.svg' %}
+    <small class="w-100 text-center mt-1">Análises</small>
+  </a>
+</div>
+
+<div class="d-flex justify-content-center align-items-center nav-item-item">
+  <a  class="h6 text-white p-0 m-0 d-flex flex-wrap justify-content-center align-items-center" href="{% url 'core:settings' %}">
+    {% include 'core/nav/icons/gear_fill.svg' %}
+    <small class="w-100 text-center mt-1">Config.</small>
+  </a>
+</div>
