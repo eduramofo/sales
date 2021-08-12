@@ -59,6 +59,8 @@ urlpatterns = [
 
     path('activities/', include('activities.urls')),
 
+    path('event/', include('event.urls')),
+
     path('signup/', include('signup.urls')),
 
     path('academy/', include('academy.urls')),

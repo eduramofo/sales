@@ -5,7 +5,9 @@ from django.utils.timezone import datetime, make_aware, timedelta
 
 from activities.models import Activity
 from analytics import day
+from analytics import data_clean
 from analytics import balance_data
+from analytics import data
 
 
 @login_required()
@@ -59,17 +61,16 @@ def day_select(request):
 @login_required()
 def day_result(request, dt):
     dt_obj = make_aware(datetime.strptime(dt, '%Y-%m-%d'))
-    activities = Activity.objects.filter(
-        created_at__year=dt_obj.year,
-        created_at__month=dt_obj.month,
-        created_at__day=dt_obj.day
-    ).exclude(subject='Inválido')
+    activities = data.get_activities_by_day(dt)
+    conversations = data.get_conversations_by_day(dt)
+    speechs = data.speechs_by_day(dt)
+    win = data.win_by_day(dt)
     page_title = 'Análise das Atividades do Dia ' + dt_obj.strftime('%d/%m/%Y')
     nav_name = 'analyze'
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'data': day.get_data_clean(activities),
+        'data': data_clean.data(activities, conversations, speechs, win),
     }
     return render(request, 'analytics/day_result/index.html', context)
 

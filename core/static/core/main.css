@@ -28,7 +28,6 @@ nav#main-navbar button.navbar-toggler {
 }
 
 nav#main-navbar.fixed-bottom {
-    margin-top: 63px;
     background-color: var(--main-color-primary)!important;
 }
 
@@ -74,6 +73,7 @@ nav#main-navbar .nav-item-item small {
     border: 3px solid #721c24;
 }
 
+.border-bolder,
 .bolder-border {
     border: 3px solid var(--main-color-primary)!important;
 }
@@ -114,4 +114,8 @@ nav#main-navbar .nav-item-item small {
 
 .btn.btn-secondary {
     border: 3px solid rgb(56, 56, 56)!important;
+}
+
+blockquote p {
+    font-size: 1rem;
 }
