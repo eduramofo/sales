@@ -3,3 +3,5 @@
         {% include 'event/event_list_all/list_item.html' %}
     {% endfor %}
 </div>
+
+{% include "core/tools/pagination.html" with page=events %}

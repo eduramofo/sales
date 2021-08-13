@@ -1,16 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from core.tools import paginator
+from event.models import Event
 
 
 @login_required()
 def event_list_all(request):
     page_title = 'Eventos'
-    events = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     nav_name = 'event'
+    events_qs = Event.objects.all()
+    pages = paginator.make_paginator(request, events_qs, 20)
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'events': events,
+        'events': pages['page'],
+        'page_range': pages['page_range'],
     }
     return render(request, 'event/event_list_all/index.html', context)
 
@@ -41,8 +45,25 @@ def event_list_done(request):
 def event_list_overdue(request):
     page_title = 'Eventos vencidos'
     nav_name = 'event'
+    for n in range(150):
+        Event.objects.create(
+            summary='Evento Teste ' + str(n),
+        )
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
     }
     return render(request, 'event/event_list_overdue/index.html', context)
+
+
+@login_required()
+def event_update(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    page_title = 'Evento: ' + event.summary
+    nav_name = 'event'
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'event': event,
+    }
+    return render(request, 'event/event_update/index.html', context)

@@ -6,7 +6,9 @@ from event.models import Event
 
 
 class EventAdmin(admin.ModelAdmin):
-    
+
+    search_fields = ('id', 'summary',)
+
     list_filter = (
         ('created_at', DateRangeFilter),
     )

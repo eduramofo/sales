@@ -38,6 +38,20 @@ class Event(BaseModel):
         blank=False,
     )
 
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
+    note = models.TextField(
+        verbose_name='Anotações',
+        null=True,
+        blank=True,
+    )
+
     google_calendar_calendar_id = models.CharField(
         verbose_name='Google Calendar: [calendarId]',
         max_length=500,

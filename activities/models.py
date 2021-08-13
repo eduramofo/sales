@@ -55,6 +55,14 @@ class Activity(BaseModel):
         null=True,
     )
 
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
     google_calendar_calendar_id = models.CharField(
         verbose_name='Google Calendar: [calendarId]',
         max_length=500,
