@@ -10,25 +10,16 @@ from django.contrib import messages
 
 from activities.models import Activity
 from conversation.models import Conversation
-from event.create_from_lead import create_event
+from event.create_from_lead import create_event, create_event_direct
 from leads.process_contacts import gerar_leads
 from leads.models import Lead,  WhatsappTemplate
 from leads.forms import ReferrerForm, ScheduleForm
 from leads import tools
 from leads.whatsapp import api as whatsapp_api
+from account.models import Account
 
 
-@login_required()
-def next(request):
-    random_queryset_list =  tools.get_open_run_now_leads()
-    if not random_queryset_list:
-        random_queryset_list = tools.get_open_leads()
-    pks = random_queryset_list.values_list('pk', flat=True)
-    random_pk = random_choice(pks)
-    next_lead_url = reverse('leads:update', args=[random_pk,])
-    return HttpResponseRedirect(next_lead_url)
-
-
+# contact attempt
 @login_required()
 def t1(request, lead_id):
 
@@ -38,12 +29,15 @@ def t1(request, lead_id):
     
     lead.save()
 
+    account = Account.objects.get(user=request.user)
+
     Activity.objects.create(
         lead=lead,
+        account=account,
         due_date=timezone.now(),
         done=True,
         subject='Não atendeu T1',
-        type='call'
+        type='call',
     )
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
@@ -53,6 +47,7 @@ def t1(request, lead_id):
     return HttpResponseRedirect(url)
 
 
+# contact attempt
 @login_required()
 def t2(request, lead_id):
 
@@ -62,12 +57,15 @@ def t2(request, lead_id):
     
     lead.save()
 
+    account = Account.objects.get(user=request.user)
+
     Activity.objects.create(
         lead=lead,
+        account=account,
         due_date=timezone.now(),
         done=True,
         subject='Não atendeu T2',
-        type='call'
+        type='call',
     )
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
@@ -77,6 +75,7 @@ def t2(request, lead_id):
     return HttpResponseRedirect(url)
 
 
+# contact attempt
 @login_required()
 def t3(request, lead_id):
 
@@ -86,12 +85,15 @@ def t3(request, lead_id):
     
     lead.save()
 
+    account = Account.objects.get(user=request.user)
+
     Activity.objects.create(
         lead=lead,
+        account=account,
         due_date=timezone.now(),
         done=True,
         subject='Não atendeu T3',
-        type='call'
+        type='call',
     )
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
@@ -101,6 +103,212 @@ def t3(request, lead_id):
     return HttpResponseRedirect(url)
 
 
+# contact attempt
+@login_required()
+def lost_direct(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead.status = 'perdido'
+
+    status_lost_justification = 'lost_direct'
+
+    lead.status_lost_justification = status_lost_justification
+
+    lead.save()
+
+    account = Account.objects.get(user=request.user)
+
+    Activity.objects.create(
+        account=account,
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Perdido direto (mensagem etc)',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def ultimatum(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ultimatum'
+
+    lead.save()
+    
+    account = Account.objects.get(user=request.user)
+
+    Activity.objects.create(
+        account=account,
+        lead=lead,
+        due_date=timezone.now(),
+        done=True,
+        subject='Ultimato',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def jump(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+
+    lead.order = lead.order + 1
+
+    lead.save()
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def invalid(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'invalid'
+    
+    lead.save()
+    
+    account = Account.objects.get(user=request.user)
+
+    Activity.objects.create(
+        lead=lead,
+        account=account,
+        due_date=timezone.now(),
+        done=True,
+        subject='Inválido',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def ghosting(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ghosting'
+    
+    lead.save()
+
+    account = Account.objects.get(user=request.user)
+
+    Activity.objects.create(
+        lead=lead,
+        account=account,
+        due_date=timezone.now(),
+        done=True,
+        subject='Bolo 1',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def ghosting_2(request, lead_id):
+
+    lead = get_object_or_404(Lead, id=lead_id)
+    
+    lead.status = 'ghosting_2'
+    
+    lead.save()
+
+    account = Account.objects.get(user=request.user)
+
+    Activity.objects.create(
+        lead=lead,
+        account=account,
+        due_date=timezone.now(),
+        done=True,
+        subject='Bolo 2',
+        type='call'
+    )
+
+    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
+
+    url = reverse_lazy('leads:update', args=(str(lead.id),))
+
+    return HttpResponseRedirect(url)
+
+
+# contact attempt
+@login_required()
+def schedule_direct(request, lead_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    schedule_form = ScheduleForm()
+    context = {
+        'schedule_form': schedule_form,
+        'lead': lead,
+        'activity': None,
+        'whatsapp_confirm': None,
+    }
+    first_name = request.user.first_name
+    if request.method == 'POST':
+        schedule_form = ScheduleForm(request.POST or None)
+        context['schedule_form'] = schedule_form
+        if schedule_form.is_valid():
+            if settings.DEBUG:
+                return create_event_direct(request, context, lead, schedule_form)
+            else:
+                schedule_form_cleaned_data = schedule_form.cleaned_data
+                due_date = schedule_form_cleaned_data['due_date']
+                lead.status = 'agendamento_direct'
+                lead.save()
+                account = Account.objects.get(user=request.user)
+                activity_obj = Activity.objects.create(
+                    lead=lead,
+                    account=account,
+                    due_date=due_date,
+                    done=False,
+                    subject='Agendamento direto (mensagem etc) criado',
+                    type='call'
+                )
+                activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
+                whatsapp_confirm = whatsapp_api.schedule_due_date(lead, first_name, 'agendamento_confirmacao_auto', activity_obj_due_date)
+                context['whatsapp_confirm'] = whatsapp_confirm
+                context['activity'] = activity_obj
+                messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
+                return render(request, 'leads/update/schedule/success.html', context)
+        else:
+            context['schedule_form'] = schedule_form
+
+    return render(request, 'leads/update/schedule/entry.html', context)
+
+
+# contact attempt
 @login_required()
 def schedule(request, lead_id):
     
@@ -126,12 +334,14 @@ def schedule(request, lead_id):
                 due_date = schedule_form_cleaned_data['due_date']
                 lead.status = 'agendamento'
                 lead.save()
+                account = Account.objects.get(user=request.user)
                 activity_obj = Activity.objects.create(
                     lead=lead,
+                    account=account,
                     due_date=due_date,
                     done=False,
                     subject='Agendamento criado',
-                    type='call'
+                    type='call',
                 )
                 activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
                 whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
@@ -144,47 +354,7 @@ def schedule(request, lead_id):
     return render(request, 'leads/update/schedule/entry.html', context)
 
 
-@login_required()
-def schedule_direct(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-
-    schedule_form = ScheduleForm()
-
-    context = {
-        'schedule_form': schedule_form,
-        'lead': lead,
-        'activity': None,
-        'whatsapp_confirm': None,
-    }
-
-    if request.method == 'POST':
-        schedule_form = ScheduleForm(request.POST or None)
-        context['schedule_form'] = schedule_form
-        if schedule_form.is_valid():
-            schedule_form_cleaned_data = schedule_form.cleaned_data
-            due_date = schedule_form_cleaned_data['due_date']
-            lead.status = 'agendamento_direct'
-            lead.save()
-            activity_obj = Activity.objects.create(
-                lead=lead,
-                due_date=due_date,
-                done=False,
-                subject='Agendamento direto (mensagem etc) criado',
-                type='call'
-            )
-            activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
-            whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
-            context['whatsapp_confirm'] = whatsapp_confirm
-            context['activity'] = activity_obj
-            messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
-            return render(request, 'leads/update/schedule/success.html', context)
-        else:
-            context['schedule_form'] = schedule_form
-
-    return render(request, 'leads/update/schedule/entry.html', context)
-
-
+# conversation
 @login_required()
 def lost(request, lead_id):
 
@@ -198,8 +368,11 @@ def lost(request, lead_id):
 
     lead.save()
 
+    account = Account.objects.get(user=request.user)
+
     Activity.objects.create(
         lead=lead,
+        account=account,
         due_date=timezone.now(),
         done=True,
         subject='Perdido',
@@ -207,12 +380,14 @@ def lost(request, lead_id):
     )
 
     if status_lost_justification == 'entrevista_perdida':
-        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_LOST)
-    elif status_lost_justification == 'di':
-        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_DI)
-    elif status_lost_justification == 'sem_interesse':
-        Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_SEM_INTERESSE)
+        Conversation.objects.create(lead=lead, account=account, type=Conversation.CONVERSATION_LOST)
     
+    elif status_lost_justification == 'di':
+        Conversation.objects.create(lead=lead, account=account, type=Conversation.CONVERSATION_DI)
+    
+    elif status_lost_justification == 'sem_interesse':
+        Conversation.objects.create(lead=lead, account=account, type=Conversation.CONVERSATION_SEM_INTERESSE)
+
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
     url = reverse_lazy('leads:update', args=(str(lead.id),))
@@ -220,6 +395,7 @@ def lost(request, lead_id):
     return HttpResponseRedirect(url)
 
 
+# conversation
 @login_required()
 def off(request, lead_id):
 
@@ -229,15 +405,18 @@ def off(request, lead_id):
 
     lead.save()
 
+    account = Account.objects.get(user=request.user)
+
     Activity.objects.create(
         lead=lead,
+        account=account,
         due_date=timezone.now(),
         done=True,
         subject='Off',
         type='call'
     )
 
-    Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_OFF)
+    Conversation.objects.create(lead=lead, account=account, type=Conversation.CONVERSATION_OFF)
 
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
@@ -246,34 +425,7 @@ def off(request, lead_id):
     return HttpResponseRedirect(url)
 
 
-@login_required()
-def lost_direct(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-
-    lead.status = 'perdido'
-
-    status_lost_justification = 'lost_direct'
-
-    lead.status_lost_justification = status_lost_justification
-
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Perdido direto (mensagem etc)',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
+# conversation
 @login_required()
 def win(request, lead_id):
 
@@ -282,10 +434,12 @@ def win(request, lead_id):
     lead.status = 'ganho'
     
     lead.save()
+    
+    account = Account.objects.get(user=request.user)
 
-    Activity.objects.create(lead=lead, due_date=timezone.now(), done=True, subject='Ganho', type='call')
+    Activity.objects.create(lead=lead, account=account, due_date=timezone.now(), done=True, subject='Ganho', type='call')
 
-    Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_WIN)
+    Conversation.objects.create(lead=lead, account=account, type=Conversation.CONVERSATION_WIN)
 
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
 
@@ -295,115 +449,14 @@ def win(request, lead_id):
 
 
 @login_required()
-def jump(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-
-    lead.order = lead.order + 1
-
-    lead.save()
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def ultimatum(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'ultimatum'
-
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Ultimato',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def invalid(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'invalid'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Inválido',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def ghosting(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'ghosting'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Bolo 1',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
-
-
-@login_required()
-def ghosting_2(request, lead_id):
-
-    lead = get_object_or_404(Lead, id=lead_id)
-    
-    lead.status = 'ghosting_2'
-    
-    lead.save()
-
-    Activity.objects.create(
-        lead=lead,
-        due_date=timezone.now(),
-        done=True,
-        subject='Bolo 2',
-        type='call'
-    )
-
-    messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
-
-    return HttpResponseRedirect(url)
+def next(request):
+    random_queryset_list =  tools.get_open_run_now_leads()
+    if not random_queryset_list:
+        random_queryset_list = tools.get_open_leads()
+    pks = random_queryset_list.values_list('pk', flat=True)
+    random_pk = random_choice(pks)
+    next_lead_url = reverse('leads:update', args=[random_pk,])
+    return HttpResponseRedirect(next_lead_url)
 
 
 @login_required()
@@ -492,7 +545,8 @@ def whatsapp_template(request, lead_id, whatsapp_template_id):
 
 @login_required()
 def activity_delete(request, lead_id, activity_id):
-    activity_object = get_object_or_404(Activity, id=activity_id).delete()
+    activity_object = get_object_or_404(Activity, id=activity_id)
+    activity_object.delete()
     url = reverse_lazy('leads:update', args=(lead_id,))
     messages.add_message(request, messages.SUCCESS, 'Atividade excluída com sucesso!')
     return HttpResponseRedirect(url)

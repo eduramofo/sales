@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.timezone import datetime, make_aware, timedelta
 
 from activities.models import Activity
+from account.models import Account
 from analytics import day
 from analytics import data_clean
 from analytics import balance_data
@@ -61,10 +62,11 @@ def day_select(request):
 @login_required()
 def day_result(request, dt):
     dt_obj = make_aware(datetime.strptime(dt, '%Y-%m-%d'))
-    activities = data.get_activities_by_day(dt)
-    conversations = data.get_conversations_by_day(dt)
-    speechs = data.speechs_by_day(dt)
-    win = data.win_by_day(dt)
+    account = Account.objects.get(user=request.user)
+    activities = data.get_activities_by_day(account, dt)
+    conversations = data.get_conversations_by_day(account, dt)
+    speechs = data.speechs_by_day(account, dt)
+    win = data.win_by_day(account, dt)
     page_title = 'Análise das Atividades do Dia ' + dt_obj.strftime('%d/%m/%Y')
     nav_name = 'analyze'
     context = {

@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from .models import Account
 
 
+class AccountAdmin(admin.ModelAdmin):
+    search_fields = ['user']
+
+
 class AccountInline(admin.StackedInline):
     model = Account
     can_delete = False
@@ -23,3 +27,5 @@ class CustomUserAdmin(UserAdmin):
 admin.site.unregister(User)
 
 admin.site.register(User, CustomUserAdmin)
+
+admin.site.register(Account, AccountAdmin)
