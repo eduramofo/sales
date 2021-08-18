@@ -27,21 +27,24 @@ def globallabel(request):
 
 
 def goal_of_the_day(request):
-    conversations_goal = 21
-    account = Account.objects.get(user=request.user)
-    conversations = get_conversations_day(account)
-    percentage = conversations / conversations_goal
-    percentage_int = int(math.floor(percentage * 100))
-    percentage_int_str = str(percentage_int)
-    percentage_str = str(percentage_int) + '%'
-    label = str(conversations) + '/' + str(conversations_goal)
-    result = {
-        'conversations_goal': conversations_goal,
-        'conversations': conversations,
-        'percentage': percentage,
-        'percentage_int': percentage_int,
-        'percentage_int_str': percentage_int_str,
-        'percentage_str': percentage_str,
-        'label': label,
-    }
+    current_user = request.user
+    result = None
+    if current_user and not current_user.is_anonymous :
+        conversations_goal = 21
+        account = Account.objects.get(user=current_user)
+        conversations = get_conversations_day(account)
+        percentage = conversations / conversations_goal
+        percentage_int = int(math.floor(percentage * 100))
+        percentage_int_str = str(percentage_int)
+        percentage_str = str(percentage_int) + '%'
+        label = str(conversations) + '/' + str(conversations_goal)
+        result = {
+            'conversations_goal': conversations_goal,
+            'conversations': conversations,
+            'percentage': percentage,
+            'percentage_int': percentage_int,
+            'percentage_int_str': percentage_int_str,
+            'percentage_str': percentage_str,
+            'label': label,
+        }
     return {'goal_of_the_day': result,}

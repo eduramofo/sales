@@ -3,13 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils import timezone
-
-from core.tools import paginator
-
 from activities.models import Activity
 from activities.forms import ActivityForm
-from activities.filters import ActivityFilter
-
+from account.models import Account
 from leads import models as LeadsModels
 
 
@@ -167,9 +163,13 @@ def update_through_lead(request, activity_id):
         'activity_form': activity_form,
     }
 
+    account = Account.objects.get(user=request.user)
+
     if method == 'POST':
         if activity_form.is_valid():
             activity = activity_form.save()
+            activity.account = account
+            activity.save()
             url = reverse_lazy('leads:update', args=(str(activity.lead.id),))
             messages.add_message(request, messages.SUCCESS, 'Atividade atualizado com sucesso!')
             return HttpResponseRedirect(url)

@@ -63,16 +63,19 @@ def day_select(request):
 def day_result(request, dt):
     dt_obj = make_aware(datetime.strptime(dt, '%Y-%m-%d'))
     account = Account.objects.get(user=request.user)
+    # DATA: START
     activities = data.get_activities_by_day(account, dt)
     conversations = data.get_conversations_by_day(account, dt)
     speechs = data.speechs_by_day(account, dt)
     win = data.win_by_day(account, dt)
+    data_result = data_clean.data(activities, conversations, speechs, win)
+    # DATA: END
     page_title = 'Análise das Atividades do Dia ' + dt_obj.strftime('%d/%m/%Y')
     nav_name = 'analyze'
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
-        'data': data_clean.data(activities, conversations, speechs, win),
+        'data': data_result,
     }
     return render(request, 'analytics/day_result/index.html', context)
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from signup.forms import SignupForm
 from account.create_user import create_user
 
@@ -15,9 +16,11 @@ def home(request):
             # waid = signup_form.cleaned_data['waid']
             email = signup_form.cleaned_data['email']
             password = signup_form.cleaned_data['password']
-            create_user(name, username, email, password)
-            message_text = 'Usuário foi criado com sucesso!'
-            messages.add_message(request,messages.SUCCESS, message_text)
+            create_user(name, username, email, password)            
+            new_user_auth = authenticate(username=username, password=password)
+            login(request, new_user_auth)
+            message_text = 'Obrigado por se cadastrar. Você está logado.'
+            messages.add_message(request, messages.INFO, message_text)
             success_url = reverse('core:home')
             return HttpResponseRedirect(success_url)
         else:
