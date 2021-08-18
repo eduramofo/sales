@@ -130,6 +130,5 @@ def process_tel_if_exist(tel):
     current_waid = 'NN' 
     if 'WAID' in tel.params.keys():
         current_waid = tel.params['WAID'][0]
-    
     current_tel_obj = {'numero': current_numero, 'waid': current_waid}
     return current_tel_obj

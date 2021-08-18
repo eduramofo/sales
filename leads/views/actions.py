@@ -448,6 +448,7 @@ def win(request, lead_id):
     return HttpResponseRedirect(url)
 
 
+# next
 @login_required()
 def next(request):
     random_queryset_list =  tools.get_open_run_now_leads()

@@ -5,14 +5,10 @@ from .views import statistics
 from .views import settings
 from .views import recommendation
 
-from leads.views.lead import qualified_confirmed
-
 
 app_name = 'core'
 urlpatterns = [
     path('', main.index, name='home'),
-    #path('', qualified, name='home'),
-    path('confirmed/<uuid:qualified_id>/', qualified_confirmed, name='qualified_confirmed'),
     path('messages/', main.messages, name='messages'),
     path('statistics/', statistics.home, name='statistics'),
     path('statistics/balance/', statistics.balance, name='statistics_balance'),
