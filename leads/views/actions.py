@@ -239,15 +239,10 @@ def ghosting(request, lead_id):
 # contact attempt
 @login_required()
 def ghosting_2(request, lead_id):
-
     lead = get_object_or_404(Lead, id=lead_id)
-    
     lead.status = 'ghosting_2'
-    
     lead.save()
-
     account = Account.objects.get(user=request.user)
-
     Activity.objects.create(
         lead=lead,
         account=account,
@@ -256,11 +251,8 @@ def ghosting_2(request, lead_id):
         subject='Bolo 2',
         type='call'
     )
-
     messages.add_message(request, messages.SUCCESS, 'Lead atualizado com sucesso!')
-
     url = reverse_lazy('leads:update', args=(str(lead.id),))
-
     return HttpResponseRedirect(url)
 
 
@@ -279,10 +271,9 @@ def schedule_direct(request, lead_id):
         schedule_form = ScheduleForm(request.POST or None)
         context['schedule_form'] = schedule_form
         if schedule_form.is_valid():
-            return create_event_direct(request, False, context, lead, schedule_form)
+            return create_event_direct(request, True, context, lead, schedule_form)
         else:
             context['schedule_form'] = schedule_form
-
     return render(request, 'leads/update/schedule/entry.html', context)
 
 
