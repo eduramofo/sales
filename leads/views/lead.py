@@ -1,21 +1,13 @@
-from urllib.parse import urlencode
 from random import choice as random_choice
-
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
-
-from core.tools import paginator
-
 from account.models import Account
 from activities.models import Activity
-
-from leads.process_contacts import gerar_leads
-from leads.models import Lead, Qualified
-from leads.forms import LeadForm, QualifiedForm
-from leads.filters import LeadFilter
+from leads.models import Lead
+from leads.forms import LeadForm
 from leads import tools
 from leads.templatetags import leads_extras
 

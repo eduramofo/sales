@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from core.tools import paginator
 from activities.models import Activity
 
+from account.models import Account
 from leads.models import Lead
 from leads.filters import LeadFilter
 from leads import tools
@@ -49,7 +50,9 @@ def search(request):
 
     page_title = 'Pesquisa de Leads'
     
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
+    account = Account.objects.get(user=request.user)
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account).order_by('-created_at'))
 
     form = leads.form
 
@@ -80,7 +83,9 @@ def all(request):
 
     page_title = 'Leads'
     
-    leads = LeadFilter(request.GET, queryset=Lead.objects.all().order_by('-created_at'))
+    account = Account.objects.get(user=request.user)
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account).order_by('-created_at'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -102,7 +107,9 @@ def now(request):
 
     page_title = 'Lista de Leads [ AGORA ]'
 
-    leads_queryset = tools.get_open_run_now_leads()
+    account = Account.objects.get(user=request.user)
+
+    leads_queryset = tools.get_open_run_now_leads(account)
 
     leads = LeadFilter(request.GET, queryset=leads_queryset)
 
@@ -126,7 +133,9 @@ def news(request):
 
     page_title = 'Leads Novos'
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='novo').order_by('-priority'))
+    account = Account.objects.get(user=request.user)
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account, status='novo').order_by('-priority'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -149,8 +158,10 @@ def opened(request):
     page_title = 'Leads em aberto'
 
     query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')
+    
+    account = Account.objects.get(user=request.user)
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(query).order_by('-priority'))
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account).filter(query).order_by('-priority'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -173,8 +184,10 @@ def priorities(request):
     page_title = 'Leads prioritários em aberto'
 
     query = Q(status='novo') | Q(status='tentando_contato') | Q(status='processando')
+    
+    account = Account.objects.get(user=request.user)
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(priority=True).filter(query).order_by('-created_at'))
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account, priority=True).filter(query).order_by('-created_at'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -198,11 +211,16 @@ def schedules(request):
 
     from_now_plus_24h = timezone.now() + timedelta(days=1)
 
+    account = Account.objects.get(user=request.user)
+
+    ########################################
+
     activities = Activity.objects.filter(
+        account=account,
         done=False,
         due_date__lte=from_now_plus_24h,
     ).exclude(lead=None).order_by('due_date')
-   
+
     leads_pks= []
     leads___ = []
     for activity in activities:
@@ -211,9 +229,11 @@ def schedules(request):
             leads_pks.append(lead.pk)
             leads___.append(lead)
 
+    ########################################
+
     query = Q(status='agendamento') | Q(status='agendamento_direct')
 
-    leads_ = Lead.objects.filter(pk__in=leads_pks).filter(query).order_by('name')
+    leads_ = Lead.objects.filter(account=account, pk__in=leads_pks).filter(query).order_by('name')
 
     leads = LeadFilter(request.GET, queryset=leads_)
 
@@ -236,8 +256,12 @@ def ghosting(request):
     nav_name = 'leads_list'
 
     page_title = 'Leads Bolo 1'
+    
+    account = Account.objects.get(user=request.user)
+    
+    queryset = Lead.objects.filter(account=account, status='ghosting').order_by('-created_at')
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='ghosting').order_by('-created_at'))
+    leads = LeadFilter(request.GET, queryset=queryset)
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -258,8 +282,12 @@ def ghosting_2(request):
     nav_name = 'leads_list'
 
     page_title = 'Leads Bolo 2'
+    
+    account = Account.objects.get(user=request.user)
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='ghosting_2').order_by('-created_at'))
+    queryset = Lead.objects.filter(account=account, status='ghosting_2').order_by('-created_at')
+
+    leads = LeadFilter(request.GET, queryset=queryset)
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -281,7 +309,9 @@ def off(request):
 
     page_title = 'Leads Off 1'
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='off').order_by('-created_at'))
+    account = Account.objects.get(user=request.user)
+
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account, status='off').order_by('-created_at'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 
@@ -302,8 +332,10 @@ def off_2(request):
     nav_name = 'leads_list'
 
     page_title = 'Leads Off 2'
+    
+    account = Account.objects.get(user=request.user)
 
-    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(status='off_2').order_by('-created_at'))
+    leads = LeadFilter(request.GET, queryset=Lead.objects.filter(account=account, status='off_2').order_by('-created_at'))
 
     pages = paginator.make_paginator(request, leads.qs, 30)
 

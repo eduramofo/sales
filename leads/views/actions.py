@@ -10,7 +10,7 @@ from django.contrib import messages
 
 from activities.models import Activity
 from conversation.models import Conversation
-from event.create_from_lead import create_event, create_event_direct
+from event.create_from_lead import create_event
 from leads.process_contacts import gerar_leads
 from leads.models import Lead,  WhatsappTemplate
 from leads.forms import ReferrerForm, ScheduleForm
@@ -275,33 +275,11 @@ def schedule_direct(request, lead_id):
         'activity': None,
         'whatsapp_confirm': None,
     }
-    first_name = request.user.first_name
     if request.method == 'POST':
         schedule_form = ScheduleForm(request.POST or None)
         context['schedule_form'] = schedule_form
         if schedule_form.is_valid():
-            if settings.DEBUG:
-                return create_event_direct(request, context, lead, schedule_form)
-            else:
-                schedule_form_cleaned_data = schedule_form.cleaned_data
-                due_date = schedule_form_cleaned_data['due_date']
-                lead.status = 'agendamento_direct'
-                lead.save()
-                account = Account.objects.get(user=request.user)
-                activity_obj = Activity.objects.create(
-                    lead=lead,
-                    account=account,
-                    due_date=due_date,
-                    done=False,
-                    subject='Agendamento direto (mensagem etc) criado',
-                    type='call'
-                )
-                activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
-                whatsapp_confirm = whatsapp_api.schedule_due_date(lead, first_name, 'agendamento_confirmacao_auto', activity_obj_due_date)
-                context['whatsapp_confirm'] = whatsapp_confirm
-                context['activity'] = activity_obj
-                messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
-                return render(request, 'leads/update/schedule/success.html', context)
+            return create_event_direct(request, False, context, lead, schedule_form)
         else:
             context['schedule_form'] = schedule_form
 
@@ -327,29 +305,7 @@ def schedule(request, lead_id):
         schedule_form = ScheduleForm(request.POST or None)
         context['schedule_form'] = schedule_form
         if schedule_form.is_valid():
-            if settings.DEBUG:
-                return create_event(request, context, lead, schedule_form)
-            else:
-                schedule_form_cleaned_data = schedule_form.cleaned_data
-                due_date = schedule_form_cleaned_data['due_date']
-                lead.status = 'agendamento'
-                lead.save()
-                account = Account.objects.get(user=request.user)
-                activity_obj = Activity.objects.create(
-                    lead=lead,
-                    account=account,
-                    due_date=due_date,
-                    done=False,
-                    subject='Agendamento criado',
-                    type='call',
-                )
-                activity_obj_due_date = activity_obj.due_date.strftime('%d/%m/%y às %H:%M')
-                whatsapp_confirm = whatsapp_api.schedule_due_date(lead, 'Eduardo', 'agendamento_confirmacao_auto', activity_obj_due_date)
-                context['whatsapp_confirm'] = whatsapp_confirm
-                context['activity'] = activity_obj
-                Conversation.objects.create(lead=lead, type=Conversation.CONVERSATION_AGENDAMENTO)
-                messages.add_message(request, messages.SUCCESS, 'Agendamento criado com sucesso!')
-                return render(request, 'leads/update/schedule/success.html', context)
+            return create_event(request, True, context, lead, schedule_form)
 
     return render(request, 'leads/update/schedule/entry.html', context)
 

@@ -2,13 +2,15 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from core.tools import paginator
 from event.models import Event
+from account.models import Account
 
 
 @login_required()
 def event_list_all(request):
     page_title = 'Eventos'
     nav_name = 'event'
-    events_qs = Event.objects.all()
+    account = Account.objects.get(user=request.user)
+    events_qs = Event.objects.filter(account=account)
     pages = paginator.make_paginator(request, events_qs, 20)
     context = {
         'page_title': page_title,

@@ -9,9 +9,9 @@ def get_open_leads():
     return leads_open_filter
 
 
-def get_open_run_now_leads():
+def get_open_run_now_leads(account):
     open_leads = get_open_leads()
-    return open_leads.filter(run_now=True)
+    return open_leads.filter(account=account, run_now=True)
 
 
 def get_referrers_next_lead(lead):
