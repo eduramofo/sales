@@ -36,6 +36,14 @@ class Conversation(BaseModel):
         null=True,
     )
 
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         verbose_name = "Conversa"
         verbose_name_plural = "Conversas"

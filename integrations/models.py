@@ -18,6 +18,14 @@ class GoogleApi(BaseModel):
         verbose_name='Identificador',
     )
 
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Perfil',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
     calendar_id = models.CharField(
         max_length=250,
         verbose_name='Calendar ID',
