@@ -1,5 +1,4 @@
 import datetime
-
 from activities.models import Activity
 from conversation.models import Conversation
 from account.models import Account

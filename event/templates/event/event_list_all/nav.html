@@ -1,0 +1,19 @@
+<div class="row">
+    
+    <div class="col-6 mb-3">
+        <a href="{% url 'event:event_list_overdue' %}" role="button" class="btn btn-dark btn-block">Vencidos</a>
+    </div>
+
+    <div class="col-6 mb-3">
+        <a href="{% url 'event:event_list_all' %}" role="button" class="btn btn-dark btn-block">Todos</a>
+    </div>
+
+    <div class="col-6 mb-3">
+        <a href="{% url 'event:event_list_open' %}" role="button" class="btn btn-dark btn-block">Em Aberto</a>
+    </div>
+
+    <div class="col-6 mb-3">
+        <a href="{% url 'event:event_list_done' %}" role="button" class="btn btn-dark btn-block">Feitos</a>
+    </div>
+
+</div>

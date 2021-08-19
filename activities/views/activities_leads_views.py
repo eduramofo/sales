@@ -145,26 +145,18 @@ def add_through_lead(request, lead_id):
 
 @login_required()
 def update_through_lead(request, activity_id):
-
     activity = get_object_or_404(Activity, id=activity_id)
-    
     activity_form = ActivityForm(request.POST or None, instance=activity, prefix='activity')
-    
     page_title = 'Atualização de Atividade | LEAD: {}'.format(activity.lead)
-    
     nav_name = 'activities'
-
     method = request.method
-
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
         'activity': activity,
         'activity_form': activity_form,
     }
-
     account = Account.objects.get(user=request.user)
-
     if method == 'POST':
         if activity_form.is_valid():
             activity = activity_form.save()
@@ -175,5 +167,4 @@ def update_through_lead(request, activity_id):
             return HttpResponseRedirect(url)
         else:
             messages.add_message(request, messages.ERROR, 'Dados incorretos preenchido no formulário da atividade!')
-
     return render(request, 'activities/leads/update_through_lead/index.html', context)

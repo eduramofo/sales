@@ -11,6 +11,7 @@ class EventAdmin(admin.ModelAdmin):
 
     list_filter = (
         ('created_at', DateRangeFilter),
+        'done',
     )
     
     list_display = ('created_at', 'updated_at', 'summary', 'lead',)

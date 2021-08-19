@@ -69,7 +69,7 @@ class Event(BaseModel):
     class Meta:
         verbose_name = 'Evento'
         verbose_name_plural = 'Eventos'
-        ordering = ['-created_at']
+        ordering = ['start_datetime']
 
     def __str__(self):
         result = str(self.id)

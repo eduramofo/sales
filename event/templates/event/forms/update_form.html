@@ -1,0 +1,18 @@
+{% load core_extras %}
+
+<form id="event" method="post" action="{% url 'event:event_update' event.id %}" class="bg-light border-bolder p-3 mt-1 rounded">
+
+    {% include "event/forms/update_form_fields.html" with form=event_form %}
+
+    <div class="row">
+        <div class="col-12">
+            <button 
+                    id="event-form-submit-btn"
+                    type="submit"
+                    class="btn btn-block btn-success">
+                {% btn_svg_icons 'google' 'save' '20px' 'center' 'Salvar' %}
+            </button>
+        </div>
+    </div>
+
+</form>

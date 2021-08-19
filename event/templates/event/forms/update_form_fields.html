@@ -1,0 +1,23 @@
+{% csrf_token %}
+
+<div class="row">
+    
+    <div class="col-12">
+        <p class="h5 mb-3"><strong>Lead:</strong> <a href="{% url 'leads:update' event.lead.id %}">{{event.lead}}</a></p>    
+    </div>
+
+    <div class="col-12">
+        {% include 'core/inputs/default.html' with field=form.summary %}
+    </div>
+
+    <div class="col-12">
+        {% include 'core/inputs/default_datetime_picker.html' with field=form.start_datetime %}
+    </div>
+
+    <div class="col-12">
+        {% include 'core/inputs/default.html' with field=form.done %}
+    </div>
+
+</div>
+
+{% include 'core/inputs/default.html' with field=form.note %}

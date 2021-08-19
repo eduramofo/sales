@@ -20,9 +20,6 @@ $(document).ready(function() {
         });
     }
 
-
-
-
     function addActivityAddModalToDocument(modalHtml) {
         var modal = $(modalHtml);
         addEventsListenersToActivityAddModal(modal);

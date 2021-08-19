@@ -15,23 +15,19 @@ def integrates_with_google_calendar(sender, instance, created, **kwargs):
     # on created
     if created:
         try:
-            lead = instance.lead
-            if lead:
-                google_calendar_event = events.create(instance)
-                if google_calendar_event['success']:
-                    event_data = google_calendar_event['event']
-                    event_data_event_id = event_data.get('id')
-                    google_calendar_id = google_calendar_event['calendar_id']
-                    instance.google_calendar_event_id = event_data_event_id
-                    instance.google_calendar_calendar_id = google_calendar_id
-                    instance.save()
+            google_calendar_event = events.create(instance)
+            if google_calendar_event['success']:
+                event_data = google_calendar_event['event']
+                event_data_event_id = event_data.get('id')
+                google_calendar_id = google_calendar_event['calendar_id']
+                instance.google_calendar_event_id = event_data_event_id
+                instance.google_calendar_calendar_id = google_calendar_id
+                instance.save()
         except Exception as error:
             logger.error(str(error))
     # on update
     else:
         try:
-            lead = instance.lead
-            if lead.status == 'agendamento':
-                events.update(instance)
+            events.update(instance)
         except Exception as error:
             logger.error(str(error))

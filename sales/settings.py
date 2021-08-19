@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'conversation.apps.ConversationConfig',
     'account.apps.AccountConfig',
     'signup.apps.SignupConfig',
+    'login.apps.LoginConfig',
     'event.apps.EventConfig',
 
     # django apps
