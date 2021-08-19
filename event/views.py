@@ -28,7 +28,7 @@ def event_list_all(request):
 
 @login_required()
 def event_list_open(request):
-    page_title = 'Eventos em aberto'
+    page_title = 'Eventos Em Aberto'
     nav_name = 'event'
     account = Account.objects.get(user=request.user)
     events_qs = Event.objects.filter(account=account, done=False)
@@ -44,7 +44,7 @@ def event_list_open(request):
 
 @login_required()
 def event_list_done(request):
-    page_title = 'Eventos concluídos'
+    page_title = 'Eventos Concluídos'
     nav_name = 'event'
     account = Account.objects.get(user=request.user)
     events_qs = Event.objects.filter(account=account, done=True)
@@ -60,7 +60,7 @@ def event_list_done(request):
 
 @login_required()
 def event_list_overdue(request):
-    page_title = 'Eventos vencidos'
+    page_title = 'Eventos Vencidos'
     nav_name = 'event'
     account = Account.objects.get(user=request.user)
     from_now_plus_1s = timezone.now() + timedelta(seconds=1)
