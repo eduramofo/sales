@@ -1,28 +1,19 @@
 from django.utils import timezone
 import math
 from datetime import timedelta
-from activities.models import Activity
+from event.models import Event
 from analytics.data import get_conversations_day
 from account.models import Account
 from django.db.models import Q
 
 
 def globallabel(request):
-
     result = 'bg-success'
-
     from_now_plus_1s = timezone.now() + timedelta(seconds=1)
-
-    activities = Activity.objects.filter(
-        done=False,
-        due_date__lte=from_now_plus_1s,
-    ).exclude(lead=None).filter(
-        Q(lead__status='agendamento') | Q(lead__status='agendamento_direct')
-    ).order_by('due_date')
-
-    if len(activities) > 0:
+    account = Account.objects.get(user=request.user)
+    events_qs = Event.objects.filter(account=account, done=False, start_datetime__lte=from_now_plus_1s)
+    if len(events_qs) > 0:
         result = 'bg-danger'
-
     return {'globallabel': result,}
 
 
