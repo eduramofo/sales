@@ -1,7 +1,17 @@
 <div class="row">
-    {% for event in events %}
-        {% include 'event/event_list_all/list_item.html' %}
-    {% endfor %}
+    {% if events %}
+        {% for event in events %}
+            {% include 'event/event_list_all/list_item.html' %}
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-danger bolder-border" role="alert">
+                <h6 class="text-danger mb-0 p-0">
+                    <strong>Não há eventos.</strong>
+                </h6>
+            </div>
+        </div>
+    {% endif %}
 </div>
 
 {% include "core/tools/pagination.html" with page=events %}

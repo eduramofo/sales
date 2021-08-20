@@ -17,14 +17,9 @@ from leads import tools
 
 @login_required()
 def home(request):
-    
     nav_name = 'leads_list'
     page_title = 'Listas de Leads'
-    
-    # Done
     priorities = {'title': 'Prioridades', 'url': 'leads:lists:priorities'}
-    schedules = {'title': 'Agendamentos', 'url': 'leads:lists:schedules'}
-    ultimatum = {'title': 'Enviar Ultimato', 'url': 'leads:lists:ultimatum'}
     all = {'title': 'Todos', 'url': 'leads:lists:all'}
     news = {'title': 'Novos', 'url': 'leads:lists:news'}
     opened = {'title': 'Abertos', 'url': 'leads:lists:opened'}
@@ -33,7 +28,9 @@ def home(request):
     bolo_2 = {'title': 'Bolos 2', 'url': 'leads:lists:ghosting_2'}
     off_1 = {'title': 'Offs 1', 'url': 'leads:lists:off'}
     off_2 = {'title': 'Offs 2', 'url': 'leads:lists:off_2'}
-    lists = [priorities, schedules, ultimatum, flow, all, news, opened, flow, bolo_1, bolo_2, off_1, off_2]
+    lists = [
+        all, priorities, news, opened, flow, bolo_1, bolo_2, off_1, off_2,
+    ]
 
     context = {
         'page_title': page_title,

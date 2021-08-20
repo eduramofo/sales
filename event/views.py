@@ -66,10 +66,6 @@ def event_list_overdue(request):
     from_now_plus_1s = timezone.now() + timedelta(seconds=1)
     events_qs = Event.objects.filter(account=account, done=False, start_datetime__lte=from_now_plus_1s)
     pages = paginator.make_paginator(request, events_qs, 20)
-    for n in range(150):
-        Event.objects.create(
-            summary='Evento Teste ' + str(n),
-        )
     context = {
         'page_title': page_title,
         'nav_name': nav_name,

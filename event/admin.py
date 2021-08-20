@@ -14,7 +14,7 @@ class EventAdmin(admin.ModelAdmin):
         'done',
     )
     
-    list_display = ('created_at', 'updated_at', 'summary', 'lead',)
+    list_display = ('created_at', 'updated_at', 'summary', 'lead', 'done',)
 
     autocomplete_fields = ['lead',]
 
