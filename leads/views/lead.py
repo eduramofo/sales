@@ -1,7 +1,6 @@
 from random import choice as random_choice
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
 from account.models import Account
