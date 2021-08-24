@@ -271,7 +271,7 @@ def schedule_direct(request, lead_id):
         schedule_form = ScheduleForm(request.POST or None)
         context['schedule_form'] = schedule_form
         if schedule_form.is_valid():
-            return create_event_direct(request, True, context, lead, schedule_form)
+            return create_event(request, False, context, lead, schedule_form)
         else:
             context['schedule_form'] = schedule_form
     return render(request, 'leads/update/schedule/entry.html', context)
