@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config, Csv
 from dj_database_url import parse as dburl
+from . import apps
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default="NOT_GOOD_SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY', default='NOT_GOOD_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -25,44 +26,9 @@ ADMINS = [
 
 # Application definition
 
-INSTALLED_APPS = [
-
-    # local apps
-    'core.apps.CoreConfig',
-    'leads.apps.LeadsConfig',
-    'activities.apps.ActivitiesConfig',
-    'integrations.apps.IntegrationsConfig',
-    'analytics.apps.AnalyticsConfig',
-    'academy.apps.AcademyConfig',
-    'conversation.apps.ConversationConfig',
-    'account.apps.AccountConfig',
-    'signup.apps.SignupConfig',
-    'login.apps.LoginConfig',
-    'event.apps.EventConfig',
-
-    # django apps
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'django.contrib.humanize',
-
-    # thirds
-    'widget_tweaks',
-    'rangefilter',
-    'django_filters',
-
-    # thirds -> celery
-    'django_celery_beat',
-    'django_celery_results',
-
-]
+INSTALLED_APPS = apps.APPS
 
 SITE_ID = 1
-
 
 MIDDLEWARE = [
 
@@ -244,4 +210,12 @@ TELEGRAM_BOT_API = config('TELEGRAM_BOT_API', default='')
 TELEGRAM_BOT_CHAT_ID = config('TELEGRAM_BOT_CHAT_ID', default='')
 #########################################################
 # Telegram BOT - END
+#########################################################
+
+#########################################################
+# Auth - START
+#########################################################
+LOGIN_REDIRECT_URL = '/'
+#########################################################
+# Auth - END
 #########################################################

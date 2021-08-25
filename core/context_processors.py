@@ -8,19 +8,22 @@ from django.db.models import Q
 
 
 def globallabel(request):
-    result = 'bg-success'
-    from_now_plus_1s = timezone.now() + timedelta(seconds=1)
-    account = Account.objects.get(user=request.user)
-    events_qs = Event.objects.filter(account=account, done=False, start_datetime__lte=from_now_plus_1s)
-    if len(events_qs) > 0:
-        result = 'bg-danger'
+    current_user = request.user
+    result = None
+    if current_user and not current_user.is_anonymous:
+        result = 'bg-success'
+        from_now_plus_1s = timezone.now() + timedelta(seconds=1)
+        account = Account.objects.get(user=request.user)
+        events_qs = Event.objects.filter(account=account, done=False, start_datetime__lte=from_now_plus_1s)
+        if len(events_qs) > 0:
+            result = 'bg-danger'
     return {'globallabel': result,}
 
 
 def goal_of_the_day(request):
     current_user = request.user
     result = None
-    if current_user and not current_user.is_anonymous :
+    if current_user and not current_user.is_anonymous:
         conversations_goal = 21
         account = Account.objects.get(user=current_user)
         conversations = get_conversations_day(account)
