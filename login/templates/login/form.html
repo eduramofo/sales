@@ -1,5 +1,22 @@
-  <form method="post">
+{% load widget_tweaks %}
+
+<form method="post" action="{% url 'login:login' %}" class="bg-light p-4 rounded bolder-border">
+
+    <div class="form-group">
+        <h1 class="h3 w-100 text-center mb-3">
+            <strong>Entre na Sua Conta</strong>
+        </h1>
+        <hr class="mb-4">
+    </div>
+
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+
+    {% include "core/fields_widgets/input_default.html" with field=form.username %}
+
+    {% include "core/fields_widgets/input_default.html" with field=form.password %}
+
+    <div class="form-group mb-1 mt-4">
+        <button type="submit" class="btn btn-block btn-success">Entrar</button>
+    </div>
+
+</form>
