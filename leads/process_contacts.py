@@ -10,20 +10,20 @@ def gerar_leads(form, request):
     account.save()
     files = request.FILES.getlist('vcf_files')
     contacts = handle_uploaded_files(files)
-    create_leads_by_contacts(contacts, referrer)
+    create_leads_by_contacts(account, contacts, referrer)
     return referrer
 
 
-def create_leads_by_contacts(contacts, referrer):
+def create_leads_by_contacts(account, contacts, referrer):
     leads = []
     for contact in contacts:
-        new_lead = create_or_get_lead(contact, referrer)
+        new_lead = create_or_get_lead(account, contact, referrer)
         leads.append(new_lead)
     referrer.leads.set(leads)
     referrer.save()
 
 
-def create_or_get_lead(contact, referrer):
+def create_or_get_lead(account, contact, referrer):
     tels = contact['tels']
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
@@ -50,7 +50,7 @@ def create_or_get_lead(contact, referrer):
     if waid == 'NN':
         new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
     else:
-        lead = Lead.objects.filter(waid=waid).first()
+        lead = Lead.objects.filter(account=account, waid=waid).first()
         if lead is None:
             new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
         else:
