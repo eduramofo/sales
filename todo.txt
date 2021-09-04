@@ -1,8 +1,6 @@
-L2 -> Após clicar no botão abrir o whats com a mensagem de tentei te ligar.
+L2 -> Após clicar no botão abrir o whats com a mensagem de tentei te ligar;
 
 L3 -> Após clicar no botão abrir o whats com a mensagem de ultimato (pensar numa mensagem unisex);
-
-Criar uma sistema de paginação para os leads e para os reffers;
 
 Diminuir as opções de pesquisas para os leads;
 
@@ -10,4 +8,4 @@ Enviar a mensagem de agendamento ao enviar;
 
 Criar um botão de bolo;
 
-Pensar uma forma de se criar uma notificação pata os agendamentos;
+Pensar uma forma de se criar uma notificação para os agendamentos;

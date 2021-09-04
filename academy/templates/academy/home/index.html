@@ -1,8 +1,8 @@
-{% extends 'academy/core/base.html' %}
+{% extends 'academy/core/base_v2.html' %}
 {% block css %}{% endblock %}
+{% block main %}
+    {% include 'academy/home/content.html' %}
+{% endblock %}
 {% block content %}
-{% include "academy/core/nav.html" %}
-{% include "academy/core/page_title.html" %}
-{% include "academy/home/content.html" %}
 {% endblock %}
 {% block js %}{% endblock %}
