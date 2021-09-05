@@ -9,3 +9,41 @@ Enviar a mensagem de agendamento ao enviar;
 Criar um botão de bolo;
 
 Pensar uma forma de se criar uma notificação para os agendamentos;
+
+
+
+1. Na hora de fazer o upload dos leads, colocar o campo pra selecionar o gênero dá pessoa que tá indicando;
+
+2. Programar uma tag nos gerenciadores de templates de mensagens de acordo com o gênero;
+
+3. No Card das indicadores, colocar mais opções de status, colocar todas:
+Off 1
+Off 2
+ultimato
+Inválido
+Bolo 1
+Bolo 2
+
+4. Colocar os templates de mensagens via WhatsApp separados por categoria.
+
+Ex.: Agendamentos, Matrícula, Links, Etc.
+
+5. Colocar um sistema de classificação dos leads/indicadores.
+
+Ex.: BR - SUDESTE GMT-3, EUROPA GMT-0, EUA-GMT+2
+
+6. Colocar informações de validação do lead:
+Leads validados de 5 em 5;
+Leads validados de via lista de transmissão;
+Etc;
+
+7. No sistema de Lista, criar um moda pra carregar mais rápido e colocar as listas mais usadas.
+
+
+Eu sinto muito Pedro 😔
+
+Não vou mais conseguir entrar em contato com você novamente (por conta da minha demanda que tá muito grande 🤯)
+
+Logo, se você ainda tiver interesse na vaga de inglês que a Maria direcionou pra você.
+
+Corre 🏃🏃 e chama aqui no WhatsApp (antes deu passar ela pra outra pessoa e vocẽ vai perder a oportunidade).
