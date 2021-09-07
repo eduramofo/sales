@@ -383,7 +383,6 @@ class Referrer(BaseModel):
         verbose_name = "Referenciador"
         verbose_name_plural = "Referenciadores"
 
-
     def __str__(self):
 
         result = str(self.id)
@@ -396,6 +395,17 @@ class Referrer(BaseModel):
             result = str(self.lead)
 
         return result
+
+    def t1(self):
+        pass
+
+    def t2(self):
+        pass
+
+    def t3(self):
+        pass
+
+
 
 
 class Qualified(BaseModel):

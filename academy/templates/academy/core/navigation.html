@@ -1,22 +1,14 @@
-<aside id="navigation" class="col-3">
+<aside id="navigation" class="col-3" data-current-module-id="{{current_module.id}}">
     <ul class="list-group">
-        <li class="list-group-item active" aria-current="true">Primeiros Passos</li>
-        <li class="list-group-item">Entrevistas Gravadas</li>
-        <li class="list-group-item">Reuniões</li>
-        <li class="list-group-item">Técnica</li>
-        <li class="list-group-item">Scripts</li>
-        <li class="list-group-item">Mentalidade</li>
-        <li class="list-group-item">Visão</li>
-        <li class="list-group-item">Emocional</li>
-        <li class="list-group-item">Disciplina</li>
-        <li class="list-group-item">Cadência</li>
-        <li class="list-group-item">Objeções</li>
-        <li class="list-group-item">Cartão de Crédito</li>
-        <li class="list-group-item">PIX</li>
-        <li class="list-group-item">Boleto</li>
-        <li class="list-group-item">Tour pela Plataforma</li>
-        <li class="list-group-item">Vídeos</li>
-        <li class="list-group-item">Gerenciado de Leads</li>
-        <li class="list-group-item">Perguntas Frenquentes</li>
+        {% for module in modules %}
+            <li data-url="{% url 'academy:module_detail' module.url %}" data-module-id="{{module.id}}" data-module-active="false" class="list-group-item list-group-item-module">
+                <div class="list-group-item-module-content">
+                    <i class="bi bi-chevron-right closed"></i>
+                    <i class="bi bi-chevron-down open d-none"></i>
+                    <span class="ms-1">{{module.title}}</span>
+                </div>
+                {% include "academy/core/navigation_sub.html" with submodules=module.get_submodules %}
+            </li>
+        {% endfor %}
     </ul>
 </aside>

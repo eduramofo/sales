@@ -6,6 +6,7 @@ app_name = 'academy'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('<slug:url>/', views.module_detail, name='module_detail'),
     path('audio-speechs/', views.audio_speechs, name='audio-speechs'),
     path('technique/', views.technique_home, name='technique-home'),
     path('technique/1/', views.technique_1, name='technique-1'),
