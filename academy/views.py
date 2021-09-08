@@ -5,35 +5,28 @@ from academy.models import Module
 def home(request):
     modules = Module.objects.filter(active=True)
     current_module = modules.first()
-    context = {
-        'page_title': 'Página Inicial',
-        'nav_name': 'core_home',
-        'modules': modules,
-    }
+    current_module_submodules = current_module.get_submodules().first()
+    # context = {
+    #     'page_title': 'Página Inicial',
+    #     'nav_name': 'core_home',
+    #     'modules': modules,
+    # }
     # return render(request, 'academy/home/index.html', context)
-    return redirect('academy:module_detail', url=current_module.url)
+    return redirect('academy:module_detail', module_url=current_module.url, submodule_url=current_module_submodules.url)
 
 
-def module_detail(request, url):
-    modules_ = Module.objects.filter(active=True)
-    current_module = modules_.filter(url=url).first()
-    # modules = []
-    # for module in Module.objects.filter(active=True):
-    #     submodules = module.submodule_set.filter(active=True)
-    #     modules.append({'module': module, 'submodules': submodules})
+def module_detail(request, module_url, submodule_url):
+    modules = Module.objects.filter(active=True)
+    current_module = modules.filter(url=module_url).first()
+    current_submodule = current_module.get_submodules().filter(url=submodule_url).first()
     context = {
         'page_title': current_module.title,
         'nav_name': 'core_home',
-        'modules': modules_,
+        'modules': modules,
         'current_module': current_module,
+        'current_submodule': current_submodule,
     }
     return render(request, 'academy/module_detail/index.html', context)
-
-
-
-
-
-
 
 
 def audio_speechs(request):

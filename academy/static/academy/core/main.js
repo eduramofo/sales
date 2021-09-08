@@ -5,18 +5,19 @@ $(document).ready(function() {
 function setupNavigation() {
 
     const navigation = $('aside#navigation');
-    const currentModuleId = navigation.data('current-module-id');
-    const currentModule = navigation.find('li[data-module-id=' + currentModuleId + ']');
 
-    activeModule(currentModule);
-    onClickItemModule();
+    module();
+    submodule();
 
-    function onClickItemModule() {
+    function module() {
+        const currentModule = navigation.find('li[data-module-id=' + navigation.data('current-module-id') + ']');
+        console.log('li[data-module-id=' + navigation.data('current-module-id') + ']');
+        activeModule(currentModule);
         navigation.find('li.list-group-item-module').click(function(event) {
             event.preventDefault();
             const clickedModule = $(this);
             const clickedModuleActive = clickedModule.data('module-active');
-            if (clickedModule.data('module-active')) {
+            if (clickedModuleActive) {
                 deactivateModule(clickedModule);
             } else {
                 activeModule(clickedModule);
@@ -25,7 +26,9 @@ function setupNavigation() {
     };
 
     function activeModule(module) {
-        console.log(navigation.find('.list-group-item-module-active').parent('li').length);
+        navigation.find('.list-group-item-module-active').each(function() {
+            deactivateModule($(this));
+        });
         module.addClass('list-group-item-module-active');
         module.data('module-active', true);
         openModule(module);
@@ -49,6 +52,17 @@ function setupNavigation() {
         module.find('i.open').addClass('d-none');
     };
 
-    //document.location = $(this).data('url');
+    function submodule() {
+        const currentSubmodule = navigation.find('li[data-submodule-id=' + navigation.data('current-submodule-id') + ']');
+        activeSubmodule(currentSubmodule);
+        navigation.find('.list-group-item-submodule').click(function(e) {
+            e.preventDefault();
+            document.location = $(this).data('url');
+        });
+    };
+
+    function activeSubmodule(submodule) {
+        submodule.find('.list-group-item-submodule-content').addClass('active');
+    };
 
 };
