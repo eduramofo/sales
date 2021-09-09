@@ -1,5 +1,4 @@
 from django.urls import path
-
 from leads.views import actions as views
 
 app_name = 'actions'

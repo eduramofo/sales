@@ -1,0 +1,104 @@
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:ghosting_1' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Bolo 1 <span class="badge badge-light">{{referrer.ghosting_1.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:ghosting_2' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Bolo 2 <span class="badge badge-light">{{referrer.ghosting_2.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:lna' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Não Atendeu <span class="badge badge-light">{{referrer.lna.count}}</span>
+    </a>            
+</div>
+
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:events' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Eventos <span class="badge badge-light">{{referrer.events.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:off_1' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Off 1 <span class="badge badge-light">{{referrer.off_1.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:off_2' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Off 2 <span class="badge badge-light">{{referrer.off_2.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:ultimatum' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Ultimato <span class="badge badge-light">{{referrer.ultimatum.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:lost' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Perdido <span class="badge badge-light">{{referrer.lost.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:invalid' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Inválido <span class="badge badge-light">{{referrer.invalid.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:win' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Ganho <span class="badge badge-light">{{referrer.win.count}}</span>
+    </a>            
+</div>
+
+<div class="col-12 mt-2">
+    <a  role="button"
+        href="{% url 'leads:referrer_actions:all' referrer.id %}"
+        class="btn btn-sm btn-block btn-primary">Todos <span class="badge badge-light">{{referrer.all.count}}</span>
+    </a>            
+</div>
+
+<div class="col-6 mt-2">    
+    <a role="button" href="{% url 'leads:referrer_actions:edit_leads' referrer.id %}"
+    class="btn btn-sm btn-block btn-warning">
+        <small>
+            <strong>Editar Leads</strong>
+        </small>
+    </a>
+</div>
+
+<div class="col-6 mt-2">    
+    <a role="button" href="{% url 'leads:referrer_actions:edit_card' referrer.id %}"
+    class="btn btn-sm btn-block btn-warning">
+        <small>
+            <strong>Editar Cartão</strong>
+        </small>
+    </a>
+</div>
+
+<div class="col-12 mt-2">    
+    <a role="button" href="{% url 'leads:referrer_actions:next' referrer.id %}"
+    class="btn btn-sm btn-block btn-warning">
+        <small>
+            <strong>Next</strong>
+        </small>
+    </a>
+</div>

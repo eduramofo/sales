@@ -1,7 +1,5 @@
-from account.models import Account
 from django.db import models
-from django.utils import timezone
-
+from django.db.models import Q
 from core.models import BaseModel
 
 
@@ -396,16 +394,66 @@ class Referrer(BaseModel):
 
         return result
 
+
     def t1(self):
-        pass
+        return self.leads.filter(status='novo').order_by('order', '-priority')
 
     def t2(self):
-        pass
+        return self.leads.filter(status='tentando_contato').order_by('order', '-priority')
 
     def t3(self):
-        pass
+        return self.leads.filter(status='tentando_contato_2').order_by('order', '-priority')
 
+    def ghosting_1(self):
+        return self.leads.filter(status='ghosting').order_by('order', '-priority')
 
+    def ghosting_2(self):
+        return self.leads.filter(status='ghosting_2').order_by('order', '-priority')
+
+    def lna(self):
+        return self.leads.filter(status='geladeira').order_by('order', '-priority')
+
+    def events(self):
+        return self.leads.filter(Q(status='agendamento') | Q(status='agendamento_direct')).order_by('order', '-priority')
+
+    def lost(self):
+        return self.leads.filter(status='perdido').order_by('order', '-priority')
+
+    def ultimatum(self):
+        return self.leads.filter(status='ultimatum').order_by('order', '-priority')
+
+    def off_1(self):
+        return self.leads.filter(status='off').order_by('order', '-priority')
+
+    def off_2(self):
+        return self.leads.filter(status='off_2').order_by('order', '-priority')
+
+    def invalid(self):
+        return self.leads.filter(status='invalid').order_by('order', '-priority')
+
+    def win(self):
+        return self.leads.filter(status='ganho').order_by('order', '-priority')
+
+    def all(self):
+        return self.leads.all()
+
+    def next(self):
+        result = None
+        # t1
+        t1s = self.t1()
+        if t1s.count() > 0:
+            result = t1s.first()
+        # t2
+        if result is not None:
+            t2s = self.t2()
+            if t2s.count() > 0:
+                result = t2s.first()
+        # t3
+        if result is not None:
+            t3s = self.t3()
+            if t3s.count() > 0:
+                result = t2s.first()
+        return result
 
 
 class Qualified(BaseModel):

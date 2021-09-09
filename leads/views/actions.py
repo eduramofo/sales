@@ -427,7 +427,8 @@ def add(request, lead_id):
             referrer = gerar_leads(form, request)
             message_text = 'Leads criados com sucesso =)'
             messages.add_message(request,messages.SUCCESS, message_text)
-            return HttpResponseRedirect(reverse('leads:leads_referrers_edit', args=[str(referrer.id),]))
+            success_url = reverse('leads:referrer_actions:edit_leads', args=[str(referrer.id),])
+            return HttpResponseRedirect(success_url)
         else:
             message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
             messages.add_message(request,messages.ERROR, message_text)
@@ -464,7 +465,8 @@ def add_upload(request, lead_id):
             referrer = gerar_leads(form, request)
             message_text = 'Leads criados com sucesso =)'
             messages.add_message(request,messages.SUCCESS, message_text)
-            return HttpResponseRedirect(reverse('leads:leads_referrers_edit', args=[str(referrer.id),]))
+            success_url = reverse('leads:referrer_actions:edit_leads', args=[str(referrer.id),])
+            return HttpResponseRedirect(success_url)
         else:
             message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
             messages.add_message(request,messages.ERROR, message_text)

@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'leads:leads_referrers_edit' referrer.id %}">
+<form method="post" action="{% url 'leads:referrer_actions:edit_leads' referrer.id %}">
     
     {{ formset.management_form }}
 
@@ -10,7 +10,7 @@
     </div>
 
     <div class="form-group mb-5">
-        <a role="button" href="{% url 'leads:leads_referrers_all' referrer.id %}"  class="btn btn-block btn-primary">Ir para Lista de Leads</a>
+        <a role="button" href="{% url 'leads:referrer_actions:all' referrer.id %}"  class="btn btn-block btn-primary">Ir para Lista de Leads</a>
     </div>
 
 </form>

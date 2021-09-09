@@ -8,9 +8,14 @@
 
                 <div class="col-12">
                     <p class="p-0 m-0 mt-0 mb-2 text-dark">
-                    <strong>Ref.:</strong> {% if referrer.lead %}
-                        <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">{{referrer.lead.name}}</a>
-                        {% else %}{{referrer.name}}{% endif %} 
+                    <strong>Ref.:</strong> 
+                    {% if referrer.lead %}
+                        <a target="_black" href="{% url 'leads:update' referrer.lead.id %}">
+                            {{referrer.lead}} ({{referrer.lead.get_status_display}})
+                        </a>
+                    {% else %}
+                        {{referrer.name}}
+                    {% endif %}
                     em {{referrer.referring_datetime|date:"d/M/y à\s H:i"}}.</p>
                 </div>
               
@@ -18,37 +23,12 @@
                     <p class="mb-2"><strong>Descrição da linha:</strong> {{referrer.short_description}}</p>
                 </div>
 
-                <div class="col-4">    
-                    <a role="button" href="{% url 'leads:leads_referrers_t1' referrer.id %}"
-                    class="btn btn-sm btn-block btn-warning">
-                        <small>
-                            <strong>T1 ({{referrer|get_news_leads|length}})</strong>
-                        </small>
-                    </a>
-                </div>
-
-                <div class="col-4">    
-                    <a role="button" href="{% url 'leads:leads_referrers_t2' referrer.id %}"
-                    class="btn btn-sm btn-block btn-warning">
-                        <small>
-                            <strong>T2 ({{referrer|get_tentanto_leads|length}})</strong>
-                        </small>
-                    </a>
-                </div>
-
-                <div class="col-4">    
-                    <a role="button" href="{% url 'leads:leads_referrers_t3' referrer.id %}"
-                    class="btn btn-sm btn-block btn-warning">
-                        <small>
-                            <strong>T3 ({{referrer|get_tentanto_2_leads|length}})</strong>
-                        </small>
-                    </a>
-                </div>
+                {% include 'leads/referrers/referrer_item/list_item_referrer_content_btns_t1_t2_t3.html' %}
 
                 <div class="col-12 mt-2">
                     <a  role='button' 
                         id='leads-call-whatsapp-btn' 
-                        href="{% url 'leads:leads_referrers_next' referrer.id %}"
+                        href="{% url 'leads:referrer_actions:next' referrer.id %}"
                         class='btn btn-block btn-info'>
                         {% btn_svg_icons 'bootstrap' 'heart-fill' '22px' 'center' 'Próximo' %}
                     </a>
