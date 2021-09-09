@@ -444,12 +444,12 @@ class Referrer(BaseModel):
         if t1s.count() > 0:
             result = t1s.first()
         # t2
-        if result is not None:
+        if result is None:
             t2s = self.t2()
             if t2s.count() > 0:
                 result = t2s.first()
         # t3
-        if result is not None:
+        if result is None:
             t3s = self.t3()
             if t3s.count() > 0:
                 result = t2s.first()
