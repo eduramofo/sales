@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from account.models import Account
 from activities.models import Activity
+from event.models import Event
 from leads.models import Lead
 from leads.forms import LeadForm
 from leads import tools
@@ -45,7 +46,8 @@ def lead_update(request, lead_id):
     lead = get_object_or_404(Lead, id=lead_id)
     lead_form = LeadForm(request.POST or None, instance=lead)
     activities = Activity.objects.filter(lead=lead).order_by('-created_at')
-    page_title = "{} ({})".format(lead.name, lead.get_status_display())
+    events = Event.objects.filter(lead=lead).order_by('done', 'start_datetime')
+    page_title = str(lead)
     nav_name = 'leads_list'
     method = request.method
     referrers = leads_extras.get_referrers_from_lead(lead)
@@ -53,6 +55,7 @@ def lead_update(request, lead_id):
         'page_title': page_title,
         'nav_name': nav_name,
         'lead': lead,
+        'events': events,
         'activities': activities,
         'referrers': referrers,
         'lead_form': lead_form,

@@ -5,10 +5,13 @@
               <div class="alert alert-danger alert-main py-1 px-2 mt-3 mb-0" role="alert">
                   <p class="m-0 p-1"><strong>PERDIDO</strong></p>
               </div>
-            {% endif %}
-            {% if lead.status == 'ganho' %}
+            {% elif lead.status == 'ganho' %}
               <div class="alert alert-success alert-main py-1 px-2 mt-3 mb-0" role="alert">
                   <p class="m-0 p-1"><strong>GANHO</strong></p>
+              </div>
+            {% else %}
+              <div class="alert alert-secondary alert-main py-1 px-2 mt-3 mb-0" role="alert">
+                  <p class="m-0 p-1"><strong>{{lead.get_status_display}}</strong></p>
               </div>
             {% endif %}
         </div>

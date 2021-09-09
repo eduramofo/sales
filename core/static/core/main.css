@@ -69,8 +69,16 @@ nav#main-navbar .nav-item-item small {
      border: 3px solid #155724;
  }
 
- .alert-main.alert-danger {
+.alert-main.alert-danger {
     border: 3px solid #721c24;
+}
+
+.alert-main.alert-primary {
+    border: 3px solid #04366b;
+}
+
+.alert-main.alert-secondary {
+    border: 3px solid rgb(56, 56, 56);
 }
 
 .border-bolder,

@@ -23,7 +23,7 @@ def event_list_all(request):
         'events': pages['page'],
         'page_range': pages['page_range'],
     }
-    return render(request, 'event/event_list_all/index.html', context)
+    return render(request, 'event/event_list/index.html', context)
 
 
 @login_required()
@@ -39,7 +39,24 @@ def event_list_open(request):
         'events': pages['page'],
         'page_range': pages['page_range'],
     }
-    return render(request, 'event/event_list_open/index.html', context)
+    return render(request, 'event/event_list/index.html', context)
+
+
+@login_required()
+def event_list_open_next_24h(request):
+    page_title = 'Eventos Em Aberto'
+    nav_name = 'event'
+    account = Account.objects.get(user=request.user)
+    from_now_plus_24h = timezone.now() + timedelta(hours=24)
+    events_qs = Event.objects.filter(account=account, done=False, start_datetime__lte=from_now_plus_24h)
+    pages = paginator.make_paginator(request, events_qs, 20)
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'events': pages['page'],
+        'page_range': pages['page_range'],
+    }
+    return render(request, 'event/event_list/index.html', context)
 
 
 @login_required()
@@ -55,7 +72,7 @@ def event_list_done(request):
         'events': pages['page'],
         'page_range': pages['page_range'],
     }
-    return render(request, 'event/event_list_done/index.html', context)
+    return render(request, 'event/event_list/index.html', context)
 
 
 @login_required()
@@ -72,7 +89,7 @@ def event_list_overdue(request):
         'events': pages['page'],
         'page_range': pages['page_range'],
     }
-    return render(request, 'event/event_list_overdue/index.html', context)
+    return render(request, 'event/event_list/index.html', context)
 
 
 @login_required()

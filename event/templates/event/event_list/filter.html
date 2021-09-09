@@ -1,0 +1,35 @@
+<div class="row mb-3">
+    <div class="col-12">
+        <button id="event-filter-wrapper-btn"
+        class="btn btn-primary btn-block">Mostrar Filtro</button>
+    </div>
+</div>
+
+<div id="event-filter-wrapper-content" class="row d-none">
+
+    <div class="col-12 mb-3">
+        <a href="{% url 'event:event_list_overdue' %}" role="button"
+        class="btn btn-dark btn-block">Próximas 24H</a>
+    </div>
+
+    <div class="col-12 mb-3">
+        <a href="{% url 'event:event_list_overdue' %}" role="button"
+        class="btn btn-dark btn-block">Vencidos</a>
+    </div>
+
+    <div class="col-12 mb-3">
+        <a href="{% url 'event:event_list_open' %}" role="button"
+        class="btn btn-dark btn-block">Abertos</a>
+    </div>
+
+    <div class="col-12 mb-3">
+        <a href="{% url 'event:event_list_done' %}" role="button"
+        class="btn btn-dark btn-block">Feitos</a>
+    </div>
+    
+    <div class="col-12 mb-3">
+        <a href="{% url 'event:event_list_all' %}" role="button"
+        class="btn btn-dark btn-block">Todos</a>
+    </div>
+
+</div>

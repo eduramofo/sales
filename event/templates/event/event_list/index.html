@@ -3,6 +3,8 @@
 {% block content %}
 {% include "core/nav.html" %}
 {% include "core/page_title.html" %}
-{% include "event/event_list_done/content.html" %}
+{% include "event/event_list/content.html" %}
 {% endblock %}
-{% block js %}{% endblock %}
+{% block js %}
+<script src="{% static 'event/main.js' %}"></script>
+{% endblock %}

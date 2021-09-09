@@ -1,0 +1,23 @@
+{% if events %}
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+            <div class="alert alert-danger alert-main py-1 px-2 mt-3 mb-0" role="alert">
+                <h6 class="alert-heading w-100 text-center mt-2">
+                  <strong>Existem Eventos Registrados!</strong>
+                </h6>
+                <hr class="m-2">
+                {% for event in events %}
+                    <span class="badge badge-secondary">
+                      <a href="{% url 'event:event_update' event.id %}" class="text-white">
+                          {{event.start_datetime|date:"d/m/y"}} {{ event.start_datetime|time:"H:i"}} |
+                          {{event}} |
+                          {% if event.done %}Feito{%else%}Aberto{% endif %}
+                      </a>
+                    </span>
+                {% endfor %}
+            </div>
+          </div>
+      </div>
+  </div>
+{% endif %}

@@ -1,7 +1,7 @@
 <div class="row">
     {% if events %}
         {% for event in events %}
-            {% include 'event/event_list_all/list_item.html' %}
+            {% include 'leads/list/list_card.html' with lead=event.lead %}
         {% endfor %}
     {% else %}
         <div class="col-12">
