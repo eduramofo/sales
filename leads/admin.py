@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from leads.models import Lead, Referrer, WhatsappTemplate, Qualified
+from leads.models import Lead, Referrer, WhatsappTemplate, WhatsappTemplateCategory, Qualified
 from rangefilter.filter import DateRangeFilter
 
 
@@ -77,6 +77,16 @@ class WhatsappTemplateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(WhatsappTemplate, WhatsappTemplateAdmin)
+
+
+class WhatsappTemplateCategoryAdmin(admin.ModelAdmin):
+
+    search_fields = ('name', 'title',)
+
+    list_display = ('name', 'created_at', 'updated_at')
+
+
+admin.site.register(WhatsappTemplateCategory, WhatsappTemplateCategoryAdmin)
 
 
 class QualifiedAdmin(admin.ModelAdmin):

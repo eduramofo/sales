@@ -1,78 +1,77 @@
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:ghosting_1' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Bolo 1 <span class="badge badge-light">{{referrer.ghosting_1.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Bolo 1 <span class="badge badge-dark">{{referrer.ghosting_1.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:ghosting_2' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Bolo 2 <span class="badge badge-light">{{referrer.ghosting_2.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Bolo 2 <span class="badge badge-dark">{{referrer.ghosting_2.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:lna' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Não Atendeu <span class="badge badge-light">{{referrer.lna.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Não Atendeu <span class="badge badge-dark">{{referrer.lna.count}}</span>
     </a>            
 </div>
-
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:events' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Eventos <span class="badge badge-light">{{referrer.events.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Eventos <span class="badge badge-dark">{{referrer.events.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:off_1' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Off 1 <span class="badge badge-light">{{referrer.off_1.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Off 1 <span class="badge badge-dark">{{referrer.off_1.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:off_2' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Off 2 <span class="badge badge-light">{{referrer.off_2.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Off 2 <span class="badge badge-dark">{{referrer.off_2.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:ultimatum' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Ultimato <span class="badge badge-light">{{referrer.ultimatum.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Ultimato <span class="badge badge-dark">{{referrer.ultimatum.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:lost' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Perdido <span class="badge badge-light">{{referrer.lost.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Perdido <span class="badge badge-dark">{{referrer.lost.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:invalid' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Inválido <span class="badge badge-light">{{referrer.invalid.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Inválido <span class="badge badge-dark">{{referrer.invalid.count}}</span>
     </a>            
 </div>
 
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:win' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Ganho <span class="badge badge-light">{{referrer.win.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Ganho <span class="badge badge-dark">{{referrer.win.count}}</span>
     </a>            
 </div>
 
 <div class="col-12 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:all' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">Todos <span class="badge badge-light">{{referrer.all.count}}</span>
+        class="btn btn-sm btn-block btn-warning">Todos <span class="badge badge-dark">{{referrer.all.count}}</span>
     </a>            
 </div>
 

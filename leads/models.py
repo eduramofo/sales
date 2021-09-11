@@ -456,6 +456,21 @@ class Referrer(BaseModel):
         return result
 
 
+class WhatsappTemplateCategory(BaseModel):
+
+    name = models.CharField(
+        max_length=150,
+        verbose_name='Nome',
+    )
+
+    class Meta:
+        verbose_name = 'Categoria dos Modelos de Mensagens para WhatsApp'
+        verbose_name_plural = 'Categoria dos Modelos de Mensagens para WhatsApp'
+
+    def __str__(self):
+        return self.name
+
+
 class Qualified(BaseModel):
 
     name = models.CharField(

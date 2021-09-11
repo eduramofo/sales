@@ -6,7 +6,7 @@
                 <h6 class="alert-heading w-100 text-center mt-2">
                   <strong>Existem Eventos Registrados!</strong>
                 </h6>
-                <hr class="m-2">
+                <hr class="mt-2 mb-1">
                 {% for event in events %}
                     <span class="badge badge-secondary">
                       <a href="{% url 'event:event_update' event.id %}" class="text-white">

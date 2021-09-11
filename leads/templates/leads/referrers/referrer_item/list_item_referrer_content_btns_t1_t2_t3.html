@@ -1,20 +1,20 @@
 <div class="col-4">
     <a  role="button"
         href="{% url 'leads:referrer_actions:t1' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">T1 <span class="badge badge-light">{{referrer.t1.count}}</span>
+        class="btn btn-sm btn-block btn-warning">T1 <span class="badge badge-dark">{{referrer.t1.count}}</span>
     </a>            
 </div>
 
 <div class="col-4">
     <a  role="button"
         href="{% url 'leads:referrer_actions:t2' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">T2 <span class="badge badge-light">{{referrer.t2.count}}</span>
+        class="btn btn-sm btn-block btn-warning">T2 <span class="badge badge-dark">{{referrer.t2.count}}</span>
     </a>            
 </div>
 
 <div class="col-4">
     <a  role="button"
         href="{% url 'leads:referrer_actions:t3' referrer.id %}"
-        class="btn btn-sm btn-block btn-primary">T3 <span class="badge badge-light">{{referrer.t3.count}}</span>
+        class="btn btn-sm btn-block btn-warning">T3 <span class="badge badge-dark">{{referrer.t3.count}}</span>
     </a>            
 </div>

@@ -42,7 +42,7 @@ def t1(request, lead_id):
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
 
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
+    url = reverse_lazy('leads:update', args=(str(lead.id),)) + '?and-now=t2'
 
     return HttpResponseRedirect(url)
 
@@ -70,7 +70,7 @@ def t2(request, lead_id):
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
 
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
+    url = reverse_lazy('leads:update', args=(str(lead.id),)) + '?and-now=t3'
 
     return HttpResponseRedirect(url)
 
@@ -98,7 +98,7 @@ def t3(request, lead_id):
 
     messages.add_message(request, messages.SUCCESS, 'Ligação registrada como não atendida.')
 
-    url = reverse_lazy('leads:update', args=(str(lead.id),))
+    url = reverse_lazy('leads:update', args=(str(lead.id),)) + '?and-now=lna'
 
     return HttpResponseRedirect(url)
 
