@@ -9,6 +9,7 @@ from .views import recommendation
 app_name = 'core'
 urlpatterns = [
     path('', main.index, name='home'),
+    path('speech/', main.speech, name='speech'),
     path('messages/', main.messages, name='messages'),
     path('statistics/', statistics.home, name='statistics'),
     path('statistics/balance/', statistics.balance, name='statistics_balance'),

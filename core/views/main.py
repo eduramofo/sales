@@ -26,3 +26,8 @@ def messages(request):
         'messages': messages_html,
     }
     return JsonResponse(data)
+
+
+def speech(request):
+    return render(request, 'speech/index.html', {})
+

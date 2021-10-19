@@ -2,6 +2,7 @@
 .vscode
 .sales/
 db.sqlite3
+venv
 /staticfiles
 /media
 /private
