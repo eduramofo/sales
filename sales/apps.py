@@ -14,6 +14,8 @@ LOCAL_APPS = [
 
 THIRDS_APPS = [
     'widget_tweaks',
+    'crispy_forms',
+    'tempus_dominus',
     'rangefilter',
     'django_filters',
     # celery
@@ -31,6 +33,5 @@ DJANGO_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
 ]
-
 
 APPS = LOCAL_APPS + THIRDS_APPS + DJANGO_APPS

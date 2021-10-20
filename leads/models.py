@@ -87,6 +87,15 @@ GMT_CHOICES = (
     (12, 'GMT+12'),
 )
 
+VALIDATION_CHOICES = (
+    (None, 'Selecionar'),
+    ('De 5 em 5', '5 em 5'),
+    ('Lista de Transmissão', 'Lista de Transmissão'),
+    ('Não Validada', 'Não Validada'),
+    ('Não Validada (Lead Mentiu)', 'Não Validada (Lead Mentiu)'),
+    ('Validada Parcialmente', 'Validada Parcialmente'),
+    ('Outro', 'Outro'),
+)
 
 class Lead(BaseModel):
 
@@ -349,6 +358,14 @@ class Referrer(BaseModel):
     location = models.CharField(
         max_length=1024,
         verbose_name='Localização: País/Cidade',
+        null=True,
+        blank=True,
+    )
+
+    validation = models.CharField(
+        max_length=200,
+        choices=VALIDATION_CHOICES,
+        verbose_name='Validação',
         null=True,
         blank=True,
     )

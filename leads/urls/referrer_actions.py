@@ -2,7 +2,6 @@ from django.urls import path
 from leads.views import referrer_actions as views
 
 app_name = 'referrer_actions'
-
 urlpatterns = [
     path('t1/', views.t1, name='t1'),
     path('t2/', views.t2, name='t2'),
@@ -20,6 +19,6 @@ urlpatterns = [
     path('all/', views.all, name='all'),
     # actions
     path('edit-leads/', views.edit_leads, name='edit_leads'),
-    path('edit-card/', views.edit_leads, name='edit_card'),
+    path('update-card/', views.update_card, name='edit_card'),
     path('next/', views.next, name='next'),
 ]

@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.forms import formset_factory
@@ -8,6 +7,7 @@ from core.tools import paginator
 from leads.models import Lead, Referrer
 from leads.forms import LeadSimpleForm
 from leads.filters import LeadFilter
+from leads.forms import ReferrerForm
 
 
 @login_required()
@@ -312,9 +312,29 @@ def edit_leads(request, referrer_id):
 
 
 @login_required()
-def edit_card(request, referrer_id):
-    context = None
-    return render(request, 'leads/referrers/list_edit/index.html', context)
+def update_card(request, referrer_id):
+    nav_name = 'leads_list'
+    referrer_obj = get_object_or_404(Referrer, id=referrer_id)
+    page_title = 'Editar cartão dos leads do(a) {}'.format(referrer_obj)
+    form = ReferrerForm(instance=referrer_obj)
+    method = request.method
+    context = {
+        'page_title': page_title,
+        'nav_name': nav_name,
+        'form': form,
+        'referrer': referrer_obj,
+    }
+    if method == 'POST':
+        form = ReferrerForm(request.POST, instance=referrer_obj)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'Cartão de indicação atualizado com sucesso!')
+            redirect_url = reverse_lazy('leads:referrer_actions:edit_card', args=(str(referrer_obj.id),))
+            return HttpResponseRedirect(redirect_url)
+        else:
+            messages.add_message(request, messages.ERROR, 'Existem erros no formulário, faça as devidas correções!')
+            context['form'] = form
+    return render(request, 'leads/referrers/update_card/index.html', context)
 
 
 @login_required()

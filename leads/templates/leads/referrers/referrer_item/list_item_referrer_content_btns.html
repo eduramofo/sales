@@ -1,3 +1,5 @@
+{% load core_extras %}
+
 <div class="col-6 mt-2">
     <a  role="button"
         href="{% url 'leads:referrer_actions:ghosting_1' referrer.id %}"
@@ -77,7 +79,7 @@
 
 <div class="col-6 mt-2">    
     <a role="button" href="{% url 'leads:referrer_actions:edit_leads' referrer.id %}"
-    class="btn btn-sm btn-block btn-warning">
+    class="btn btn-sm btn-block btn-secondary">
         <small>
             <strong>Editar Leads</strong>
         </small>
@@ -86,7 +88,7 @@
 
 <div class="col-6 mt-2">    
     <a role="button" href="{% url 'leads:referrer_actions:edit_card' referrer.id %}"
-    class="btn btn-sm btn-block btn-warning">
+    class="btn btn-sm btn-block btn-secondary">
         <small>
             <strong>Editar Cartão</strong>
         </small>
@@ -94,10 +96,10 @@
 </div>
 
 <div class="col-12 mt-2">    
-    <a role="button" href="{% url 'leads:referrer_actions:next' referrer.id %}"
-    class="btn btn-sm btn-block btn-warning">
-        <small>
-            <strong>Next</strong>
-        </small>
+    <a  role='button' 
+        id='leads-call-whatsapp-btn' 
+        href="{% url 'leads:referrer_actions:next' referrer.id %}"
+        class='btn btn-block btn-info'>
+        {% btn_svg_icons 'bootstrap' 'heart-fill' '22px' 'center' 'Próximo' %}
     </a>
 </div>

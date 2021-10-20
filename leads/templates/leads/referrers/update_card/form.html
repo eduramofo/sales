@@ -1,0 +1,41 @@
+{% load crispy_forms_tags %}
+
+<form 
+        id="referrer-card-update"
+        method="post"
+        action="{% url 'leads:referrer_actions:edit_card' referrer.id %}"
+        class="bg-light border border-primary p-4 rounded">
+    {{form.lead.as_hidden}}
+    {{form.name.as_hidden}}
+    {% csrf_token %}
+    <div class="row">
+
+        <div class="col-12">
+            {{ form.referring_datetime|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            {{ form.validation|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            {{ form.gmt|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            {{ form.short_description|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            {{ form.location|as_crispy_field }}
+        </div>
+        <div class="col-12">
+            <div class="form-group mb-0">
+                <button type="submit" class="btn btn-block btn-success">Salvar</buatton>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<div class="row">
+    <div class="col-12">
+        <a role="button" href="{% url 'leads:referrer_actions:all' referrer.id %}" class="btn btn-secondary btn-block mt-3 border">Ir para todos os Leads</a>
+    </div>
+</div>

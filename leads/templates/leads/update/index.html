@@ -1,7 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block css %}
-<link href="{% static 'core/gijgo/css/gijgo.min.css' %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block content %}
 {% include "core/nav.html" %}
@@ -9,7 +8,6 @@
 {% include "leads/update/content.html" %}
 {% endblock %}
 {% block js %}
-<script src="{% static 'core/gijgo/js/gijgo.min.js' %}"></script>
 <script src="{% static 'leads/update.js' %}"></script>
 <script src="{% static 'leads/schedule.js' %}"></script>
 <script src="{% static 'activities/activities_lead_update.js' %}"></script>

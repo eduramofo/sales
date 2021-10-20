@@ -19,6 +19,9 @@
           {{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}
           {% endif %}
         </p>
+        
+        <p class="card-text mb-0"><strong>Validação:</strong> {{lead.get_referrer.validation|default_if_none:"Não Informado"}}</p>
+
         <p class="card-text mb-0"><strong>Status:</strong> {{lead.get_status_display}}</p>
         <p class="card-text mb-0 {% if lead.priority %}text-danger{% endif %}"><strong>Prioridade:</strong> {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
         <p class="card-text mb-0"><strong>Tel: </strong>{{lead.tel}}</p>

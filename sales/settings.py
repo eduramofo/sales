@@ -63,7 +63,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.globallabel',
-                'core.context_processors.goal_of_the_day',
             ],
         },
     },
@@ -217,4 +216,13 @@ TELEGRAM_BOT_CHAT_ID = config('TELEGRAM_BOT_CHAT_ID', default='')
 LOGIN_REDIRECT_URL = '/'
 #########################################################
 # Auth - END
+#########################################################
+
+
+#########################################################
+# CRISPY_TEMPLATE_PACK - START
+#########################################################
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+#########################################################
+# CRISPY_TEMPLATE_PACK - END
 #########################################################

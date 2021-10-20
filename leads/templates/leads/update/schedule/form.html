@@ -1,25 +1,27 @@
+{% load crispy_forms_tags %}
+
 <form id="schedule-modal-form" method="post" action="{% url 'leads:actions:schedule' lead.id %}">
     
-    {% csrf_token %}
+{% csrf_token %}
 
-    <div class="row">
+<div class="row">
 
-      <div class="col-12">
-          {% include 'core/inputs/default_datetime_picker.html' with field=schedule_form.due_date %}
-      </div>
-      
-      <div class="col-12">
-          {% include 'core/inputs/default_sm.html' with field=schedule_form.note %}
-      </div>
-      
-      <div class="col-6">
-          <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-      
-      <div class="col-6">
-          <button id="schedule-modal-confirm-btn" type="submit" class="btn btn-block btn-success">Confirmar</button>
-      </div>
-
+    <div class="col-12">
+        {{ schedule_form.due_date|as_crispy_field }}
     </div>
+
+    <div class="col-12">
+        {{ schedule_form.note|as_crispy_field }}
+    </div>
+
+    <div class="col-6">
+        <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Cancelar</button>
+    </div>
+
+    <div class="col-6">
+        <button id="schedule-modal-confirm-btn" type="submit" class="btn btn-block btn-success">Confirmar</button>
+    </div>
+
+</div>
 
 </form>

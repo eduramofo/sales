@@ -1,6 +1,8 @@
 {% load core_extras %}
 
 <form id="event" method="post" action="{% url 'event:event_update' event.id %}" class="bg-light border-bolder p-3 mt-1 rounded">
+    
+    {% csrf_token %}
 
     {% include "event/forms/update_form_fields.html" with form=event_form %}
 

@@ -12,6 +12,10 @@
     <p class="mb-1"><strong>Descrição da linha:</strong> {{referrer.short_description}}</p>
 </div>
 
+<div class="w-100">
+    <p class="mb-1"><strong>Validação:</strong> {{referrer.validation|default_if_none:"Não Informado"}}</p>
+</div>
+
 <div class="w-100 d-flex flex-wrap justify-content-between align-items-center mt-2">
     <div class="row">
         {% include 'leads/referrers/referrer_item/list_item_referrer_content_btns_t1_t2_t3.html' %}

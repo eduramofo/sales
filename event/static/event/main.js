@@ -1,21 +1,6 @@
 $(document).ready(function() {
-    setupDatetimePicker();
     setupFilter();
 });
-
-function setupDatetimePicker() {
-    var dueDateInput = $('form#event #id_start_datetime');
-    if(dueDateInput.length) {
-        dueDateInput.datetimepicker({
-            uiLibrary: 'bootstrap4',
-            format: 'mm/dd/yyyy HH:MM',
-            modal: true,
-            showOnFocus: true,
-            header: true,
-            footer: true,
-        });
-    };
-};
 
 function setupFilter() {
 

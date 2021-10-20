@@ -1,7 +1,22 @@
 from datetime import timedelta
 from django import forms
 from event import models
+from tempus_dominus.widgets import DateTimePicker
 
+datetime_picker = DateTimePicker(
+    options={
+        'useCurrent': True,
+        'collapse': False,
+        'locale': 'pt-BR',
+        'format': 'DD/MM/YYYY HH:mm',
+    },
+    attrs={
+        'append': 'fa fa-calendar',
+        'icon_toggle': True,
+        'input_toggle': True,
+        'input_group': True,
+    },
+)
 
 class EventForm(forms.ModelForm):
     
@@ -16,18 +31,14 @@ class EventForm(forms.ModelForm):
     )
 
     start_datetime = forms.DateTimeField(
-        label='Data e Hora do Início do Evento',
-        widget=forms.DateTimeInput(
-            format='%d/%m/%Y %H:%M',
-            attrs={
-                'type': 'text',
-            }
-        ),
-        required=True,
+        label='Data/Hora [INÍCIO]',
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=datetime_picker,
+        required=False,
     )
 
     end_datetime = forms.DateTimeField(
-        label='Data e Hora do Fim do Evento',
+        label='Data/Hora [FIM]',
         required=False,
     )
 

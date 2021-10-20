@@ -1,7 +1,22 @@
 from django import forms
 from leads import models as leads_models
 from leads import validators
+from tempus_dominus.widgets import DateTimePicker
 
+datetime_picker = DateTimePicker(
+    options={
+        'useCurrent': True,
+        'collapse': False,
+        'locale': 'pt-BR',
+        'format': 'DD/MM/YYYY HH:mm',
+    },
+    attrs={
+        'append': 'fa fa-calendar',
+        'icon_toggle': True,
+        'input_toggle': True,
+        'input_group': True,
+    },
+)
 
 class LeadForm(forms.ModelForm):
     
@@ -146,6 +161,7 @@ class ReferrerForm(forms.ModelForm):
             'lead',
             'short_description',
             'location',
+            'validation',
         ]
 
     name = forms.CharField(
@@ -160,7 +176,9 @@ class ReferrerForm(forms.ModelForm):
     )
 
     referring_datetime = forms.DateTimeField(
-        label='Data e hora da indicação',
+        label='Data/Hora [Indicação]',
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=datetime_picker,
         required=True,
     )
 
@@ -177,6 +195,12 @@ class ReferrerForm(forms.ModelForm):
     gmt = forms.ChoiceField(
         label='GMT',
         choices=leads_models.GMT_CHOICES,
+        required=True,
+    )
+
+    validation = forms.ChoiceField(
+        label='Validação',
+        choices=leads_models.VALIDATION_CHOICES,
         required=True,
     )
 
@@ -214,13 +238,9 @@ class QualifiedForm(forms.Form):
 class ScheduleForm(forms.Form):
 
     due_date = forms.DateTimeField(
-        label='Data/hora',
-        widget=forms.DateTimeInput(
-            format='%Y-%m-%d %H:%M',
-            attrs={
-                'type': 'text',
-            }
-        ),
+        label='Data/Hora [INÍCIO]',
+        input_formats=['%d/%m/%Y %H:%M'],
+        widget=datetime_picker,
         required=True,
     )
 

@@ -23,11 +23,8 @@ $(document).ready(function() {
         function success(resp) {
 
             var scheduleModal = $(resp);
-            var dueDateInput = scheduleModal.find('#id_due_date');
             var formConfirmBtn = scheduleModal.find('#schedule-modal-confirm-btn');
-            
-            setupDatetimePicker(dueDateInput);
-            
+     
             formConfirmBtn.click(function(e) {    
                 e.preventDefault();
                 formSubmit(scheduleModal, url);
@@ -56,11 +53,8 @@ $(document).ready(function() {
         function success(resp) {
 
             var scheduleModal = $(resp);
-            var dueDateInput = scheduleModal.find('#id_due_date');
             var formConfirmBtn = scheduleModal.find('#schedule-modal-confirm-btn');
-            
-            setupDatetimePicker(dueDateInput);
-            
+                        
             formConfirmBtn.click(function(e) {    
                 e.preventDefault();
                 formSubmit(scheduleModal, url);
@@ -77,19 +71,6 @@ $(document).ready(function() {
             });
 
         };
-
-    };
-
-    function setupDatetimePicker(dateTimePickerInput) {
-
-        dateTimePickerInput.datetimepicker({
-            uiLibrary: 'bootstrap4',
-            format: 'yyyy-mm-dd HH:MM',
-            modal: false,
-            showOnFocus: true,
-            header: true,
-            footer: true,
-        });
 
     };
 

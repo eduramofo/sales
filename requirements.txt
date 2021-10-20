@@ -16,3 +16,5 @@ django-celery-beat
 django-celery-results
 google-auth-oauthlib
 google-api-python-client
+django-tempus-dominus
+django-crispy-forms
