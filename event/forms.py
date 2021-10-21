@@ -5,8 +5,8 @@ from tempus_dominus.widgets import DateTimePicker
 
 datetime_picker = DateTimePicker(
     options={
-        'useCurrent': True,
-        'collapse': False,
+        'useCurrent': False,
+        'collapse': True,
         'locale': 'pt-BR',
         'format': 'DD/MM/YYYY HH:mm',
     },
