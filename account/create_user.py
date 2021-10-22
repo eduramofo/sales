@@ -8,4 +8,11 @@ def create_user(name, username, email, password):
         email=email,
         password=password,
     )
+    new_user_setup(new_user)
     return new_user
+
+
+def new_user_setup(user):
+    # Criar o primeiro LEAD
+    # Cria o 
+    pass

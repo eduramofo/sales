@@ -216,6 +216,13 @@ class Lead(BaseModel):
         default=False,
     )
 
+    best_time_to_contact = models.CharField(
+        max_length=100,
+        verbose_name='Melhor horário para contato',
+        null=True,
+        blank=True,
+    )
+
     short_description = models.CharField(
         max_length=1024,
         verbose_name='Descrição curta da (linha)',
@@ -386,6 +393,14 @@ class Referrer(BaseModel):
         blank=True,
     )
 
+    line_group = models.ForeignKey(
+        'leads.LineGroup',
+        verbose_name='Grupo da Linha',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+    )
+
     account = models.ForeignKey(
         'account.Account',
         verbose_name='Dono',
@@ -410,7 +425,6 @@ class Referrer(BaseModel):
             result = str(self.lead)
 
         return result
-
 
     def t1(self):
         return self.leads.filter(status='novo').order_by('order', '-priority')
@@ -470,6 +484,44 @@ class Referrer(BaseModel):
             t3s = self.t3()
             if t3s.count() > 0:
                 result = t2s.first()
+        return result
+
+
+class LineGroup(BaseModel):
+
+    active = models.BooleanField(
+        verbose_name='Ativo?',
+        default=False,
+    )
+
+    default = models.BooleanField(
+        verbose_name='Padrão?',
+        default=False,
+    )
+
+    name = models.CharField(
+        max_length=100,
+        verbose_name='Nome da Categoria',
+        null=True,
+        blank=False,
+    )
+
+    account = models.ForeignKey(
+        'account.Account',
+        verbose_name='Dono',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = 'Grupo da Linha'
+        verbose_name_plural = 'Grupo da Linhas'
+
+    def __str__(self):
+        result = str(self.id)
+        if self.name:
+            result = str(self.name)
         return result
 
 

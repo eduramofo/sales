@@ -1,0 +1,8 @@
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+<form id="upload-leads-form" method="post" action="{% url 'leads:actions:add_upload' lead.id %}" enctype="multipart/form-data" class="bg-light p-4 rounded">
+    <div class="form-group mb-0">
+        <button type="submit" class="btn btn-block btn-success border border-dark">Carregar Contatos</button>
+    </div>
+</form>

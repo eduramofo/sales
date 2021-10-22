@@ -11,6 +11,7 @@ urlpatterns = [
     path('schedule/direct/', views.schedule_direct, name='schedule_direct'),
     path('add/', views.add, name='add'),
     path('add/upload/', views.add_upload, name='add_upload'),
+    path('add/manually/', views.add_manually, name='add_manually'),
     path('lost/', views.lost, name='lost'),
     path('off/', views.off, name='off'),
     path('win/', views.win, name='win'),

@@ -456,6 +456,40 @@ def add_upload(request, lead_id):
         'referring_datetime': indicated_by_datetime,
         'gmt': gmt,
     }
+    account = Account.objects.get(user=request.user)
+    form = ReferrerForm(initial=initial, account=account)
+    if request.method == 'POST':
+        form = ReferrerForm(request.POST)
+        if form.is_valid():
+            referrer = gerar_leads(form, request)
+            message_text = 'Leads criados com sucesso =)'
+            messages.add_message(request,messages.SUCCESS, message_text)
+            success_url = reverse('leads:referrer_actions:edit_leads', args=[str(referrer.id),])
+            return HttpResponseRedirect(success_url)
+        else:
+            message_text = 'Ocorreu um ERRO durante a inclusão dos Leads, faça uma verificação manual!'
+            messages.add_message(request,messages.ERROR, message_text)
+    page_title = 'Upload de Contatos para ' + str(lead)
+    context = {
+        'nav_name': 'leads_upload',
+        'page_title': page_title,
+        'form': form,
+        'lead': lead,
+    }
+    return render(request, 'leads/actions/add/upload/index.html', context)
+
+
+@login_required()
+def add_manually(request, lead_id):
+    lead = get_object_or_404(Lead, id=lead_id)
+    indicated_by_datetime = timezone.localtime(timezone.now()).strftime('%Y-%m-%dT%H:%M')
+    gmt = -3
+    initial = {
+        'name': str(lead),
+        'lead': str(lead.id),
+        'referring_datetime': indicated_by_datetime,
+        'gmt': gmt,
+    }
     form = ReferrerForm()
     form = ReferrerForm(initial=initial)
 
@@ -480,7 +514,7 @@ def add_upload(request, lead_id):
         'lead': lead,
     }
 
-    return render(request, 'leads/actions/add/upload/index.html', context)
+    return render(request, 'leads/actions/add/manually/index.html', context)
 
 
 @login_required()

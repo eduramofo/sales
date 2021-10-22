@@ -1,0 +1,18 @@
+{% load leads_extras %}
+
+<p class="card-text mb-0"><strong>Indicado em:</strong>
+  {% if lead|get_referrers_from_lead_first_referring_datetime %}
+  {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/M/y à\s H:i"}}
+  {% else %}
+  {{lead.created_at|date:"d/m/y"}} {{ lead.created_at|time:"H:i" }}
+  {% endif %}
+</p>
+<p class="card-text mb-0"><strong>Validação:</strong> {{lead.get_referrer.validation|default_if_none:"Não Informado"}}</p>
+<p class="card-text mb-0"><strong>Status:</strong> {{lead.get_status_display}}</p>
+<p class="card-text mb-0 {% if lead.priority %}text-danger{% endif %}"><strong>Prioridade:</strong> {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
+<p class="card-text mb-0"><strong>Tel: </strong>{{lead.tel}}</p>
+<p class="card-text mb-0"><strong>Whats: </strong>{{lead.waid}}</p>
+<p class="card-text mb-0"><strong>Próxima Evento:</strong> {{lead|show_next_event}}
+<p class="card-text mb-0"><strong>Última Atividade:</strong> {{lead|show_last_activities}}
+<p class="card-text mb-0"><strong>Descrição da linha:</strong> {{lead.short_description}}</p>
+<p class="card-text mb-0"><strong>Anotações do Lead:</strong> {{lead.note|default_if_none:"Não há."|truncatechars:60}}</p>

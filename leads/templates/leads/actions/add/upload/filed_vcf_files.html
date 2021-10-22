@@ -1,0 +1,12 @@
+{% load widget_tweaks %}
+<div class="form-group border border-dark rounded p-3">
+    <label for="{{ form.vcf_files.id_for_label }}">
+        <strong>{{ form.vcf_files.label }}</strong>
+    </label>
+    {% if not form.vcf_files.errors %}
+        {{ form.vcf_files|attr:"multiple"|add_class:'form-control-file' }}
+    {% else %}
+        {{ form.vcf_files|attr:"multiple"|add_class:'form-control-file is-invalid' }}
+    {% endif %}
+    <div class="invalid-feedback">{{ form.vcf_files.errors }}</div>
+</div>

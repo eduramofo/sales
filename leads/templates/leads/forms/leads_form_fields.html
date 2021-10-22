@@ -1,58 +1,55 @@
+{% load crispy_forms_tags %}
+
 {% csrf_token %}
 
 <div class="row">
 
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.name %}
+    <div class="col-12">
+        {{ form.name|as_crispy_field }}
     </div>
-    
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.nickname %}
+
+    <div class="col-12">
+        {{ form.nickname|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.best_time_to_contact|as_crispy_field }}
     </div>
 
     <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=form.priority %}
+        {{ form.priority|as_crispy_field }}
     </div>
 
     <div class="col-6">
-        {% include 'core/inputs/boolean.html' with field=form.qualified %}
+        {{ form.qualified|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.status|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.gender|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.location|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.gmt|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.tel|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.waid|as_crispy_field }}
+    </div>
+
+    <div class="col-12">
+        {{ form.note|as_crispy_field }}
     </div>
 
 </div>
-
-<div class="row">
-
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.status %}
-    </div>
-
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.gender %}
-    </div>
-
-</div>
-
-<div class="row">
-
-    <div class="col-12 col-md-8">
-        {% include 'core/inputs/default.html' with field=form.location %}
-    </div>
-
-    <div class="col-12 col-md-4">
-        {% include 'core/inputs/default.html' with field=form.gmt %}
-    </div>
-
-</div>
-
-
-<div class="row">
-
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.tel %}
-    </div>
-    <div class="col-12 col-md-6">
-        {% include 'core/inputs/default.html' with field=form.waid %}
-    </div>
-</div>
-
-{% include 'core/inputs/default.html' with field=form.note %}

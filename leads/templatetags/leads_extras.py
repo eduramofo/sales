@@ -1,20 +1,18 @@
-import urllib.parse
 import json
 import humanize
 
 from django.db.models import Q
 from django import template
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import date
 from django.utils import timezone
 from django.utils.timezone import localtime
 
-from leads.models import Lead, Referrer, WhatsappTemplate
+from leads.models import Referrer, WhatsappTemplate
 from leads.whatsapp import api as whatsapp_api
 from activities.models import Activity
-
+from event.models import Event
 
 register = template.Library()
 
@@ -89,6 +87,18 @@ def get_referrers_from_lead_first_name(lead):
     if referrer_obj:
         return referrer_obj.name
     return None
+
+
+@register.filter
+def show_next_event(lead):
+    result = 'Não Existe'
+    event_qs = Event.objects.filter(lead=lead, done=False).order_by('start_datetime')
+    event_qs_len = len(event_qs)
+    if event_qs_len > 0:
+        start_datetime = event_qs.first().start_datetime
+        if start_datetime:
+            result = date(localtime(start_datetime), 'd/M/y à\s H:i')
+    return result
 
 
 @register.filter

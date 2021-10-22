@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from leads.models import Lead, Referrer, WhatsappTemplate, WhatsappTemplateCategory, Qualified
+from leads.models import Lead, Referrer, WhatsappTemplate, WhatsappTemplateCategory, Qualified, LineGroup
 from rangefilter.filter import DateRangeFilter
 
 
@@ -37,7 +37,7 @@ class ReferrerForm(forms.ModelForm):
 class ReferrerAdmin(admin.ModelAdmin):
 
     search_fields = ('name',)
-
+    
     list_per_page = 30
 
     list_filter = (
@@ -49,7 +49,7 @@ class ReferrerAdmin(admin.ModelAdmin):
 
     form = ReferrerForm
 
-    autocomplete_fields = ['lead', 'leads',]
+    autocomplete_fields = ['lead', 'leads', 'line_group', 'account']
 
 admin.site.register(Referrer, ReferrerAdmin)
 
@@ -101,3 +101,9 @@ class QualifiedAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Qualified, QualifiedAdmin)
+
+
+class LineGroupAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+
+admin.site.register(LineGroup, LineGroupAdmin)

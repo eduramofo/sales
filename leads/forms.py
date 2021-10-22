@@ -3,6 +3,7 @@ from leads import models as leads_models
 from leads import validators
 from tempus_dominus.widgets import DateTimePicker
 
+
 datetime_picker = DateTimePicker(
     options={
         'useCurrent': False,
@@ -17,6 +18,23 @@ datetime_picker = DateTimePicker(
         'input_group': True,
     },
 )
+
+def get_line_group_choices(account):
+    line_group_qs = leads_models.LineGroup.objects.filter(active=True, account=account).order_by('-default')
+    line_group_choices = []
+    if len(line_group_qs) > 0:
+        for line_group in line_group_qs:
+            line_group_id = str(line_group.id)
+            if line_group.default:
+                line_group_name = str(line_group.name) + ' (Padrão)'
+            else:
+                line_group_name = str(line_group.name)
+            choice = (line_group_id, line_group_name)
+            line_group_choices.append(choice)
+    else:
+        line_group_choices.append((None,'Sem Grupo'))
+    return line_group_choices
+
 
 class LeadForm(forms.ModelForm):
     
@@ -41,6 +59,11 @@ class LeadForm(forms.ModelForm):
 
     qualified = forms.BooleanField(
         label='Qualificado?',
+        required=False,
+    )
+
+    best_time_to_contact = forms.CharField(
+        label='Melhor Horário p/ Contato',
         required=False,
     )
 
@@ -70,6 +93,7 @@ class LeadForm(forms.ModelForm):
             'note',
             'location',
             'gmt',
+            'best_time_to_contact',
         ]
 
 
@@ -161,6 +185,7 @@ class ReferrerForm(forms.ModelForm):
             'lead',
             'short_description',
             'location',
+            'line_group',
             'validation',
         ]
 
@@ -208,6 +233,18 @@ class ReferrerForm(forms.ModelForm):
        label='Arquivos de contatos para upload (VCF)',
        required=False,
     )
+
+    line_group = forms.ChoiceField(
+        label='Grupo da Linha',
+        choices=(('','')),
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        account = kwargs.pop('account', None)
+        super(ReferrerForm, self).__init__(*args, **kwargs)
+        self.fields['line_group'].choices = get_line_group_choices(account)
+
 
     def clean_lead(self):
         data_lead_id = self.cleaned_data['lead']
