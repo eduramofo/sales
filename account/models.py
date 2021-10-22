@@ -7,6 +7,14 @@ from django.dispatch import receiver
 # https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    current_line_group = models.ForeignKey(
+        'leads.LineGroup',
+        verbose_name='Grupo da Linha',
+        on_delete=models.CASCADE,
+        related_name='LineGroup',
+        null=True,
+        blank=True,
+    )
     def __str__(self):
         return self.user.username
 

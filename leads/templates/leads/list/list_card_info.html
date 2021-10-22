@@ -1,5 +1,4 @@
 {% load leads_extras %}
-
 <p class="card-text mb-0"><strong>Indicado em:</strong>
   {% if lead|get_referrers_from_lead_first_referring_datetime %}
   {{lead|get_referrers_from_lead_first_referring_datetime|date:"d/M/y à\s H:i"}}
@@ -9,6 +8,13 @@
 </p>
 <p class="card-text mb-0"><strong>Validação:</strong> {{lead.get_referrer.validation|default_if_none:"Não Informado"}}</p>
 <p class="card-text mb-0"><strong>Status:</strong> {{lead.get_status_display}}</p>
+{% if lead.best_time_to_contact  %}
+<p class="card-text mb-0"><strong>Melhor Horário:</strong> 
+<mark>{{lead.best_time_to_contact}}</mark>
+</p>
+{% else %}
+<p class="card-text mb-0"><strong>Melhor Horário:</strong> Não Informado</p>
+{% endif %}
 <p class="card-text mb-0 {% if lead.priority %}text-danger{% endif %}"><strong>Prioridade:</strong> {% if lead.priority %}Sim{% else %}Não{% endif %}</p>
 <p class="card-text mb-0"><strong>Tel: </strong>{{lead.tel}}</p>
 <p class="card-text mb-0"><strong>Whats: </strong>{{lead.waid}}</p>

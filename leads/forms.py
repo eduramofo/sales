@@ -8,6 +8,7 @@ datetime_picker = DateTimePicker(
     options={
         'useCurrent': False,
         'collapse': True,
+        'stepping': 15,
         'locale': 'pt-BR',
         'format': 'DD/MM/YYYY HH:mm',
     },
@@ -242,6 +243,7 @@ class ReferrerForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         account = kwargs.pop('account', None)
+        self.account = account
         super(ReferrerForm, self).__init__(*args, **kwargs)
         self.fields['line_group'].choices = get_line_group_choices(account)
 
@@ -252,6 +254,15 @@ class ReferrerForm(forms.ModelForm):
         if data_lead_id:
             lead = leads_models.Lead.objects.get(id=self.cleaned_data['lead'])
         return lead
+
+    def clean_line_group(self):
+        data_line_group_id = self.cleaned_data['line_group']
+        line_group = None
+        if data_line_group_id:
+            line_group_qs = leads_models.LineGroup.objects.filter(active=True, account=self.account).filter(id=data_line_group_id)
+            if (len(line_group_qs)) > 0:
+                line_group = line_group_qs.first()
+        return line_group
 
 
 class QualifiedForm(forms.Form):

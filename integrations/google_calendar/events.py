@@ -85,6 +85,11 @@ def update(event_obj):
             event['start']['dateTime'] = start_datetime
             event['end']['dateTime'] = end_datetime
             updated_event = service.events().update(calendarId=calendar_id, eventId=event['id'], body=event).execute()
+            data = {
+                'success': True,
+                'calendar_id': calendar_id,
+                'event': updated_event,
+            }
     return data
 
 

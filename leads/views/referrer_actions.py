@@ -8,6 +8,7 @@ from leads.models import Lead, Referrer
 from leads.forms import LeadSimpleForm
 from leads.filters import LeadFilter
 from leads.forms import ReferrerForm
+from account.models import Account
 
 
 @login_required()
@@ -316,7 +317,8 @@ def update_card(request, referrer_id):
     nav_name = 'leads_list'
     referrer_obj = get_object_or_404(Referrer, id=referrer_id)
     page_title = 'Editar cartão dos leads do(a) {}'.format(referrer_obj)
-    form = ReferrerForm(instance=referrer_obj)
+    account = Account.objects.get(user=request.user)
+    form = ReferrerForm(instance=referrer_obj, account=account)
     method = request.method
     context = {
         'page_title': page_title,
@@ -325,7 +327,7 @@ def update_card(request, referrer_id):
         'referrer': referrer_obj,
     }
     if method == 'POST':
-        form = ReferrerForm(request.POST, instance=referrer_obj)
+        form = ReferrerForm(request.POST, instance=referrer_obj, account=account)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, 'Cartão de indicação atualizado com sucesso!')

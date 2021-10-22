@@ -459,7 +459,7 @@ def add_upload(request, lead_id):
     account = Account.objects.get(user=request.user)
     form = ReferrerForm(initial=initial, account=account)
     if request.method == 'POST':
-        form = ReferrerForm(request.POST)
+        form = ReferrerForm(request.POST, account=account)
         if form.is_valid():
             referrer = gerar_leads(form, request)
             message_text = 'Leads criados com sucesso =)'

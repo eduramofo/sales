@@ -1,0 +1,20 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'leads:select-current-line-group' %}?line-group-id=all">
+                <div class="w-100 y-2 border border-dark p-2 rounded mb-2">
+                    <p class="p-0 m-0 h6">TODOS</p>
+                </div>
+            </a>    
+        </div>
+    {% for current_line_group in line_group %}
+        <div class="col-12">
+            <a href="{% url 'leads:select-current-line-group' %}?line-group-id={{current_line_group.id}}">
+                <div class="w-100 y-2 border border-dark p-2 rounded mb-2">
+                    <p class="p-0 m-0 h6">{{current_line_group}}</p>
+                </div>
+            </a>    
+        </div>
+    {% endfor %}
+    </div>
+</div>
