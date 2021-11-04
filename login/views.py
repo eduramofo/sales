@@ -2,4 +2,4 @@ from django.contrib.auth import views
 
 
 class LoginView(views.LoginView):
-    template_name = 'login/index.html'
+    template_name = 'registration/login.html'

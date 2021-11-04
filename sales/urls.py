@@ -23,6 +23,8 @@ urlpatterns = [
 
     path('login/', include('login.urls')),
 
+    path('logout/', include('logout.urls')),
+    
     path('leads/', include('leads.urls.main')),
 
     path('integrations/', include('integrations.urls')),

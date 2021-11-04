@@ -9,6 +9,7 @@ LOCAL_APPS = [
     'account.apps.AccountConfig',
     'signup.apps.SignupConfig',
     'login.apps.LoginConfig',
+    'logout.apps.LogoutConfig',
     'event.apps.EventConfig',
 ]
 
