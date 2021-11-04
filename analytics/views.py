@@ -9,6 +9,7 @@ from analytics import day
 from analytics import data_clean
 from analytics import balance_data
 from analytics import data
+from analytics import forms
 
 
 @login_required()
@@ -46,15 +47,17 @@ def this_week(request):
 
 @login_required()
 def day_select(request):
-    selected_day = request.GET.get('day-detail-date', None)
+    selected_day = request.GET.get('day', None)
     if selected_day:
         url = reverse_lazy('analytics:day_result', args=(selected_day,))
         return HttpResponseRedirect(url)
+    day_select_form = forms.DaySelectForm()
     page_title = 'Selecione o Dia para Análise das Atividades'
     nav_name = 'analyze'
     context = {
         'page_title': page_title,
         'nav_name': nav_name,
+        'form': day_select_form,
     }
     return render(request, 'analytics/day_select/index.html', context)
 

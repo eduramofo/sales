@@ -14,6 +14,13 @@ def gerar_leads(form, request):
     return referrer
 
 
+def handle_uploaded_files(request_files):
+    contacts = []
+    for contacts_files in request_files:
+        contacts = contacts + process_contacts_file(contacts_files.file)
+    return contacts
+
+
 def create_leads_by_contacts(account, contacts, referrer):
     leads = []
     for contact in contacts:
@@ -25,11 +32,13 @@ def create_leads_by_contacts(account, contacts, referrer):
 
 def create_or_get_lead(account, contact, referrer):
     tels = contact['tels']
+    tels_len = len(tels)
     tel = contact['tels'][0]['numero']
     waid = contact['tels'][0]['waid']
     name = contact['nome']
     note = ''
-    if len(tels) > 1:
+
+    if tels_len > 1:
         for current_tel in tels:
             current_tel_numero =  current_tel['numero']
             current_tel_waid = current_tel['waid']
@@ -47,14 +56,17 @@ def create_or_get_lead(account, contact, referrer):
 
                 elif current_tel_waid and current_tel_waid != 'NN':
                     note = note + '[ Whats: https://wa.me/{} ]\n'.format(current_tel_numero, current_tel_waid)
+
     if waid == 'NN':
         new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
-    else:
+
+    if waid != 'NN':
         lead = Lead.objects.filter(account=account, waid=waid).first()
         if lead is None:
             new_lead = create_lead(name, tel, waid, referrer.gmt, referrer.location, referrer.short_description, note, referrer.account)
         else:
             new_lead = lead
+
     return new_lead
 
 
@@ -71,13 +83,6 @@ def create_lead(name, tel, waid, gmt, location, short_description, note, account
         account=account,
     )
     return new_created_lead
-
-
-def handle_uploaded_files(request_files):
-    contacts = []
-    for contacts_files in request_files:
-        contacts = contacts + process_contacts_file(contacts_files.file)
-    return contacts
 
 
 def process_contacts_file(contacts_file):

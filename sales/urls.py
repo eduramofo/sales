@@ -12,6 +12,7 @@ admin.site.site_header = ugettext_lazy(DEFAULT_TITLE)
 
 admin.site.index_title = ugettext_lazy(DEFAULT_TITLE)
 
+urlpatterns_media_url = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = [
     
@@ -39,4 +40,4 @@ urlpatterns = [
 
     path('academy/', include('academy.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + urlpatterns_media_url
