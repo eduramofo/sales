@@ -8,7 +8,7 @@ datetime_picker = DateTimePicker(
     options={
         'useCurrent': False,
         'collapse': True,
-        'stepping': 15,
+        'stepping': 5,
         'locale': 'pt-BR',
         'format': 'DD/MM/YYYY HH:mm',
     },
