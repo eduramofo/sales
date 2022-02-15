@@ -113,22 +113,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-# new
-# AUTHENTICATION_BACKENDS = ['core.authentication_backends.EmailBackend'] 
-
-# Whitenoise
-STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='whitenoise.storage.CompressedManifestStaticFilesStorage')
-
-
 #########################################################
 # AWS - START
 #########################################################
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
-AWS_S3_STORAGE_BUCKET_NAME = config('AWS_S3_STORAGE_BUCKET_NAME', default='')
+AWS_STORAGE_BUCKET_NAME = config('AWS_S3_STORAGE_BUCKET_NAME', default='')
 AWS_S3_SIGNATURE_VERSION = config('AWS_S3_SIGNATURE_VERSION', default='')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='')
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_S3_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_IS_GZIPPED = True
 AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_OBJECT_PARAMETERS = {
@@ -169,7 +163,7 @@ PRIVATE_FILE_STORAGE = config('PRIVATE_FILE_STORAGE', default='django.core.files
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='django.contrib.staticfiles.storage.StaticFilesStorage')
+STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='whitenoise.storage.CompressedManifestStaticFilesStorage')
 
 STATIC_URL = config('STATIC_URL', default='/static/')
 #########################################################
