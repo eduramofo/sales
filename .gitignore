@@ -8,6 +8,7 @@ venv
 /private
 __pycache__
 .env
+.note.txt
 pyvenv.cfg
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
