@@ -121,6 +121,31 @@ STATICFILES_STORAGE = config('STATICFILES_STORAGE', default='whitenoise.storage.
 
 
 #########################################################
+# AWS - START
+#########################################################
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+AWS_STORAGE_BUCKET_NAME = config('S3_BUCKET_NAME', default='')
+AWS_S3_SIGNATURE_VERSION = config('AWS_S3_SIGNATURE_VERSION', default='')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='')
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_IS_GZIPPED = True
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_PUBLIC_MEDIA_LOCATION = 'media/public'
+AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
+AWS_STATIC_LOCATION = 'static'
+AWS_STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
+AWS_PUBLIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_PUBLIC_MEDIA_LOCATION)
+#########################################################
+# AWS - END
+#########################################################
+
+
+#########################################################
 # MEDIA - START
 #########################################################
 
