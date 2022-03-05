@@ -6,10 +6,12 @@ from analytics import forms
 from analytics import constants
 from analytics.production import get_production_table
 from analytics.balance import get_balance_table
+from analytics.daily_report import send_email
 
 
 @login_required()
 def select(request):
+    send_email()
     if request.method == 'POST':
         form = forms.RangeDateSelectForm(request.POST)
         if form.is_valid():        

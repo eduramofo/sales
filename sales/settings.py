@@ -23,6 +23,8 @@ ADMINS = [
     ('Eduardo Rabelo', 'eduramofo@gmail.com'),
 ]
 
+SERVER_EMAIL = "Edu Fontes <eduramofo@gmail.com>"
+
 # Application definition
 
 INSTALLED_APPS = apps.APPS
@@ -190,17 +192,11 @@ CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=False, cast=bool)
 # Email configuration - START
 #########################################################
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-
 EMAIL_HOST = config('EMAIL_HOST', default='127.0.0.1')
-
 EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
-
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
-
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
 #########################################################
 # Email configuration - END
@@ -208,13 +204,20 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
 
 
 #########################################################
-# CELERY CONFIGURATION OPTIONS - START
+# Celery Configuration Options
 #########################################################
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://localhost')
-BROKER_POOL_LIMIT = 3
+# https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html#using-celery-with-django
+# https://youtu.be/BbPswIqn2VI?t=301
+# https://docs.celeryproject.org/en/stable/userguide/configuration.html
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://127.0.0.1:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = 'America/Sao_Paulo'
+CELERY_TASK_TRACK_STARTED = True
+BROKER_POOL_LIMIT = None
 #########################################################
-# CELERY CONFIGURATION OPTIONS - END
+# Celery Configuration Options
 #########################################################
 
 
