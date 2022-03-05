@@ -1,0 +1,10 @@
+<form action="{% url 'analytics:select' %}" method="post" class="border border-dark p-3 rounded">
+    <div class="row">
+        {% include "analytics/select/fields.html" %}
+        <div class="col-12">
+            <div class="form-group mb-0 pb-0">
+                <button type="submit" class="btn btn-success btn-block">Visualizar Relatório</button>
+            </div>
+        </div>
+    </div>
+</form>

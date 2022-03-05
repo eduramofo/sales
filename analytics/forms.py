@@ -1,5 +1,7 @@
+from email.policy import default
 from django import forms
 from tempus_dominus.widgets import DatePicker
+from analytics.constants import REPORT_CHOICES, REPORT_DEFAULT
 
 
 datetime_picker = DatePicker(
@@ -7,7 +9,7 @@ datetime_picker = DatePicker(
         'useCurrent': False,
         'collapse': True,
         'locale': 'pt-BR',
-        'format': 'YYYY-MM-DD',
+        'format': 'DD/MM/YYYY',
     },
     attrs={
         'append': 'fa fa-calendar',
@@ -17,24 +19,22 @@ datetime_picker = DatePicker(
     },
 )
 
+class RangeDateSelectForm(forms.Form):
 
-class DaySelectForm(forms.Form):
-    day = forms.DateField(
-        label='Dia para Análise',
-        input_formats=['%d/%m/%Y'],
-        widget=datetime_picker,
+    report = forms.ChoiceField(
+        label='Selecione o Relatório',
+        choices=REPORT_CHOICES,
         required=True,
     )
 
-
-class RangeDateSelectForm(forms.Form):
-    start_day = forms.DateField(
+    start_date = forms.DateField(
         label='Início da Data para Análise',
         input_formats=['%d/%m/%Y'],
         widget=datetime_picker,
         required=True,
     )
-    start_end = forms.DateField(
+
+    end_date = forms.DateField(
         label='Fim da Data para Análise',
         input_formats=['%d/%m/%Y'],
         widget=datetime_picker,

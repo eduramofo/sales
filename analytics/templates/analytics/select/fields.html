@@ -1,0 +1,11 @@
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div class="col-12 col-md-4">
+    {{form.report|as_crispy_field}}
+</div>
+<div class="col-12 col-md-4">
+    {{form.start_date|as_crispy_field}}
+</div>
+<div class="col-12 col-md-4">
+    {{form.end_date|as_crispy_field}}
+</div>
