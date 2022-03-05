@@ -115,7 +115,7 @@ def get_summary_table(activities, conversations, speechs, win, leads_generated, 
                 leads_rate = str(leads_rate).replace('.', ',')
 
     table = {
-        'title': 'Sumário do Dia',
+        'title': 'Produtividade',
         'id': 'table-summary',
         'columns': ['#', 'Variável', 'Valor'],
         'rows': [
