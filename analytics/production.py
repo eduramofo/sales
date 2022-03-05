@@ -53,7 +53,7 @@ def get_speechs_win(account, start_date_obj, end_date_obj):
         account=account,
         created_at__gte=start_date_obj,
         created_at__lte=lt_end_date,
-        type__in=['lost', 'win', 'off'],
+        type__in=['win'],
     )
     return conversation_qs.values_list('lead', flat=True).distinct().count()
 
