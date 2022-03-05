@@ -2,7 +2,7 @@ from django.core.mail import EmailMessage
 
 
 def daily_report_run():
-    pass
+    send_email()
 
 
 def send_email():
