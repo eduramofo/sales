@@ -111,7 +111,7 @@ def get_summary_table(activities, conversations, speechs, win, leads_generated, 
         if leads_consumed != 'ERROR' and leads_consumed is not None:
             leads_balance = leads_generated - leads_consumed
             if leads_consumed > 0:
-                leads_rate = round(leads_generated / leads_consumed, 1)
+                leads_rate = round(leads_generated / leads_consumed, 2)
                 leads_rate = str(leads_rate).replace('.', ',')
 
     table = {
@@ -126,7 +126,7 @@ def get_summary_table(activities, conversations, speechs, win, leads_generated, 
             {'title': 'Leads Gerados', 'value': leads_generated},
             {'title': 'Leads Consumidos', 'value': leads_consumed},
             {'title': 'Saldo de Leads', 'value': leads_balance},
-            {'title': 'Taxa de Leads Ref.: > 1', 'value': leads_rate},
+            {'title': 'Taxa de Leads (ref.: > 1'), 'value': leads_rate},
             {'title': 'Taxa de Conversas', 'value': attendance_rate},
             {'title': 'Taxa de Entrevistas', 'value': speech_rate},
             {'title': 'Taxa de Matrículas', 'value': win_rate},
